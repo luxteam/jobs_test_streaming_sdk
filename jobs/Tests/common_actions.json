@@ -69,16 +69,27 @@
 
     "apexlegends_actions": [
         "check_game \"Apex Legends\" \"r5apex.exe\"",
-        "skip_if_done 19",
+        "skip_if_done 26",
         "execute_cmd \"C:\\JN\\ApexLegends.exe - Shortcut.url\"",
-        "sleep 45",
+        "sleep 60",
         "click_server center_0 center_0",
         "sleep 20",
+
         "click_server 230 920",
         "sleep 3",
         "click_server 415 130",
         "sleep 3",
         "click_server 230 1070 3",
+
+        "press_keys_server \"esc\"",
+        "sleep 1",
+
+        "click_server 230 920",
+        "sleep 3",
+        "click_server 415 130",
+        "sleep 3",
+        "click_server 230 1070 3",
+
         "sleep 90",
         "click_server center_0 center_0",
         "press_keys_server \"w+shift_15\"",
