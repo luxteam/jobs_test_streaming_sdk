@@ -250,8 +250,8 @@ def execute_tests(args, current_conf):
                     with open(settings_json_path, "r") as file:
                         settings_json_content = json.load(file)
 
-                    main_logger.info("Network in settings.json: {}".format(settings_json_content["Headset"]["Network"]))
-                    main_logger.info("Datagram size in settings.json: {}".format(settings_json_content["Headset"]["DatagramSize"]))
+                    main_logger.info("Network in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["Network"]))
+                    main_logger.info("Datagram size in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["DatagramSize"]))
 
                     execution_script = "{tool} {keys}".format(tool=tool_path, keys=keys)
 

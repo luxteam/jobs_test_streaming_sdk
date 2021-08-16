@@ -59,8 +59,6 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         if start_streaming is not None and process is None:
             process = start_streaming(args, script_path)
 
-    sock = socket.socket()
-
     game_name = args.game_name
 
     # start client before server
@@ -69,10 +67,15 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             process = start_streaming(args, script_path)
             sleep(10)
 
+    response = None
+
     # Connect to server to sync autotests
     while True:
         try:
+            sock = socket.socket()
             sock.connect((args.ip_address, int(args.communication_port)))
+            sock.send("ready".encode("utf-8"))
+            response = sock.recv(1024).decode("utf-8")
             break
         except Exception:
             main_logger.info("Could not connect to server. Try it again")
@@ -91,8 +94,6 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         #         3.1.1 Streaming SDK client is alive: start do actions
         #         3.1.2 Streaming SDK client isn't alive: client sent retry to server to init retry of the current test case
         #     3.2 Server sent fail: client sent retry to server to init retry of the current test case
-        sock.send("ready".encode("utf-8"))
-        response = sock.recv(1024).decode("utf-8")
 
         if response == "ready":
 
