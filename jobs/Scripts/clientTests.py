@@ -57,7 +57,7 @@ def start_client_side_tests(args, case, process, script_path, audio_device_name,
     # default launching of client and server (order doesn't matter)
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
         if start_streaming is not None and process is None:
-            start_streaming(args, script_path)
+            process = start_streaming(args, script_path)
 
     sock = socket.socket()
 
@@ -66,7 +66,7 @@ def start_client_side_tests(args, case, process, script_path, audio_device_name,
     # start client before server
     if "start_first" in case and case["start_first"] == "client":
         if start_streaming is not None and process is None:
-            start_streaming(args, script_path)
+            process = start_streaming(args, script_path)
             sleep(10)
 
     # Connect to server to sync autotests
@@ -99,7 +99,7 @@ def start_client_side_tests(args, case, process, script_path, audio_device_name,
             # start server before client
             if "start_first" in case and case["start_first"] == "server":
                 if start_streaming is not None and process is None:
-                    start_streaming(args, script_path)
+                    process = start_streaming(args, script_path)
 
             if not is_workable_condition(process):
                 instance_state.non_workable_client = True
