@@ -3,9 +3,14 @@ import psutil
 import os
 from glob import glob
 import zipfile
-import psutil
 from subprocess import PIPE
 import shlex
+import win32api
+
+ROOT_PATH = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+sys.path.append(ROOT_PATH)
+from jobs_launcher.core.config import main_logger
 
 
 def is_case_skipped(case, render_platform):
@@ -119,9 +124,16 @@ def close_process(args, case, process):
         while status != 128:
             status = subprocess.call("taskkill /f /im RemoteGameServer.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+        process = None
 
-def save_logs():
+    return process
+
+
+def save_logs(args, case):
     try:
+        tool_path = args.server_tool if args.execution_type == "server" else args.client_tool
+        tool_path = os.path.abspath(tool_path)
+
         log_source_path = tool_path + ".log"
         log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_{}".format(args.execution_type) + ".log")
 
@@ -158,3 +170,19 @@ def save_logs():
     except Exception as e:
         main_logger.error("Failed during logs saving. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+def start_streaming(args, script_path):
+    main_logger.info("Start StreamingSDK {}".format(args.execution_type))
+
+    # start Streaming SDK process
+    process = psutil.Popen(script_path, stdout=PIPE, stderr=PIPE, shell=True)
+
+    main_logger.info("Start execution_type depended script")
+
+    # Wait a bit to launch streaming SDK client/server
+    time.sleep(3)
+
+    main_logger.info("Screen resolution: width = {}, height = {}".format(win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)))
+
+    return process

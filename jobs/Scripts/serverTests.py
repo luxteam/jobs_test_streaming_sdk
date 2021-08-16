@@ -80,20 +80,20 @@ def close_game(game_name):
 
 # Server receives commands from client and executes them
 # Server doesn't decide to retry case or do next test case. Exception: fail on server side which generates abort on server side
-def start_server_side_tests(args, case, start_streaming, is_workable_condition, current_try):
+def start_server_side_tests(args, case, process, script_path, current_try):
     archive_path = os.path.join(args.output, "gpuview")
     if not os.path.exists(archive_path):
         os.makedirs(archive_path)
 
     # default launching of client and server (order doesn't matter)
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
-        if start_streaming is not None:
-            start_streaming(args)
+        if start_streaming is not None and process is None:
+            start_streaming(args, script_path)
 
     # start server before client
     if "start_first" in case and case["start_first"] == "server":
-        if start_streaming is not None:
-            start_streaming(args)
+        if start_streaming is not None and process is None:
+            start_streaming(args, script_path)
             sleep(10)
 
     # configure socket
@@ -126,8 +126,8 @@ def start_server_side_tests(args, case, start_streaming, is_workable_condition, 
 
             # start client before server
             if "start_first" in case and case["start_first"] == "client":
-                if start_streaming is not None:
-                    start_streaming(args)
+                if start_streaming is not None and process is None:
+                    start_streaming(args, script_path)
 
             if is_workable_condition():
                 connection.send("ready".encode("utf-8"))
@@ -232,3 +232,8 @@ def start_server_side_tests(args, case, start_streaming, is_workable_condition, 
                 
         with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
             json.dump(state, json_file, indent=4)
+
+        process = close_process(args, case, process)
+        save_logs(args, case)
+
+        return process

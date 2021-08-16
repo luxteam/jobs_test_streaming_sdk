@@ -28,8 +28,6 @@ from jobs_launcher.core.system_info import get_gpu
 
 # process of Streaming SDK client / server
 PROCESS = None
-# path to Streaming SDK client / server run script
-SCRIPT_PATH = None
 
 
 def get_audio_device_name():
@@ -201,22 +199,6 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         json.dump(cases, file, indent=4)
 
 
-def start_streaming(args):
-    global PROCESS, SCRIPT_PATH
-
-    main_logger.info("Start StreamingSDK {}".format(args.execution_type))
-
-    # start Streaming SDK process
-    PROCESS = psutil.Popen(SCRIPT_PATH, stdout=PIPE, stderr=PIPE, shell=True)
-
-    main_logger.info("Start execution_type depended script")
-
-    # Wait a bit to launch streaming SDK client/server
-    time.sleep(3)
-
-    main_logger.info("Screen resolution: width = {}, height = {}".format(win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)))
-
-
 def execute_tests(args, current_conf):
     rc = 0
 
@@ -246,7 +228,7 @@ def execute_tests(args, current_conf):
         current_try = 0
 
         while current_try < args.retries:
-            global PROCESS, SCRIPT_PATH
+            global PROCESS
 
             error_messages = set()
 
@@ -284,37 +266,28 @@ def execute_tests(args, current_conf):
                         ip_address=args.ip_address
                     )
 
-                SCRIPT_PATH = os.path.join(args.output, "{}.bat".format(case["case"]))
+                script_path = os.path.join(args.output, "{}.bat".format(case["case"]))
        
-                with open(SCRIPT_PATH, "w") as f:
+                with open(script_path, "w") as f:
                     f.write(execution_script)
 
-                # provide start Streaming SDK func if Streaming SDK was closed in previous case
-                if PROCESS is None:
-                    start_streaming_func = start_streaming
-                else:
-                    start_streaming_func = None
-
                 if args.execution_type == "server":
-                    start_server_side_tests(args, case, start_streaming_func, is_workable_condition, current_try)
+                    PROCESS = start_server_side_tests(args, case, PROCESS, script_path, current_try)
                 else:
-                    start_client_side_tests(args, case, start_streaming_func, is_workable_condition, audio_device_name, current_try)
+                    PROCESS = start_client_side_tests(args, case, PROCESS, script_path, audio_device_name, current_try)
 
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
 
                 break
             except Exception as e:
+                PROCESS = None
+                save_logs(args, case)
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "failed", error_messages = error_messages)
                 main_logger.error("Failed to execute test case (try #{}): {}".format(current_try, str(e)))
                 main_logger.error("Traceback: {}".format(traceback.format_exc()))
             finally:
-                global PROCESS
-
-                if should_case_be_closed(args, case):
-                    PROCESS = None
-
                 current_try += 1
         else:
             main_logger.error("Failed to execute case '{}' at all".format(case["case"]))

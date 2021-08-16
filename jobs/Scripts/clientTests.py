@@ -43,7 +43,7 @@ ACTIONS_MAPPING = {
 # Client reads list of actions and executes them one by one.
 # It sends actions which must be executed on server to it.
 # Also client does screenshots and records video.
-def start_client_side_tests(args, case, start_streaming, is_workable_condition, audio_device_name, current_try):
+def start_client_side_tests(args, case, process, script_path, audio_device_name, current_try):
     output_path = os.path.join(args.output, "Color")
 
     screen_path = os.path.join(output_path, case["case"])
@@ -56,8 +56,8 @@ def start_client_side_tests(args, case, start_streaming, is_workable_condition, 
 
     # default launching of client and server (order doesn't matter)
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
-        if start_streaming is not None:
-            start_streaming(args)
+        if start_streaming is not None and process is None:
+            start_streaming(args, script_path)
 
     sock = socket.socket()
 
@@ -65,8 +65,8 @@ def start_client_side_tests(args, case, start_streaming, is_workable_condition, 
 
     # start client before server
     if "start_first" in case and case["start_first"] == "client":
-        if start_streaming is not None:
-            start_streaming(args)
+        if start_streaming is not None and process is None:
+            start_streaming(args, script_path)
             sleep(10)
 
     # Connect to server to sync autotests
@@ -98,8 +98,8 @@ def start_client_side_tests(args, case, start_streaming, is_workable_condition, 
 
             # start server before client
             if "start_first" in case and case["start_first"] == "server":
-                if start_streaming is not None:
-                    start_streaming(args)
+                if start_streaming is not None and process is None:
+                    start_streaming(args, script_path)
 
             if not is_workable_condition():
                 instance_state.non_workable_client = True
@@ -187,3 +187,8 @@ def start_client_side_tests(args, case, start_streaming, is_workable_condition, 
             command_object.do_action()
 
         sock.close()
+
+        process = close_process(args, case, process)
+        save_logs(args, case)
+
+        return process
