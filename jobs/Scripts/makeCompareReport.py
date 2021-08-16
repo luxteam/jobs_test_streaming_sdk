@@ -26,7 +26,7 @@ if __name__ == '__main__':
         if json_content.get('group_timeout_exceeded', False):
             json_content['message'].append('Test group timeout exceeded')
 
-        if parse_logs == "True":
+        if args.parse_logs == "True":
             json_content = analyze_logs(work_dir, json_content, args.execution_type)
 
         reports.append(json_content)

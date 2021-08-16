@@ -397,8 +397,8 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
 
         end_of_block = False
 
-        if execution_type == "server" and log_key in json_content:
-            if log_key in json_content
+        if execution_type == "server":
+            if log_key in json_content:
                 log_path = os.path.join(work_dir, json_content[log_key]).replace('/', os.path.sep).replace('\\', os.path.sep)
             else:
                 log_path = os.path.join(work_dir, "tool_logs", json_content["test_case"] + "_server.log")

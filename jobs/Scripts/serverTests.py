@@ -199,7 +199,7 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 last_log_line = save_logs(args, case, last_log_line, current_try)
 
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
-                    json_content = json.load(json_file)
+                    json_content = json.load(file)[0]
 
                 analyze_logs(args.output, json_content)
 
