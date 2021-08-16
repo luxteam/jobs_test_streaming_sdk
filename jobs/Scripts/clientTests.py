@@ -101,7 +101,7 @@ def start_client_side_tests(args, case, process, script_path, audio_device_name,
                 if start_streaming is not None and process is None:
                     start_streaming(args, script_path)
 
-            if not is_workable_condition():
+            if not is_workable_condition(process):
                 instance_state.non_workable_client = True
                 raise Exception("Client has non-workable state")
 

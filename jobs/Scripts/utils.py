@@ -3,6 +3,7 @@ import psutil
 import os
 from glob import glob
 import zipfile
+import subprocess
 from subprocess import PIPE
 import shlex
 import win32api

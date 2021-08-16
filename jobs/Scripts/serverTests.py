@@ -129,7 +129,7 @@ def start_server_side_tests(args, case, process, script_path, current_try):
                 if start_streaming is not None and process is None:
                     start_streaming(args, script_path)
 
-            if is_workable_condition():
+            if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))
             else:
                 connection.send("fail".encode("utf-8"))
