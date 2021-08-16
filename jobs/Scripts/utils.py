@@ -138,7 +138,7 @@ def close_streaming_process(args, case, process):
         return None
 
 
-def save_logs(args, case):
+def save_logs(args, case, last_log_line):
     try:
         tool_path = args.server_tool if args.execution_type == "server" else args.client_tool
         tool_path = os.path.abspath(tool_path)
@@ -176,9 +176,13 @@ def save_logs(args, case):
         with open(log_destination_path, "ab") as file:
             file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
             file.write(logs)
+
+        return last_log_line
     except Exception as e:
         main_logger.error("Failed during logs saving. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+        return None
 
 
 def start_streaming(args, script_path):

@@ -272,9 +272,9 @@ def execute_tests(args, current_conf):
                     f.write(execution_script)
 
                 if args.execution_type == "server":
-                    PROCESS = start_server_side_tests(args, case, PROCESS, script_path, current_try)
+                    PROCESS, last_log_line = start_server_side_tests(args, case, PROCESS, script_path, last_log_line, current_try)
                 else:
-                    PROCESS = start_client_side_tests(args, case, PROCESS, script_path, audio_device_name, current_try)
+                    PROCESS, last_log_line = start_client_side_tests(args, case, PROCESS, script_path, last_log_line, audio_device_name, current_try)
 
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
@@ -282,7 +282,7 @@ def execute_tests(args, current_conf):
                 break
             except Exception as e:
                 PROCESS = close_streaming_process(args, case, PROCESS)
-                save_logs(args, case)
+                last_log_line = save_logs(args, case, last_log_line)
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "failed", error_messages = error_messages)
                 main_logger.error("Failed to execute test case (try #{}): {}".format(current_try, str(e)))

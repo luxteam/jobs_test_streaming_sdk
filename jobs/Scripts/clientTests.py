@@ -43,7 +43,7 @@ ACTIONS_MAPPING = {
 # Client reads list of actions and executes them one by one.
 # It sends actions which must be executed on server to it.
 # Also client does screenshots and records video.
-def start_client_side_tests(args, case, process, script_path, audio_device_name, current_try):
+def start_client_side_tests(args, case, process, script_path, last_log_line, audio_device_name, current_try):
     output_path = os.path.join(args.output, "Color")
 
     screen_path = os.path.join(output_path, case["case"])
@@ -189,6 +189,6 @@ def start_client_side_tests(args, case, process, script_path, audio_device_name,
         sock.close()
 
         process = close_streaming_process(args, case, process)
-        save_logs(args, case)
+        last_log_line = save_logs(args, case, last_log_line)
 
-        return process
+        return process, last_log_line

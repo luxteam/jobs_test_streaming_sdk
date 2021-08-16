@@ -80,7 +80,7 @@ def close_game(game_name):
 
 # Server receives commands from client and executes them
 # Server doesn't decide to retry case or do next test case. Exception: fail on server side which generates abort on server side
-def start_server_side_tests(args, case, process, script_path, current_try):
+def start_server_side_tests(args, case, process, script_path, last_log_line, current_try):
     archive_path = os.path.join(args.output, "gpuview")
     if not os.path.exists(archive_path):
         os.makedirs(archive_path)
@@ -234,6 +234,6 @@ def start_server_side_tests(args, case, process, script_path, current_try):
             json.dump(state, json_file, indent=4)
 
         process = close_streaming_process(args, case, process)
-        save_logs(args, case)
+        last_log_line = save_logs(args, case, last_log_line)
 
-        return process
+        return process, last_log_line
