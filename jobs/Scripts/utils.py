@@ -6,6 +6,8 @@ import zipfile
 from subprocess import PIPE
 import shlex
 import win32api
+import sys
+import traceback
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -181,7 +183,7 @@ def start_streaming(args, script_path):
     main_logger.info("Start execution_type depended script")
 
     # Wait a bit to launch streaming SDK client/server
-    time.sleep(3)
+    sleep(3)
 
     main_logger.info("Screen resolution: width = {}, height = {}".format(win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)))
 
