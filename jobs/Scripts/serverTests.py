@@ -15,6 +15,7 @@ from utils import *
 from threading import Thread
 from instance_state import ServerInstanceState
 from server_actions import *
+from analyzeLogs import analyze_logs
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -194,6 +195,17 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
                 main_logger.info("Finish action execution\n\n\n")
 
+                process = close_streaming_process(args, case, process)
+                last_log_line = save_logs(args, case, last_log_line, current_try)
+
+                with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
+                    json_content = json.load(json_file)
+
+                analyze_logs(args.output, json_content)
+
+                with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
+                    json.dump([json_content], file, indent=4)
+
         else:
             raise Exception("Unknown client request: {}".format(request))
     except Exception as e:
@@ -232,8 +244,5 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 
         with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
             json.dump(state, json_file, indent=4)
-
-        process = close_streaming_process(args, case, process)
-        last_log_line = save_logs(args, case, last_log_line, current_try)
 
         return process, last_log_line

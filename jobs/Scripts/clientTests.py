@@ -155,6 +155,9 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 else:
                     raise ClientActionException("Unknown client command: {}".format(command))
 
+                process = close_streaming_process(args, case, process)
+                last_log_line = save_logs(args, case, last_log_line, current_try)
+
                 main_logger.info("Finish action execution\n\n\n")
 
         elif response == "fail":
@@ -188,8 +191,5 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             command_object.do_action()
 
         sock.close()
-
-        process = close_streaming_process(args, case, process)
-        last_log_line = save_logs(args, case, last_log_line, current_try)
 
         return process, last_log_line
