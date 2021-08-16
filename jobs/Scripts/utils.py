@@ -138,7 +138,7 @@ def close_streaming_process(args, case, process):
         return None
 
 
-def save_logs(args, case, last_log_line):
+def save_logs(args, case, last_log_line, current_try):
     try:
         tool_path = args.server_tool if args.execution_type == "server" else args.client_tool
         tool_path = os.path.abspath(tool_path)

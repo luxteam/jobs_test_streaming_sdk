@@ -189,6 +189,6 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         sock.close()
 
         process = close_streaming_process(args, case, process)
-        last_log_line = save_logs(args, case, last_log_line)
+        last_log_line = save_logs(args, case, last_log_line, current_try)
 
         return process, last_log_line

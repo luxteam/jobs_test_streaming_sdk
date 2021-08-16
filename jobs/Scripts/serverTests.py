@@ -234,6 +234,6 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
             json.dump(state, json_file, indent=4)
 
         process = close_streaming_process(args, case, process)
-        last_log_line = save_logs(args, case, last_log_line)
+        last_log_line = save_logs(args, case, last_log_line, current_try)
 
         return process, last_log_line
