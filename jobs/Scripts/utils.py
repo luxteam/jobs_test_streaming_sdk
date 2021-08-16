@@ -109,27 +109,33 @@ def should_case_be_closed(args, case):
     return "keep_{}".format(args.execution_type) not in case or not case["keep_{}".format(args.execution_type)]
 
 
-def close_process(args, case, process):
-    if should_case_be_closed(args, case):
-        # close the current Streaming SDK process
-        if process is not None:
-            close_process(process)
+def close_streaming_process(args, case, process):
+    try:
+        if should_case_be_closed(args, case):
+            # close the current Streaming SDK process
+            if process is not None:
+                close_process(process)
 
-        # additional try to kill Streaming SDK server/client (to be sure that all processes are closed)
+            # additional try to kill Streaming SDK server/client (to be sure that all processes are closed)
 
-        status = 0
+            status = 0
 
-        while status != 128:
-            status = subprocess.call("taskkill /f /im RemoteGameClient.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            while status != 128:
+                status = subprocess.call("taskkill /f /im RemoteGameClient.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-        status = 0
+            status = 0
 
-        while status != 128:
-            status = subprocess.call("taskkill /f /im RemoteGameServer.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            while status != 128:
+                status = subprocess.call("taskkill /f /im RemoteGameServer.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-        process = None
+            process = None
 
-    return process
+        return process
+    except Exception as e:
+        main_logger.error("Failed to close Streaming SDK process. Exception: {}".format(str(e)))
+        main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+        return None
 
 
 def save_logs(args, case):

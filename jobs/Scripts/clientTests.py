@@ -188,7 +188,7 @@ def start_client_side_tests(args, case, process, script_path, audio_device_name,
 
         sock.close()
 
-        process = close_process(args, case, process)
+        process = close_streaming_process(args, case, process)
         save_logs(args, case)
 
         return process

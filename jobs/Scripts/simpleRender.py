@@ -281,7 +281,7 @@ def execute_tests(args, current_conf):
 
                 break
             except Exception as e:
-                PROCESS = None
+                PROCESS = close_streaming_process(args, case, PROCESS)
                 save_logs(args, case)
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "failed", error_messages = error_messages)

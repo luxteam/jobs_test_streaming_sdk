@@ -233,7 +233,7 @@ def start_server_side_tests(args, case, process, script_path, current_try):
         with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
             json.dump(state, json_file, indent=4)
 
-        process = close_process(args, case, process)
+        process = close_streaming_process(args, case, process)
         save_logs(args, case)
 
         return process
