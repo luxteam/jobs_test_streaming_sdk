@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(
 from jobs_launcher.core.config import SESSION_REPORT, TEST_REPORT_NAME_COMPARED
 
 
-KEYS_TO_COPY = ["min_server_latency", "max_server_latency", "median_server_latency", "server_trace_archive"]
+KEYS_TO_COPY = ["min_server_latency", "max_server_latency", "median_server_latency", "server_trace_archive", "firstinstance_server", "secondinstance_server", "iperf_server"]
 
 
 def get_test_status(test_status_one, test_status_two):
