@@ -160,6 +160,14 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
 
                 main_logger.info("Finish action execution\n\n\n")
 
+                with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
+                    json_content = json.load(file)[0]
+
+                json_content["test_status"] = "passed"
+
+                with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
+                    json.dump([json_content], file, indent=4)
+
         elif response == "fail":
             instance_state.non_workable_server = True
             raise Exception("Server has non-workable state")

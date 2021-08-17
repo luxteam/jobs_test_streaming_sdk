@@ -435,5 +435,3 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
     except Exception as e:
         main_logger.error("Failed to analyze logs. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
-
-    return json_content

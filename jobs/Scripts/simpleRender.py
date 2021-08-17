@@ -90,6 +90,15 @@ def copy_test_cases(args):
         exit(-1)
 
 
+def calculate_status(status_in_json, execution_status):
+    test_statuses = (status_in_json, execution_status)
+    statuses = ("skipped", "error", "failed", "passed")
+
+    for status in statuses:
+        if status in test_statuses:
+            return status
+
+
 def prepare_empty_reports(args, current_conf):
     main_logger.info('Create empty report files')
 
@@ -165,7 +174,9 @@ def prepare_empty_reports(args, current_conf):
 def save_results(args, case, cases, execution_time = 0.0, test_case_status = "", error_messages = []):
     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
         test_case_report = json.loads(file.read())[0]
-        test_case_report["test_status"] = test_case_status
+
+        test_case_report["test_status"] = calculate_status(test_case_report["test_status"], test_case_status)
+
         test_case_report["execution_time"] = execution_time
 
         server_log_path = os.path.join("tool_logs", case["case"] + "_server.log")
@@ -185,9 +196,9 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report["testing_start"] = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         test_case_report["number_of_tries"] += 1
 
-        test_case_report["message"] = list(error_messages)
+        test_case_report["message"] = test_case_report["message"] + list(error_messages)
 
-        if test_case_status == "passed" or test_case_status == "error":
+        if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
             test_case_report["group_timeout_exceeded"] = False
 
         video_path = os.path.join("Color", case["case"] + ".mp4")

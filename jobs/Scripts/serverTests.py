@@ -111,7 +111,7 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
     global GAMES_WITH_TIMEOUTS
 
     # some games can kick by AFK reason
-    # press each space before each test case to prevent it
+    # press space before each test case to prevent it
     if game_name in GAMES_WITH_TIMEOUTS:
         pydirectinput.press("space")
 
@@ -201,6 +201,7 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                     json_content = json.load(file)[0]
 
+                json_content["test_status"] = "passed"
                 analyze_logs(args.output, json_content)
 
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
