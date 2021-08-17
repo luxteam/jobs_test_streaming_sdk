@@ -234,7 +234,7 @@ def collect_iperf_info(args, log_name_base):
                 copyfile("iperf.out", os.path.join(logs_path, log_name_base + "_iperf_server.log"))
             else:
                 # run iperf scripts
-                proc = psutil.Popen("UDPTrafficTest.bat -d {} -s 130 -r 100 >> result.log 2>&1".format(args.ip_address), stdout=PIPE, stderr=PIPE, shell=True)
+                proc = psutil.Popen("UDPTrafficTest.bat -d {} -s 130 -r 100 >> result.out 2>&1".format(args.ip_address), stdout=PIPE, stderr=PIPE, shell=True)
                 proc.communicate()
 
                 # save output files
