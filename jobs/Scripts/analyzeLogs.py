@@ -406,7 +406,7 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
             else:
                 log_path = os.path.join(work_dir, "tool_logs", json_content["test_case"] + "_server.log")
 
-            if log_key in json_content and os.path.exists(log_path):
+            if os.path.exists(log_path):
                 framerate = get_framerate(json_content["keys"])
 
                 with open(log_path, 'r') as log_file:
