@@ -9,6 +9,7 @@ import shlex
 import win32api
 import sys
 import traceback
+from shutil import copyfile
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -199,3 +200,49 @@ def start_streaming(args, script_path):
     main_logger.info("Screen resolution: width = {}, height = {}".format(win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)))
 
     return process
+
+
+def collect_iperf_info(args, log_name_base):
+    iperf_base_path = "C:\\iperf"
+    current_dir = os.getcwd()
+
+    try:
+        logs_path = os.path.join(args.output, "tool_logs")
+
+        # change current dir to dir with iperf
+        os.chdir(iperf_base_path)
+
+        # cleat old ".out" files
+        try:
+            for filename in glob(os.path.join(iperf_base_path, "*.out")):
+                os.remove(filename)
+        except Exception:
+            pass
+
+        if args.execution_type == "server":
+            # run iperf scripts
+            proc = psutil.Popen("ServerTrafficListener.bat", stdout=PIPE, stderr=PIPE, shell=True)
+            outs, errs = proc.communicate()
+
+            # save output files
+            copyfile("iperf5201.out", os.path.join(logs_path, log_name_base + "_firstinstance_server.log"))
+            copyfile("iperf5203.out", os.path.join(logs_path, log_name_base + "_secondinstance_server.log"))
+            copyfile("iperf.out", os.path.join(logs_path, log_name_base + "_iperf_server.log"))
+        else:
+            # run iperf scripts
+            proc = psutil.Popen("UDPTrafficTest.bat -d {} -s 130 -r 100".format(args.ip_address), stdout=PIPE, stderr=PIPE, shell=True)
+            outs, errs = proc.communicate()
+
+            # save output files
+            copyfile("send.out", os.path.join(logs_path, log_name_base + "_firstinstance_client.log"))
+            copyfile("recv.out", os.path.join(logs_path, log_name_base + "_secondinstance_client.log"))
+            copyfile("iperf.out", os.path.join(logs_path, log_name_base + "_iperf_client.log"))
+
+            with open(os.path.join(logs_path, log_name_base + "_iperf_result.log"), "w", encoding="utf-8") as file:
+                file.write(outs)
+                file.write(errs)
+    except Exception as e:
+        main_logger.error("Failed during iperf execution. Exception: {}".format(str(e)))
+        main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+    os.chdir(current_dir)

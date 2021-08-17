@@ -7,7 +7,7 @@ import json
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import collect_traces, parse_arguments
+from utils import collect_traces, parse_arguments, collect_iperf_info
 import win32api
 from actions import *
 
@@ -81,6 +81,22 @@ class NextCase(Action):
 
     def analyze_result(self):
         self.wait_server_answer(analyze_answer = False, abort_if_fail = False)
+
+
+class IPerf(Action):
+    def execute(self):
+        self.sock.send("iperf".encode("utf-8"))
+
+        response = self.sock.recv(1024).decode("utf-8")
+
+        self.logger.info("Server answer: {}".format(response))
+
+        # start iperf execution
+        if response == "done":
+            collect_iperf_info(self.params["args"], args.params["case"]["case"])
+        else:
+            # finish execution
+            pass
 
 
 # [Server action] send request to do click on server side

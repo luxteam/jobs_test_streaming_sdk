@@ -169,6 +169,10 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
 
             json_content["test_status"] = "passed"
 
+            # execute iperf if it's necessary
+            command_object = IPerf(sock, params, instance_state, main_logger)
+            command_object.do_action()
+
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                 json.dump([json_content], file, indent=4)
 

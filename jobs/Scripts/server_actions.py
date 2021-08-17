@@ -203,6 +203,27 @@ class NextCase(Action):
         self.state.wait_next_command = False
 
 
+class IPerf(Action):
+    def parse(self):
+        self.json_content = self.params["json_content"]
+
+    def execute(self):
+        execute_iperf = None
+
+        for message in json_content["message"]:
+            "Network problem:" in message:
+            execute_iperf = True
+            break
+
+        iperf_answer = "done" if execute_iperf else "skip"
+
+        self.logger.info("IPerf answer: {}".format(iperf_answer))
+        self.sock.send(iperf_answer.encode("utf-8"))
+
+        if execute_iperf:
+            collect_iperf_info(self.params["args"], args.params["case"]["case"])
+
+
 # do click on server side
 class ClickServer(Action):
     def parse(self):

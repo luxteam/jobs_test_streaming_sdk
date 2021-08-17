@@ -56,6 +56,8 @@ class Action(ABC):
                 elif response == "failed":
                     if abort_if_fail:
                         raise ServerActionException("Action failed on server side")
+                elif response == "iperf":
+                    
                 else:
                     raise ServerActionException("Unknown server status: {}".format(response))
 
