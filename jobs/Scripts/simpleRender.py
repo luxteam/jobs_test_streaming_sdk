@@ -179,13 +179,8 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
         test_case_report["execution_time"] = execution_time
 
-        server_log_path = os.path.join("tool_logs", case["case"] + "_server.log")
-        if os.path.exists(server_log_path):
-            test_case_report["server_log"] = server_log_path
-
-        client_log_path = os.path.join("tool_logs", case["case"] + "_client.log")
-        if os.path.exists(client_log_path):
-            test_case_report["client_log"] = client_log_path
+        test_case_report["server_log"] = os.path.join("tool_logs", case["case"] + "_server.log")
+        test_case_report["client_log"] = os.path.join("tool_logs", case["case"] + "_client.log")
 
         if args.collect_traces == "True":
             if args.execution_type == "server":

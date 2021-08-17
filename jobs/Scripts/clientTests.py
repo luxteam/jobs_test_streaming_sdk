@@ -155,18 +155,22 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 else:
                     raise ClientActionException("Unknown client command: {}".format(command))
 
-                process = close_streaming_process(args, case, process)
-                last_log_line = save_logs(args, case, last_log_line, current_try)
-
                 main_logger.info("Finish action execution\n\n\n")
 
-                with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
-                    json_content = json.load(file)[0]
+            # say server to start next case
+            command_object = NextCase(sock, params, instance_state, main_logger)
+            command_object.do_action()
 
-                json_content["test_status"] = "passed"
+            process = close_streaming_process(args, case, process)
+            last_log_line = save_logs(args, case, last_log_line, current_try)
 
-                with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
-                    json.dump([json_content], file, indent=4)
+            with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
+                json_content = json.load(file)[0]
+
+            json_content["test_status"] = "passed"
+
+            with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
+                json.dump([json_content], file, indent=4)
 
         elif response == "fail":
             instance_state.non_workable_server = True
@@ -193,10 +197,6 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         elif instance_state.is_aborted_server:
             # some case failed on server at all during execution. Server doesn't require to receive signal
             pass
-        else:
-            # say server to start next case
-            command_object = NextCase(sock, params, instance_state, main_logger)
-            command_object.do_action()
 
         sock.close()
 
