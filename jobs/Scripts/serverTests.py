@@ -209,7 +209,7 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
             command_object = IPerf(connection, params, instance_state, main_logger)
             command_object.do_action()
 
-            logs_path = os.path.join(args.output, "tool_logs")
+            logs_path = "tool_logs"
             json_content["firstinstance_server"] = os.path.join(logs_path, case["case"] + "_firstinstance_server.log")
             json_content["secondinstance_server"] = os.path.join(logs_path, case["case"] + "_secondinstance_server.log")
             json_content["iperf_server"] = os.path.join(logs_path, case["case"] + "_iperf_server.log")

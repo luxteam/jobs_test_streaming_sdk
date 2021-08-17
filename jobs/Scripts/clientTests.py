@@ -173,7 +173,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             command_object = IPerf(sock, params, instance_state, main_logger)
             command_object.do_action()
 
-            logs_path = os.path.join(args.output, "tool_logs")
+            logs_path = "tool_logs"
             json_content["firstinstance_client"] = os.path.join(logs_path, case["case"] + "_firstinstance_client.log")
             json_content["secondinstance_client"] = os.path.join(logs_path, case["case"] + "_secondinstance_client.log")
             json_content["iperf_client"] = os.path.join(logs_path, case["case"] + "_iperf_client.log")
