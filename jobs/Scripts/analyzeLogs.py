@@ -383,6 +383,9 @@ def update_status(json_content, saved_values, saved_errors, framerate):
 
                     break
 
+        json_content["message"].append("Network problem: test problem")
+        json_content["test_status"] = "failed"
+
     json_content["message"].extend(saved_errors)
 
 
