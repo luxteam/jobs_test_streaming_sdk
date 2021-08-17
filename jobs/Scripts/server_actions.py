@@ -222,6 +222,7 @@ class IPerf(Action):
 
         if execute_iperf:
             collect_iperf_info(self.params["args"], self.params["case"]["case"])
+            self.params["iperf_executed"] = True
 
 
 # do click on server side

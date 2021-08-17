@@ -94,6 +94,7 @@ class IPerf(Action):
         # start iperf execution
         if response == "start":
             collect_iperf_info(self.params["args"], self.params["case"]["case"])
+            self.params["iperf_executed"] = True
         else:
             # finish execution
             pass
