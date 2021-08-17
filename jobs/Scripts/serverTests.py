@@ -206,8 +206,13 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
             # execute iperf if it's necessary
             params["json_content"] = json_content
-            command_object = IPerf(sock, params, instance_state, main_logger)
+            command_object = IPerf(connection, params, instance_state, main_logger)
             command_object.do_action()
+
+            logs_path = os.path.join(args.output, "tool_logs")
+            json_content["firstinstance_server"] = os.path.join(logs_path, case["case"] + "_firstinstance_server.log")
+            json_content["secondinstance_server"] = os.path.join(logs_path, case["case"] + "_secondinstance_server.log")
+            json_content["iperf_server"] = os.path.join(logs_path, case["case"] + "_iperf_server.log")
 
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                 json.dump([json_content], file, indent=4)

@@ -89,11 +89,11 @@ class IPerf(Action):
 
         response = self.sock.recv(1024).decode("utf-8")
 
-        self.logger.info("Server answer: {}".format(response))
+        self.logger.info("Server iperf answer: {}".format(response))
 
         # start iperf execution
-        if response == "done":
-            collect_iperf_info(self.params["args"], args.params["case"]["case"])
+        if response == "start":
+            collect_iperf_info(self.params["args"], self.params["case"]["case"])
         else:
             # finish execution
             pass
