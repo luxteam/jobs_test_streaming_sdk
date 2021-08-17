@@ -79,7 +79,6 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             break
         except Exception:
             main_logger.info("Could not connect to server. Try it again")
-            sleep(1)
 
     params = {}
 

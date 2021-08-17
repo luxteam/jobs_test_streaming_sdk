@@ -239,6 +239,8 @@ def execute_tests(args, current_conf):
 
         current_try = 0
 
+        main_logger.info("Start test case {}. Try: {}".format(case["case"], current_try))
+
         while current_try < args.retries:
             global PROCESS
 
