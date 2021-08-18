@@ -213,40 +213,18 @@ def collect_iperf_info(args, log_name_base):
         # change current dir to dir with iperf
         os.chdir(iperf_base_path)
 
-        # cleat old ".out" files
-        try:
-            for filename in glob(os.path.join(iperf_base_path, "*.out")):
-                os.remove(filename)
-        except Exception:
-            pass
-
-        start_time = datetime.now()
-
-        while (datetime.now() - start_time).total_seconds() <= 30:
-            if args.execution_type == "server":
-                # run iperf scripts
-                proc = psutil.Popen("ServerTrafficListener.bat", stdout=PIPE, stderr=PIPE, shell=True)
-                proc.communicate()
-
-                # save output files
-                copyfile("iperf5201.out", os.path.join(logs_path, log_name_base + "_firstinstance_server.log"))
-                copyfile("iperf5203.out", os.path.join(logs_path, log_name_base + "_secondinstance_server.log"))
-                copyfile("iperf.out", os.path.join(logs_path, log_name_base + "_iperf_server.log"))
-            else:
-                # run iperf scripts
-                proc = psutil.Popen("UDPTrafficTest.bat -d {} -s 130 -r 100 >> result.out 2>&1".format(args.ip_address), stdout=PIPE, stderr=PIPE, shell=True)
-                proc.communicate()
-
-                # save output files
-                copyfile("send.out", os.path.join(logs_path, log_name_base + "_firstinstance_client.log"))
-                copyfile("recv.out", os.path.join(logs_path, log_name_base + "_secondinstance_client.log"))
-                copyfile("iperf.out", os.path.join(logs_path, log_name_base + "_iperf_client.log"))
-                copyfile("result.out", os.path.join(logs_path, log_name_base + "_iperf_result.log"))
-
-            break
-
+        if args.execution_type == "server":
+            # run iperf scripts
+            proc = psutil.Popen("ServerTrafficListener.bat", stdout=PIPE, stderr=PIPE, shell=True)
+            proc.communicate(timeout=30)
         else:
-            main_logger.error("Abort iperf by timeout")
+            # run iperf scripts
+            proc = psutil.Popen("UDPTrafficTest.bat -d {} -s 130 -r 100 > result.log 2>&1".format(args.ip_address), stdout=PIPE, stderr=PIPE, shell=True)
+            proc.communicate(timeout=30)
+
+            # save output files
+            copyfile("result.log", os.path.join(logs_path, log_name_base + "_iperf.log"))
+
     except Exception as e:
         main_logger.error("Failed during iperf execution. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
