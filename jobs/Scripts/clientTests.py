@@ -8,6 +8,7 @@ from instance_state import ClientInstanceState
 from actions import ClientActionException
 from client_actions import *
 import psutil
+from utils import *
 from subprocess import PIPE, STDOUT
 sys.path.append(os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir)))
@@ -42,7 +43,7 @@ ACTIONS_MAPPING = {
 # Client reads list of actions and executes them one by one.
 # It sends actions which must be executed on server to it.
 # Also client does screenshots and records video.
-def start_client_side_tests(args, case, start_streaming, is_workable_condition, audio_device_name, current_try):
+def start_client_side_tests(args, case, process, script_path, last_log_line, audio_device_name, current_try):
     output_path = os.path.join(args.output, "Color")
 
     screen_path = os.path.join(output_path, case["case"])
@@ -55,27 +56,29 @@ def start_client_side_tests(args, case, start_streaming, is_workable_condition, 
 
     # default launching of client and server (order doesn't matter)
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
-        if start_streaming is not None:
-            start_streaming(args)
-
-    sock = socket.socket()
+        if start_streaming is not None and process is None:
+            process = start_streaming(args, script_path)
 
     game_name = args.game_name
 
     # start client before server
     if "start_first" in case and case["start_first"] == "client":
-        if start_streaming is not None:
-            start_streaming(args)
+        if start_streaming is not None and process is None:
+            process = start_streaming(args, script_path)
             sleep(10)
+
+    response = None
 
     # Connect to server to sync autotests
     while True:
         try:
+            sock = socket.socket()
             sock.connect((args.ip_address, int(args.communication_port)))
+            sock.send("ready".encode("utf-8"))
+            response = sock.recv(1024).decode("utf-8")
             break
         except Exception:
             main_logger.info("Could not connect to server. Try it again")
-            sleep(1)
 
     params = {}
 
@@ -90,17 +93,15 @@ def start_client_side_tests(args, case, start_streaming, is_workable_condition, 
         #         3.1.1 Streaming SDK client is alive: start do actions
         #         3.1.2 Streaming SDK client isn't alive: client sent retry to server to init retry of the current test case
         #     3.2 Server sent fail: client sent retry to server to init retry of the current test case
-        sock.send("ready".encode("utf-8"))
-        response = sock.recv(1024).decode("utf-8")
 
         if response == "ready":
 
             # start server before client
             if "start_first" in case and case["start_first"] == "server":
-                if start_streaming is not None:
-                    start_streaming(args)
+                if start_streaming is not None and process is None:
+                    process = start_streaming(args, script_path)
 
-            if not is_workable_condition():
+            if not is_workable_condition(process):
                 instance_state.non_workable_client = True
                 raise Exception("Client has non-workable state")
 
@@ -155,6 +156,29 @@ def start_client_side_tests(args, case, start_streaming, is_workable_condition, 
 
                 main_logger.info("Finish action execution\n\n\n")
 
+            # say server to start next case
+            command_object = NextCase(sock, params, instance_state, main_logger)
+            command_object.do_action()
+
+            process = close_streaming_process(args, case, process)
+            last_log_line = save_logs(args, case, last_log_line, current_try)
+
+            with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
+                json_content = json.load(file)[0]
+
+            json_content["test_status"] = "passed"
+
+            # execute iperf if it's necessary
+            command_object = IPerf(sock, params, instance_state, main_logger)
+            command_object.do_action()
+
+            if "iperf_executed" in params and params["iperf_executed"]:
+                logs_path = "tool_logs"
+                json_content["iperf_result"] = os.path.join(logs_path, case["case"] + "_iperf.log")
+
+            with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
+                json.dump([json_content], file, indent=4)
+
         elif response == "fail":
             instance_state.non_workable_server = True
             raise Exception("Server has non-workable state")
@@ -180,9 +204,7 @@ def start_client_side_tests(args, case, start_streaming, is_workable_condition, 
         elif instance_state.is_aborted_server:
             # some case failed on server at all during execution. Server doesn't require to receive signal
             pass
-        else:
-            # say server to start next case
-            command_object = NextCase(sock, params, instance_state, main_logger)
-            command_object.do_action()
 
         sock.close()
+
+        return process, last_log_line

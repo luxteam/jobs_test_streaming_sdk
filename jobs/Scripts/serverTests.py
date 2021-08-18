@@ -11,10 +11,11 @@ import win32api
 import shlex
 import pyautogui
 import pydirectinput
-from utils import close_process, collect_traces
+from utils import *
 from threading import Thread
 from instance_state import ServerInstanceState
 from server_actions import *
+from analyzeLogs import analyze_logs
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -80,20 +81,20 @@ def close_game(game_name):
 
 # Server receives commands from client and executes them
 # Server doesn't decide to retry case or do next test case. Exception: fail on server side which generates abort on server side
-def start_server_side_tests(args, case, start_streaming, is_workable_condition, current_try):
+def start_server_side_tests(args, case, process, script_path, last_log_line, current_try):
     archive_path = os.path.join(args.output, "gpuview")
     if not os.path.exists(archive_path):
         os.makedirs(archive_path)
 
     # default launching of client and server (order doesn't matter)
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
-        if start_streaming is not None:
-            start_streaming(args)
+        if start_streaming is not None and process is None:
+            process = start_streaming(args, script_path)
 
     # start server before client
     if "start_first" in case and case["start_first"] == "server":
-        if start_streaming is not None:
-            start_streaming(args)
+        if start_streaming is not None and process is None:
+            process = start_streaming(args, script_path)
             sleep(10)
 
     # configure socket
@@ -110,7 +111,7 @@ def start_server_side_tests(args, case, start_streaming, is_workable_condition, 
     global GAMES_WITH_TIMEOUTS
 
     # some games can kick by AFK reason
-    # press each space before each test case to prevent it
+    # press space before each test case to prevent it
     if game_name in GAMES_WITH_TIMEOUTS:
         pydirectinput.press("space")
 
@@ -126,10 +127,10 @@ def start_server_side_tests(args, case, start_streaming, is_workable_condition, 
 
             # start client before server
             if "start_first" in case and case["start_first"] == "client":
-                if start_streaming is not None:
-                    start_streaming(args)
+                if start_streaming is not None and process is None:
+                    process = start_streaming(args, script_path)
 
-            if is_workable_condition():
+            if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))
             else:
                 connection.send("fail".encode("utf-8"))
@@ -194,6 +195,23 @@ def start_server_side_tests(args, case, start_streaming, is_workable_condition, 
 
                 main_logger.info("Finish action execution\n\n\n")
 
+            process = close_streaming_process(args, case, process)
+            last_log_line = save_logs(args, case, last_log_line, current_try)
+
+            with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
+                json_content = json.load(file)[0]
+
+            json_content["test_status"] = "passed"
+            analyze_logs(args.output, json_content)
+
+            # execute iperf if it's necessary
+            params["json_content"] = json_content
+            command_object = IPerf(connection, params, instance_state, main_logger)
+            command_object.do_action()
+
+            with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
+                json.dump([json_content], file, indent=4)
+
         else:
             raise Exception("Unknown client request: {}".format(request))
     except Exception as e:
@@ -232,3 +250,5 @@ def start_server_side_tests(args, case, start_streaming, is_workable_condition, 
                 
         with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
             json.dump(state, json_file, indent=4)
+
+        return process, last_log_line

@@ -10,7 +10,7 @@ import win32api
 import pyautogui
 import pydirectinput
 from threading import Thread
-from utils import close_process, collect_traces, parse_arguments
+from utils import close_process, collect_traces, parse_arguments, collect_iperf_info
 from actions import *
 
 pyautogui.FAILSAFE = False
@@ -201,6 +201,28 @@ class NextCase(Action):
 
     def analyze_result(self):
         self.state.wait_next_command = False
+
+
+class IPerf(Action):
+    def parse(self):
+        self.json_content = self.params["json_content"]
+
+    def execute(self):
+        execute_iperf = None
+
+        for message in self.json_content["message"]:
+            if "Network problem:" in message:
+                execute_iperf = True
+                break
+
+        iperf_answer = "start" if execute_iperf else "skip"
+
+        self.logger.info("IPerf answer: {}".format(iperf_answer))
+        self.sock.send(iperf_answer.encode("utf-8"))
+
+        if execute_iperf:
+            collect_iperf_info(self.params["args"], self.params["case"]["case"])
+            self.params["iperf_executed"] = True
 
 
 # do click on server side
