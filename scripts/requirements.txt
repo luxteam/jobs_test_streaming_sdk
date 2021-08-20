@@ -3,3 +3,4 @@ PyAutoGUI==0.9.52
 pyffmpeg==2.0.5.1
 keyboard
 pydirectinput
+Appium-Python-Client

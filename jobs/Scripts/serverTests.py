@@ -89,12 +89,12 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
     # default launching of client and server (order doesn't matter)
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
         if start_streaming is not None and process is None:
-            process = start_streaming(args, script_path)
+            process = start_streaming(args.start_streaming, script_path)
 
     # start server before client
     if "start_first" in case and case["start_first"] == "server":
         if start_streaming is not None and process is None:
-            process = start_streaming(args, script_path)
+            process = start_streaming(args.start_streaming, script_path)
             sleep(10)
 
     # configure socket
@@ -128,7 +128,7 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
             # start client before server
             if "start_first" in case and case["start_first"] == "client":
                 if start_streaming is not None and process is None:
-                    process = start_streaming(args, script_path)
+                    process = start_streaming(args.start_streaming, script_path)
 
             if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))
@@ -195,7 +195,7 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
                 main_logger.info("Finish action execution\n\n\n")
 
-            process = close_streaming_process(args, case, process)
+            process = close_streaming_process(args.execution_type, case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try)
 
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:

@@ -107,13 +107,13 @@ def is_workable_condition(process):
         return True
 
 
-def should_case_be_closed(args, case):
-    return "keep_{}".format(args.execution_type) not in case or not case["keep_{}".format(args.execution_type)]
+def should_case_be_closed(execution_type, case):
+    return "keep_{}".format(execution_type) not in case or not case["keep_{}".format(args.execution_type)]
 
 
-def close_streaming_process(args, case, process):
+def close_streaming_process(execution_type, case, process):
     try:
-        if should_case_be_closed(args, case):
+        if should_case_be_closed(execution_type, case):
             # close the current Streaming SDK process
             if process is not None:
                 close_process(process)
@@ -138,6 +138,14 @@ def close_streaming_process(args, case, process):
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
 
         return None
+
+
+def close_android_app(driver):
+    try:
+        driver.close_app()
+    except Exception as e:
+        main_logger.error("Failed to close Streaming SDK Android app. Exception: {}".format(str(e)))
+        main_logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
 def save_logs(args, case, last_log_line, current_try):
@@ -187,8 +195,8 @@ def save_logs(args, case, last_log_line, current_try):
         return None
 
 
-def start_streaming(args, script_path):
-    main_logger.info("Start StreamingSDK {}".format(args.execution_type))
+def start_streaming(execution_type, script_path):
+    main_logger.info("Start StreamingSDK {}".format(execution_type))
 
     # start Streaming SDK process
     process = psutil.Popen(script_path, stdout=PIPE, stderr=PIPE, shell=True)
