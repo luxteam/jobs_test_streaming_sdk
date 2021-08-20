@@ -16,6 +16,7 @@ import time
 import win32api
 from appium import webdriver
 from instance_state import AndroidInstanceState
+from android_actions import *
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -260,9 +261,10 @@ def execute_tests(args, driver):
                 params["args"] = args
                 params["case"] = case
                 params["driver"] = driver
+                params["game_name"] = args.game_name.lower()
 
                 # get list of actions for the current game / benchmark
-                actions_key = "{}_actions_android".format(game_name.lower())
+                actions_key = "{}_actions_android".format(args.game_name.lower())
                 if actions_key in case:
                     actions = case[actions_key]
                 else:

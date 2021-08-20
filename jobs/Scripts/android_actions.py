@@ -19,15 +19,15 @@ pyautogui.FAILSAFE = False
 # open some game if it doesn't launched (e.g. open game/benchmark)
 class OpenGame(Action):
     def parse(self):
-        games_launchers = [
+        games_launchers = {
             "heavendx9": "C:\\JN\\Heaven Benchmark 4.0.lnk"
-        ]
+        }
 
-        games_windows = [
-            "heavendx9": ["Unigine Heaven Benchmark 4.0 (Basic Edition)", "browser_x86.exe"]
-        ]
+        games_windows = {
+            "heavendx9": ["Unigine Heaven Benchmark 4.0 Basic (Direct3D9)", "Heaven.exe"]
+        }
 
-        self.game_name = self.params["arguments_line"].lower()
+        self.game_name = self.params["game_name"]
         self.game_launcher = games_launchers[self.game_name]
         self.game_window = games_windows[self.game_name][0]
         self.game_process_name = games_windows[self.game_name][1]
@@ -40,8 +40,7 @@ class OpenGame(Action):
         if window is not None and window != 0:
             self.logger.info("Window {} was succesfully found".format(self.game_window))
 
-            if self.is_game:
-                make_window_foreground(window, self.logger)
+            make_window_foreground(window, self.logger)
         else:
             self.logger.error("Window {} wasn't found at all".format(self.game_window))
             game_launched = False
@@ -60,10 +59,19 @@ class OpenGame(Action):
 
             if self.game_name == "heavendx9" or self.game_name == "heavendx11":
                 sleep(6)
-                click("center_290", "center_-85", args.logger)
-                click("center_290", "center_-55", args.logger)
-                click("center_280", "center_135", args.logger)
+                click("center_290", "center_-85", self.logger)
+                click("center_290", "center_-55", self.logger)
+                click("center_280", "center_135", self.logger)
                 sleep(30)
+
+
+def make_window_foreground(window, logger):
+    try:
+        win32gui.ShowWindow(window, 4)
+        win32gui.SetForegroundWindow(window)
+    except Exception as e:
+        logger.error("Failed to make window foreground: {}".format(str(e)))
+        logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
 # Do click 
@@ -151,6 +159,7 @@ class PressKeys(Action):
 # Do screenshot
 class MakeScreen(Action):
     def parse(self):
+        self.driver = self.params["driver"]
         self.screen_path = self.params["screen_path"]
         self.screen_name = self.params["arguments_line"]
         self.current_image_num = self.params["current_image_num"]
@@ -158,13 +167,13 @@ class MakeScreen(Action):
 
     def execute(self):
         if not self.screen_name:
-            make_screen(self.screen_path, self.current_try)
+            make_screen(self.driver, self.screen_path, self.current_try)
         else:
-            make_screen(self.screen_path, self.current_try, self.screen_name, self.current_image_num)
+            make_screen(self.driver, self.screen_path, self.current_try, self.screen_name, self.current_image_num)
             self.params["current_image_num"] += 1
 
 
-def make_screen(screen_path, current_try, screen_name = "", current_image_num = 0):
+def make_screen(driver, screen_path, current_try, screen_name = "", current_image_num = 0):
     screen_base64 = driver.get_screenshot_as_base64()
 
     screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1))
@@ -184,6 +193,7 @@ class SleepAndScreen(Action):
         self.screen_name = parsed_arguments[3]
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
+        self.driver = self.params["driver"]
 
     def execute(self):
         sleep(float(self.initial_delay))
@@ -191,7 +201,7 @@ class SleepAndScreen(Action):
         screen_number = 1
 
         while True:
-            make_screen(self.screen_path, self.current_try, self.screen_name, self.current_image_num)
+            make_screen(self.driver, self.screen_path, self.current_try, self.screen_name, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1
@@ -206,7 +216,7 @@ class SleepAndScreen(Action):
 class RecordVideo(Action):
     def parse(self):
         self.video_path = self.params["output_path"]
-        self.video_name = self.params["case"]["case"]
+        self.video_name = self.params["case"]["case"] + ".mp4"
         self.driver = self.params["driver"]
         self.duration = int(self.params["arguments_line"])
 
@@ -218,8 +228,6 @@ class RecordVideo(Action):
         video_base64 = self.driver.stop_recording_screen()
 
         self.logger.info("Finish to record video")
-
-        recorder = FFmpeg()
         
         with open(os.path.join(self.video_path, self.video_name), "wb") as video:
             video.write(base64.b64decode(video_base64))

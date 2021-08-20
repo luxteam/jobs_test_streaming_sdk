@@ -199,8 +199,7 @@
     ],
 
     "heavendx9_actions_android": [
-        "open_game heavendx9",
-
+        "open_game",
         "press_keys \"f9\"",
         "sleep 1",
         "make_screen heaven_benchmark",
