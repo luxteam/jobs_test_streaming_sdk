@@ -14,6 +14,7 @@ import copy
 import traceback
 import time
 import win32api
+from appium import webdriver
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -83,9 +84,10 @@ def prepare_empty_reports(args):
             test_case_report['tool'] = 'StreamingSDK'
             test_case_report['render_time'] = 0.0
             test_case_report['execution_time'] = 0.0
-            test_case_report['keys'] = case['server_keys'] if args.execution_type == 'server' else case['client_keys']
+            test_case_report['keys'] = case['server_keys']
             test_case_report['transport_protocol'] = case['transport_protocol'].upper()
-            test_case_report['tool_path'] = args.server_tool if args.execution_type == 'server' else args.client_tool
+            test_case_report['server_tool_path'] = args.server_tool
+            test_case_report['client_tool_path'] = args.client_tool
             test_case_report['date_time'] = datetime.now().strftime(
                 '%m/%d/%Y %H:%M:%S')
             test_case_report[SCREENS_PATH_KEY] = os.path.join(args.output, "Color", case["case"])
@@ -211,7 +213,7 @@ def execute_tests(args, driver):
                 main_logger.info("Network in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["Network"]))
                 main_logger.info("Datagram size in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["DatagramSize"]))
 
-                server_execution_script = "{tool} {keys}".format(tool=tool_path, keys=case["server_keys"])
+                server_execution_script = "{tool} {keys}".format(tool=args.server_tool, keys=case["server_keys"])
 
                 # TODO get info about emulator
                 server_execution_script = server_execution_script.replace("<resolution>", "1080,2220")
@@ -225,7 +227,7 @@ def execute_tests(args, driver):
                 driver.launch_app()
 
                 # start server
-                process = start_streaming(execution_type, script_path)
+                process = start_streaming("server", server_script_path)
 
                 sleep(30)
 
