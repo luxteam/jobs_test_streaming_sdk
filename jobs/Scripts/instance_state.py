@@ -34,3 +34,16 @@ class ServerInstanceState:
             Executing test actions: {self.executing_test_actions}
             Has non workable state: {self.non_workable_state}
         """
+
+
+class AndroidInstanceState:
+    # server stores only its state
+    def __init__(self):
+        self.executing_test_actions = False
+        self.non_workable_state = False
+
+    def format_current_state(self):
+        return f"""
+            Executing test actions: {self.executing_test_actions}
+            Has non workable state: {self.non_workable_state}
+        """

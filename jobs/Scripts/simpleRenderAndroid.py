@@ -15,12 +15,25 @@ import traceback
 import time
 import win32api
 from appium import webdriver
+from instance_state import AndroidInstanceState
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
 sys.path.append(ROOT_PATH)
 from jobs_launcher.core.config import *
 from jobs_launcher.core.system_info import get_gpu
+
+
+# mapping of commands and their implementations
+ACTIONS_MAPPING = {
+    "open_game": OpenGame,
+    "click": Click,
+    "sleep": DoSleep,
+    "press_keys": PressKeys,
+    "make_screen": MakeScreen,
+    "sleep_and_screen": SleepAndScreen,
+    "record_video": RecordVideo
+}
 
 
 def copy_test_cases(args):
@@ -181,6 +194,7 @@ def execute_tests(args, driver):
         cases = json.load(json_file)
 
     process = None
+    processes = {}
 
     for case in [x for x in cases if not is_case_skipped(x, current_conf)]:
 
@@ -194,6 +208,8 @@ def execute_tests(args, driver):
             error_messages = set()
 
             try:
+                instance_state = AndroidInstanceState()
+
                 # copy settings.json to update transport protocol using by server instance
                 settings_json_path = os.path.join(os.getenv("APPDATA"), "..", "Local", "AMD", "RemoteGameServer", "settings", "settings.json")
 
@@ -229,7 +245,56 @@ def execute_tests(args, driver):
                 # start server
                 process = start_streaming("server", server_script_path)
 
-                sleep(30)
+                params = {}
+
+                output_path = os.path.join(args.output, "Color")
+
+                screen_path = os.path.join(output_path, case["case"])
+                if not os.path.exists(screen_path):
+                    os.makedirs(screen_path)
+
+                params["output_path"] = output_path
+                params["screen_path"] = screen_path
+                params["current_image_num"] = 1
+                params["current_try"] = current_try
+                params["args"] = args
+                params["case"] = case
+                params["driver"] = driver
+
+                # get list of actions for the current game / benchmark
+                actions_key = "{}_actions_android".format(game_name.lower())
+                if actions_key in case:
+                    actions = case[actions_key]
+                else:
+                    # use default list of actions if some specific list of actions doesn't exist
+                    with open(os.path.abspath(args.common_actions_path), "r", encoding="utf-8") as common_actions_file:
+                        actions = json.load(common_actions_file)[actions_key]
+
+                # execute actions one by one
+                for action in actions:
+                    main_logger.info("Current action: {}".format(action))
+                    main_logger.info("Current state:\n{}".format(instance_state.format_current_state()))
+
+                    # split action to command and arguments
+                    parts = action.split(" ", 1)
+                    command = parts[0]
+                    if len(parts) > 1:
+                        arguments_line = parts[1]
+                    else:
+                        arguments_line = None
+
+                    params["action_line"] = action
+                    params["command"] = command
+                    params["arguments_line"] = arguments_line
+
+                    # find necessary command and execute it
+                    if command in ACTIONS_MAPPING:
+                        command_object = ACTIONS_MAPPING[command](None, params, instance_state, main_logger)
+                        command_object.do_action()
+                    else:
+                        raise ClientActionException("Unknown client command: {}".format(command))
+
+                    main_logger.info("Finish action execution\n\n\n")
 
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
