@@ -315,6 +315,19 @@ def execute_tests(args, driver):
                 save_logs(args, case, None, current_try)
                 save_android_log(args, case, None, current_try, driver)
 
+                try:
+                    with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
+                        json_content = json.load(file)[0]
+
+                    json_content["test_status"] = "passed"
+                    analyze_logs(args.output, json_content)
+
+                    with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
+                        json.dump([json_content], file, indent=4)
+                except Exception as e:
+                    main_logger.error("Failed to analyze_logs (try #{}): {}".format(current_try, str(e)))
+                    main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
                 current_try += 1
         else:
             main_logger.error("Failed to execute case '{}' at all".format(case["case"]))
