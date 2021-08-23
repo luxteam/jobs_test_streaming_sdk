@@ -118,7 +118,7 @@ def prepare_empty_reports(args):
                     test_case_report["script_info"][i] = test_case_report["script_info"][i].replace("<resolution>", "{}, {}".format(resolution_width, resolution_height))
                 if "Client keys" not in test_case_report["script_info"][i]:
                     # ignore line with client keys (they aren't used by Android autotests)
-                    script_info.append(test_case_report["script_info"])
+                    script_info.append(test_case_report["script_info"][i])
 
             test_case_report["script_info"] = script_info
 
