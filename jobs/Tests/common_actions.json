@@ -201,7 +201,7 @@
     "heavendx9_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 1",
+        "sleep 5",
         "make_screen heaven_benchmark",
         "sleep 3",
         "record_video 10",

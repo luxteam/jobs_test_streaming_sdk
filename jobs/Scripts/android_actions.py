@@ -223,7 +223,7 @@ class RecordVideo(Action):
     def execute(self):
         self.logger.info("Start to record video")
 
-        self.driver.start_recording_screen()
+        self.driver.start_recording_screen(timeLimit = float(self.duration))
         sleep(float(self.duration))
         video_base64 = self.driver.stop_recording_screen()
 
