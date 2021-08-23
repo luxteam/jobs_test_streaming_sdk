@@ -312,6 +312,8 @@ def execute_tests(args, driver):
                 close_android_app(driver)
                 # close Streaming SDK server instance
                 process = close_streaming_process("server", case, process)
+                save_logs(args, case, None, current_try)
+                save_android_log(args, case, None, current_try, driver)
 
                 current_try += 1
         else:

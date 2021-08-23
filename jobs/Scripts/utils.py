@@ -150,11 +150,16 @@ def close_android_app(driver):
 
 def save_logs(args, case, last_log_line, current_try):
     try:
-        tool_path = args.server_tool if args.execution_type == "server" else args.client_tool
+        if hasattr(args, "execution_type"):
+            execution_type = args.execution_type
+        else:
+            execution_type = "server"
+
+        tool_path = args.server_tool if execution_type == "server" else args.client_tool
         tool_path = os.path.abspath(tool_path)
 
         log_source_path = tool_path + ".log"
-        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_{}".format(args.execution_type) + ".log")
+        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_{}".format(execution_type) + ".log")
 
         with open(log_source_path, "rb") as file:
             logs = file.read()
@@ -190,6 +195,27 @@ def save_logs(args, case, last_log_line, current_try):
         return last_log_line
     except Exception as e:
         main_logger.error("Failed during logs saving. Exception: {}".format(str(e)))
+        main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+        return None
+
+
+def save_android_log(args, case, last_log_line, current_try, driver):
+    try:
+        raw_logs = driver.get_log("logcat")
+
+        log_lines = []
+
+        for log_line_info in raw_logs:
+            log_lines.append(log_line_info["message"].encode("utf-8", "ignore"))
+
+        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_client" + ".log")
+
+        with open(log_destination_path, "ab") as file:
+            file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
+            file.write(b"\n".join(log_lines))
+    except Exception as e:
+        main_logger.error("Failed during android logs saving. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
 
         return None
