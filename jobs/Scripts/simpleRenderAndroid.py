@@ -107,13 +107,20 @@ def prepare_empty_reports(args):
                 '%m/%d/%Y %H:%M:%S')
             test_case_report[SCREENS_PATH_KEY] = os.path.join(args.output, "Color", case["case"])
             test_case_report["number_of_tries"] = 0
-            test_case_report["configuration"] = render_device + " " + platform_name
+            test_case_report["server_configuration"] = render_device + " " + platform_name
             test_case_report["message"] = []
+
+            script_info = []
 
             # update script info using current params (e.g. resolution)
             for i in range(len(test_case_report["script_info"])):
                 if "Server keys" in test_case_report["script_info"][i]:
                     test_case_report["script_info"][i] = test_case_report["script_info"][i].replace("<resolution>", "{}, {}".format(resolution_width, resolution_height))
+                if "Client keys" not in test_case_report["script_info"][i]:
+                    # ignore line with client keys (they aren't used by Android autotests)
+                    script_info.append(test_case_report["script_info"])
+
+            test_case_report["script_info"] = script_info
 
             if case['status'] == 'skipped':
                 test_case_report['test_status'] = 'skipped'
