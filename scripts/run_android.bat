@@ -6,6 +6,7 @@ set GAME_NAME=%4
 if not defined RETRIES set RETRIES=1
 
 python prepare_xmls.py --os_name "Android"
+python prepare_test_cases.py --os_name "Android"
 
 python -m pip install -r ../jobs_launcher/install/requirements.txt
 
