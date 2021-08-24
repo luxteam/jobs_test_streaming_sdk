@@ -53,7 +53,7 @@
             "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1920,1200 -extStats true",
             "Client keys: -Fullscreen false"
         ]
-   }
+   },
     {
         "case": "STR_ARN_006",
         "status": "active",
