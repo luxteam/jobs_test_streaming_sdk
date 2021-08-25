@@ -20,11 +20,19 @@ pyautogui.FAILSAFE = False
 class OpenGame(Action):
     def parse(self):
         games_launchers = {
-            "heavendx9": "C:\\JN\\Heaven Benchmark 4.0.lnk"
+            "heavendx9": "C:\\JN\\Heaven Benchmark 4.0.lnk",
+            "heavendx11": "C:\\JN\\Heaven Benchmark 4.0.lnk",
+            "valleydx9": "C:\\JN\\Heaven Benchmark 4.0.lnk",
+            "valleydx11": "C:\\JN\\Heaven Benchmark 4.0.lnk",
+            "borderlands3": "C:\\JN\\Borderlands3.exe - Shortcut.lnk"
         }
 
         games_windows = {
-            "heavendx9": ["Unigine Heaven Benchmark 4.0 Basic (Direct3D9)", "Heaven.exe"]
+            "heavendx9": ["Unigine Heaven Benchmark 4.0 Basic (Direct3D9)", "Heaven.exe"],
+            "heavendx11": ["Unigine Heaven Benchmark 4.0 Basic (Direct3D11)", "Heaven.exe"],
+            "valleydx9": ["Unigine Valley Benchmark 1.0 Basic (Direct3D9)", "Valley.exe"],
+            "valleydx11": ["Unigine Valley Benchmark 1.0 Basic (Direct3D11)", "Valley.exe"],
+            "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"]
         }
 
         self.game_name = self.params["game_name"]
@@ -60,9 +68,24 @@ class OpenGame(Action):
             if self.game_name == "heavendx9" or self.game_name == "heavendx11":
                 sleep(6)
                 click("center_290", "center_-85", self.logger)
-                click("center_290", "center_-55", self.logger)
+                if self.game_name == "heavendx9":
+                    click("center_290", "center_-55", self.logger)
+                else:
+                    click("center_290", "center_-70", self.logger)
                 click("center_280", "center_135", self.logger)
                 sleep(30)
+            if self.game_name == "valleydx9" or self.game_name == "valleydx11":
+                sleep(6)
+                click("center_290", "center_-70", self.logger)
+                if self.game_name == "valleydx9":
+                    click("center_290", "center_-40", self.logger)
+                else:
+                    click("center_290", "center_-55", self.logger)
+                click("center_280", "center_135", self.logger)
+                sleep(30)
+            elif self.game == "borderlands3"
+                sleep(150)
+
 
 
 def make_window_foreground(window, logger):
