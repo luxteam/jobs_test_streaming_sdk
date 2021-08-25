@@ -18,6 +18,7 @@ if not defined COLLECT_TRACES set COLLECT_TRACES="False"
 if not defined SCREEN_RESOLUTION set SCREEN_RESOLUTION="1920x1080"
 
 python prepare_xmls.py --os_name "Windows"
+python prepare_test_cases.py --os_name "Windows"
 
 python -m pip install -r ../jobs_launcher/install/requirements.txt
 
