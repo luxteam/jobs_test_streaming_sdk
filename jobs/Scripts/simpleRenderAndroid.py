@@ -182,8 +182,7 @@ def prepare_android_emulator(args):
         "udid": "emulator-5554",
         "platformName": "Android",
         "autoGrantPermissions": True,
-        "app": os.path.abspath(args.client_tool),
-        "orientation": "LANDSCAPE"
+        "app": os.path.abspath(args.client_tool)
     }
 
     driver = webdriver.Remote("http://localhost:4723/wd/hub", configuration)
