@@ -205,6 +205,10 @@ def execute_tests(args, driver):
     process = None
     processes = {}
 
+    # copy log from last log line
+    last_log_line_server = None
+    last_log_line_client = None
+
     for case in [x for x in cases if not is_case_skipped(x, current_conf)]:
 
         case_start_time = time.time()
@@ -320,8 +324,8 @@ def execute_tests(args, driver):
                 close_android_app(driver)
                 # close Streaming SDK server instance
                 process = close_streaming_process("server", case, process)
-                save_logs(args, case, None, current_try)
-                save_android_log(args, case, None, current_try, driver)
+                last_log_line_server = save_logs(args, case, last_log_line_server, current_try)
+                last_log_line_client = save_android_log(args, case, last_log_line_client, current_try, driver)
 
                 try:
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
