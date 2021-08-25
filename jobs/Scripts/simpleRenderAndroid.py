@@ -179,10 +179,11 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 def prepare_android_emulator(args):
     # TODO remove hard coded emulator name
     configuration = {
-        "deviceName": "emulator-5554",
-        "platform": "Android",
+        "udid": "emulator-5554",
+        "platformName": "Android",
         "autoGrantPermissions": True,
         "app": os.path.abspath(args.client_tool)
+        "orientation": "LANDSCAPE"
     }
 
     driver = webdriver.Remote("http://localhost:4723/wd/hub", configuration)
