@@ -22,6 +22,7 @@
 
     "borderlands3_actions_android": [
         "open_game",
+        "sleep 3",
         "make_screen borderlands_menu",
         "press_keys \"down down enter   enter   c c   down enter\"",
         "sleep 30",
