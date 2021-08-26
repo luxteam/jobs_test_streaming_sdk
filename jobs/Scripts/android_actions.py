@@ -83,7 +83,7 @@ class OpenGame(Action):
                     click("center_290", "center_-55", self.logger)
                 click("center_280", "center_135", self.logger)
                 sleep(30)
-            elif self.game == "borderlands3":
+            elif self.game_name == "borderlands3":
                 sleep(150)
 
 
