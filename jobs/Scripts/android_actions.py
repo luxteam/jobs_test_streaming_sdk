@@ -198,19 +198,23 @@ class MakeScreen(Action):
 
     def execute(self):
         if not self.screen_name:
-            make_screen(self.driver, self.screen_path, self.current_try)
+            make_screen(self.driver, self.screen_path, self.current_try, self.logger)
         else:
-            make_screen(self.driver, self.screen_path, self.current_try, self.screen_name, self.current_image_num)
+            make_screen(self.driver, self.screen_path, self.current_try, self.logger, self.screen_name, self.current_image_num)
             self.params["current_image_num"] += 1
 
 
-def make_screen(driver, screen_path, current_try, screen_name = "", current_image_num = 0):
-    screen_base64 = driver.get_screenshot_as_base64()
+def make_screen(driver, screen_path, current_try, logger, screen_name = "", current_image_num = 0):
+    try:
+        screen_base64 = driver.get_screenshot_as_base64()
 
-    screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1))
+        screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1))
 
-    with open(screen_path, "wb") as screen:
-        screen.write(base64.b64decode(screen_base64))
+        with open(screen_path, "wb") as screen:
+            screen.write(base64.b64decode(screen_base64))
+    except Exception as e:
+        logger.error("Failed to make screenshot: {}".format(str(e)))
+        logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
 # Make sequence of screens with delay. It supports initial delay before the first test case
@@ -232,7 +236,7 @@ class SleepAndScreen(Action):
         screen_number = 1
 
         while True:
-            make_screen(self.driver, self.screen_path, self.current_try, self.screen_name, self.current_image_num)
+            make_screen(self.driver, self.screen_path, self.current_try, self.logger, self.screen_name, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1
@@ -252,16 +256,20 @@ class RecordVideo(Action):
         self.duration = int(self.params["arguments_line"])
 
     def execute(self):
-        self.logger.info("Start to record video")
+        try:
+            self.logger.info("Start to record video")
 
-        self.driver.start_recording_screen(timeLimit = float(self.duration))
-        sleep(float(self.duration))
-        video_base64 = self.driver.stop_recording_screen()
+            self.driver.start_recording_screen(timeLimit = float(self.duration))
+            sleep(float(self.duration))
+            video_base64 = self.driver.stop_recording_screen()
 
-        self.logger.info("Finish to record video")
-        
-        with open(os.path.join(self.video_path, self.video_name), "wb") as video:
-            video.write(base64.b64decode(video_base64))
+            self.logger.info("Finish to record video")
+            
+            with open(os.path.join(self.video_path, self.video_name), "wb") as video:
+                video.write(base64.b64decode(video_base64))
+        except Exception as e:
+            logger.error("Failed to make screenshot: {}".format(str(e)))
+            logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
 def click(x_description, y_description, logger, delay = 0.2):
