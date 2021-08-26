@@ -433,9 +433,7 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
 
             if connection_terminated:
                 json_content["message"].append("Application problem: Client connection terminated")
-
-                if json_content["test_status"] != "error":
-                    json_content["test_status"] = "failed"
+                json_content["test_status"] = "error"
 
             main_logger.info("Test case processed: {}".format(json_content["test_case"]))
             main_logger.info("Saved values: {}".format(saved_values))
