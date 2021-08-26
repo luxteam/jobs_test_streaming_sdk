@@ -86,6 +86,14 @@ class OpenGame(Action):
             elif self.game_name == "borderlands3":
                 sleep(150)
 
+            window = win32gui.FindWindow(None, self.game_window)
+
+            if window is not None and window != 0:
+                self.logger.info("Window {} was succesfully found".format(self.game_window))
+
+                make_window_foreground(window, self.logger)
+            else:
+                raise Exception("Window {} wasn't found at all".format(self.game_window))
 
 
 def make_window_foreground(window, logger):
