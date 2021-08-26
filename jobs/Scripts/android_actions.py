@@ -22,8 +22,8 @@ class OpenGame(Action):
         games_launchers = {
             "heavendx9": "C:\\JN\\Heaven Benchmark 4.0.lnk",
             "heavendx11": "C:\\JN\\Heaven Benchmark 4.0.lnk",
-            "valleydx9": "C:\\JN\\Heaven Benchmark 4.0.lnk",
-            "valleydx11": "C:\\JN\\Heaven Benchmark 4.0.lnk",
+            "valleydx9": "C:\\JN\\Valley Benchmark 1.0.lnk",
+            "valleydx11": "C:\\JN\\Valley Benchmark 1.0.lnk",
             "borderlands3": "C:\\JN\\Borderlands3.exe - Shortcut.lnk"
         }
 
