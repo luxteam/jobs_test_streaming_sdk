@@ -327,6 +327,7 @@ def execute_tests(args, driver):
                             main_logger.info("Connection isn't alive. Recreate it")
 
                             driver = prepare_android_emulator(args, True)
+                            params["driver"] = driver
 
                     main_logger.info("Finish action execution\n\n\n")
 
