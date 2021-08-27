@@ -25,7 +25,9 @@ class OpenGame(Action):
             "valleydx9": "C:\\JN\\Valley Benchmark 1.0.lnk",
             "valleydx11": "C:\\JN\\Valley Benchmark 1.0.lnk",
             "borderlands3": "C:\\JN\\Borderlands3.exe - Shortcut.lnk",
-            "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url"
+            "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url",
+            "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
+            "lol": "C:\\JN\\League of Legends.lnk"
         }
 
         games_windows = {
@@ -34,7 +36,9 @@ class OpenGame(Action):
             "valleydx9": ["Unigine Valley Benchmark 1.0 Basic (Direct3D9)", "Valley.exe"],
             "valleydx11": ["Unigine Valley Benchmark 1.0 Basic (Direct3D11)", "Valley.exe"],
             "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"],
-            "apexlegends": ["Apex Legends", "r5apex.exe"]
+            "apexlegends": ["Apex Legends", "r5apex.exe"],
+            "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
+            "lol": ["League of Legends", "LeagueClient.exe"]
         }
 
         self.game_name = self.params["game_name"]
@@ -117,15 +121,55 @@ class OpenGame(Action):
                 sleep(2)
                 click("center_680", "center_-190", self.logger)
                 sleep(2)
+            elif self.game_name == "valorant":
+                sleep(15)
+                click("center_0", "center_0", self.logger)
+                sleep(60)
 
-            window = win32gui.FindWindow(None, self.game_window)
+                # do opening of lobby twice to avoid ads
+                click("center_0", "25", self.logger)
+                sleep(1)
+                click("center_0", "85", self.logger)
+                sleep(3)
 
-            if window is not None and window != 0:
-                self.logger.info("Window {} was succesfully found".format(self.game_window))
+                press_keys("esc", self.logger)
 
-                make_window_foreground(window, self.logger)
-            else:
-                raise Exception("Window {} wasn't found at all".format(self.game_window))
+                click("center_0", "25", self.logger)
+                sleep(1)
+                click("center_0", "85", self.logger)
+                sleep(3)
+
+                click("center_-300", "edge_-95", self.logger)
+                sleep(1)
+                click("center_-300", "edge_-155", self.logger)
+                sleep(3)
+
+                click("center_0", "center_225", self.logger)
+                sleep(30)
+
+                click("center_-650", "center_0", self.logger)
+                sleep(2)
+                click("center_0", "edge_-400", self.logger)
+                sleep(1)
+                click("center_0", "edge_-460", self.logger)
+            elif self.game_name == "lol":
+                sleep(90)
+                click("center_-520", "center_-340", self.logger)
+                sleep(1)
+                click("center_-390", "center_-280", self.logger)
+                sleep(1)
+                click("center_-15", "center_-160", self.logger)
+                sleep(1)
+                click("center_-110", "center_310", self.logger)
+                sleep(1)
+                click("center_-110", "center_310", self.logger)
+                sleep(1)
+                click("center_150", "center_-210", self.logger)
+                sleep(1)
+                click("center_0", "center_230", self.logger)
+                sleep(60)
+                click("center_0", "center_0", self.logger)
+                press_keys("shift+x ctrl+shift+i shift+y:17 ctrl+e ctrl+r", self.logger)
 
 
 def make_window_foreground(window, logger):
@@ -359,13 +403,19 @@ def do_test_actions(game_name, logger):
                 pydirectinput.keyUp("space")
         elif game_name == "valorant":
             for i in range(10):
+                pydirectinput.keyDown("space")
+                sleep(0.1)
+                pydirectinput.keyUp("space")
+
                 pydirectinput.press("x")
                 sleep(1)
                 pyautogui.click()
                 sleep(3)
         elif game_name == "lol":
-            center_x = win32api.GetSystemMetrics(0) / 2
-            center_y = win32api.GetSystemMetrics(1) / 2
+            edge_x = win32api.GetSystemMetrics(0)
+            edge_y = win32api.GetSystemMetrics(1)
+            center_x = edge_x / 2
+            center_y = edge_y / 2
 
             for i in range(5):
                 pydirectinput.press("e")
@@ -378,8 +428,22 @@ def do_test_actions(game_name, logger):
                 pydirectinput.press("r")
                 sleep(3)
 
-                # get time to do server actions
-                sleep(4)
+                pyautogui.moveTo(center_x + 360, center_y - 360)
+                sleep(0.1)
+                pyautogui.click()
+                sleep(0.1)
+                pyautogui.moveTo(edge_x - 255, edge_y - 60)
+                sleep(0.1)
+                pyautogui.click(button="right")
+                sleep(1.5)
+                pyautogui.moveTo(edge_x - 290, edge_y - 20)
+                sleep(0.1)
+                pyautogui.click()
+                sleep(0.1)
+                pyautogui.moveTo(center_x, center_y)
+                sleep(0.1)
+                pyautogui.click(button="right")
+                sleep(1.5)
 
     except Exception as e:
         logger.error("Failed to do test actions: {}".format(str(e)))

@@ -81,6 +81,15 @@
         "sleep_and_screen 5 4 4 test_actions"
     ],
 
+    "valorant_actions_android": [
+        "open_game",
+        "start_actions",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
     "apexlegends_actions": [
         "check_game \"Apex Legends\" \"r5apex.exe\"",
         "skip_if_done 26",
@@ -165,6 +174,15 @@
         "click",
         "start_test_actions_server",
         "start_test_actions_client",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
+    "lol_actions_android": [
+        "open_game",
+        "start_actions",
         "make_screen test_actions",
         "sleep 4",
         "record_video 10",
