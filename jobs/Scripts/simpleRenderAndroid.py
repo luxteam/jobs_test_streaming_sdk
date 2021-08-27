@@ -45,7 +45,7 @@ ACTIONS_MAPPING = {
 
 def hide_emulator(args):
     window = win32gui.FindWindow(None, "Android Emulator - Pixel:5554")
-    def make_window_minimized(window, main_logger):
+    make_window_minimized(window, main_logger)
 
 
 def copy_test_cases(args):
