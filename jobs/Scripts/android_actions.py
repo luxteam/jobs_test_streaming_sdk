@@ -268,8 +268,8 @@ class RecordVideo(Action):
             with open(os.path.join(self.video_path, self.video_name), "wb") as video:
                 video.write(base64.b64decode(video_base64))
         except Exception as e:
-            logger.error("Failed to make screenshot: {}".format(str(e)))
-            logger.error("Traceback: {}".format(traceback.format_exc()))
+            self.logger.error("Failed to make screenshot: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
 def click(x_description, y_description, logger, delay = 0.2):
