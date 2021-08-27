@@ -352,10 +352,10 @@ def execute_tests(args, driver):
                     state = json.load(json_file)
 
                 if state["restart_time"] == 0:
-                    state["restart_time"] = time()
+                    state["restart_time"] = time.time()
                     main_logger.info("Reboot time was set")
                 else:
-                    main_logger.info("Time left from the latest restart of game: {}".format(time() - state["restart_time"]))
+                    main_logger.info("Time left from the latest restart of game: {}".format(time.time() - state["restart_time"]))
                     if args.game_name.lower() in REBOOTING_GAMES and (time() - state["restart_time"]) > REBOOTING_GAMES[args.game_name.lower()]["time_to_reboot"]:
                         close_game(game_name.lower())
 
