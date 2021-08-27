@@ -11,6 +11,7 @@ import sys
 import traceback
 from shutil import copyfile
 from datetime import datetime
+import pydirectinput, pyautogui
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -283,3 +284,37 @@ def collect_iperf_info(args, log_name_base):
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
 
     os.chdir(current_dir)
+
+
+def close_game(game_name):
+    edge_x = win32api.GetSystemMetrics(0)
+    edge_y = win32api.GetSystemMetrics(1)
+    center_x = edge_x / 2
+    center_y = edge_y / 2
+
+    if game_name == "lol":
+        pydirectinput.keyDown("esc")
+        sleep(0.1)
+        pydirectinput.keyUp("esc")
+
+        sleep(2)
+
+        pyautogui.moveTo(center_x - 360, center_y + 335)
+        sleep(0.2)
+        pyautogui.mouseDown()
+        sleep(0.2)
+        pyautogui.mouseUp()
+        sleep(0.2)
+        pyautogui.mouseDown()
+        sleep(0.2)
+        pyautogui.mouseUp()
+
+        sleep(1)
+
+        pyautogui.moveTo(center_x - 130, center_y - 50)
+        sleep(0.2)
+        pyautogui.mouseDown()
+        sleep(0.2)
+        pyautogui.mouseUp()
+
+        sleep(3)

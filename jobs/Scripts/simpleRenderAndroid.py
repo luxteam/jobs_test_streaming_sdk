@@ -26,6 +26,10 @@ from jobs_launcher.core.config import *
 from jobs_launcher.core.system_info import get_gpu
 
 
+# some games should be rebooted sometimes
+REBOOTING_GAMES = {"valorant": {"time_to_reboot": 3000, "delay": 120}, "lol": {"time_to_reboot": 3000}}
+
+
 # mapping of commands and their implementations
 ACTIONS_MAPPING = {
     "open_game": OpenGame,
@@ -340,6 +344,26 @@ def execute_tests(args, driver):
                 except Exception as e:
                     main_logger.error("Failed to analyze_logs (try #{}): {}".format(current_try, str(e)))
                     main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+                # restart game if it's required
+                global REBOOTING_GAMES
+                
+                with open(os.path.join(ROOT_PATH, "state.py"), "r") as json_file:
+                    state = json.load(json_file)
+
+                if state["restart_time"] == 0:
+                    state["restart_time"] = time()
+                    main_logger.info("Reboot time was set")
+                else:
+                    main_logger.info("Time left from the latest restart of game: {}".format(time() - state["restart_time"]))
+                    if args.game_name.lower() in REBOOTING_GAMES and (time() - state["restart_time"]) > REBOOTING_GAMES[args.game_name.lower()]["time_to_reboot"]:
+                        close_game(game_name.lower())
+
+                        # sleep a bit if it's required (some games can open same lobby if restart game immediately)
+                        if "delay" in REBOOTING_GAMES[args.game_name.lower()]:
+                            sleep(REBOOTING_GAMES[args.game_name.lower()]["delay"])
+
+                        state["restart_time"] = time()
 
                 current_try += 1
         else:

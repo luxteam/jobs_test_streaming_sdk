@@ -45,40 +45,6 @@ ACTIONS_MAPPING = {
 }
 
 
-def close_game(game_name):
-    edge_x = win32api.GetSystemMetrics(0)
-    edge_y = win32api.GetSystemMetrics(1)
-    center_x = edge_x / 2
-    center_y = edge_y / 2
-
-    if game_name == "lol":
-        pydirectinput.keyDown("esc")
-        sleep(0.1)
-        pydirectinput.keyUp("esc")
-
-        sleep(2)
-
-        pyautogui.moveTo(center_x - 360, center_y + 335)
-        sleep(0.2)
-        pyautogui.mouseDown()
-        sleep(0.2)
-        pyautogui.mouseUp()
-        sleep(0.2)
-        pyautogui.mouseDown()
-        sleep(0.2)
-        pyautogui.mouseUp()
-
-        sleep(1)
-
-        pyautogui.moveTo(center_x - 130, center_y - 50)
-        sleep(0.2)
-        pyautogui.mouseDown()
-        sleep(0.2)
-        pyautogui.mouseUp()
-
-        sleep(3)
-
-
 # Server receives commands from client and executes them
 # Server doesn't decide to retry case or do next test case. Exception: fail on server side which generates abort on server side
 def start_server_side_tests(args, case, process, script_path, last_log_line, current_try):
