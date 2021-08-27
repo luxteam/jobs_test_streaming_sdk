@@ -186,7 +186,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         json.dump(cases, file, indent=4)
 
 
-def prepare_android_emulator(args):
+def prepare_android_emulator(args, keep_app = False):
     # TODO remove hard coded emulator name
     configuration = {
         "udid": "emulator-5554",
@@ -197,7 +197,8 @@ def prepare_android_emulator(args):
 
     driver = webdriver.Remote("http://localhost:4723/wd/hub", configuration)
 
-    close_android_app(driver)
+    if not keep_app:
+        close_android_app(driver)
 
     return driver
 
@@ -317,6 +318,15 @@ def execute_tests(args, driver):
                         command_object.do_action()
                     else:
                         raise ClientActionException("Unknown client command: {}".format(command))
+
+                    # check that connection is still alive
+                    if command == "open_game":
+                        try:
+                            driver.get_log("logcat")
+                        except Exception:
+                            main_logger.info("Connection isn't alive. Recreate it")
+
+                            driver = prepare_android_emulator(args, True)
 
                     main_logger.info("Finish action execution\n\n\n")
 
