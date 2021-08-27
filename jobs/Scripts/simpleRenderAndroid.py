@@ -34,7 +34,8 @@ ACTIONS_MAPPING = {
     "press_keys": PressKeys,
     "make_screen": MakeScreen,
     "sleep_and_screen": SleepAndScreen,
-    "record_video": RecordVideo
+    "record_video": RecordVideo,
+    "start_actions": StartActions
 }
 
 

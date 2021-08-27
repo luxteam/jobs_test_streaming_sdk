@@ -24,7 +24,8 @@ class OpenGame(Action):
             "heavendx11": "C:\\JN\\Heaven Benchmark 4.0.lnk",
             "valleydx9": "C:\\JN\\Valley Benchmark 1.0.lnk",
             "valleydx11": "C:\\JN\\Valley Benchmark 1.0.lnk",
-            "borderlands3": "C:\\JN\\Borderlands3.exe - Shortcut.lnk"
+            "borderlands3": "C:\\JN\\Borderlands3.exe - Shortcut.lnk",
+            "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url"
         }
 
         games_windows = {
@@ -32,7 +33,8 @@ class OpenGame(Action):
             "heavendx11": ["Unigine Heaven Benchmark 4.0 Basic (Direct3D11)", "Heaven.exe"],
             "valleydx9": ["Unigine Valley Benchmark 1.0 Basic (Direct3D9)", "Valley.exe"],
             "valleydx11": ["Unigine Valley Benchmark 1.0 Basic (Direct3D11)", "Valley.exe"],
-            "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"]
+            "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"],
+            "apexlegends": ["Apex Legends", "r5apex.exe"]
         }
 
         self.game_name = self.params["game_name"]
@@ -85,6 +87,36 @@ class OpenGame(Action):
                 sleep(30)
             elif self.game_name == "borderlands3":
                 sleep(150)
+            elif self.game_name == "apexlegends":
+                sleep(60)
+                click("center_0", "center_0", self.logger)
+                sleep(20)
+
+                # do opening of lobby twice to avoid ads
+                click("230", "920", self.logger)
+                sleep(3)
+                click("415", "130", self.logger)
+                sleep(3)
+                click("230", "1070", self.logger, delay=3)
+
+                press_keys("esc", self.logger)
+                sleep(1)
+
+                click("230", "920", self.logger)
+                sleep(3)
+                click("415", "130", self.logger)
+                sleep(3)
+                click("230", "1070", self.logger, delay=3)
+
+                sleep(90)
+                click("center_0", "center_0", self.logger)
+                press_keys("w+shift_15", self.logger)
+                press_keys("esc", self.logger)
+                sleep(1)
+                click("center_0", "center_155", self.logger)
+                sleep(2)
+                click("center_680", "center_-190", self.logger)
+                sleep(2)
 
             window = win32gui.FindWindow(None, self.game_window)
 
@@ -128,63 +160,67 @@ class PressKeys(Action):
         self.keys_string = parsed_arguments[0]
 
     def execute(self):
-        keys = self.keys_string.split()
+        press_keys(self.keys_string, self.logger)
 
-        # press keys one by one
-        # possible formats
-        # * space - press space
-        # * space_10 - press space down for 10 seconds
-        # * space+shift - press space and shift
-        # * space+shift:10 - press space and shift 10 times
-        for i in range(len(keys)):
-            key = keys[i]
 
-            duration = 0
+def press_keys(keys_string, logger):
+    keys = keys_string.split()
 
-            if "_" in key:
-                parts = key.split("_")
+    # press keys one by one
+    # possible formats
+    # * space - press space
+    # * space_10 - press space down for 10 seconds
+    # * space+shift - press space and shift
+    # * space+shift:10 - press space and shift 10 times
+    for i in range(len(keys)):
+        key = keys[i]
+
+        duration = 0
+
+        if "_" in key:
+            parts = key.split("_")
+            key = parts[0]
+            duration = int(parts[1])
+
+        logger.info("Press: {}. Duration: {}".format(key, duration))
+
+        if duration == 0:
+            times = 1
+
+            if ":" in key:
+                parts = key.split(":")
                 key = parts[0]
-                duration = int(parts[1])
+                times = int(parts[1])
 
-            self.logger.info("Press: {}. Duration: {}".format(key, duration))
+            keys_to_press = key.split("+")
 
-            if duration == 0:
-                times = 1
-
-                if ":" in key:
-                    parts = key.split(":")
-                    key = parts[0]
-                    times = int(parts[1])
-
-                keys_to_press = key.split("+")
-
-                for i in range(times):
-                    for key_to_press in keys_to_press:
-                        pydirectinput.keyDown(key_to_press)
-
-                    sleep(0.1)
-
-                    for key_to_press in keys_to_press:
-                        pydirectinput.keyUp(key_to_press)
-
-                    sleep(0.5)
-            else:
-                keys_to_press = key.split("+")
-
+            for i in range(times):
                 for key_to_press in keys_to_press:
                     pydirectinput.keyDown(key_to_press)
 
-                sleep(duration)
+                sleep(0.1)
 
                 for key_to_press in keys_to_press:
                     pydirectinput.keyUp(key_to_press)
 
-            # if it isn't the last key - make a delay
-            if i != len(keys) - 1:
-                if "enter" in key:
-                    sleep(2)
-                else:
-                    sleep(1)
+                sleep(0.5)
+        else:
+            keys_to_press = key.split("+")
+
+            for key_to_press in keys_to_press:
+                pydirectinput.keyDown(key_to_press)
+
+            sleep(duration)
+
+            for key_to_press in keys_to_press:
+                pydirectinput.keyUp(key_to_press)
+
+        # if it isn't the last key - make a delay
+        if i != len(keys) - 1:
+            if "enter" in key:
+                sleep(2)
+            else:
+                sleep(1)
 
 
 # Do screenshot
@@ -292,3 +328,59 @@ def click(x_description, y_description, logger, delay = 0.2):
     pyautogui.moveTo(x, y)
     sleep(delay)
     pyautogui.click()
+
+
+class StartActions(Action):
+    def parse(self):
+        self.game_name = self.params["game_name"]
+
+    def execute(self):
+        gpu_view_thread = Thread(target=do_test_actions, args=(self.game_name.lower(), self.logger,))
+        gpu_view_thread.daemon = True
+        gpu_view_thread.start()
+
+
+def do_test_actions(game_name, logger):
+    try:
+        if game_name == "apexlegends":
+            for i in range(40):
+                pydirectinput.press("q")
+                pydirectinput.keyDown("a")
+                pydirectinput.keyDown("space")
+                sleep(0.5)
+                pydirectinput.keyUp("a")
+                pydirectinput.keyUp("space")
+
+                pydirectinput.press("q")
+                pydirectinput.keyDown("d")
+                pydirectinput.keyDown("space")
+                sleep(0.5)
+                pydirectinput.keyUp("d")
+                pydirectinput.keyUp("space")
+        elif game_name == "valorant":
+            for i in range(10):
+                pydirectinput.press("x")
+                sleep(1)
+                pyautogui.click()
+                sleep(3)
+        elif game_name == "lol":
+            center_x = win32api.GetSystemMetrics(0) / 2
+            center_y = win32api.GetSystemMetrics(1) / 2
+
+            for i in range(5):
+                pydirectinput.press("e")
+                sleep(0.1)
+                pydirectinput.press("e")
+                sleep(0.1)
+
+                pydirectinput.press("r")
+                sleep(0.1)
+                pydirectinput.press("r")
+                sleep(3)
+
+                # get time to do server actions
+                sleep(4)
+
+    except Exception as e:
+        logger.error("Failed to do test actions: {}".format(str(e)))
+        logger.error("Traceback: {}".format(traceback.format_exc()))

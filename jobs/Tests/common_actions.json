@@ -126,6 +126,15 @@
         "sleep_and_screen 5 4 4 test_actions"
     ],
 
+    "apexlegends_actions_android": [
+        "open_game",
+        "start_actions",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
     "lol_actions": [
         "check_window \"League of Legends\" \"LeagueClient.exe\"",
         "check_game \"League of Legends (TM) Client\" \"League of Legends.exe\"",
