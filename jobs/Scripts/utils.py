@@ -12,6 +12,7 @@ import traceback
 from shutil import copyfile
 from datetime import datetime
 import pydirectinput, pyautogui
+import win32gui
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -318,3 +319,11 @@ def close_game(game_name):
         pyautogui.mouseUp()
 
         sleep(3)
+
+
+def make_window_minimized(window, logger):
+    try:
+        win32gui.ShowWindow(window, 2)
+    except Exception as e:
+        logger.error("Failed to make window minized: {}".format(str(e)))
+        logger.error("Traceback: {}".format(traceback.format_exc()))
