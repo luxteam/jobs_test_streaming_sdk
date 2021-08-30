@@ -381,6 +381,9 @@ def execute_tests(args, driver):
 
                         state["restart_time"] = time()
 
+                with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
+                    json.dump(state, json_file, indent=4)
+
                 current_try += 1
         else:
             main_logger.error("Failed to execute case '{}' at all".format(case["case"]))
