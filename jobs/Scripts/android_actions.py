@@ -387,7 +387,7 @@ class StartActions(Action):
 def do_test_actions(game_name, logger):
     try:
         if game_name == "apexlegends":
-            for i in range(40):
+            for i in range(30):
                 pydirectinput.press("q")
                 pydirectinput.keyDown("a")
                 pydirectinput.keyDown("space")

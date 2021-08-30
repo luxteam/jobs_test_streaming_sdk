@@ -261,10 +261,7 @@ def execute_tests(args, driver):
                 server_script_path = os.path.join(args.output, "{}.bat".format(case["case"]))
        
                 with open(server_script_path, "w") as f:
-                    f.write(server_execution_script)                
-
-                # start client
-                driver.launch_app()
+                    f.write(server_execution_script)
 
                 # start server
                 process = start_streaming("server", server_script_path)
@@ -322,6 +319,9 @@ def execute_tests(args, driver):
                     # check that connection is still alive
                     if command == "open_game":
                         try:
+                            # start client
+                            driver.launch_app()
+
                             driver.get_log("logcat")
                         except Exception:
                             main_logger.info("Connection isn't alive. Recreate it")

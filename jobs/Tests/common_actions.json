@@ -83,6 +83,7 @@
 
     "valorant_actions_android": [
         "open_game",
+        "sleep 5",
         "start_actions",
         "make_screen test_actions",
         "sleep 4",
@@ -137,6 +138,7 @@
 
     "apexlegends_actions_android": [
         "open_game",
+        "sleep 5",
         "start_actions",
         "make_screen test_actions",
         "sleep 4",
@@ -182,6 +184,7 @@
 
     "lol_actions_android": [
         "open_game",
+        "sleep 5",
         "start_actions",
         "make_screen test_actions",
         "sleep 4",

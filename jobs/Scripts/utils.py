@@ -324,25 +324,22 @@ def close_game(game_name):
 def close_game_process(game_name):
     try:
         games_processes = {
-            "heavendx9": "Heaven.exe",
-            "heavendx11": "Heaven.exe",
-            "valleydx9": "Valley.exe",
-            "valleydx11": "Valley.exe",
-            "borderlands3": "Borderlands3.exe",
-            "apexlegends": "r5apex.exe",
-            "valorant": "VALORANT-Win64-Shipping.exe",
-            "lol": "League of Legends.exe"
+            "heavendx9": ["browser_x86.exe", "Heaven.exe"],
+            "heavendx11": ["browser_x86.exe", "Heaven.exe"],
+            "valleydx9": ["browser_x86.exe", "Valley.exe"],
+            "valleydx11": ["browser_x86.exe", "Valley.exe"],
+            "borderlands3": ["Borderlands3.exe"],
+            "apexlegends": ["r5apex.exe"],
+            "valorant": ["VALORANT-Win64-Shipping.exe"],
+            "lol": ["LeagueClient.exe", "League of Legends.exe"]
         }
 
-        process_name = games_processes[game_name]
+        processes_names = games_processes[game_name]
 
         for process in psutil.process_iter():
-            if process.name() == process_name:
+            if process.name() in processes_names:
                 process.kill()
                 main_logger.info("Target game process found. Close it")
-                break
-        else:
-            main_logger.info("Game process wasn't found at all")
 
     except Exception as e:
         main_logger.error("Failed to close game process. Exception: {}".format(str(e)))
