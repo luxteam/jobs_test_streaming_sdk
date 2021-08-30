@@ -373,7 +373,7 @@ def execute_tests(args, driver):
                 else:
                     main_logger.info("Time left from the latest restart of game: {}".format(time.time() - state["restart_time"]))
                     if args.game_name.lower() in REBOOTING_GAMES and (time.time() - state["restart_time"]) > REBOOTING_GAMES[args.game_name.lower()]["time_to_reboot"]:
-                        close_game(game_name.lower())
+                        close_game(args.game_name.lower())
 
                         # sleep a bit if it's required (some games can open same lobby if restart game immediately)
                         if "delay" in REBOOTING_GAMES[args.game_name.lower()]:

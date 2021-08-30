@@ -248,7 +248,7 @@ def start_streaming(execution_type, script_path):
     # start Streaming SDK process
     process = psutil.Popen(script_path, stdout=PIPE, stderr=PIPE, shell=True)
 
-    main_logger.info("Start execution_type depended script")
+    main_logger.info("Start Streaming SDK")
 
     # Wait a bit to launch streaming SDK client/server
     sleep(3)
