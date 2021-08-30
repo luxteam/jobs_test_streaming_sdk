@@ -330,7 +330,7 @@ def close_game_process(game_name):
             "valleydx11": "Valley.exe",
             "borderlands3": "Borderlands3.exe",
             "apexlegends": "r5apex.exe",
-            "valorant": "VALORANT-Win64-Shipping.exe"
+            "valorant": "VALORANT-Win64-Shipping.exe",
             "lol": "League of Legends.exe"
         }
 
