@@ -45,7 +45,7 @@ ACTIONS_MAPPING = {
 
 def hide_emulator(args):
     window = win32gui.FindWindow(None, "Android Emulator - Pixel:5554")
-    make_window_minimized(window, main_logger)
+    make_window_minimized(window)
 
 
 def copy_test_cases(args):
@@ -338,6 +338,7 @@ def execute_tests(args, driver):
             except Exception as e:
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "failed", error_messages = error_messages)
+                close_game_process(args.game_name.lower())
                 main_logger.error("Failed to execute test case (try #{}): {}".format(current_try, str(e)))
                 main_logger.error("Traceback: {}".format(traceback.format_exc()))
             finally:
@@ -374,6 +375,7 @@ def execute_tests(args, driver):
                     main_logger.info("Time left from the latest restart of game: {}".format(time.time() - state["restart_time"]))
                     if args.game_name.lower() in REBOOTING_GAMES and (time.time() - state["restart_time"]) > REBOOTING_GAMES[args.game_name.lower()]["time_to_reboot"]:
                         close_game(args.game_name.lower())
+                        close_game_process(args.game_name.lower())
 
                         # sleep a bit if it's required (some games can open same lobby if restart game immediately)
                         if "delay" in REBOOTING_GAMES[args.game_name.lower()]:

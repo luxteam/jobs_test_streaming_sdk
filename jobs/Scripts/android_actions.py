@@ -38,7 +38,7 @@ class OpenGame(Action):
             "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"],
             "apexlegends": ["Apex Legends", "r5apex.exe"],
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
-            "lol": ["League of Legends", "LeagueClient.exe"]
+            "lol": ["League of Legends (TM) Client", "League of Legends.exe"]
         }
 
         self.game_name = self.params["game_name"]
