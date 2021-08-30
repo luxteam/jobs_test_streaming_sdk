@@ -22,8 +22,6 @@
 
     "borderlands3_actions_android": [
         "open_game",
-        "sleep 3",
-        "make_screen borderlands_menu",
         "press_keys \"down down enter   enter   c c   down enter\"",
         "sleep 30",
         "make_screen borderlands_benchmark",
@@ -83,7 +81,7 @@
 
     "valorant_actions_android": [
         "open_game",
-        "sleep 5",
+        "sleep 10",
         "start_actions",
         "make_screen test_actions",
         "sleep 4",
@@ -138,7 +136,7 @@
 
     "apexlegends_actions_android": [
         "open_game",
-        "sleep 5",
+        "sleep 10",
         "start_actions",
         "make_screen test_actions",
         "sleep 4",
@@ -184,7 +182,7 @@
 
     "lol_actions_android": [
         "open_game",
-        "sleep 5",
+        "sleep 10",
         "start_actions",
         "make_screen test_actions",
         "sleep 4",
