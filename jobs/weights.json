@@ -1,0 +1,72 @@
+{
+    "weights": [
+        {
+            "suite_name": "Audio",
+            "value": 2
+        },
+        {
+            "suite_name": "CaptureType",
+            "value": 0
+        },
+        {
+            "suite_name": "Codecs",
+            "value": 4
+        },
+        {
+            "suite_name": "Connection",
+            "value": 24
+        },
+        {
+            "suite_name": "ConversionType",
+            "value": 4
+        },
+        {
+            "suite_name": "Duplicate",
+            "value": 0
+        },
+        {
+            "suite_name": "General",
+            "value": 30
+        },
+        {
+            "suite_name": "GeneralQoS",
+            "value": 28
+        },
+        {
+            "suite_name": "Monitors",
+            "value": 4
+        },
+        {
+            "suite_name": "MPO",
+            "value": 2
+        },
+        {
+            "suite_name": "QoS",
+            "value": 18
+        },
+        {
+            "suite_name": "RateControl",
+            "value": 22
+        },
+        {
+            "suite_name": "RenderType",
+            "value": 4
+        },
+        {
+            "suite_name": "Resolution",
+            "value": 6
+        },
+        {
+            "suite_name": "Slices",
+            "value": 4
+        },
+        {
+            "suite_name": "Smoke",
+            "value": 2
+        },
+        {
+            "suite_name": "VSync",
+            "value": 2
+        }
+    ]
+}
