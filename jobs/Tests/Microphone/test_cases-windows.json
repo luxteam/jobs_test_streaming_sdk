@@ -1,0 +1,24 @@
+[
+    {
+        "case": "STR_MIC_001",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Microphone true",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Server keys: -Resolution <resolution> -extStats true -Microphone true",
+            "Client keys:"
+        ]
+    },
+    {
+        "case": "STR_MIC_002",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Microphone true",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Server keys: -Resolution <resolution> -extStats true -Microphone true",
+            "Client keys:"
+        ]
+    }
+]

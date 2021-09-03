@@ -17,6 +17,9 @@
         "Smoke":"",
         "VSync":"",
         "GeneralQoS":"",
-        "Connection":""
+        "Connection":"",
+        "DirtyRectangles":"",
+        "Flags":"",
+        "Microphone":""
     }
 }
