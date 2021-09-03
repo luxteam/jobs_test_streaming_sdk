@@ -1,0 +1,314 @@
+[
+    {
+        "case": "STR_FLG_001",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set explicitly (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_002",
+        "status": "active",
+        "server_keys": "-extStats true",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "No parameters set (UDP)",
+            "Server keys: -extStats true",
+            "Client keys:"
+        ]
+    },
+    {
+        "case": "STR_FLG_003",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
+        "client_keys": " -fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: minbitrate, minframerate (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_004",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: bitratestep, frameratestep (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_005",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: bitrateperiod, framerateperiod (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_006",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: adjustbitrate, adjustframerate (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_007",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: slices, ratecontrol (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_008",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: codec, duplicate (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_009",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: convert (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_010",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: render (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_011",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -resolution 2560,1440 -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: extStats, QoS, bitrate, framerate (UDP)",
+            "Server keys: -extStats true -capture amd -resolution 2560,1440 -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false"
+        ]
+    },
+    {
+        "case": "STR_FLG_012",
+        "status": "active",
+        "server_keys": "-extStats true -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except: capture (UDP)",
+            "Server keys: -extStats true -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_013",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "All parameters set, except (on client): fullscreen, stereo, mpo (UDP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys:"
+        ]
+    },
+    {
+        "case": "STR_FLG_014",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set explicitly (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_015",
+        "status": "active",
+        "server_keys": "-extStats true",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "No parameters set (TCP)",
+            "Server keys: -extStats true",
+            "Client keys:"
+        ]
+    },
+    {
+        "case": "STR_FLG_016",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
+        "client_keys": " -fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: minbitrate, minframerate (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_017",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: bitratestep, frameratestep (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_018",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: bitrateperiod, framerateperiod (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_019",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: adjustbitrate, adjustframerate (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_020",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: slices, ratecontrol (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_021",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: codec, duplicate (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_022",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: convert (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_023",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: render (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_024",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -resolution 2560,1440 -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: extStats, QoS, bitrate, framerate (TCP)",
+            "Server keys: -extStats true -capture amd -resolution 2560,1440 -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false"
+        ]
+    },
+    {
+        "case": "STR_FLG_025",
+        "status": "active",
+        "server_keys": "-extStats true -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except: capture (TCP)",
+            "Server keys: -extStats true -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys: -fullscreen true -stereo false -mpo false -vsync true"
+        ]
+    },
+    {
+        "case": "STR_FLG_026",
+        "status": "active",
+        "server_keys": "-extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "All parameters set, except (on client): fullscreen, stereo, mpo (TCP)",
+            "Server keys: -extStats true -capture amd -framerate 0 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+            "Client keys:"
+        ]
+    }
+]
