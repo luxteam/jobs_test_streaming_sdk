@@ -67,6 +67,18 @@
         {
             "suite_name": "VSync",
             "value": 2
+        },
+        {
+            "suite_name": "DirtyRectangles",
+            "value": 4
+        },
+        {
+            "suite_name": "Flags",
+            "value": 26
+        },
+        {
+            "suite_name": "Microphone",
+            "value": 2
         }
     ]
 }
