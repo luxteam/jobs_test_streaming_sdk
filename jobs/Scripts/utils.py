@@ -142,9 +142,9 @@ def close_streaming_process(execution_type, case, process):
         return None
 
 
-def close_android_app(driver):
+def close_android_app(driver, case=None):
     try:
-        if should_case_be_closed("client", case):
+        if case is None or should_case_be_closed("client", case):
             driver.close_app()
 
             return True

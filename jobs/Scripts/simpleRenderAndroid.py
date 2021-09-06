@@ -360,7 +360,7 @@ def execute_tests(args, driver):
                 main_logger.error("Traceback: {}".format(traceback.format_exc()))
             finally:
                 # close Streaming SDK android app
-                client_closed = close_android_app(driver)
+                client_closed = close_android_app(driver, case)
                 # close Streaming SDK server instance
                 process = close_streaming_process("server", case, process)
                 last_log_line_server = save_logs(args, case, last_log_line_server, current_try)
