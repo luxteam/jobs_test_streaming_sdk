@@ -214,6 +214,7 @@ def execute_tests(args, driver):
         cases = json.load(json_file)
 
     process = None
+    client_closed = True
     processes = {}
 
     # copy log from last log line
@@ -262,9 +263,6 @@ def execute_tests(args, driver):
        
                 with open(server_script_path, "w") as f:
                     f.write(server_execution_script)
-
-                # start server
-                process = start_streaming("server", server_script_path)
 
                 params = {}
 
@@ -316,8 +314,16 @@ def execute_tests(args, driver):
                     else:
                         raise ClientActionException("Unknown client command: {}".format(command))
 
+                    # start server first
+                    if "start_first" not in case or case["start_first"] == "server":
+                        if process is None:
+                            process = start_streaming("server", server_script_path)
+
+                    if "start_first" in case and case["start_first"] == "server":
+                        sleep(10)
+
                     # check that connection is still alive
-                    if command == "open_game":
+                    if command == "open_game" and client_closed:
                         try:
                             # start client
                             driver.launch_app()
@@ -328,6 +334,13 @@ def execute_tests(args, driver):
 
                             driver = prepare_android_emulator(args, True)
                             params["driver"] = driver
+
+                    if "start_first" in case and case["start_first"] == "client":
+                        sleep(10)
+
+                    # start server after client
+                    if "start_first" in case and case["start_first"] == "client":
+                        process = start_streaming("server", server_script_path)
 
                     main_logger.info("Finish action execution\n\n\n")
 
@@ -343,7 +356,7 @@ def execute_tests(args, driver):
                 main_logger.error("Traceback: {}".format(traceback.format_exc()))
             finally:
                 # close Streaming SDK android app
-                close_android_app(driver)
+                client_closed = close_android_app(driver)
                 # close Streaming SDK server instance
                 process = close_streaming_process("server", case, process)
                 last_log_line_server = save_logs(args, case, last_log_line_server, current_try)

@@ -144,7 +144,12 @@ def close_streaming_process(execution_type, case, process):
 
 def close_android_app(driver):
     try:
-        driver.close_app()
+        if should_case_be_closed("client", case):
+            driver.close_app()
+
+            return True
+
+        return False
     except Exception as e:
         main_logger.error("Failed to close Streaming SDK Android app. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
