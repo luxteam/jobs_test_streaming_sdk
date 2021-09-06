@@ -13,11 +13,11 @@
     {
         "case": "STR_DRT_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -DrawDirtyRects true",
+        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -DrawDirtyRects true",
+            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
             "Client keys:"
         ]
     },
@@ -35,11 +35,11 @@
     {
         "case": "STR_DRT_004",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -DrawDirtyRects true",
+        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -DrawDirtyRects true",
+            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
             "Client keys:"
         ]
     }
