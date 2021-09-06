@@ -110,7 +110,7 @@ def is_workable_condition(process):
 
 
 def should_case_be_closed(execution_type, case):
-    return "keep_{}".format(execution_type) not in case or not case["keep_{}".format(args.execution_type)]
+    return "keep_{}".format(execution_type) not in case or not case["keep_{}".format(execution_type)]
 
 
 def close_streaming_process(execution_type, case, process):
