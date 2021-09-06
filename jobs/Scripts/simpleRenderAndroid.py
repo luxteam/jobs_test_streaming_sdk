@@ -314,33 +314,37 @@ def execute_tests(args, driver):
                     else:
                         raise ClientActionException("Unknown client command: {}".format(command))
 
-                    # start server first
-                    if "start_first" not in case or case["start_first"] == "server":
-                        if process is None:
-                            process = start_streaming("server", server_script_path)
-
-                    if "start_first" in case and case["start_first"] == "server":
-                        sleep(10)
-
                     # check that connection is still alive
-                    if command == "open_game" and client_closed:
-                        try:
-                            # start client
-                            driver.launch_app()
+                    if command == "open_game":
+                        # start server first
+                        if "start_first" not in case or case["start_first"] == "server":
+                            if process is None:
+                                main_logger.info("Start Streaming SDK server instance")
+                                process = start_streaming("server", server_script_path)
 
-                            driver.get_log("logcat")
-                        except Exception:
-                            main_logger.info("Connection isn't alive. Recreate it")
+                        if "start_first" in case and case["start_first"] == "server":
+                            sleep(10)
 
-                            driver = prepare_android_emulator(args, True)
-                            params["driver"] = driver
+                        if client_closed:
+                            try:
+                                main_logger.info("Start Streaming SDK client instance")
+                                # start client
+                                driver.launch_app()
 
-                    if "start_first" in case and case["start_first"] == "client":
-                        sleep(10)
+                                driver.get_log("logcat")
+                            except Exception:
+                                main_logger.info("Connection isn't alive. Recreate it")
 
-                    # start server after client
-                    if "start_first" in case and case["start_first"] == "client":
-                        process = start_streaming("server", server_script_path)
+                                driver = prepare_android_emulator(args, True)
+                                params["driver"] = driver
+
+                        if "start_first" in case and case["start_first"] == "client":
+                            sleep(10)
+
+                        # start server after client
+                        if "start_first" in case and case["start_first"] == "client":
+                            main_logger.info("Start Streaming SDK server instance")
+                            process = start_streaming("server", server_script_path)
 
                     main_logger.info("Finish action execution\n\n\n")
 
