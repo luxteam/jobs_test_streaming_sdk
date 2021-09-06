@@ -1,6 +1,6 @@
 [
     {
-        "case": "STR_SL_001",
+        "case": "STR_MN_001",
         "status": "active",
         "server_keys": "-Resolution <resolution> -MonitorID 2 -extStats true",
         "client_keys": "-Fullscreen true",
@@ -11,7 +11,7 @@
         ]
     },
     {
-        "case": "STR_SL_002",
+        "case": "STR_MN_002",
         "status": "active",
         "server_keys": "-Resolution <resolution> -EDID true -extStats true",
         "client_keys": "-Fullscreen true",
@@ -22,7 +22,7 @@
         ]
     },
     {
-        "case": "STR_SL_003",
+        "case": "STR_MN_003",
         "status": "active",
         "server_keys": "-Resolution <resolution> -MonitorID 2 -extStats true",
         "client_keys": "-Fullscreen true",
@@ -33,7 +33,7 @@
         ]
     },
     {
-        "case": "STR_SL_004",
+        "case": "STR_MN_004",
         "status": "active",
         "server_keys": "-Resolution <resolution> -EDID true -extStats true",
         "client_keys": "-Fullscreen true",
