@@ -410,7 +410,7 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
                 with open(log_path, 'r') as log_file:
                     log = log_file.readlines()
                     for line in log:
-                        if 'DEBUG ME!!! Client connection terminated' in line:
+                        if block_number > 0 and 'DEBUG ME!!! Client connection terminated' in line:
                             connection_terminated = True
 
                         # beginning of the new block
