@@ -11,6 +11,8 @@ import sys
 import traceback
 from shutil import copyfile
 from datetime import datetime
+import pydirectinput, pyautogui
+import win32gui
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -107,13 +109,13 @@ def is_workable_condition(process):
         return True
 
 
-def should_case_be_closed(args, case):
-    return "keep_{}".format(args.execution_type) not in case or not case["keep_{}".format(args.execution_type)]
+def should_case_be_closed(execution_type, case):
+    return "keep_{}".format(execution_type) not in case or not case["keep_{}".format(execution_type)]
 
 
-def close_streaming_process(args, case, process):
+def close_streaming_process(execution_type, case, process):
     try:
-        if should_case_be_closed(args, case):
+        if should_case_be_closed(execution_type, case):
             # close the current Streaming SDK process
             if process is not None:
                 close_process(process)
@@ -140,13 +142,31 @@ def close_streaming_process(args, case, process):
         return None
 
 
+def close_android_app(driver, case=None):
+    try:
+        if case is None or should_case_be_closed("client", case):
+            driver.close_app()
+
+            return True
+
+        return False
+    except Exception as e:
+        main_logger.error("Failed to close Streaming SDK Android app. Exception: {}".format(str(e)))
+        main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
 def save_logs(args, case, last_log_line, current_try):
     try:
-        tool_path = args.server_tool if args.execution_type == "server" else args.client_tool
+        if hasattr(args, "execution_type"):
+            execution_type = args.execution_type
+        else:
+            execution_type = "server"
+
+        tool_path = args.server_tool if execution_type == "server" else args.client_tool
         tool_path = os.path.abspath(tool_path)
 
         log_source_path = tool_path + ".log"
-        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_{}".format(args.execution_type) + ".log")
+        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_{}".format(execution_type) + ".log")
 
         with open(log_source_path, "rb") as file:
             logs = file.read()
@@ -187,13 +207,53 @@ def save_logs(args, case, last_log_line, current_try):
         return None
 
 
-def start_streaming(args, script_path):
-    main_logger.info("Start StreamingSDK {}".format(args.execution_type))
+def save_android_log(args, case, last_log_line, current_try, driver):
+    try:
+        raw_logs = driver.get_log("logcat")
+
+        log_lines = []
+
+        for log_line_info in raw_logs:
+            log_lines.append(log_line_info["message"].encode("utf-8", "ignore"))
+
+        # index of first line of the current log in whole log file
+        first_log_line_index = 0
+
+        for i in range(len(log_lines)):
+            if last_log_line is not None and last_log_line in log_lines[i]:
+                first_log_line_index = i + 1
+                break
+
+        # update last log line
+        for i in range(len(log_lines) - 1, -1, -1):
+            if log_lines[i] and log_lines[i] != b"\r":
+                last_log_line = log_lines[i]
+                break
+
+        if first_log_line_index != 0:
+            log_lines = log_lines[first_log_line_index:]
+
+        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_client" + ".log")
+
+        with open(log_destination_path, "ab") as file:
+            file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
+            file.write(b"\n".join(log_lines))
+
+        return last_log_line
+    except Exception as e:
+        main_logger.error("Failed during android logs saving. Exception: {}".format(str(e)))
+        main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+        return None
+
+
+def start_streaming(execution_type, script_path):
+    main_logger.info("Start StreamingSDK {}".format(execution_type))
 
     # start Streaming SDK process
     process = psutil.Popen(script_path, stdout=PIPE, stderr=PIPE, shell=True)
 
-    main_logger.info("Start execution_type depended script")
+    main_logger.info("Start Streaming SDK")
 
     # Wait a bit to launch streaming SDK client/server
     sleep(3)
@@ -230,3 +290,70 @@ def collect_iperf_info(args, log_name_base):
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
 
     os.chdir(current_dir)
+
+
+def close_game(game_name):
+    edge_x = win32api.GetSystemMetrics(0)
+    edge_y = win32api.GetSystemMetrics(1)
+    center_x = edge_x / 2
+    center_y = edge_y / 2
+
+    if game_name == "lol":
+        pydirectinput.keyDown("esc")
+        sleep(0.1)
+        pydirectinput.keyUp("esc")
+
+        sleep(2)
+
+        pyautogui.moveTo(center_x - 360, center_y + 335)
+        sleep(0.2)
+        pyautogui.mouseDown()
+        sleep(0.2)
+        pyautogui.mouseUp()
+        sleep(0.2)
+        pyautogui.mouseDown()
+        sleep(0.2)
+        pyautogui.mouseUp()
+
+        sleep(1)
+
+        pyautogui.moveTo(center_x - 130, center_y - 50)
+        sleep(0.2)
+        pyautogui.mouseDown()
+        sleep(0.2)
+        pyautogui.mouseUp()
+
+        sleep(3)
+
+
+def close_game_process(game_name):
+    try:
+        games_processes = {
+            "heavendx9": ["browser_x86.exe", "Heaven.exe"],
+            "heavendx11": ["browser_x86.exe", "Heaven.exe"],
+            "valleydx9": ["browser_x86.exe", "Valley.exe"],
+            "valleydx11": ["browser_x86.exe", "Valley.exe"],
+            "borderlands3": ["Borderlands3.exe"],
+            "apexlegends": ["r5apex.exe"],
+            "valorant": ["VALORANT-Win64-Shipping.exe"],
+            "lol": ["LeagueClient.exe", "League of Legends.exe"]
+        }
+
+        processes_names = games_processes[game_name]
+
+        for process in psutil.process_iter():
+            if process.name() in processes_names:
+                process.kill()
+                main_logger.info("Target game process found. Close it")
+
+    except Exception as e:
+        main_logger.error("Failed to close game process. Exception: {}".format(str(e)))
+        main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+def make_window_minimized(window):
+    try:
+        win32gui.ShowWindow(window, 2)
+    except Exception as e:
+        main_logger.error("Failed to make window minized: {}".format(str(e)))
+        main_logger.error("Traceback: {}".format(traceback.format_exc()))

@@ -20,6 +20,18 @@
         "sleep 10"
     ],
 
+    "borderlands3_actions_android": [
+        "open_game",
+        "press_keys \"down down enter   enter   c c   down enter\"",
+        "sleep 30",
+        "make_screen borderlands_benchmark",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 borderlands_benchmark",
+        "press_keys \"esc\"",
+        "sleep 10"
+    ],
+
     "valorant_actions": [
         "check_game \"VALORANT  \" \"VALORANT-Win64-Shipping.exe\"",
         "skip_if_done 25",
@@ -61,6 +73,16 @@
         "click",
         "start_test_actions_server",
         "start_test_actions_client",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
+    "valorant_actions_android": [
+        "open_game",
+        "sleep 10",
+        "start_actions",
         "make_screen test_actions",
         "sleep 4",
         "record_video 10",
@@ -112,6 +134,16 @@
         "sleep_and_screen 5 4 4 test_actions"
     ],
 
+    "apexlegends_actions_android": [
+        "open_game",
+        "sleep 10",
+        "start_actions",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
     "lol_actions": [
         "check_window \"League of Legends\" \"LeagueClient.exe\"",
         "check_game \"League of Legends (TM) Client\" \"League of Legends.exe\"",
@@ -148,6 +180,16 @@
         "sleep_and_screen 5 4 4 test_actions"
     ],
 
+    "lol_actions_android": [
+        "open_game",
+        "sleep 10",
+        "start_actions",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
     "heavendx11_actions": [
         "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Heaven Benchmark 4.0 Basic (Direct3D11)\" \"Heaven.exe\"",
@@ -171,6 +213,17 @@
         "record_video 10",
         "sleep_and_screen 6 4 4.7 heaven_benchmark",
         "press_keys_server \"esc\""
+    ],
+
+    "heavendx11_actions_android": [
+        "open_game",
+        "press_keys \"f9\"",
+        "sleep 5",
+        "make_screen heaven_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 heaven_benchmark",
+        "press_keys \"esc\""
     ],
 
     "heavendx9_actions": [
@@ -198,6 +251,17 @@
         "press_keys_server \"esc\""
     ],
 
+    "heavendx9_actions_android": [
+        "open_game",
+        "press_keys \"f9\"",
+        "sleep 5",
+        "make_screen heaven_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 heaven_benchmark",
+        "press_keys \"esc\""
+    ],
+
     "valleydx11_actions": [
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
@@ -223,6 +287,17 @@
         "press_keys_server \"esc\""
     ],
 
+    "valleydx11_actions_android": [
+        "open_game",
+        "press_keys \"f9\"",
+        "sleep 5",
+        "make_screen valley_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 valley_benchmark",
+        "press_keys \"esc\""
+    ],
+
     "valleydx9_actions": [
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
@@ -246,6 +321,17 @@
         "record_video 10",
         "sleep_and_screen 5 4 4 valley_benchmark",
         "press_keys_server \"esc\""
+    ],
+
+    "valleydx9_actions_android": [
+        "open_game",
+        "press_keys \"f9\"",
+        "sleep 5",
+        "make_screen valley_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 valley_benchmark",
+        "press_keys \"esc\""
     ],
 
     "superposition_actions": [

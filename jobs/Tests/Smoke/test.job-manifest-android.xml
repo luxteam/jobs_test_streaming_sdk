@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<job-manifest enable="False">
+
+    <outpath value="{OutputDir}"/>
+
+    <execute command='python "{ResourcesDir}/simpleRenderAndroid.py"' timeout="900">
+        <argument>--client_tool "{clientTool}"</argument>
+        <argument>--server_tool "{serverTool}"</argument>
+        <argument>--output "{OutputDir}"</argument>
+        <argument>--test_group Smoke</argument>
+        <argument>--test_cases "{TestCases}"</argument>
+        <argument>--retries {retries}</argument>
+        <argument>--game_name "{gameName}"</argument>
+        <argument>--common_actions_path "{CommonActions}"</argument>
+    </execute>
+
+    <execute command='python "{ResourcesDir}/makeCompareReport.py"'>
+        <argument>--work_dir "{OutputDir}"</argument>
+        <argument>--execution_type "server"</argument>
+    </execute>
+
+</job-manifest>

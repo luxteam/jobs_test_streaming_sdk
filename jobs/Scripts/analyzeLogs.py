@@ -396,6 +396,7 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
         saved_errors = []
 
         end_of_block = False
+        connection_terminated = False
 
         if execution_type == "server":
             if log_key in json_content:
@@ -409,6 +410,9 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
                 with open(log_path, 'r') as log_file:
                     log = log_file.readlines()
                     for line in log:
+                        if block_number > 0 and 'DEBUG ME!!! Client connection terminated' in line:
+                            connection_terminated = True
+
                         # beginning of the new block
                         if 'Average latency' in line:
                             end_of_block = False
@@ -426,6 +430,10 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
                             end_of_block = True
 
                     update_status(json_content, saved_values, saved_errors, framerate)
+
+            if connection_terminated:
+                json_content["message"].append("Application problem: Client connection terminated")
+                json_content["test_status"] = "error"
 
             main_logger.info("Test case processed: {}".format(json_content["test_case"]))
             main_logger.info("Saved values: {}".format(saved_values))

@@ -1,0 +1,26 @@
+[
+    {
+        "case": "STR_ASM_001",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_ASM_002",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    }
+]
