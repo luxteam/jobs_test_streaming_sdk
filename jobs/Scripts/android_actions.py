@@ -147,11 +147,9 @@ class OpenGame(Action):
                 click("center_0", "center_225", self.logger)
                 sleep(30)
 
-                click("center_-650", "center_0", self.logger)
+                click("center_-370", "center_0", self.logger)
                 sleep(2)
-                click("center_0", "edge_-400", self.logger)
-                sleep(1)
-                click("center_0", "edge_-460", self.logger)
+                click("center_0", "edge_70", self.logger)
             elif self.game_name == "lol":
                 sleep(90)
                 click("center_-520", "center_-340", self.logger)
