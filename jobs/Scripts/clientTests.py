@@ -59,13 +59,20 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         if start_streaming is not None and process is None:
             process = start_streaming(args.execution_type, script_path)
 
+            if self.collect_traces == "before":
+                collect_traces(self.archive_path, self.archive_name + "_client.zip")
+
     game_name = args.game_name
 
     # start client before server
     if "start_first" in case and case["start_first"] == "client":
         if start_streaming is not None and process is None:
             process = start_streaming(args.execution_type, script_path)
-            sleep(10)
+
+            if self.collect_traces == "before":
+                collect_traces(self.archive_path, self.archive_name + "_client.zip")
+            else:
+                sleep(10)
 
     response = None
 
@@ -100,6 +107,9 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             if "start_first" in case and case["start_first"] == "server":
                 if start_streaming is not None and process is None:
                     process = start_streaming(args.execution_type, script_path)
+
+                    if self.collect_traces == "before":
+                        collect_traces(self.archive_path, self.archive_name + "_client.zip")
 
             if not is_workable_condition(process):
                 instance_state.non_workable_client = True

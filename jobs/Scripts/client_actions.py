@@ -238,7 +238,7 @@ class SleepAndScreen(Action):
         self.screen_name = parsed_arguments[3]
         self.archive_path = self.params["archive_path"]
         self.archive_name = self.params["case"]["case"]
-        self.start_collect_traces = self.params["args"].collect_traces
+        self.collect_traces = self.params["args"].collect_traces
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
 
@@ -263,7 +263,7 @@ class SleepAndScreen(Action):
             response = self.sock.recv(1024).decode("utf-8")
             self.logger.info("Server response for 'gpuview' action: {}".format(response))
 
-            if self.start_collect_traces == "True":
+            if self.collect_traces == "after":
                 collect_traces(self.archive_path, self.archive_name + "_client.zip")
         except Exception as e:
             self.logger.warning("Failed to collect GPUView traces: {}".format(str(e)))
