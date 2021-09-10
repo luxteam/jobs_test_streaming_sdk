@@ -59,7 +59,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         if start_streaming is not None and process is None:
             process = start_streaming(args.execution_type, script_path)
 
-            if self.collect_traces == "before":
+            if self.collect_traces == "BeforeTests":
                 collect_traces(self.archive_path, self.archive_name + "_client.zip")
 
     game_name = args.game_name
@@ -69,7 +69,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         if start_streaming is not None and process is None:
             process = start_streaming(args.execution_type, script_path)
 
-            if self.collect_traces == "before":
+            if self.collect_traces == "BeforeTests":
                 collect_traces(self.archive_path, self.archive_name + "_client.zip")
             else:
                 sleep(10)
@@ -108,7 +108,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 if start_streaming is not None and process is None:
                     process = start_streaming(args.execution_type, script_path)
 
-                    if self.collect_traces == "before":
+                    if self.collect_traces == "BeforeTests":
                         collect_traces(self.archive_path, self.archive_name + "_client.zip")
 
             if not is_workable_condition(process):

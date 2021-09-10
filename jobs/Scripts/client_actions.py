@@ -263,7 +263,7 @@ class SleepAndScreen(Action):
             response = self.sock.recv(1024).decode("utf-8")
             self.logger.info("Server response for 'gpuview' action: {}".format(response))
 
-            if self.collect_traces == "after":
+            if self.collect_traces == "AfterTests":
                 collect_traces(self.archive_path, self.archive_name + "_client.zip")
         except Exception as e:
             self.logger.warning("Failed to collect GPUView traces: {}".format(str(e)))
