@@ -52,21 +52,23 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
     if not os.path.exists(archive_path):
         os.makedirs(archive_path)
 
+    archive_name = case["case"]
+
     # default launching of client and server (order doesn't matter)
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
         if start_streaming is not None and process is None:
             process = start_streaming(args.execution_type, script_path)
 
-            if self.collect_traces == "BeforeTests":
-                collect_traces(self.archive_path, self.archive_name + "_server.zip")
+            if args.collect_traces == "BeforeTests":
+                collect_traces(archive_path, archive_name + "_server.zip")
 
     # start server before client
     if "start_first" in case and case["start_first"] == "server":
         if start_streaming is not None and process is None:
             process = start_streaming(args.execution_type, script_path)
 
-            if self.collect_traces == "BeforeTests":
-                collect_traces(self.archive_path, self.archive_name + "_server.zip")
+            if args.collect_traces == "BeforeTests":
+                collect_traces(archive_path, archive_name + "_server.zip")
             else:
                 sleep(10)
 
@@ -103,8 +105,8 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 if start_streaming is not None and process is None:
                     process = start_streaming(args.execution_type, script_path)
 
-                    if self.collect_traces == "BeforeTests":
-                        collect_traces(self.archive_path, self.archive_name + "_server.zip")
+                    if args.collect_traces == "BeforeTests":
+                        collect_traces(archive_path, archive_name + "_server.zip")
 
             if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))

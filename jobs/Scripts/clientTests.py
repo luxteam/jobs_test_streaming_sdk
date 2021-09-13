@@ -54,13 +54,15 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
     if not os.path.exists(archive_path):
         os.makedirs(archive_path)
 
+    archive_name = case["case"]
+
     # default launching of client and server (order doesn't matter)
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
         if start_streaming is not None and process is None:
             process = start_streaming(args.execution_type, script_path)
 
-            if self.collect_traces == "BeforeTests":
-                collect_traces(self.archive_path, self.archive_name + "_client.zip")
+            if args.collect_traces == "BeforeTests":
+                collect_traces(archive_path, archive_name + "_client.zip")
 
     game_name = args.game_name
 
@@ -69,8 +71,8 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         if start_streaming is not None and process is None:
             process = start_streaming(args.execution_type, script_path)
 
-            if self.collect_traces == "BeforeTests":
-                collect_traces(self.archive_path, self.archive_name + "_client.zip")
+            if args.collect_traces == "BeforeTests":
+                collect_traces(archive_path, archive_name + "_client.zip")
             else:
                 sleep(10)
 
@@ -108,8 +110,8 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 if start_streaming is not None and process is None:
                     process = start_streaming(args.execution_type, script_path)
 
-                    if self.collect_traces == "BeforeTests":
-                        collect_traces(self.archive_path, self.archive_name + "_client.zip")
+                    if args.collect_traces == "BeforeTests":
+                        collect_traces(archive_path, archive_name + "_client.zip")
 
             if not is_workable_condition(process):
                 instance_state.non_workable_client = True
