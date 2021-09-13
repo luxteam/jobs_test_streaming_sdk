@@ -59,9 +59,10 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
     # default launching of client and server (order doesn't matter)
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
         if start_streaming is not None and process is None:
-            process = start_streaming(args.execution_type, script_path)
+            should_collect_traces = (args.collect_traces == "BeforeTests")
+            process = start_streaming(args.execution_type, script_path, not should_collect_traces)
 
-            if args.collect_traces == "BeforeTests":
+            if should_collect_traces:
                 collect_traces(archive_path, archive_name + "_client.zip")
 
     game_name = args.game_name
@@ -69,9 +70,10 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
     # start client before server
     if "start_first" in case and case["start_first"] == "client":
         if start_streaming is not None and process is None:
-            process = start_streaming(args.execution_type, script_path)
+            should_collect_traces = (args.collect_traces == "BeforeTests")
+            process = start_streaming(args.execution_type, script_path, not should_collect_traces)
 
-            if args.collect_traces == "BeforeTests":
+            if should_collect_traces:
                 collect_traces(archive_path, archive_name + "_client.zip")
             else:
                 sleep(10)
@@ -108,9 +110,10 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             # start server before client
             if "start_first" in case and case["start_first"] == "server":
                 if start_streaming is not None and process is None:
-                    process = start_streaming(args.execution_type, script_path)
+                    should_collect_traces = (args.collect_traces == "BeforeTests")
+                    process = start_streaming(args.execution_type, script_path, not should_collect_traces)
 
-                    if args.collect_traces == "BeforeTests":
+                    if should_collect_traces:
                         collect_traces(archive_path, archive_name + "_client.zip")
 
             if not is_workable_condition(process):
