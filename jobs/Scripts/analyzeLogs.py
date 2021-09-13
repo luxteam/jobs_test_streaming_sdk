@@ -410,13 +410,14 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
                 with open(log_path, 'r') as log_file:
                     log = log_file.readlines()
                     for line in log:
-                        if block_number > 0 and 'DEBUG ME!!! Client connection terminated' in line:
+                        if 'DEBUG ME!!! Client connection terminated' in line:
                             connection_terminated = True
 
                         # beginning of the new block
                         if 'Average latency' in line:
                             end_of_block = False
                             block_number += 1
+                            connection_terminated = False
 
                         # skip three first blocks of output with latency (it can contains abnormal data due to starting of Streaming SDK)
                         if block_number > 3:
