@@ -14,7 +14,6 @@ import copy
 import traceback
 import time
 import win32api
-from appium import webdriver
 from instance_state import AndroidInstanceState
 from android_actions import *
 from analyzeLogs import analyze_logs
@@ -186,24 +185,12 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         json.dump(cases, file, indent=4)
 
 
-def prepare_android_emulator(args, keep_app = False):
-    # TODO remove hard coded emulator name
-    configuration = {
-        "udid": "emulator-5554",
-        "platformName": "Android",
-        "autoGrantPermissions": True,
-        "app": os.path.abspath(args.client_tool)
-    }
-
-    driver = webdriver.Remote("http://localhost:4723/wd/hub", configuration)
-
-    if not keep_app:
-        close_android_app(driver)
-
-    return driver
+def prepare_android_emulator(args):
+    execute_adb_command("aadb uninstall com.amd.remotegameclient")
+    execute_adb_command("adb install {}".format(os.path.abspath(args.client_tool)))
 
 
-def execute_tests(args, driver):
+def execute_tests(args):
     render_device = get_gpu()
     platform_name = platform.system() + " with Android Emulator"
     current_conf = set(platform_name) if not render_device else {platform_name, render_device}
@@ -278,7 +265,6 @@ def execute_tests(args, driver):
                 params["current_try"] = current_try
                 params["args"] = args
                 params["case"] = case
-                params["driver"] = driver
                 params["game_name"] = args.game_name.lower()
 
                 # get list of actions for the current game / benchmark
@@ -326,17 +312,8 @@ def execute_tests(args, driver):
                             sleep(10)
 
                         if client_closed:
-                            try:
-                                main_logger.info("Start Streaming SDK client instance")
-                                # start client
-                                driver.launch_app()
-
-                                driver.get_log("logcat")
-                            except Exception:
-                                main_logger.info("Connection isn't alive. Recreate it")
-
-                                driver = prepare_android_emulator(args, True)
-                                params["driver"] = driver
+                            execute_adb_command("adb logcat -c")
+                            execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivty")
 
                         if "start_first" in case and case["start_first"] == "client":
                             sleep(10)
@@ -360,11 +337,11 @@ def execute_tests(args, driver):
                 main_logger.error("Traceback: {}".format(traceback.format_exc()))
             finally:
                 # close Streaming SDK android app
-                client_closed = close_android_app(driver, case)
+                client_closed = close_android_app(case)
                 # close Streaming SDK server instance
                 process = close_streaming_process("server", case, process)
                 last_log_line_server = save_logs(args, case, last_log_line_server, current_try)
-                last_log_line_client = save_android_log(args, case, last_log_line_client, current_try, driver)
+                last_log_line_client = save_android_log(args, case, last_log_line_client, current_try)
 
                 try:
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
@@ -444,8 +421,8 @@ if __name__ == '__main__':
         hide_emulator(args)
         copy_test_cases(args)
         prepare_empty_reports(args)
-        driver = prepare_android_emulator(args)
-        exit(execute_tests(args, driver))
+        prepare_android_emulator(args)
+        exit(execute_tests(args))
     except Exception as e:
         main_logger.error("Failed during script execution. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
