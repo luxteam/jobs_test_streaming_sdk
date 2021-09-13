@@ -138,7 +138,8 @@ class PressKeysServer(Action):
                     for key_to_press in keys_to_press:
                         pydirectinput.keyUp(key_to_press)
 
-                    sleep(0.5)
+                    if i != times - 1:
+                        sleep(0.5)
             else:
                 keys_to_press = key.split("+")
 
