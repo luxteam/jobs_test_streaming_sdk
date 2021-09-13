@@ -153,9 +153,9 @@ class PressKeysServer(Action):
             # if it isn't the last key - make a delay
             if i != len(keys) - 1:
                 if "enter" in key:
-                    sleep(2)
+                    sleep(1.5)
                 else:
-                    sleep(1)
+                    sleep(0.2)
 
         return True
 

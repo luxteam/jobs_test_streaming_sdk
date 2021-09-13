@@ -11,13 +11,12 @@
         "sleep 1",
         "make_screen borderlands_menu",
         "press_keys_server \"down down enter   enter   c c   down enter\"",
-        "sleep 30",
+        "sleep 25",
         "make_screen borderlands_benchmark",
         "sleep 4",
         "record_video 10",
         "sleep_and_screen 5 4 4 borderlands_benchmark",
-        "press_keys_server \"esc\"",
-        "sleep 10"
+        "press_keys_server \"esc\""
     ],
 
     "borderlands3_actions_android": [
