@@ -161,7 +161,7 @@
         "click_server center_150 center_-210",
         "sleep 1",
         "click_server center_0 center_230",
-        "sleep 60",
+        "sleep 40",
         "click_server center_0 center_0",
         "press_keys_server \"shift+x ctrl+shift+i shift+y:17 ctrl+e ctrl+r\"",
         "check_window \"League of Legends\" \"LeagueClient.exe\"",
@@ -197,7 +197,7 @@
         "click_server center_290 center_-85",
         "click_server center_290 center_-70",
         "click_server center_280 center_135",
-        "sleep 30",
+        "sleep 15",
         "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Heaven Benchmark 4.0 Basic (Direct3D11)\" \"Heaven.exe\"",
 
@@ -233,7 +233,7 @@
         "click_server center_290 center_-85",
         "click_server center_290 center_-55",
         "click_server center_280 center_135",
-        "sleep 30",
+        "sleep 15",
         "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Heaven Benchmark 4.0 Basic (Direct3D9)\" \"Heaven.exe\"",
 
@@ -269,7 +269,7 @@
         "click_server center_290 center_-70",
         "click_server center_290 center_-55",
         "click_server center_280 center_135",
-        "sleep 30",
+        "sleep 15",
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
 
@@ -305,7 +305,7 @@
         "click_server center_290 center_-70",
         "click_server center_290 center_-40",
         "click_server center_280 center_135",
-        "sleep 30",
+        "sleep 15",
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
 
