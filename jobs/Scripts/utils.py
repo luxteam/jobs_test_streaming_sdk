@@ -247,7 +247,7 @@ def save_android_log(args, case, last_log_line, current_try, driver):
         return None
 
 
-def start_streaming(execution_type, script_path):
+def start_streaming(execution_type, script_path, do_delay=True):
     main_logger.info("Start StreamingSDK {}".format(execution_type))
 
     # start Streaming SDK process
@@ -255,8 +255,9 @@ def start_streaming(execution_type, script_path):
 
     main_logger.info("Start Streaming SDK")
 
-    # Wait a bit to launch streaming SDK client/server
-    sleep(3)
+    if do_delay:
+        # Wait a bit to launch streaming SDK client/server
+        sleep(3)
 
     main_logger.info("Screen resolution: width = {}, height = {}".format(win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)))
 
