@@ -27,7 +27,8 @@ class OpenGame(Action):
             "borderlands3": "C:\\JN\\Borderlands3.exe - Shortcut.lnk",
             "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url",
             "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
-            "lol": "C:\\JN\\League of Legends.lnk"
+            "lol": "C:\\JN\\League of Legends.lnk",
+            "nothing": None
         }
 
         games_windows = {
@@ -38,7 +39,8 @@ class OpenGame(Action):
             "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"],
             "apexlegends": ["Apex Legends", "r5apex.exe"],
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
-            "lol": ["League of Legends (TM) Client", "League of Legends.exe"]
+            "lol": ["League of Legends (TM) Client", "League of Legends.exe"],
+            "nothing": [None, None]
         }
 
         self.game_name = self.params["game_name"]
@@ -47,6 +49,9 @@ class OpenGame(Action):
         self.game_process_name = games_windows[self.game_name][1]
 
     def execute(self):
+        if self.game_launcher is None or self.game_window is None or self.game_process_name is None:
+            return
+
         game_launched = True
 
         window = win32gui.FindWindow(None, self.game_window)
@@ -283,8 +288,9 @@ class MakeScreen(Action):
 
 def make_screen(screen_path, current_try, logger, screen_name = "", current_image_num = 0):
     try:
-        screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1))
-        execute_adb_command("adb exec-out screencap -p > {}".format(screen_path))
+        screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1))
+        execute_adb_command("adb exec-out screencap /sdcard/screen.png")
+        execute_adb_command("adb pull /sdcard/screen.png {}".format(screen_path))
     except Exception as e:
         logger.error("Failed to make screenshot: {}".format(str(e)))
         logger.error("Traceback: {}".format(traceback.format_exc()))

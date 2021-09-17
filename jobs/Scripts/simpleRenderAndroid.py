@@ -186,8 +186,9 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
 
 def prepare_android_emulator(args):
-    execute_adb_command("aadb uninstall com.amd.remotegameclient")
+    execute_adb_command("adb uninstall com.amd.remotegameclient")
     execute_adb_command("adb install {}".format(os.path.abspath(args.client_tool)))
+    execute_adb_command("adb shell pm grant com.amd.remotegameclient android.permission.RECORD_AUDIO")
 
 
 def execute_tests(args):
@@ -303,7 +304,7 @@ def execute_tests(args):
                     # check that connection is still alive
                     if command == "open_game":
                         # start server first
-                        if "start_first" not in case or case["start_first"] == "server":
+                        if "start_first" in case and case["start_first"] == "server":
                             if process is None:
                                 main_logger.info("Start Streaming SDK server instance")
                                 process = start_streaming("server", server_script_path)
@@ -313,13 +314,13 @@ def execute_tests(args):
 
                         if client_closed:
                             execute_adb_command("adb logcat -c")
-                            execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivty")
+                            execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
 
                         if "start_first" in case and case["start_first"] == "client":
                             sleep(10)
 
                         # start server after client
-                        if "start_first" in case and case["start_first"] == "client":
+                        if "start_first" not in case or case["start_first"] == "client":
                             main_logger.info("Start Streaming SDK server instance")
                             process = start_streaming("server", server_script_path)
 
