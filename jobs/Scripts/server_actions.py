@@ -341,7 +341,7 @@ class GPUView(Action):
         self.archive_name = self.params["case"]["case"]
 
     def execute(self):
-        if self.collect_traces == "True":
+        if self.collect_traces == "AfterTests":
             self.sock.send("start".encode("utf-8"))
 
             try:
