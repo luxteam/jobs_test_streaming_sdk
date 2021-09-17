@@ -308,9 +308,7 @@ def execute_tests(args):
                             if process is None:
                                 main_logger.info("Start Streaming SDK server instance")
                                 process = start_streaming("server", server_script_path)
-
-                        if "start_first" in case and case["start_first"] == "server":
-                            sleep(10)
+                                sleep(10)
 
                         if client_closed:
                             execute_adb_command("adb logcat -c")
