@@ -2,44 +2,44 @@
     {
         "case": "STR_DRT_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true",
+        "server_keys": "-capturemode present -Resolution <resolution> -extStats true -EnableDirtyRects true",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true",
+            "Server keys: -capturemode present -Resolution <resolution> -extStats true -EnableDirtyRects true",
             "Client keys:"
         ]
     },
     {
         "case": "STR_DRT_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
+        "server_keys": "-capturemode present -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
+            "Server keys: -capturemode present -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
             "Client keys:"
         ]
     },
     {
         "case": "STR_DRT_003",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true",
+        "server_keys": "-capturemode present -Resolution <resolution> -extStats true -EnableDirtyRects true",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true",
+            "Server keys: -capturemode present -Resolution <resolution> -extStats true -EnableDirtyRects true",
             "Client keys:"
         ]
     },
     {
         "case": "STR_DRT_004",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
+        "server_keys": "-capturemode present -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
+            "Server keys: -capturemode present -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
             "Client keys:"
         ]
     }

@@ -2,33 +2,33 @@
    {
         "case": "STR_ACT_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Convert DX11 -extStats true",
+        "server_keys": "-capturemode present -Resolution <resolution> -Convert DX11 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert DX11 -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert DX11 -extStats true",
             "Client keys: -Fullscreen true"
         ]
    },
       {
         "case": "STR_ACT_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Convert OpenGL -extStats true",
+        "server_keys": "-capturemode present -Resolution <resolution> -Convert OpenGL -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert OpenGL -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert OpenGL -extStats true",
             "Client keys: -Fullscreen true"
         ]
    },
       {
         "case": "STR_ACT_003",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Convert Vulkan -extStats true",
+        "server_keys": "-capturemode present -Resolution <resolution> -Convert Vulkan -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert Vulkan -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert Vulkan -extStats true",
             "Client keys: -Fullscreen true",
             "Vulkan needs -connectionurl"
         ]
@@ -36,33 +36,33 @@
       {
         "case": "STR_ACT_004",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Convert DX11 -extStats true",
+        "server_keys": "-capturemode present -Resolution <resolution> -Convert DX11 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert DX11 -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert DX11 -extStats true",
             "Client keys: -Fullscreen true"
         ]
    },
       {
         "case": "STR_ACT_005",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Convert OpenGL -extStats true",
+        "server_keys": "-capturemode present -Resolution <resolution> -Convert OpenGL -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert OpenGL -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert OpenGL -extStats true",
             "Client keys: -Fullscreen true"
         ]
    },
       {
         "case": "STR_ACT_006",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Convert Vulkan -extStats true",
+        "server_keys": "-capturemode present -Resolution <resolution> -Convert Vulkan -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert Vulkan -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert Vulkan -extStats true",
             "Client keys: -Fullscreen true",
             "Vulkan needs -connectionurl"
         ]

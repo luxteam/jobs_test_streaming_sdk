@@ -2,66 +2,66 @@
    {
         "case": "STR_ARN_001",
         "status": "skipped",
-        "server_keys": "-Resolution 3840,2160 -extStats true",
+        "server_keys": "-capturemode present -Resolution 3840,2160 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 3840,2160 -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 3840,2160 -extStats true",
             "Client keys: -Fullscreen true"
         ]
    },
     {
         "case": "STR_ARN_002",
         "status": "active",
-        "server_keys": "-Resolution 1920,1200 -extStats true",
+        "server_keys": "-capturemode present -Resolution 1920,1200 -extStats true",
         "client_keys": "-Fullscreen false",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1920,1200 -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1920,1200 -extStats true",
             "Client keys: -Fullscreen false"
         ]
    },
     {
         "case": "STR_ARN_003",
         "status": "active",
-        "server_keys": "-Resolution 1280,720 -extStats true",
+        "server_keys": "-capturemode present -Resolution 1280,720 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1280,720 -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1280,720 -extStats true",
             "Client keys: -Fullscreen true"
         ]
    },
    {
         "case": "STR_ARN_004",
         "status": "skipped",
-        "server_keys": "-Resolution 3840,2160 -extStats true",
+        "server_keys": "-capturemode present -Resolution 3840,2160 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 3840,2160 -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 3840,2160 -extStats true",
             "Client keys: -Fullscreen true"
         ]
    },
     {
         "case": "STR_ARN_005",
         "status": "active",
-        "server_keys": "-Resolution 1920,1200 -extStats true",
+        "server_keys": "-capturemode present -Resolution 1920,1200 -extStats true",
         "client_keys": "-Fullscreen false",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1920,1200 -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1920,1200 -extStats true",
             "Client keys: -Fullscreen false"
         ]
    },
     {
         "case": "STR_ARN_006",
         "status": "active",
-        "server_keys": "-Resolution 1280,720 -extStats true",
+        "server_keys": "-capturemode present -Resolution 1280,720 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1280,720 -extStats true",
+            "Server keys: -capturemode present -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1280,720 -extStats true",
             "Client keys: -Fullscreen true"
         ]
    }
