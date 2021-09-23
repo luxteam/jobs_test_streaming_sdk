@@ -289,9 +289,13 @@ class MakeScreen(Action):
 def make_screen(screen_path, current_try, logger, screen_name = "", current_image_num = 0):
     try:
         screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1))
-        execute_adb_command("adb exec-out screencap /sdcard/screen.png")
-        sleep(0.75)
-        execute_adb_command("adb pull /sdcard/screen.png {}".format(screen_path))
+        command_process = subprocess.Popen("adb exec-out screencap -p", shell=False, stdin=PIPE, stdout=PIPE)
+        out, err = command_process.communicate()
+
+        with open(screen_path, "wb") as file:
+            file.write(out)
+
+        main_logger.error("Screencap command err: {}".format(err))
     except Exception as e:
         logger.error("Failed to make screenshot: {}".format(str(e)))
         logger.error("Traceback: {}".format(traceback.format_exc()))
