@@ -432,9 +432,9 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
 
                     update_status(json_content, saved_values, saved_errors, framerate)
 
-            if connection_terminated:
-                json_content["message"].append("Application problem: Client connection terminated")
-                json_content["test_status"] = "error"
+            #if connection_terminated:
+            #    json_content["message"].append("Application problem: Client connection terminated")
+            #    json_content["test_status"] = "error"
 
             main_logger.info("Test case processed: {}".format(json_content["test_case"]))
             main_logger.info("Saved values: {}".format(saved_values))
