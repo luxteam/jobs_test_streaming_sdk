@@ -296,7 +296,7 @@ def make_screen(screen_path, current_try, logger, screen_name = "", current_imag
         with open(screen_path, "wb") as file:
             file.write(out)
 
-        main_logger.error("Screencap command err: {}".format(err))
+        logger.error("Screencap command err: {}".format(err))
     except Exception as e:
         logger.error("Failed to make screenshot: {}".format(str(e)))
         logger.error("Traceback: {}".format(traceback.format_exc()))
