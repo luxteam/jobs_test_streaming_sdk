@@ -290,6 +290,7 @@ def make_screen(screen_path, current_try, logger, screen_name = "", current_imag
     try:
         screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1))
         execute_adb_command("adb exec-out screencap /sdcard/screen.png")
+        sleep(0.75)
         execute_adb_command("adb pull /sdcard/screen.png {}".format(screen_path))
     except Exception as e:
         logger.error("Failed to make screenshot: {}".format(str(e)))
