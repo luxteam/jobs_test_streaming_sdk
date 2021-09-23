@@ -186,9 +186,10 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
 
 def prepare_android_emulator(args):
-    execute_adb_command("adb uninstall com.amd.remotegameclient")
-    execute_adb_command("adb install {}".format(os.path.abspath(args.client_tool)))
-    execute_adb_command("adb shell pm grant com.amd.remotegameclient android.permission.RECORD_AUDIO")
+    #execute_adb_command("adb uninstall com.amd.remotegameclient")
+    #execute_adb_command("adb install {}".format(os.path.abspath(args.client_tool)))
+    #execute_adb_command("adb shell pm grant com.amd.remotegameclient android.permission.RECORD_AUDIO")
+    pass
 
 
 def execute_tests(args):
