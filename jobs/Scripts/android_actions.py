@@ -2,6 +2,7 @@ import sys
 import os
 from time import sleep
 import psutil
+import subprocess
 from subprocess import PIPE
 import traceback
 import win32gui
