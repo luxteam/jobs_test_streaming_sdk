@@ -138,7 +138,8 @@ class PressKeysServer(Action):
                     for key_to_press in keys_to_press:
                         pydirectinput.keyUp(key_to_press)
 
-                    sleep(0.5)
+                    if i != times - 1:
+                        sleep(0.5)
             else:
                 keys_to_press = key.split("+")
 
@@ -153,9 +154,9 @@ class PressKeysServer(Action):
             # if it isn't the last key - make a delay
             if i != len(keys) - 1:
                 if "enter" in key:
-                    sleep(2)
+                    sleep(1.5)
                 else:
-                    sleep(1)
+                    sleep(0.2)
 
         return True
 
