@@ -22,14 +22,13 @@
 
     "borderlands3_actions_android": [
         "open_game",
-        "press_keys \"down down enter   enter   c c   down enter\"",
-        "sleep 30",
+        "press_keys \"down down enter enter c c down enter\"",
+        "sleep 25",
         "make_screen borderlands_benchmark",
         "sleep 4",
         "record_video 10",
         "sleep_and_screen 5 4 4 borderlands_benchmark",
-        "press_keys \"esc\"",
-        "sleep 10"
+        "press_keys \"esc\""
     ],
 
     "valorant_actions": [
