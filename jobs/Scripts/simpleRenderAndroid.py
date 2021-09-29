@@ -202,6 +202,9 @@ def execute_tests(args):
     with open(os.path.join(os.path.abspath(args.output), "test_cases.json"), "r") as json_file:
         cases = json.load(json_file)
 
+    resolution_width = win32api.GetSystemMetrics(0)
+    resolution_height = win32api.GetSystemMetrics(1)
+
     process = None
     client_closed = True
     processes = {}
@@ -246,7 +249,7 @@ def execute_tests(args):
                 server_execution_script = "{tool} {keys}".format(tool=args.server_tool, keys=case["server_keys"])
 
                 # TODO get info about emulator
-                server_execution_script = server_execution_script.replace("<resolution>", "1080,2220")
+                server_execution_script = server_execution_script.replace("<resolution>", "{},{}".format(resolution_width, resolution_height))
 
                 server_script_path = os.path.join(args.output, "{}.bat".format(case["case"]))
        
