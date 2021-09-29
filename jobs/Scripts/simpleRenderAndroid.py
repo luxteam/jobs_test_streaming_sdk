@@ -248,8 +248,8 @@ def execute_tests(args):
 
                 server_execution_script = "{tool} {keys}".format(tool=args.server_tool, keys=case["server_keys"])
 
-                # TODO get info about emulator
-                server_execution_script = server_execution_script.replace("<resolution>", "{},{}".format(resolution_width, resolution_height))
+                # TODO remove hardcoded values
+                server_execution_script = server_execution_script.replace("<resolution>", "{},{}".format(1920, 1080))
 
                 server_script_path = os.path.join(args.output, "{}.bat".format(case["case"]))
        
