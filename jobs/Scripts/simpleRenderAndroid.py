@@ -384,6 +384,9 @@ def execute_tests(args):
                     json.dump(state, json_file, indent=4)
 
                 current_try += 1
+
+                if ("keep_server" in case and case["keep_server"]) or ("keep_client" in case and case["keep_client"]):
+                    sleep(30)
         else:
             main_logger.error("Failed to execute case '{}' at all".format(case["case"]))
             rc = -1
