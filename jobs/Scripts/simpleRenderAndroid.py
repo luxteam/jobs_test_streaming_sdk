@@ -175,15 +175,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
             test_case_report[VIDEO_KEY] = video_path
 
         # save keys from scripts in script_info
-        if "prepared_keys" in case:
-            if args.execution_type == "server":
-                keys_description = "Server keys: {}".format(case["prepared_keys"])
-                for i in range(len(test_case_report["script_info"])):
-                    if "Server keys" in test_case_report["script_info"][i]:
-                        test_case_report["script_info"][i] = keys_description
-                        break
-                else:
-                    test_case_report["script_info"].append(keys_description)
+        test_case_report["script_info"] = case["script_info"]
 
     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
         json.dump([test_case_report], file, indent=4)
@@ -273,7 +265,13 @@ def execute_tests(args, driver):
                 with open(server_script_path, "w") as f:
                     f.write(server_execution_script)
 
-                case["prepared_keys"] = prepared_keys
+                keys_description = "Server keys: {}".format(prepared_keys)
+                for i in range(len(case["script_info"])):
+                    if "Server keys" in case["script_info"][i]:
+                        case["script_info"][i] = keys_description
+                        break
+                else:
+                    case["script_info"].append(keys_description)
 
                 params = {}
 
