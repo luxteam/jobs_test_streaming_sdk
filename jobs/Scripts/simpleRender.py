@@ -274,12 +274,10 @@ def execute_tests(args, current_conf):
                     main_logger.info("Network in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["Network"]))
                     main_logger.info("Datagram size in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["DatagramSize"]))
 
-                    prepared_keys = keys
-                    execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
-
                     # replace 'x' in resolution by ',' (1920x1080 -> 1920,1080)
                     # place the current screen resolution in keys of the server instance
-                    execution_script = execution_script.replace("<resolution>", args.screen_resolution.replace("x", ","))
+                    prepared_keys = keys.replace("<resolution>", args.screen_resolution.replace("x", ","))
+                    execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
                 else:
                     prepared_keys = "{keys} -connectionurl {transport_protocol}://{ip_address}:1235".format(
                         keys=keys,
