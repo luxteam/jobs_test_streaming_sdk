@@ -139,18 +139,6 @@ def prepare_empty_reports(args, current_conf):
             test_case_report["server_configuration"] = args.server_gpu_name + " " + args.server_os_name
             test_case_report["message"] = []
 
-            # update script info using current params (e.g. ip and communication port, resolution)
-            for i in range(len(test_case_report["script_info"])):
-                if "Client keys" in test_case_report["script_info"][i]:
-                    test_case_report["script_info"][i] = "{base} -connectionurl {transport_protocol}://{ip_address}:1235".format(
-                        base=test_case_report["script_info"][i],
-                        transport_protocol=case["transport_protocol"],
-                        ip_address=args.ip_address
-                    )
-
-                elif "Server keys" in test_case_report["script_info"][i]:
-                    test_case_report["script_info"][i] = test_case_report["script_info"][i].replace("<resolution>", args.screen_resolution.replace("x", ","))
-
             if case['status'] == 'skipped':
                 test_case_report['test_status'] = 'skipped'
                 test_case_report['group_timeout_exceeded'] = False
@@ -200,6 +188,25 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
         if os.path.exists(os.path.join(args.output, video_path)):
             test_case_report[VIDEO_KEY] = video_path
+
+        # save keys from scripts in script_info
+        if "prepared_keys" in case:
+            if args.execution_type == "server":
+                keys_description = "Server keys: {}".format(prepared_keys)
+                for i in range(len(test_case_report["script_info"])):
+                    if "Server keys" in test_case_report["script_info"][i]:
+                        test_case_report["script_info"][i] = keys_description
+                        break
+                else:
+                    test_case_report["script_info"].append(keys_description)
+            elif args.execution_type == "client":
+                keys_description = "Client keys: {}".format(prepared_keys)
+                for i in range(len(test_case_report["script_info"])):
+                    if "Client keys" in test_case_report["script_info"][i]:
+                        test_case_report["script_info"][i] = keys_description
+                        break
+                else:
+                    test_case_report["script_info"].append(keys_description)
 
     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
         json.dump([test_case_report], file, indent=4)
@@ -267,18 +274,22 @@ def execute_tests(args, current_conf):
                     main_logger.info("Network in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["Network"]))
                     main_logger.info("Datagram size in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["DatagramSize"]))
 
-                    execution_script = "{tool} {keys}".format(tool=tool_path, keys=keys)
+                    prepared_keys = keys
+                    execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
 
                     # replace 'x' in resolution by ',' (1920x1080 -> 1920,1080)
                     # place the current screen resolution in keys of the server instance
                     execution_script = execution_script.replace("<resolution>", args.screen_resolution.replace("x", ","))
                 else:
-                    execution_script = "{tool} {keys} -connectionurl {transport_protocol}://{ip_address}:1235".format(
-                        tool=tool_path,
+                    prepared_keys = "{keys} -connectionurl {transport_protocol}://{ip_address}:1235".format(
                         keys=keys,
                         transport_protocol=case["transport_protocol"],
                         ip_address=args.ip_address
                     )
+
+                    execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
+
+                case["prepared_keys"] = prepared_keys
 
                 script_path = os.path.join(args.output, "{}.bat".format(case["case"]))
        
