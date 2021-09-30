@@ -177,7 +177,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         # save keys from scripts in script_info
         if "prepared_keys" in case:
             if args.execution_type == "server":
-                keys_description = "Server keys: {}".format(prepared_keys)
+                keys_description = "Server keys: {}".format(case["prepared_keys"])
                 for i in range(len(test_case_report["script_info"])):
                     if "Server keys" in test_case_report["script_info"][i]:
                         test_case_report["script_info"][i] = keys_description
