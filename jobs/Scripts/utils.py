@@ -324,8 +324,7 @@ def close_game(game_name):
         sleep(0.2)
         pyautogui.mouseUp()
 
-        # TODO: fix LoL closing
-        sleep(240)
+        sleep(3)
 
 
 def close_game_process(game_name):
