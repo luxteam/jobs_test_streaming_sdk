@@ -121,10 +121,8 @@ def prepare_empty_reports(args):
 
             script_info = []
 
-            # update script info using current params (e.g. resolution)
+            # ignore client keys (they aren't used in Android autotests)
             for i in range(len(test_case_report["script_info"])):
-                if "Server keys" in test_case_report["script_info"][i]:
-                    test_case_report["script_info"][i] = test_case_report["script_info"][i].replace("<resolution>", "{}, {}".format(resolution_width, resolution_height))
                 if "Client keys" not in test_case_report["script_info"][i]:
                     # ignore line with client keys (they aren't used by Android autotests)
                     script_info.append(test_case_report["script_info"][i])
@@ -174,6 +172,9 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
         if os.path.exists(os.path.join(args.output, video_path)):
             test_case_report[VIDEO_KEY] = video_path
+
+        # save keys from scripts in script_info
+        test_case_report["script_info"] = case["script_info"]
 
     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
         json.dump([test_case_report], file, indent=4)
@@ -246,15 +247,24 @@ def execute_tests(args):
                 main_logger.info("Network in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["Network"]))
                 main_logger.info("Datagram size in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["DatagramSize"]))
 
-                server_execution_script = "{tool} {keys}".format(tool=args.server_tool, keys=case["server_keys"])
-
+                prepared_keys = case["server_keys"]
                 # TODO remove hardcoded values
-                server_execution_script = server_execution_script.replace("<resolution>", "{},{}".format(1920, 1080))
+                prepared_keys = prepared_keys.replace("<resolution>", "1920,1080")
+
+                server_execution_script = "{tool} {keys}".format(tool=args.server_tool, keys=prepared_keys)
 
                 server_script_path = os.path.join(args.output, "{}.bat".format(case["case"]))
        
                 with open(server_script_path, "w") as f:
                     f.write(server_execution_script)
+
+                keys_description = "Server keys: {}".format(prepared_keys)
+                for i in range(len(case["script_info"])):
+                    if "Server keys" in case["script_info"][i]:
+                        case["script_info"][i] = keys_description
+                        break
+                else:
+                    case["script_info"].append(keys_description)
 
                 params = {}
 
