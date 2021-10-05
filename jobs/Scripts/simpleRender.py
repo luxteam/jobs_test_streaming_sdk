@@ -273,12 +273,9 @@ def execute_tests(args, current_conf):
 
                 if args.execution_type == "server":
                     keys_description = "Server keys: {}".format(prepared_keys)
-                    for i in range(len(case["script_info"])):
-                        if "Server keys" in case["script_info"][i]:
-                            case["script_info"][i] = keys_description
-                            break
-                    else:
-                        case["script_info"].append(keys_description)
+                    case["script_info"] = []
+                    case["script_info"].append(keys_description)
+                        
 
                 elif args.execution_type == "client":
                     keys_description = "Client keys: {}".format(prepared_keys)
@@ -288,6 +285,12 @@ def execute_tests(args, current_conf):
                             break
                     else:
                         case["script_info"].append(keys_description)
+
+                    # delete line with information about Server keys. It'll be taken from the server results
+                    for i in range(len(case["script_info"])):
+                        if "Server keys" in case["script_info"][i]:
+                            case["script_info"].pop(i)
+                            break
 
                 script_path = os.path.join(args.output, "{}.bat".format(case["case"]))
        

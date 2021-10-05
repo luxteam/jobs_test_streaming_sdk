@@ -53,6 +53,8 @@ if __name__ == '__main__':
                         if "message" in source_file_content[i]:
                             target_file_content[i]["message"] += source_file_content[i]["message"]
 
+                        source_file_content[i]["script_info"].extend(target_file_content[i]["script_info"])
+
                     with open(target_file_path, "w", encoding="utf8") as f:
                         json.dump(target_file_content, f, indent=4, sort_keys=True)
 
@@ -93,6 +95,8 @@ if __name__ == '__main__':
 
                             if "message" in source_group_data["render_results"][i]:
                                 target_group_data["render_results"][i]["message"] += source_group_data["render_results"][i]["message"]
+
+                            source_group_data["render_results"][i]["script_info"].extend(target_group_data["render_results"][i]["script_info"])
 
                     with open(target_file_path, "w", encoding="utf8") as f:
                         json.dump(target_file_content, f, indent=4, sort_keys=True)
