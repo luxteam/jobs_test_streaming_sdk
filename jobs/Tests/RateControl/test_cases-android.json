@@ -12,7 +12,7 @@
     },
     {
         "case": "STR_ARC_002",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -23,7 +23,7 @@
     },
     {
         "case": "STR_ARC_003",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 120 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -34,7 +34,7 @@
     },
     {
         "case": "STR_ARC_004",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 144 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -56,7 +56,7 @@
     },
     {
         "case": "STR_ARC_006",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -RateControl cbr -Framerate 60 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -67,7 +67,7 @@
     },
     {
         "case": "STR_ARC_007",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -RateControl cbr -Framerate 120 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -78,7 +78,7 @@
     },
     {
         "case": "STR_ARC_008",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -RateControl cbr -Framerate 144 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -122,7 +122,7 @@
     },
     {
         "case": "STR_ARC_012",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -133,7 +133,7 @@
     },
     {
         "case": "STR_ARC_013",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 120 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -144,7 +144,7 @@
     },
     {
         "case": "STR_ARC_014",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 144 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -166,7 +166,7 @@
     },
     {
         "case": "STR_ARC_016",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -RateControl cbr -Framerate 60 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -177,7 +177,7 @@
     },
     {
         "case": "STR_ARC_017",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -RateControl cbr -Framerate 120 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -188,7 +188,7 @@
     },
     {
         "case": "STR_ARC_018",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -RateControl cbr -Framerate 144 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
