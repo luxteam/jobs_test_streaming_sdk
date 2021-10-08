@@ -80,7 +80,7 @@ def prepare_empty_reports(args):
     main_logger.info('Create empty report files')
 
     render_device = get_gpu()
-    platform_name = platform.system() + " with Android Emulator"
+    platform_name = platform.system() + " with Android real device"
     current_conf = set(platform_name) if not render_device else {platform_name, render_device}
     main_logger.info("Detected GPUs: {}".format(render_device))
     main_logger.info("PC conf: {}".format(current_conf))
@@ -195,7 +195,7 @@ def prepare_android_emulator(args):
 
 def execute_tests(args):
     render_device = get_gpu()
-    platform_name = platform.system() + " with Android Emulator"
+    platform_name = platform.system() + " with Android real device"
     current_conf = set(platform_name) if not render_device else {platform_name, render_device}
 
     rc = 0
