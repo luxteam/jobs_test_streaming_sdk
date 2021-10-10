@@ -58,9 +58,9 @@
         "click_server center_0 center_225",
         "sleep 30",
 
-        "click_server center_-370 center_0",
+        "click_server center_-260 center_-20",
         "sleep 2",
-        "click_server center_0 center_70",
+        "click_server center_0 center_110",
 
         "check_game \"VALORANT  \" \"VALORANT-Win64-Shipping.exe\"",
 
