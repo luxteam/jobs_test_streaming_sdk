@@ -21,6 +21,18 @@ def get_framerate(keys):
     else:
         return 30
 
+def get_qos_status(keys):
+    if '-QoS ' in keys:
+        return bool(keys.split('-QoS')[1].split()[0])
+    else:
+        return True
+
+#todo
+def get_resolution(keys):
+    if '-Resolution' in keys:
+        return #подумать, как обрабатывать
+    else:
+        return #default = 2560,1440
 
 def parse_block_line(line, saved_values):
     if 'Average latency' in line:
@@ -344,22 +356,31 @@ def update_status(json_content, saved_values, saved_errors, framerate):
             average_bandwidth_tx_sum = 0
             video_bitrate_sum = 0
 
-            for i in range(len(saved_values['average_bandwidth_tx'])):
+            for i in range(3, len(saved_values['average_bandwidth_tx'])):
                 average_bandwidth_tx_sum += saved_values['average_bandwidth_tx'][i]
                 video_bitrate_sum += saved_values['video_bitrate'][i]
+            average_bitrate = video_bitrate_sum / len(saved_values['video_bitrate'])
+            
+            qos_status = get_qos_status(json_content["keys"])
+            if average_bitrate == saved_values['video_bitrate'][1] and not qos_status:
+                average_bandwidth_tx_sum /= 1000
 
-            average_bandwidth_tx_sum /= 1000
+                average_bandwidth_tx_sum /= len(saved_values['average_bandwidth_tx'])
+                #video_bitrate_sum /= len(saved_values['video_bitrate'])
 
-            average_bandwidth_tx_sum /= len(saved_values['average_bandwidth_tx'])
-            video_bitrate_sum /= len(saved_values['video_bitrate'])
+                difference = (average_bandwidth_tx_sum - average_bitrate) / average_bitrate
 
-            difference = (average_bandwidth_tx_sum - video_bitrate_sum) / video_bitrate_sum
+                if difference > 0.25:
+                    json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate_sum, 2), round(difference * 100, 2)))
 
-            if difference > 0.25:
-                json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate_sum, 2), round(difference * 100, 2)))
+            else:
+                #считать по блокам
+                #вопрос по доку как именно считать для повторяющихся, что потом с чем сравнивать
+                #вопросы по остатку правила
 
                 if json_content["test_status"] != "error":
-                    json_content["test_status"] = "failed"
+                   json_content["test_status"] = "failed"
+
 
         # rule №9: number of abnormal network latency values is bigger than 10% of total values -> issue with app
         # Abnormal value: avrg network latency * 2 < network latency
@@ -382,6 +403,22 @@ def update_status(json_content, saved_values, saved_errors, framerate):
                     json_content["message"].append("Network problem: worst send time is 100 times more than the avg send time. Send time (avg/worst):  {}/ {} ms".format(saved_values['send_time_avg'][i], saved_values['send_time_worst'][i]))
 
                     break
+
+        # rule №11 ?
+                    
+        # rule №12: Decoder > 10 -> failed
+        decoder_max = 0
+        for i in range(3, len(saved_values['decoder_values'])):
+            if saved_values['decoder_values'][i] > 10:
+                if saved_values['decoder_values'][i] > decoder_max:
+                    decoder_max = saved_values['decoder_values'][i]
+        if decoder_max != 0:
+            json_content["message"].append("Application problem: Too high Decoder value. Max Decoder value for case: {}.".format(decoder_max))
+            if json_content["test_status"] != "error":
+               json_content["test_status"] = "failed"
+
+        # rule №13: -resolution X,Y != Encode Resolution -> failed
+
 
     json_content["message"].extend(saved_errors)
 
