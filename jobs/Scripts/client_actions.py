@@ -100,17 +100,21 @@ class IPerf(Action):
             pass
 
 
-# [Server action] send request to do click on server side
+# [Server action] send request to do click on server side. If list of groups is specified it executes only for them
 # [Result] wait answer from server. Answer must be 'done'
 class ClickServer(Action):
     def parse(self):
-        self.action = self.params["action_line"]
+        self.command = self.params["command"]
+        self.groups_list = self.params["arguments_line"]
+        self.test_group = self.params["args"].test_group
 
     def execute(self):
-        self.sock.send(self.action.encode("utf-8"))
+        if self.groups_list is None or self.test_group in self.groups_list:
+            self.sock.send(self.action.encode("utf-8"))
 
     def analyze_result(self):
-        self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
+        if self.groups_list is None or self.test_group in self.groups_list:
+            self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
 # [Server action] send request to start doing test actions on server side

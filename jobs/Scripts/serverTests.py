@@ -16,6 +16,7 @@ from threading import Thread
 from instance_state import ServerInstanceState
 from server_actions import *
 from analyzeLogs import analyze_logs
+from playsound import playsound
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -166,6 +167,19 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                     # if client requests to start doing test actions server must answer immediately and starts to execute them
                     if command == "start_test_actions_server":
                         connection.send("done".encode("utf-8"))
+
+                        if args.test_group == "Microphone":
+                            main_logger.info("Play audio file")
+
+                            audio_file_path = os.path.join(
+                                os.path.dirname(__file__),
+                                "..",
+                                "Assets",
+                                "microphone.mp3"
+                            )
+
+                            playsound(audio_file_path, 0)
+
                         instance_state.executing_test_actions = True
                         continue
 

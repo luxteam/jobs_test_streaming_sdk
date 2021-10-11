@@ -4,3 +4,4 @@ pyffmpeg==2.0.5.1
 keyboard
 pydirectinput
 Appium-Python-Client
+playsound
