@@ -146,7 +146,7 @@ def parse_error(line, saved_errors):
         saved_errors.append(error_message)
 
 
-def update_status(json_content, saved_values, saved_errors, framerate):
+def update_status(json_content, saved_values, saved_errors, framerate, execution_type):
     if "client_latencies" not in saved_values or "server_latencies" not in saved_values:
         json_content["test_status"] = "error"
         json_content["message"].append("Application problem: Client could not connect")
@@ -157,18 +157,20 @@ def update_status(json_content, saved_values, saved_errors, framerate):
 
         if 'encoder_values' in saved_values:
             # rule №1.1: encoder >= framerate -> problem with app
-            bad_encoder_value = None
+            # ignore for Android
+            if execution_type != "android":
+                bad_encoder_value = None
 
-            for encoder_value in saved_values['encoder_values']:
-                # find the worst value
-                if encoder_value >= framerate:
-                    if bad_encoder_value is None or bad_encoder_value < encoder_value:
-                        bad_encoder_value = encoder_value
+                for encoder_value in saved_values['encoder_values']:
+                    # find the worst value
+                    if encoder_value >= framerate:
+                        if bad_encoder_value is None or bad_encoder_value < encoder_value:
+                            bad_encoder_value = encoder_value
 
-            if bad_encoder_value:
-                json_content["message"].append("Application problem: Encoder is equal to or bigger than framerate. Encoder  {}. Framerate: {}".format(bad_encoder_value, framerate))
-                if json_content["test_status"] != "error":
-                    json_content["test_status"] = "failed"
+                if bad_encoder_value:
+                    json_content["message"].append("Application problem: Encoder is equal to or bigger than framerate. Encoder  {}. Framerate: {}".format(bad_encoder_value, framerate))
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
             # rule №1.2: avrg encoder * 2 < encoder -> problem with app
             avrg_encoder_value = mean(saved_values['encoder_values'])
@@ -213,19 +215,21 @@ def update_status(json_content, saved_values, saved_errors, framerate):
                 json_content["message"].append("Network problem: TX Rate is much bigger than RX Rate. TX rate: {}. RX rate: {}".format(bad_tx_rate, bad_rx_rate))
 
         # rule №2.2: framerate - tx rate > 10 -> problem with app
-        if 'tx_rates' in saved_values:
-            bad_tx_rate = None
+        # ignore for Android
+        if execution_type != "android":
+            if 'tx_rates' in saved_values:
+                bad_tx_rate = None
 
-            for tx_rate in saved_values['tx_rates']:
-                # find the worst value
-                if framerate - tx_rate > 10:
-                    if bad_tx_rate is None or tx_rate < bad_tx_rate:
-                        bad_tx_rate = tx_rate
+                for tx_rate in saved_values['tx_rates']:
+                    # find the worst value
+                    if framerate - tx_rate > 10:
+                        if bad_tx_rate is None or tx_rate < bad_tx_rate:
+                            bad_tx_rate = tx_rate
 
-            if bad_tx_rate:
-                json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
-                if json_content["test_status"] != "error":
-                    json_content["test_status"] = "failed"
+                if bad_tx_rate:
+                    json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
 
         # rule №4: encoder and decoder check. Problems with encoder -> warning. Problems with decoder -> issue with app
@@ -386,7 +390,7 @@ def update_status(json_content, saved_values, saved_errors, framerate):
     json_content["message"].extend(saved_errors)
 
 
-def analyze_logs(work_dir, json_content, execution_type="server"):
+def analyze_logs(work_dir, json_content, execution_type="android"):
     try:
         log_key = '{}_log'.format(execution_type)
 
@@ -398,7 +402,7 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
         end_of_block = False
         connection_terminated = False
 
-        if execution_type == "server":
+        if execution_type == "server" or execution_type == "android":
             if log_key in json_content:
                 log_path = os.path.join(work_dir, json_content[log_key]).replace('/', os.path.sep).replace('\\', os.path.sep)
             else:
@@ -430,7 +434,7 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
                         if 'Queue depth' in line:
                             end_of_block = True
 
-                    update_status(json_content, saved_values, saved_errors, framerate)
+                    update_status(json_content, saved_values, saved_errors, framerate, execution_type)
 
             #if connection_terminated:
             #    json_content["message"].append("Application problem: Client connection terminated")
