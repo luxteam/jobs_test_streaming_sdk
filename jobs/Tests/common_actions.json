@@ -34,8 +34,8 @@
         "check_game \"VALORANT  \" \"VALORANT-Win64-Shipping.exe\"",
         "skip_if_done 23",
         "execute_cmd \"C:\\JN\\VALORANT.exe - Shortcut.lnk\"",
-        "sleep 15",
-        "click_server center_0 center_0",
+        "sleep 90",
+        "click_server 360 210",
         "sleep 60",
 
         "click_server center_0 25",
