@@ -27,12 +27,11 @@ def get_qos_status(keys):
     else:
         return True
 
-#todo
 def get_resolution(keys):
     if '-Resolution' in keys:
-        return #подумать, как обрабатывать
+        return keys.split('-Resolution')[1].split()[0]
     else:
-        return #default = 2560,1440
+        return '2560,1440'
 
 def parse_block_line(line, saved_values):
     if 'Average latency' in line:
@@ -356,7 +355,7 @@ def update_status(json_content, saved_values, saved_errors, framerate):
             average_bandwidth_tx_sum = 0
             video_bitrate_sum = 0
 
-            for i in range(3, len(saved_values['average_bandwidth_tx'])):
+            for i in range(len(saved_values['average_bandwidth_tx'])):
                 average_bandwidth_tx_sum += saved_values['average_bandwidth_tx'][i]
                 video_bitrate_sum += saved_values['video_bitrate'][i]
             average_bitrate = video_bitrate_sum / len(saved_values['video_bitrate'])
@@ -374,6 +373,7 @@ def update_status(json_content, saved_values, saved_errors, framerate):
                     json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate_sum, 2), round(difference * 100, 2)))
 
             else:
+                #todo
                 #считать по блокам
                 #вопрос по доку как именно считать для повторяющихся, что потом с чем сравнивать
                 #вопросы по остатку правила
@@ -404,11 +404,11 @@ def update_status(json_content, saved_values, saved_errors, framerate):
 
                     break
 
-        # rule №11 ?
+        # rule №11 todo
                     
         # rule №12: Decoder > 10 -> failed
         decoder_max = 0
-        for i in range(3, len(saved_values['decoder_values'])):
+        for i in range(len(saved_values['decoder_values'])):
             if saved_values['decoder_values'][i] > 10:
                 if saved_values['decoder_values'][i] > decoder_max:
                     decoder_max = saved_values['decoder_values'][i]
@@ -418,6 +418,12 @@ def update_status(json_content, saved_values, saved_errors, framerate):
                json_content["test_status"] = "failed"
 
         # rule №13: -resolution X,Y != Encode Resolution -> failed
+        flag_resolution = get_resolution(json_content["keys"])
+        for i in range(1, len(saved_values['encode_resolution'])):
+            if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == flag_resolution)):
+                json_content["message"].append("Application problem: Encode Resolution in Flags doesn't match to Encode Resolution from logs. Resolution from Flags: {}, from logs {}.".format(flag_resolution, saved_values['encode_resolution'][i]))
+                if json_content["test_status"] != "error":
+                   json_content["test_status"] = "failed"
 
 
     json_content["message"].extend(saved_errors)
@@ -456,8 +462,8 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
                             block_number += 1
                             connection_terminated = False
 
-                        # skip three first blocks of output with latency (it can contains abnormal data due to starting of Streaming SDK)
-                        if block_number > 3:
+                        # skip six first blocks of output with latency (it can contains abnormal data due to starting of Streaming SDK)
+                        if block_number > 6:
                             if not end_of_block:
                                 parse_block_line(line, saved_values)
                             elif line.strip():
@@ -466,6 +472,11 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
 
                         if 'Queue depth' in line:
                             end_of_block = True
+
+                        if 'Encode Resolution:' in line:
+                            if 'encode_resolution' not in saved_values:
+                                saved_values['encode_resolution'] = []
+                            saved_values['encode_resolution'].append(line.split()[1])
 
                     update_status(json_content, saved_values, saved_errors, framerate)
 
