@@ -183,7 +183,7 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 json_content = json.load(file)[0]
 
             json_content["test_status"] = "passed"
-            analyze_logs(args.output, json_content)
+            analyze_logs(args.output, json_content, case)
 
             # execute iperf if it's necessary
             params["json_content"] = json_content

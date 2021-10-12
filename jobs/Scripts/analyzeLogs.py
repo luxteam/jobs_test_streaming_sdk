@@ -360,7 +360,7 @@ def update_status(json_content, saved_values, saved_errors, framerate):
                 video_bitrate_sum += saved_values['video_bitrate'][i]
             average_bitrate = video_bitrate_sum / len(saved_values['video_bitrate'])
             
-            qos_status = get_qos_status(json_content["keys"])
+            qos_status = get_qos_status(case["prepared_keys"])
             if average_bitrate == saved_values['video_bitrate'][1] and not qos_status:
                 average_bandwidth_tx_sum /= 1000
 
@@ -418,7 +418,7 @@ def update_status(json_content, saved_values, saved_errors, framerate):
                json_content["test_status"] = "failed"
 
         # rule №13: -resolution X,Y != Encode Resolution -> failed
-        flag_resolution = get_resolution(json_content["keys"])
+        flag_resolution = get_resolution(case["prepared_keys"])
         if flag_resolution:
             for i in range(1, len(saved_values['encode_resolution'])):
                 if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == flag_resolution)):
@@ -430,7 +430,7 @@ def update_status(json_content, saved_values, saved_errors, framerate):
     json_content["message"].extend(saved_errors)
 
 
-def analyze_logs(work_dir, json_content, execution_type="server"):
+def analyze_logs(work_dir, json_content, case, execution_type="server"):
     try:
         log_key = '{}_log'.format(execution_type)
 
@@ -449,7 +449,7 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
                 log_path = os.path.join(work_dir, "tool_logs", json_content["test_case"] + "_server.log")
 
             if os.path.exists(log_path):
-                framerate = get_framerate(json_content["keys"])
+                framerate = get_framerate(case["prepared_keys"])
 
                 with open(log_path, 'r') as log_file:
                     log = log_file.readlines()
@@ -481,7 +481,7 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
                             # Replace 'x' by ','
                             saved_values['encode_resolution'].append(line.split("Encode Resolution:")[1].split("@")[0].replace("x", ","))
 
-                    update_status(json_content, saved_values, saved_errors, framerate)
+                    update_status(json_content, case, saved_values, saved_errors, framerate)
 
             if connection_terminated:
                 json_content["message"].append("Application problem: Client connection terminated")
