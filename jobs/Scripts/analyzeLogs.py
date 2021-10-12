@@ -141,6 +141,12 @@ def parse_block_line(line, saved_values):
         send_time_worst = float(line.split('/')[2].replace('ms', ''))
         saved_values['send_time_worst'].append(send_time_worst)
 
+    elif 'VIDEO_OP_CODE_FORCE_IDR' in line:
+        saved_values['code_force_idr'] = True
+
+    elif 'Input Queue Full' in line:
+        saved_values['input_queue_full'] = True
+
 
 def parse_error(line, saved_errors):
     error_message = line.split(':', maxsplit = 3)[3].split('.')[0].replace('fps', '').strip()
@@ -405,8 +411,17 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
 
                     break
 
-        # rule №11 todo
-                    
+        # rule №11: detect error messages: VIDEO_OP_CODE_FORCE_IDR, Input Queue Full
+        if 'code_force_idr' in saved_values and saved_values['code_force_idr']:
+            json_content["message"].append("Application problem: VIDEO_OP_CODE_FORCE_IDR detected.")
+            if json_content["test_status"] != "error":
+               json_content["test_status"] = "failed"
+
+        if 'input_queue_full' in saved_values and saved_values['input_queue_full']:
+            json_content["message"].append("Application problem: Input Queue Full detected.")
+            if json_content["test_status"] != "error":
+               json_content["test_status"] = "failed"
+
         # rule №12: Decoder > 10 -> failed
         decoder_max = 0
         for i in range(len(saved_values['decoder_values'])):
