@@ -141,6 +141,22 @@ def parse_block_line(line, saved_values):
         send_time_worst = float(line.split('/')[2].replace('ms', ''))
         saved_values['send_time_worst'].append(send_time_worst)
 
+    elif 'Bitrate: ' in line:
+        if 'bitrate' in saved_values:
+            saved_values['bitrate'] = set()
+
+        bitrate = float(line.split('Bitrate: ')[1].replace('bps', '').strip())
+        saved_values['bitrate'].add(bitrate)
+
+    elif 'HEVC Video bitrate changed to' in line:
+        # Line example:
+        # 2021-10-10 22:11:45.335     153C [VideoPipeline]    Info: HEVC Video bitrate changed to 50.00 Mbps for left eye
+        if 'hevc_video_bitrate' in saved_values:
+            saved_values['hevc_video_bitrate'] = set()
+
+        hevc_video_bitrate = float(line.split('changed to')[1].split()[0])
+        saved_values['hevc_video_bitrate'].add(hevc_video_bitrate)
+
     elif 'VIDEO_OP_CODE_FORCE_IDR' in line:
         saved_values['code_force_idr'] = True
 
@@ -357,7 +373,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        # rule №8: (sum of video bitrate - sum of average bandwidth tx) / sum of video bitrate > 0.25 -> issue with app
+        # rule №8.1: (sum of video bitrate - sum of average bandwidth tx) / video bitrate > 0.25 or 3.0 -> issue with app
         if 'average_bandwidth_tx' in saved_values and 'video_bitrate' in saved_values:
             def check_rule_8(average_bandwidth_tx_sum, video_bitrate, block_number):
                 if block_number == 0:
@@ -372,7 +388,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
                 max_difference = 0.25
 
                 if video_bitrate == 1:
-                    max_difference = 3
+                    max_difference = 3.0
 
                 if difference > 0.25:
                     json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate, 2), round(difference * 100, 2)))
@@ -388,7 +404,15 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
 
             for i in range(len(saved_values['average_bandwidth_tx'])):
                 if saved_values['video_bitrate'][i] != previous_video_bitrate:
-                    check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
+                    # if QoS == false and value change - it's abnormal
+                    if not get_qos_status(case["prepared_keys"]):
+                        json_content["message"].append("Application problem: QoS is false, but bitrate changed from {} to {}.".format(previous_video_bitrate, saved_values['video_bitrate'][i]))
+
+                        if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
+
+                    if block_number >= 5:
+                        check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
                     previous_video_bitrate = saved_values['video_bitrate'][i]
                     average_bandwidth_tx_sum = 0
                     block_number = 0
@@ -397,6 +421,18 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
                 block_number += 1
 
             check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
+
+        # rule №8.2: if QoS false -> all bitrates must be same
+        if not get_qos_status(case["prepared_keys"]) and 'video_bitrate' in saved_values:
+            video_bitrate_set = set(saved_values['video_bitrate'])
+            # make symmetric difference of sets
+            different_values = video_bitrate_set ^ saved_errors['hevc_video_bitrate'] ^ saved_errors['bitrate']
+
+            if different_values:
+                json_content["message"].append("Application problem: QoS is false, but some bitrate values are different.")
+
+                if json_content["test_status"] != "error":
+                    json_content["test_status"] = "failed"
 
         # rule №9: number of abnormal network latency values is bigger than 10% of total values -> issue with app
         # Abnormal value: avrg network latency * 2 < network latency
