@@ -31,7 +31,7 @@ def get_resolution(keys):
     if '-Resolution' in keys:
         return keys.split('-Resolution')[1].split()[0]
     else:
-        return '2560,1440'
+        return ''
 
 def parse_block_line(line, saved_values):
     if 'Average latency' in line:
@@ -419,11 +419,12 @@ def update_status(json_content, saved_values, saved_errors, framerate):
 
         # rule №13: -resolution X,Y != Encode Resolution -> failed
         flag_resolution = get_resolution(json_content["keys"])
-        for i in range(1, len(saved_values['encode_resolution'])):
-            if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == flag_resolution)):
-                json_content["message"].append("Application problem: Encode Resolution in Flags doesn't match to Encode Resolution from logs. Resolution from Flags: {}, from logs {}.".format(flag_resolution, saved_values['encode_resolution'][i]))
-                if json_content["test_status"] != "error":
-                   json_content["test_status"] = "failed"
+        if flag_resolution:
+            for i in range(1, len(saved_values['encode_resolution'])):
+                if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == flag_resolution)):
+                    json_content["message"].append("Application problem: Encode Resolution in Flags doesn't match to Encode Resolution from logs. Resolution from Flags: {}, from logs {}.".format(flag_resolution, saved_values['encode_resolution'][i]))
+                    if json_content["test_status"] != "error":
+                       json_content["test_status"] = "failed"
 
 
     json_content["message"].extend(saved_errors)
@@ -476,7 +477,9 @@ def analyze_logs(work_dir, json_content, execution_type="server"):
                         if 'Encode Resolution:' in line:
                             if 'encode_resolution' not in saved_values:
                                 saved_values['encode_resolution'] = []
-                            saved_values['encode_resolution'].append(line.split()[1])
+                            # Encode Resolution: 1920x1080@75fps
+                            # Replace 'x' by ','
+                            saved_values['encode_resolution'].append(line.split("Encode Resolution:")[1].split("@")[0].replace("x", ","))
 
                     update_status(json_content, saved_values, saved_errors, framerate)
 
