@@ -157,7 +157,7 @@ def parse_error(line, saved_errors):
         saved_errors.append(error_message)
 
 
-def update_status(json_content, saved_values, saved_errors, framerate):
+def update_status(json_content, case, saved_values, saved_errors, framerate):
     if "client_latencies" not in saved_values or "server_latencies" not in saved_values:
         json_content["test_status"] = "error"
         json_content["message"].append("Application problem: Client could not connect")
