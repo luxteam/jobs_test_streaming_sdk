@@ -479,7 +479,7 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                                 saved_values['encode_resolution'] = []
                             # Encode Resolution: 1920x1080@75fps
                             # Replace 'x' by ','
-                            saved_values['encode_resolution'].append(line.split("Encode Resolution:")[1].split("@")[0].replace("x", ","))
+                            saved_values['encode_resolution'].append(line.split("Encode Resolution:")[1].split("@")[0].replace("x", ",").trim())
 
                     update_status(json_content, case, saved_values, saved_errors, framerate)
 
