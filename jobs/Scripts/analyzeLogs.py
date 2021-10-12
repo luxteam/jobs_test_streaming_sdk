@@ -32,7 +32,7 @@ def get_resolution(keys):
     if '-Resolution' in keys:
         return keys.split('-Resolution')[1].split()[0]
     else:
-        return ''
+        return '2560,1440'
 
 def parse_block_line(line, saved_values):
     if 'Average latency' in line:
