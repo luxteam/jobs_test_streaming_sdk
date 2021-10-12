@@ -359,35 +359,44 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
 
         # rule №8: (sum of video bitrate - sum of average bandwidth tx) / sum of video bitrate > 0.25 -> issue with app
         if 'average_bandwidth_tx' in saved_values and 'video_bitrate' in saved_values:
-            average_bandwidth_tx_sum = 0
-            video_bitrate_sum = 0
+            def check_rule_8(average_bandwidth_tx_sum, video_bitrate, block_number):
+                if block_number == 0:
+                    return
 
-            for i in range(len(saved_values['average_bandwidth_tx'])):
-                average_bandwidth_tx_sum += saved_values['average_bandwidth_tx'][i]
-                video_bitrate_sum += saved_values['video_bitrate'][i]
-            average_bitrate = video_bitrate_sum / len(saved_values['video_bitrate'])
-            
-            qos_status = get_qos_status(case["prepared_keys"])
-            if average_bitrate == saved_values['video_bitrate'][1] and not qos_status:
                 average_bandwidth_tx_sum /= 1000
 
                 average_bandwidth_tx_sum /= len(saved_values['average_bandwidth_tx'])
-                #video_bitrate_sum /= len(saved_values['video_bitrate'])
 
-                difference = (average_bandwidth_tx_sum - average_bitrate) / average_bitrate
+                difference = (average_bandwidth_tx_sum - video_bitrate) / video_bitrate
+
+                max_difference = 0.25
+
+                if video_bitrate == 1:
+                    max_difference = 3
 
                 if difference > 0.25:
-                    json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate_sum, 2), round(difference * 100, 2)))
+                    json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate, 2), round(difference * 100, 2)))
 
-            else:
-                #todo
-                #считать по блокам
-                #вопрос по доку как именно считать для повторяющихся, что потом с чем сравнивать
-                #вопросы по остатку правила
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
-                if json_content["test_status"] != "error":
-                   json_content["test_status"] = "failed"
+            average_bandwidth_tx_sum = 0
+            # take the first video bitrate
+            previous_video_bitrate = saved_values['video_bitrate'][0]
+            # number of block in succession with the same video bitrate
+            block_number = 0
 
+            for i in range(len(saved_values['average_bandwidth_tx'])):
+                if saved_values['video_bitrate'][i] != previous_video_bitrate:
+                    check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
+                    previous_video_bitrate = saved_values['video_bitrate'][i]
+                    average_bandwidth_tx_sum = 0
+                    block_number = 0
+
+                average_bandwidth_tx_sum += saved_values['average_bandwidth_tx'][i]
+                block_number += 1
+
+            check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
 
         # rule №9: number of abnormal network latency values is bigger than 10% of total values -> issue with app
         # Abnormal value: avrg network latency * 2 < network latency
