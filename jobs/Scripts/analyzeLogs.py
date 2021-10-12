@@ -23,7 +23,8 @@ def get_framerate(keys):
 
 def get_qos_status(keys):
     if '-QoS ' in keys:
-        return bool(keys.split('-QoS')[1].split()[0])
+        value = keys.split('-QoS')[1].split()[0]
+        return value != "False" and value != "false"
     else:
         return True
 
