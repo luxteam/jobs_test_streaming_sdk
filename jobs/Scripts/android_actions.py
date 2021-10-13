@@ -128,8 +128,10 @@ class OpenGame(Action):
                 click("center_680", "center_-190", self.logger)
                 sleep(2)
             elif self.game_name == "valorant":
-                sleep(15)
-                click("center_0", "center_0", self.logger)
+                sleep(60)
+                click("380", "edge_-225", self.logger)
+                sleep(1)
+                click("360", "210", self.logger)
                 sleep(60)
 
                 # do opening of lobby twice to avoid ads
@@ -156,6 +158,7 @@ class OpenGame(Action):
                 click("center_-260", "center_-20", self.logger)
                 sleep(2)
                 click("center_0", "center_110", self.logger)
+                sleep
             elif self.game_name == "lol":
                 sleep(90)
                 click("center_-520", "center_-340", self.logger)
