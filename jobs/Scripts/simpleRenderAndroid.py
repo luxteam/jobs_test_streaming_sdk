@@ -214,6 +214,9 @@ def execute_tests(args):
     last_log_line_server = None
     last_log_line_client = None
 
+    # first time video recording can be unstable, do it before tests
+    execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
+
     for case in [x for x in cases if not is_case_skipped(x, current_conf)]:
 
         case_start_time = time.time()
