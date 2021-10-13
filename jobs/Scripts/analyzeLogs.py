@@ -408,7 +408,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
                 if saved_values['video_bitrate'][i] != previous_video_bitrate:
                     # if QoS == false and value change - it's abnormal
                     if not get_qos_status(case["prepared_keys"]):
-                        json_content["message"].append("Application problem: QoS is false, but bitrate changed from {} to {}.".format(previous_video_bitrate, saved_values['video_bitrate'][i]))
+                        json_content["message"].append("Application problem: QoS is false, but bitrate changed from {} to {}".format(previous_video_bitrate, saved_values['video_bitrate'][i]))
 
                         if json_content["test_status"] != "error":
                             json_content["test_status"] = "failed"
@@ -431,7 +431,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
             different_values = video_bitrate_set ^ saved_values['hevc_video_bitrate'] ^ saved_values['bitrate']
 
             if different_values:
-                json_content["message"].append("Application problem: QoS is false, but some bitrate values are different.")
+                json_content["message"].append("Application problem: QoS is false, but some bitrate values are different")
 
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
@@ -460,12 +460,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
 
         # rule №11: detect error messages: VIDEO_OP_CODE_FORCE_IDR, Input Queue Full
         if 'code_force_idr' in saved_values and saved_values['code_force_idr']:
-            json_content["message"].append("Application problem: VIDEO_OP_CODE_FORCE_IDR detected.")
+            json_content["message"].append("Application problem: VIDEO_OP_CODE_FORCE_IDR detected")
             if json_content["test_status"] != "error":
                json_content["test_status"] = "failed"
 
         if 'input_queue_full' in saved_values and saved_values['input_queue_full']:
-            json_content["message"].append("Application problem: Input Queue Full detected.")
+            json_content["message"].append("Application problem: Input Queue Full detected")
             if json_content["test_status"] != "error":
                json_content["test_status"] = "failed"
 
@@ -476,7 +476,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
                 if saved_values['decoder_values'][i] > decoder_max:
                     decoder_max = saved_values['decoder_values'][i]
         if decoder_max != 0:
-            json_content["message"].append("Application problem: Too high Decoder value. Max Decoder value for case: {}.".format(decoder_max))
+            json_content["message"].append("Application problem: Too high Decoder value. Max Decoder value for case: {}".format(decoder_max))
             if json_content["test_status"] != "error":
                json_content["test_status"] = "failed"
 
@@ -485,7 +485,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
         if flag_resolution:
             for i in range(1, len(saved_values['encode_resolution'])):
                 if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == flag_resolution)):
-                    json_content["message"].append("Application problem: Encode Resolution in Flags doesn't match to Encode Resolution from logs. Resolution from Flags: {}, from logs {}.".format(flag_resolution, saved_values['encode_resolution'][i]))
+                    json_content["message"].append("Application problem: Encode Resolution in Flags doesn't match to Encode Resolution from logs. Resolution from Flags: {}, from logs {}".format(flag_resolution, saved_values['encode_resolution'][i]))
                     if json_content["test_status"] != "error":
                        json_content["test_status"] = "failed"
 
