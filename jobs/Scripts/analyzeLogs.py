@@ -34,7 +34,7 @@ def get_resolution(keys):
     else:
         return '2560,1440'
 
-def parse_line(line, saved_values):
+def parse_block_line(line, saved_values):
     if 'Average latency' in line:
         # Line example:
         # 2021-05-31 09:01:55.469     3F90 [RemoteGamePipeline]    Info: Average latency: full 35.08, client  1.69, server 21.83, encoder  3.42, network 11.56, decoder  1.26, Rx rate: 122.67 fps, Tx rate: 62.33 fps
@@ -141,8 +141,10 @@ def parse_line(line, saved_values):
         send_time_worst = float(line.split('/')[2].replace('ms', ''))
         saved_values['send_time_worst'].append(send_time_worst)
 
-    elif 'Bitrate: ' in line:
-        if 'bitrate' in saved_values:
+
+def parse_line(line, saved_values):
+    if 'Bitrate: ' in line:
+        if 'bitrate' not in saved_values:
             saved_values['bitrate'] = set()
 
         bitrate = float(line.split('Bitrate: ')[1].replace('bps', '').strip())
@@ -151,7 +153,7 @@ def parse_line(line, saved_values):
     elif 'HEVC Video bitrate changed to' in line:
         # Line example:
         # 2021-10-10 22:11:45.335     153C [VideoPipeline]    Info: HEVC Video bitrate changed to 50.00 Mbps for left eye
-        if 'hevc_video_bitrate' in saved_values:
+        if 'hevc_video_bitrate' not in saved_values:
             saved_values['hevc_video_bitrate'] = set()
 
         hevc_video_bitrate = float(line.split('changed to')[1].split()[0])
@@ -527,6 +529,12 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                         # skip six first blocks of output with latency (it can contains abnormal data due to starting of Streaming SDK)
                         if block_number > 6:
                             parse_line(line, saved_values)
+
+                            if not end_of_block:
+                                parse_block_line(line, saved_values)
+                            elif line.strip():
+                                #parse_error(line, saved_errors)
+                                pass
 
                         if 'Queue depth' in line:
                             end_of_block = True
