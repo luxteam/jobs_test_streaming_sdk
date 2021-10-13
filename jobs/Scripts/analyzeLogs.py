@@ -268,32 +268,27 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
         # 0-0 -> skip
         # X-Y -> first time - skip. second time - problem (Y > 1, X < Y)
         # X-Y -> first time - skip. sec (X > 1, X > Y)
+        # + rule №12
         if 'queue_encoder_values' in saved_values:
             is_problem = False
-            is_small_increasing = False
-            is_small_descreasing = False
 
             for i in range(len(saved_values['queue_encoder_values']) - 1):
-                if saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1] == 0:
-                    continue
-                elif saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1]:
-                    is_problem = True
-                    json_content["message"].append("Application problem: encoder value stagnation ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
-                    break
-                elif saved_values['queue_encoder_values'][i] < saved_values['queue_encoder_values'][i + 1]:
-                    if is_small_increasing:
+                # ignore values less than 10
+                if saved_values['queue_encoder_values'][i] >= 10 or saved_values['queue_encoder_values'][i + 1] >= 10:
+                    if saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1] == 0:
+                        continue
+                    elif saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1]:
+                        is_problem = True
+                        json_content["message"].append("Application problem: encoder value stagnation ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
+                        break
+                    elif saved_values['queue_encoder_values'][i] < saved_values['queue_encoder_values'][i + 1] and saved_values['queue_encoder_values'][i] > 0:
                         is_problem = True
                         json_content["message"].append("Application problem: increase in encoder value ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
                         break
-                    else:
-                        is_small_increasing = True
-                elif saved_values['queue_encoder_values'][i] > saved_values['queue_encoder_values'][i + 1]:
-                    if is_small_descreasing:
+                    elif saved_values['queue_encoder_values'][i] > saved_values['queue_encoder_values'][i + 1] and saved_values['queue_encoder_values'][i + 1] > 0:
                         is_problem = True
                         json_content["message"].append("Application problem: decrease in encoder value ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
                         break
-                    else:
-                        is_small_descreasing = True
 
             if is_problem:
                 if json_content["test_status"] != "error":
@@ -305,26 +300,22 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
             is_small_descreasing = False
 
             for i in range(len(saved_values['queue_decoder_values']) - 1):
-                if saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1] == 0:
-                    pass
-                elif saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1]:
-                    is_problem = True
-                    json_content["message"].append("Application problem: decoder value stagnation ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
-                    break
-                elif saved_values['queue_decoder_values'][i] < saved_values['queue_decoder_values'][i + 1]:
-                    if is_small_increasing:
+                # ignore values less than 10
+                if saved_values['queue_decoder_values'][i] >= 10 or saved_values['queue_decoder_values'][i + 1] >= 10:
+                    if saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1] == 0:
+                        pass
+                    elif saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1]:
+                        is_problem = True
+                        json_content["message"].append("Application problem: decoder value stagnation ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
+                        break
+                    elif saved_values['queue_decoder_values'][i] < saved_values['queue_decoder_values'][i + 1] and saved_values['queue_decoder_values'][i] > 0:
                         is_problem = True
                         json_content["message"].append("Application problem: increase in decoder value ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
                         break
-                    else:
-                        is_small_increasing = True
-                elif saved_values['queue_decoder_values'][i] > saved_values['queue_decoder_values'][i + 1]:
-                    if is_small_descreasing:
+                    elif saved_values['queue_decoder_values'][i] > saved_values['queue_decoder_values'][i + 1] and saved_values['queue_decoder_values'][i + 1] > 0:
                         is_problem = True
                         json_content["message"].append("Application problem: decrease in decoder value ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
                         break
-                    else:
-                        is_small_descreasing = True
 
         # rule №6.1: client latency <= decoder -> issue with app
         if 'client_latencies' in saved_values and 'decoder_values' in saved_values:
@@ -360,13 +351,13 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        # rule №7: |decyns value| > 100ms -> issue with app
+        # rule №7: |decyns value| > 50ms -> issue with app
         if 'decyns_values' in saved_values:
             bad_decyns_value = None
 
             for decyns_value in saved_values['decyns_values']:
                 # find the worst value
-                if abs(decyns_value) > 100:
+                if abs(decyns_value) > 50:
                     if bad_decyns_value is None or bad_decyns_value < abs(decyns_value):
                         bad_decyns_value = abs(decyns_value)
 
@@ -466,17 +457,6 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
 
         if 'input_queue_full' in saved_values and saved_values['input_queue_full']:
             json_content["message"].append("Application problem: Input Queue Full detected")
-            if json_content["test_status"] != "error":
-               json_content["test_status"] = "failed"
-
-        # rule №12: Decoder > 10 -> failed
-        decoder_max = 0
-        for i in range(len(saved_values['decoder_values'])):
-            if saved_values['decoder_values'][i] > 10:
-                if saved_values['decoder_values'][i] > decoder_max:
-                    decoder_max = saved_values['decoder_values'][i]
-        if decoder_max != 0:
-            json_content["message"].append("Application problem: Too high Decoder value. Max Decoder value for case: {}".format(decoder_max))
             if json_content["test_status"] != "error":
                json_content["test_status"] = "failed"
 
