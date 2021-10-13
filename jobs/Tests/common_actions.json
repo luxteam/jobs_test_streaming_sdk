@@ -32,10 +32,12 @@
 
     "valorant_actions": [
         "check_game \"VALORANT  \" \"VALORANT-Win64-Shipping.exe\"",
-        "skip_if_done 23",
+        "skip_if_done 25",
         "execute_cmd \"C:\\JN\\VALORANT.exe - Shortcut.lnk\"",
         "sleep 60",
         "click_server 380 edge_-225",
+        "sleep 1",
+        "click 360 210",
         "sleep 60",
 
         "click_server center_0 25",
