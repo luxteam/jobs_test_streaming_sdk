@@ -147,7 +147,7 @@ def parse_line(line, saved_values):
         if 'bitrate' not in saved_values:
             saved_values['bitrate'] = set()
 
-        bitrate = float(line.split('Bitrate: ')[1].replace('bps', '').strip())
+        bitrate = float(line.split('Bitrate: ')[1].replace('bps', '').strip()) / 1000000
         saved_values['bitrate'].add(bitrate)
 
     elif 'HEVC Video bitrate changed to' in line:
@@ -428,9 +428,9 @@ def update_status(json_content, case, saved_values, saved_errors, framerate):
         if not get_qos_status(case["prepared_keys"]) and 'video_bitrate' in saved_values:
             video_bitrate_set = set(saved_values['video_bitrate'])
             # make symmetric difference of sets
-            different_values = video_bitrate_set ^ saved_values['hevc_video_bitrate'] ^ saved_values['bitrate']
+            has_different_values = (video_bitrate_set ^ saved_values['hevc_video_bitrate']) or (saved_values['hevc_video_bitrate'] ^ saved_values['bitrate']) or (saved_values['bitrate'] ^ video_bitrate_set)
 
-            if different_values:
+            if has_different_values:
                 json_content["message"].append("Application problem: QoS is false, but some bitrate values are different")
 
                 if json_content["test_status"] != "error":
@@ -526,10 +526,10 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                             block_number += 1
                             connection_terminated = False
 
+                        parse_line(line, saved_values)
+
                         # skip six first blocks of output with latency (it can contains abnormal data due to starting of Streaming SDK)
                         if block_number > 6:
-                            parse_line(line, saved_values)
-
                             if not end_of_block:
                                 parse_block_line(line, saved_values)
                             elif line.strip():
