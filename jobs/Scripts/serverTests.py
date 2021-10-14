@@ -176,6 +176,9 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
                 main_logger.info("Finish action execution\n\n\n")
 
+            if args.track_used_memory:
+                track_used_memory(case, args.execution_type)
+
             process = close_streaming_process(args.execution_type, case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try)
 

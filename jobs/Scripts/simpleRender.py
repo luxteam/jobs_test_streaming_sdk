@@ -314,8 +314,6 @@ def execute_tests(args, current_conf):
 
                 break
             except Exception as e:
-                if args.track_used_memory:
-                    track_used_memory(case, args.execution_type)
                 PROCESS = close_streaming_process(args.execution_type, case, PROCESS)
                 last_log_line = save_logs(args, case, last_log_line, current_try)
                 execution_time = time.time() - case_start_time

@@ -377,7 +377,7 @@ def track_used_memory(case, execution_type):
     target_process = None
 
     for process in psutil.process_iter():
-        if process.name() == process_name:
+        if process_name in process.name():
             target_process = process
             break
 
