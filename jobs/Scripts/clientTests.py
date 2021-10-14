@@ -176,9 +176,6 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             command_object = NextCase(sock, params, instance_state, main_logger)
             command_object.do_action()
 
-            if args.track_used_memory:
-                track_used_memory(case, args.execution_type)
-
             process = close_streaming_process(args.execution_type, case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try)
 

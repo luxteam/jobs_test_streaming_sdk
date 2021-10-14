@@ -214,6 +214,9 @@ class Retry(Action):
 class NextCase(Action):
     @Action.server_action_decorator
     def execute(self):
+        if self.params["args"].track_used_memory:
+            track_used_memory(self.params["case"], "server")
+
         return True
 
     def analyze_result(self):

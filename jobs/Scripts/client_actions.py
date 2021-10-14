@@ -77,6 +77,9 @@ class Retry(Action):
 # [Result] wait answer from server. Answer can be any
 class NextCase(Action):
     def execute(self):
+        if self.params["args"].track_used_memory:
+            track_used_memory(self.params["case"], "client")
+
         self.sock.send("next_case".encode("utf-8"))
 
     def analyze_result(self):

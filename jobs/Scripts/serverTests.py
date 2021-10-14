@@ -136,8 +136,8 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 try:
                     request = connection.recv(1024).decode("utf-8")
 
-                    if "gpuview" not in request:
-                        # if new command received server must stop to execute test actions execution. Exception: gpuview command
+                    if "gpuview" not in request and "record_metrics" not in request:
+                        # if new command received server must stop to execute test actions execution. Exception: gpuview and record_metrics commands
                         instance_state.executing_test_actions = False
                 except Exception as e:
                     # execute test actions if it's requested by client and new command doesn't received
@@ -176,9 +176,6 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                     raise ServerActionException("Unknown server command: {}".format(command))
 
                 main_logger.info("Finish action execution\n\n\n")
-
-            if args.track_used_memory:
-                track_used_memory(case, args.execution_type)
 
             process = close_streaming_process(args.execution_type, case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try)
