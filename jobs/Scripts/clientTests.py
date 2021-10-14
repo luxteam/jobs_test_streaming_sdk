@@ -34,7 +34,8 @@ ACTIONS_MAPPING = {
     "sleep": DoSleep,
     "parse_keys": PressKeys,
     "sleep_and_screen": SleepAndScreen,
-    "skip_if_done": SkipIfDone
+    "skip_if_done": SkipIfDone,
+    "record_metrics": RecordMetrics
 }
 
 

@@ -10,7 +10,7 @@ import win32api
 import pyautogui
 import pydirectinput
 from threading import Thread
-from utils import close_process, collect_traces, parse_arguments, collect_iperf_info
+from utils import close_process, collect_traces, parse_arguments, collect_iperf_info, track_used_memory
 from actions import *
 
 pyautogui.FAILSAFE = False
@@ -368,3 +368,19 @@ class GPUView(Action):
                 self.logger.warning("Traceback: {}".format(traceback.format_exc()))
         else:
             self.sock.send("skip".encode("utf-8"))
+
+
+# record metrics on server side
+class RecordMetrics(Action):
+    def parse(self):
+        pass
+
+    @Action.server_action_decorator
+    def execute(self):
+        if "used_memory_server" not in self.params["case"]:
+            self.params["case"]["used_memory_server"] = []
+
+        if self.params["args"].track_used_memory:
+            track_used_memory(self.params["case"], "server")
+
+        return True

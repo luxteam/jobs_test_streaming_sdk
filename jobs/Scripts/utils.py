@@ -382,6 +382,11 @@ def track_used_memory(case, execution_type):
             break
 
     if target_process:
-        case["used_memory"] = target_process.memory_info().rss / (1024 * 1024)
+        value = target_process.memory_info().rss / (1024 * 1024)
+
+        if "used_memory" in case and isinstance(case["used_memory"], list):
+            case["used_memory"].append(value)
+        else:
+            case["used_memory"] = value
     else:
         main_logger.error("Target process not found")

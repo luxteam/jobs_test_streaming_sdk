@@ -41,7 +41,8 @@ ACTIONS_MAPPING = {
     "next_case": NextCase,
     "click_server": ClickServer,
     "start_test_actions_server": DoTestActions,
-    "gpuview": GPUView
+    "gpuview": GPUView,
+    "record_metrics": RecordMetrics
 }
 
 
