@@ -363,5 +363,13 @@
         "sleep 4",
         "record_video 10",
         "sleep_and_screen 5 4 4 nothing"
+    ],
+
+    "nothing_actions_android": [
+        "open_game",
+        "make_screen before_any_actions",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 nothing"
     ]
 }

@@ -142,10 +142,10 @@ def close_streaming_process(execution_type, case, process):
         return None
 
 
-def close_android_app(driver, case=None):
+def close_android_app(case=None):
     try:
         if case is None or should_case_be_closed("client", case):
-            driver.close_app()
+            execute_adb_command("adb shell am force-stop com.amd.remotegameclient")
 
             return True
 
@@ -207,14 +207,17 @@ def save_logs(args, case, last_log_line, current_try):
         return None
 
 
-def save_android_log(args, case, last_log_line, current_try, driver):
+def save_android_log(args, case, last_log_line, current_try):
     try:
-        raw_logs = driver.get_log("logcat")
+        command_process = subprocess.Popen("adb logcat -d", shell=False, stdin=PIPE, stdout=PIPE)
+        out, err = command_process.communicate()
+
+        raw_logs = out.split(b"\r\n")
 
         log_lines = []
 
-        for log_line_info in raw_logs:
-            log_lines.append(log_line_info["message"].encode("utf-8", "ignore"))
+        for log_line in raw_logs:
+            log_lines.append(log_line.decode("utf-8", "ignore").encode("utf-8", "ignore"))
 
         # index of first line of the current log in whole log file
         first_log_line_index = 0
@@ -340,12 +343,13 @@ def close_game_process(game_name):
             "lol": ["LeagueClient.exe", "League of Legends.exe"]
         }
 
-        processes_names = games_processes[game_name]
+        if game_name in games_processes:
+            processes_names = games_processes[game_name]
 
-        for process in psutil.process_iter():
-            if process.name() in processes_names:
-                process.kill()
-                main_logger.info("Target game process found. Close it")
+            for process in psutil.process_iter():
+                if process.name() in processes_names:
+                    process.kill()
+                    main_logger.info("Target game process found. Close it")
 
     except Exception as e:
         main_logger.error("Failed to close game process. Exception: {}".format(str(e)))
@@ -358,3 +362,11 @@ def make_window_minimized(window):
     except Exception as e:
         main_logger.error("Failed to make window minized: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+def execute_adb_command(command):
+    command_process = subprocess.Popen(command, shell=False, stdin=PIPE, stdout=PIPE)
+    out, err = command_process.communicate()
+    main_logger.info("ADB command executed: {}".format(command))
+    main_logger.info("ADB command out: {}".format(out))
+    main_logger.error("ADB command err: {}".format(err))

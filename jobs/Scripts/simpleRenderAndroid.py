@@ -14,7 +14,6 @@ import copy
 import traceback
 import time
 import win32api
-from appium import webdriver
 from instance_state import AndroidInstanceState
 from android_actions import *
 from analyzeLogs import analyze_logs
@@ -81,7 +80,7 @@ def prepare_empty_reports(args):
     main_logger.info('Create empty report files')
 
     render_device = get_gpu()
-    platform_name = platform.system() + " with Android Emulator"
+    platform_name = platform.system() + " with Android real device"
     current_conf = set(platform_name) if not render_device else {platform_name, render_device}
     main_logger.info("Detected GPUs: {}".format(render_device))
     main_logger.info("PC conf: {}".format(current_conf))
@@ -187,32 +186,25 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         json.dump(cases, file, indent=4)
 
 
-def prepare_android_emulator(args, keep_app = False):
-    # TODO remove hard coded emulator name
-    configuration = {
-        "udid": "emulator-5554",
-        "platformName": "Android",
-        "autoGrantPermissions": True,
-        "app": os.path.abspath(args.client_tool)
-    }
-
-    driver = webdriver.Remote("http://localhost:4723/wd/hub", configuration)
-
-    if not keep_app:
-        close_android_app(driver)
-
-    return driver
+def prepare_android_emulator(args):
+    #execute_adb_command("adb uninstall com.amd.remotegameclient")
+    #execute_adb_command("adb install {}".format(os.path.abspath(args.client_tool)))
+    #execute_adb_command("adb shell pm grant com.amd.remotegameclient android.permission.RECORD_AUDIO")
+    pass
 
 
-def execute_tests(args, driver):
+def execute_tests(args):
     render_device = get_gpu()
-    platform_name = platform.system() + " with Android Emulator"
+    platform_name = platform.system() + " with Android real device"
     current_conf = set(platform_name) if not render_device else {platform_name, render_device}
 
     rc = 0
 
     with open(os.path.join(os.path.abspath(args.output), "test_cases.json"), "r") as json_file:
         cases = json.load(json_file)
+
+    resolution_width = win32api.GetSystemMetrics(0)
+    resolution_height = win32api.GetSystemMetrics(1)
 
     process = None
     client_closed = True
@@ -221,6 +213,9 @@ def execute_tests(args, driver):
     # copy log from last log line
     last_log_line_server = None
     last_log_line_client = None
+
+    # first time video recording can be unstable, do it before tests
+    execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
 
     for case in [x for x in cases if not is_case_skipped(x, current_conf)]:
 
@@ -256,6 +251,7 @@ def execute_tests(args, driver):
                 main_logger.info("Datagram size in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["DatagramSize"]))
 
                 prepared_keys = case["server_keys"]
+                # TODO remove hardcoded values
                 prepared_keys = prepared_keys.replace("<resolution>", "1920,1080")
 
                 server_execution_script = "{tool} {keys}".format(tool=args.server_tool, keys=prepared_keys)
@@ -287,7 +283,6 @@ def execute_tests(args, driver):
                 params["current_try"] = current_try
                 params["args"] = args
                 params["case"] = case
-                params["driver"] = driver
                 params["game_name"] = args.game_name.lower()
 
                 # get list of actions for the current game / benchmark
@@ -326,32 +321,21 @@ def execute_tests(args, driver):
                     # check that connection is still alive
                     if command == "open_game":
                         # start server first
-                        if "start_first" not in case or case["start_first"] == "server":
+                        if "start_first" in case and case["start_first"] == "server":
                             if process is None:
                                 main_logger.info("Start Streaming SDK server instance")
                                 process = start_streaming("server", server_script_path)
-
-                        if "start_first" in case and case["start_first"] == "server":
-                            sleep(10)
+                                sleep(10)
 
                         if client_closed:
-                            try:
-                                main_logger.info("Start Streaming SDK client instance")
-                                # start client
-                                driver.launch_app()
-
-                                driver.get_log("logcat")
-                            except Exception:
-                                main_logger.info("Connection isn't alive. Recreate it")
-
-                                driver = prepare_android_emulator(args, True)
-                                params["driver"] = driver
+                            execute_adb_command("adb logcat -c")
+                            execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
 
                         if "start_first" in case and case["start_first"] == "client":
                             sleep(10)
 
                         # start server after client
-                        if "start_first" in case and case["start_first"] == "client":
+                        if "start_first" not in case or case["start_first"] == "client":
                             main_logger.info("Start Streaming SDK server instance")
                             process = start_streaming("server", server_script_path)
 
@@ -369,18 +353,18 @@ def execute_tests(args, driver):
                 main_logger.error("Traceback: {}".format(traceback.format_exc()))
             finally:
                 # close Streaming SDK android app
-                client_closed = close_android_app(driver, case)
+                client_closed = close_android_app(case)
                 # close Streaming SDK server instance
                 process = close_streaming_process("server", case, process)
                 last_log_line_server = save_logs(args, case, last_log_line_server, current_try)
-                last_log_line_client = save_android_log(args, case, last_log_line_client, current_try, driver)
+                last_log_line_client = save_android_log(args, case, last_log_line_client, current_try)
 
                 try:
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                         json_content = json.load(file)[0]
 
                     json_content["test_status"] = "passed"
-                    analyze_logs(args.output, json_content)
+                    analyze_logs(args.output, json_content, execution_type = "android")
 
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                         json.dump([json_content], file, indent=4)
@@ -413,6 +397,9 @@ def execute_tests(args, driver):
                     json.dump(state, json_file, indent=4)
 
                 current_try += 1
+
+                if ("keep_server" in case and case["keep_server"]) or ("keep_client" in case and case["keep_client"]):
+                    sleep(30)
         else:
             main_logger.error("Failed to execute case '{}' at all".format(case["case"]))
             rc = -1
@@ -453,8 +440,8 @@ if __name__ == '__main__':
         hide_emulator(args)
         copy_test_cases(args)
         prepare_empty_reports(args)
-        driver = prepare_android_emulator(args)
-        exit(execute_tests(args, driver))
+        prepare_android_emulator(args)
+        exit(execute_tests(args))
     except Exception as e:
         main_logger.error("Failed during script execution. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))

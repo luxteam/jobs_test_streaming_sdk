@@ -2,7 +2,7 @@
     {
         "case": "STR_ART_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Render DX11",
+        "server_keys": "-extStats -Resolution <resolution> -Render DX11",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -13,7 +13,7 @@
     {
         "case": "STR_ART_002",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Render OpenGL",
+        "server_keys": "-extStats -Resolution <resolution> -Render OpenGL",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -25,7 +25,7 @@
     {
         "case": "STR_ART_003",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Render Vulkan",
+        "server_keys": "-extStats -Resolution <resolution> -Render Vulkan",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -36,7 +36,7 @@
     {
         "case": "STR_ART_004",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Render DX11",
+        "server_keys": "-extStats -Resolution <resolution> -Render DX11",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -47,7 +47,7 @@
     {
         "case": "STR_ART_005",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Render OpenGL",
+        "server_keys": "-extStats -Resolution <resolution> -Render OpenGL",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -59,7 +59,7 @@
     {
         "case": "STR_ART_006",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Render Vulkan",
+        "server_keys": "-extStats -Resolution <resolution> -Render Vulkan",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
