@@ -377,8 +377,8 @@ class RecordMetrics(Action):
 
     @Action.server_action_decorator
     def execute(self):
-        if "used_memory_server" not in self.params["case"]:
-            self.params["case"]["used_memory_server"] = []
+        if "used_memory" not in self.params["case"]:
+            self.params["case"]["used_memory"] = []
 
         if self.params["args"].track_used_memory:
             track_used_memory(self.params["case"], "server")

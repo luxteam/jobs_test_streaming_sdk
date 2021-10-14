@@ -277,8 +277,8 @@ class RecordMetrics(Action):
         self.action = self.params["action_line"]
 
     def execute(self):
-        if "used_memory_client" not in self.params["case"]:
-            self.params["case"]["used_memory_client"] = []
+        if "used_memory" not in self.params["case"]:
+            self.params["case"]["used_memory"] = []
 
         if self.params["args"].track_used_memory:
             track_used_memory(self.params["case"], "client")
