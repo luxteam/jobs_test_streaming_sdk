@@ -370,3 +370,18 @@ def execute_adb_command(command):
     main_logger.info("ADB command executed: {}".format(command))
     main_logger.info("ADB command out: {}".format(out))
     main_logger.error("ADB command err: {}".format(err))
+
+
+def track_used_memory(case, execution_type):
+    process_name = "RemoteGameClient.exe" if execution_type == "client" else "RemoteGameServer.exe"
+    target_process = None
+
+    for process in psutil.process_iter():
+        if process.name() == process_name:
+            target_process = process
+            break
+
+    if target_process:
+        case["used_memory"] = target_process.memory_info().rss / (1024 * 1024)
+    else:
+        main_logger.error("Target process not found")

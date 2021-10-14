@@ -1,0 +1,278 @@
+[
+    {
+        "case": "STR_LCN_001",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_server": true,
+        "script_info": [
+            "Keep server and restart client (try #1)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_002",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_server": true,
+        "script_info": [
+            "Keep server and restart client (try #2)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_003",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_server": true,
+        "script_info": [
+            "Keep server and restart client (try #3)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_004",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_server": true,
+        "script_info": [
+            "Keep server and restart client (try #4)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_005",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Keep server and restart client (try #5)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_006",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_client": true,
+        "script_info": [
+            "Keep client and restart server (try #1)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_007",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_client": true,
+        "script_info": [
+            "Keep client and restart server (try #2)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_008",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_client": true,
+        "script_info": [
+            "Keep client and restart server (try #3)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_009",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_client": true,
+        "script_info": [
+            "Keep client and restart server (try #4)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_010",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Keep client and restart server (try #5)",
+            "Default settings with UDP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_011",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "keep_server": true,
+        "script_info": [
+            "Keep server and restart client (try #1)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_012",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "keep_server": true,
+        "script_info": [
+            "Keep server and restart client (try #2)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_013",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "keep_server": true,
+        "script_info": [
+            "Keep server and restart client (try #3)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_014",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "keep_server": true,
+        "script_info": [
+            "Keep server and restart client (try #4)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_015",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Keep server and restart client (try #5)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_016",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "keep_client": true,
+        "script_info": [
+            "Keep client and restart server (try #1)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_017",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "keep_client": true,
+        "script_info": [
+            "Keep client and restart server (try #2)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_018",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "keep_client": true,
+        "script_info": [
+            "Keep client and restart server (try #3)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_019",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "keep_client": true,
+        "script_info": [
+            "Keep client and restart server (try #4)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    },
+    {
+        "case": "STR_LCN_020",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Keep client and restart server (try #5)",
+            "Default settings with TCP",
+            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
+            "Client keys: -Fullscreen true"
+        ]
+    }
+]
