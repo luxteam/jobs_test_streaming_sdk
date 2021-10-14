@@ -122,7 +122,6 @@ def prepare_empty_reports(args, current_conf):
             test_case_report['render_time'] = 0.0
             test_case_report['execution_time'] = 0.0
             test_case_report['execution_type'] = args.execution_type
-            test_case_report['keys'] = case['server_keys'] if args.execution_type == 'server' else case['client_keys']
             test_case_report['transport_protocol'] = case['transport_protocol'].upper()
             test_case_report['tool_path'] = args.server_tool if args.execution_type == 'server' else args.client_tool
             test_case_report['date_time'] = datetime.now().strftime(
@@ -180,6 +179,8 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report["number_of_tries"] += 1
 
         test_case_report["message"] = test_case_report["message"] + list(error_messages)
+
+        test_case_report["keys"] = case["prepared_keys"]
 
         if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
             test_case_report["group_timeout_exceeded"] = False
@@ -270,6 +271,8 @@ def execute_tests(args, current_conf):
                     )
 
                     execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
+
+                case["prepared_keys"] = prepared_keys
 
                 if args.execution_type == "server":
                     keys_description = "Server keys: {}".format(prepared_keys)

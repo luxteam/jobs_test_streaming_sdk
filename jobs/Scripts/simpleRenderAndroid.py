@@ -364,7 +364,7 @@ def execute_tests(args):
                         json_content = json.load(file)[0]
 
                     json_content["test_status"] = "passed"
-                    analyze_logs(args.output, json_content, execution_type = "android")
+                    analyze_logs(args.output, json_content, case, execution_type = "android")
 
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                         json.dump([json_content], file, indent=4)

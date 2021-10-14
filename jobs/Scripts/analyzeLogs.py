@@ -21,6 +21,18 @@ def get_framerate(keys):
     else:
         return 30
 
+def get_qos_status(keys):
+    if '-QoS ' in keys:
+        value = keys.split('-QoS')[1].split()[0]
+        return value != "False" and value != "false"
+    else:
+        return True
+
+def get_resolution(keys):
+    if '-Resolution' in keys:
+        return keys.split('-Resolution')[1].split()[0]
+    else:
+        return '2560,1440'
 
 def parse_block_line(line, saved_values):
     if 'Average latency' in line:
@@ -130,6 +142,30 @@ def parse_block_line(line, saved_values):
         saved_values['send_time_worst'].append(send_time_worst)
 
 
+def parse_line(line, saved_values):
+    if 'Bitrate: ' in line:
+        if 'bitrate' not in saved_values:
+            saved_values['bitrate'] = set()
+
+        bitrate = float(line.split('Bitrate: ')[1].replace('bps', '').strip()) / 1000000
+        saved_values['bitrate'].add(bitrate)
+
+    elif 'HEVC Video bitrate changed to' in line:
+        # Line example:
+        # 2021-10-10 22:11:45.335     153C [VideoPipeline]    Info: HEVC Video bitrate changed to 50.00 Mbps for left eye
+        if 'hevc_video_bitrate' not in saved_values:
+            saved_values['hevc_video_bitrate'] = set()
+
+        hevc_video_bitrate = float(line.split('changed to')[1].split()[0])
+        saved_values['hevc_video_bitrate'].add(hevc_video_bitrate)
+
+    elif 'VIDEO_OP_CODE_FORCE_IDR' in line:
+        saved_values['code_force_idr'] = True
+
+    elif 'Input Queue Full' in line:
+        saved_values['input_queue_full'] = True
+
+
 def parse_error(line, saved_errors):
     error_message = line.split(':', maxsplit = 3)[3].split('.')[0].replace('fps', '').strip()
 
@@ -146,7 +182,7 @@ def parse_error(line, saved_errors):
         saved_errors.append(error_message)
 
 
-def update_status(json_content, saved_values, saved_errors, framerate, execution_type):
+def update_status(json_content, case, saved_values, saved_errors, framerate, execution_type):
     if "client_latencies" not in saved_values or "server_latencies" not in saved_values:
         json_content["test_status"] = "error"
         json_content["message"].append("Application problem: Client could not connect")
@@ -236,32 +272,27 @@ def update_status(json_content, saved_values, saved_errors, framerate, execution
         # 0-0 -> skip
         # X-Y -> first time - skip. second time - problem (Y > 1, X < Y)
         # X-Y -> first time - skip. sec (X > 1, X > Y)
+        # + rule №12
         if 'queue_encoder_values' in saved_values:
             is_problem = False
-            is_small_increasing = False
-            is_small_descreasing = False
 
             for i in range(len(saved_values['queue_encoder_values']) - 1):
-                if saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1] == 0:
-                    continue
-                elif saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1]:
-                    is_problem = True
-                    json_content["message"].append("Application problem: encoder value stagnation ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
-                    break
-                elif saved_values['queue_encoder_values'][i] < saved_values['queue_encoder_values'][i + 1]:
-                    if is_small_increasing:
+                # ignore values less than 10
+                if saved_values['queue_encoder_values'][i] >= 10 or saved_values['queue_encoder_values'][i + 1] >= 10:
+                    if saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1] == 0:
+                        continue
+                    elif saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1]:
+                        is_problem = True
+                        json_content["message"].append("Application problem: encoder value stagnation ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
+                        break
+                    elif saved_values['queue_encoder_values'][i] < saved_values['queue_encoder_values'][i + 1] and saved_values['queue_encoder_values'][i] > 0:
                         is_problem = True
                         json_content["message"].append("Application problem: increase in encoder value ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
                         break
-                    else:
-                        is_small_increasing = True
-                elif saved_values['queue_encoder_values'][i] > saved_values['queue_encoder_values'][i + 1]:
-                    if is_small_descreasing:
+                    elif saved_values['queue_encoder_values'][i] > saved_values['queue_encoder_values'][i + 1] and saved_values['queue_encoder_values'][i + 1] > 0:
                         is_problem = True
                         json_content["message"].append("Application problem: decrease in encoder value ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
                         break
-                    else:
-                        is_small_descreasing = True
 
             if is_problem:
                 if json_content["test_status"] != "error":
@@ -273,26 +304,22 @@ def update_status(json_content, saved_values, saved_errors, framerate, execution
             is_small_descreasing = False
 
             for i in range(len(saved_values['queue_decoder_values']) - 1):
-                if saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1] == 0:
-                    pass
-                elif saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1]:
-                    is_problem = True
-                    json_content["message"].append("Application problem: decoder value stagnation ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
-                    break
-                elif saved_values['queue_decoder_values'][i] < saved_values['queue_decoder_values'][i + 1]:
-                    if is_small_increasing:
+                # ignore values less than 10
+                if saved_values['queue_decoder_values'][i] >= 10 or saved_values['queue_decoder_values'][i + 1] >= 10:
+                    if saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1] == 0:
+                        pass
+                    elif saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1]:
+                        is_problem = True
+                        json_content["message"].append("Application problem: decoder value stagnation ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
+                        break
+                    elif saved_values['queue_decoder_values'][i] < saved_values['queue_decoder_values'][i + 1] and saved_values['queue_decoder_values'][i] > 0:
                         is_problem = True
                         json_content["message"].append("Application problem: increase in decoder value ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
                         break
-                    else:
-                        is_small_increasing = True
-                elif saved_values['queue_decoder_values'][i] > saved_values['queue_decoder_values'][i + 1]:
-                    if is_small_descreasing:
+                    elif saved_values['queue_decoder_values'][i] > saved_values['queue_decoder_values'][i + 1] and saved_values['queue_decoder_values'][i + 1] > 0:
                         is_problem = True
                         json_content["message"].append("Application problem: decrease in decoder value ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
                         break
-                    else:
-                        is_small_descreasing = True
 
         # rule №6.1: client latency <= decoder -> issue with app
         if 'client_latencies' in saved_values and 'decoder_values' in saved_values:
@@ -328,13 +355,13 @@ def update_status(json_content, saved_values, saved_errors, framerate, execution
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        # rule №7: |decyns value| > 100ms -> issue with app
+        # rule №7: |decyns value| > 50ms -> issue with app
         if 'decyns_values' in saved_values:
             bad_decyns_value = None
 
             for decyns_value in saved_values['decyns_values']:
                 # find the worst value
-                if abs(decyns_value) > 100:
+                if abs(decyns_value) > 50:
                     if bad_decyns_value is None or bad_decyns_value < abs(decyns_value):
                         bad_decyns_value = abs(decyns_value)
 
@@ -343,24 +370,63 @@ def update_status(json_content, saved_values, saved_errors, framerate, execution
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        # rule №8: (sum of video bitrate - sum of average bandwidth tx) / sum of video bitrate > 0.25 -> issue with app
+        # rule №8.1: (sum of video bitrate - sum of average bandwidth tx) / video bitrate > 0.25 or 3.0 -> issue with app
         if 'average_bandwidth_tx' in saved_values and 'video_bitrate' in saved_values:
+            def check_rule_8(average_bandwidth_tx_sum, video_bitrate, block_number):
+                if block_number == 0:
+                    return
+
+                average_bandwidth_tx_sum /= 1000
+
+                average_bandwidth_tx_sum /= block_number
+
+                difference = (average_bandwidth_tx_sum - video_bitrate) / video_bitrate
+
+                max_difference = 0.25
+
+                if video_bitrate == 1:
+                    max_difference = 3.0
+
+                if difference > max_difference:
+                    json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate, 2), round(difference * 100, 2)))
+
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
+
             average_bandwidth_tx_sum = 0
-            video_bitrate_sum = 0
+            # take the first video bitrate
+            previous_video_bitrate = saved_values['video_bitrate'][0]
+            # number of block in succession with the same video bitrate
+            block_number = 0
 
             for i in range(len(saved_values['average_bandwidth_tx'])):
+                if saved_values['video_bitrate'][i] != previous_video_bitrate:
+                    # if QoS == false and value change - it's abnormal
+                    if not get_qos_status(case["prepared_keys"]):
+                        json_content["message"].append("Application problem: QoS is false, but bitrate changed from {} to {}".format(previous_video_bitrate, saved_values['video_bitrate'][i]))
+
+                        if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
+
+                    if block_number >= 5:
+                        check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
+                    previous_video_bitrate = saved_values['video_bitrate'][i]
+                    average_bandwidth_tx_sum = 0
+                    block_number = 0
+
                 average_bandwidth_tx_sum += saved_values['average_bandwidth_tx'][i]
-                video_bitrate_sum += saved_values['video_bitrate'][i]
+                block_number += 1
 
-            average_bandwidth_tx_sum /= 1000
+            check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
 
-            average_bandwidth_tx_sum /= len(saved_values['average_bandwidth_tx'])
-            video_bitrate_sum /= len(saved_values['video_bitrate'])
+        # rule №8.2: if QoS false -> all bitrates must be same
+        if not get_qos_status(case["prepared_keys"]) and 'video_bitrate' in saved_values:
+            video_bitrate_set = set(saved_values['video_bitrate'])
+            # make symmetric difference of sets
+            has_different_values = (video_bitrate_set ^ saved_values['hevc_video_bitrate']) or (saved_values['hevc_video_bitrate'] ^ saved_values['bitrate']) or (saved_values['bitrate'] ^ video_bitrate_set)
 
-            difference = (average_bandwidth_tx_sum - video_bitrate_sum) / video_bitrate_sum
-
-            if difference > 0.25:
-                json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate_sum, 2), round(difference * 100, 2)))
+            if has_different_values:
+                json_content["message"].append("Application problem: QoS is false, but some bitrate values are different")
 
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
@@ -387,10 +453,31 @@ def update_status(json_content, saved_values, saved_errors, framerate, execution
 
                     break
 
+        # rule №11: detect error messages: VIDEO_OP_CODE_FORCE_IDR, Input Queue Full
+        if 'code_force_idr' in saved_values and saved_values['code_force_idr']:
+            json_content["message"].append("Application problem: VIDEO_OP_CODE_FORCE_IDR detected")
+            if json_content["test_status"] != "error":
+               json_content["test_status"] = "failed"
+
+        if 'input_queue_full' in saved_values and saved_values['input_queue_full']:
+            json_content["message"].append("Application problem: Input Queue Full detected")
+            if json_content["test_status"] != "error":
+               json_content["test_status"] = "failed"
+
+        # rule №13: -resolution X,Y != Encode Resolution -> failed
+        flag_resolution = get_resolution(case["prepared_keys"])
+        if flag_resolution:
+            for i in range(1, len(saved_values['encode_resolution'])):
+                if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == flag_resolution)):
+                    json_content["message"].append("Application problem: Encode Resolution in Flags doesn't match to Encode Resolution from logs. Resolution from Flags: {}, from logs {}".format(flag_resolution, saved_values['encode_resolution'][i]))
+                    if json_content["test_status"] != "error":
+                       json_content["test_status"] = "failed"
+
+
     json_content["message"].extend(saved_errors)
 
 
-def analyze_logs(work_dir, json_content, execution_type="android"):
+def analyze_logs(work_dir, json_content, case, execution_type="server"):
     try:
         log_key = '{}_log'.format(execution_type)
 
@@ -409,7 +496,7 @@ def analyze_logs(work_dir, json_content, execution_type="android"):
                 log_path = os.path.join(work_dir, "tool_logs", json_content["test_case"] + "_server.log")
 
             if os.path.exists(log_path):
-                framerate = get_framerate(json_content["keys"])
+                framerate = get_framerate(case["prepared_keys"])
 
                 with open(log_path, 'r') as log_file:
                     log = log_file.readlines()
@@ -423,8 +510,10 @@ def analyze_logs(work_dir, json_content, execution_type="android"):
                             block_number += 1
                             connection_terminated = False
 
-                        # skip three first blocks of output with latency (it can contains abnormal data due to starting of Streaming SDK)
-                        if block_number > 3:
+                        parse_line(line, saved_values)
+
+                        # skip six first blocks of output with latency (it can contains abnormal data due to starting of Streaming SDK)
+                        if block_number > 6:
                             if not end_of_block:
                                 parse_block_line(line, saved_values)
                             elif line.strip():
@@ -434,7 +523,14 @@ def analyze_logs(work_dir, json_content, execution_type="android"):
                         if 'Queue depth' in line:
                             end_of_block = True
 
-                    update_status(json_content, saved_values, saved_errors, framerate, execution_type)
+                        if 'Encode Resolution:' in line:
+                            if 'encode_resolution' not in saved_values:
+                                saved_values['encode_resolution'] = []
+                            # Encode Resolution: 1920x1080@75fps
+                            # Replace 'x' by ','
+                            saved_values['encode_resolution'].append(line.split("Encode Resolution:")[1].split("@")[0].replace("x", ",").strip())
+
+                    update_status(json_content, case, saved_values, saved_errors, framerate, execution_type)
 
             #if connection_terminated:
             #    json_content["message"].append("Application problem: Client connection terminated")
