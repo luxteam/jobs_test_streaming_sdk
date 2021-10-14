@@ -32,10 +32,12 @@
 
     "valorant_actions": [
         "check_game \"VALORANT  \" \"VALORANT-Win64-Shipping.exe\"",
-        "skip_if_done 23",
+        "skip_if_done 25",
         "execute_cmd \"C:\\JN\\VALORANT.exe - Shortcut.lnk\"",
-        "sleep 90",
-        "click_server 360 210",
+        "sleep 60",
+        "click_server 380 edge_-225",
+        "sleep 1",
+        "click 360 210",
         "sleep 60",
 
         "click_server center_0 25",
@@ -359,6 +361,14 @@
         "sleep 1",
         "make_screen before_any_actions",
         "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 nothing"
+    ],
+
+    "nothing_actions_android": [
+        "open_game",
+        "make_screen before_any_actions",
+        "sleep 3",
         "record_video 10",
         "sleep_and_screen 5 4 4 nothing"
     ]

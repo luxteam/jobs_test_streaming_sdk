@@ -2,6 +2,7 @@ import sys
 import os
 from time import sleep
 import psutil
+import subprocess
 from subprocess import PIPE
 import traceback
 import win32gui
@@ -9,7 +10,7 @@ import win32api
 import pyautogui
 import pydirectinput
 from threading import Thread
-from utils import parse_arguments
+from utils import parse_arguments, execute_adb_command
 from actions import *
 import base64
 
@@ -27,7 +28,8 @@ class OpenGame(Action):
             "borderlands3": "C:\\JN\\Borderlands3.exe - Shortcut.lnk",
             "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url",
             "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
-            "lol": "C:\\JN\\League of Legends.lnk"
+            "lol": "C:\\JN\\League of Legends.lnk",
+            "nothing": None
         }
 
         games_windows = {
@@ -38,7 +40,8 @@ class OpenGame(Action):
             "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"],
             "apexlegends": ["Apex Legends", "r5apex.exe"],
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
-            "lol": ["League of Legends (TM) Client", "League of Legends.exe"]
+            "lol": ["League of Legends (TM) Client", "League of Legends.exe"],
+            "nothing": [None, None]
         }
 
         self.game_name = self.params["game_name"]
@@ -47,6 +50,9 @@ class OpenGame(Action):
         self.game_process_name = games_windows[self.game_name][1]
 
     def execute(self):
+        if self.game_launcher is None or self.game_window is None or self.game_process_name is None:
+            return
+
         game_launched = True
 
         window = win32gui.FindWindow(None, self.game_window)
@@ -122,8 +128,10 @@ class OpenGame(Action):
                 click("center_680", "center_-190", self.logger)
                 sleep(2)
             elif self.game_name == "valorant":
-                sleep(15)
-                click("center_0", "center_0", self.logger)
+                sleep(60)
+                click("380", "edge_-225", self.logger)
+                sleep(1)
+                click("360", "210", self.logger)
                 sleep(60)
 
                 # do opening of lobby twice to avoid ads
@@ -147,9 +155,10 @@ class OpenGame(Action):
                 click("center_0", "center_225", self.logger)
                 sleep(30)
 
-                click("center_-370", "center_0", self.logger)
+                click("center_-260", "center_-20", self.logger)
                 sleep(2)
-                click("center_0", "edge_70", self.logger)
+                click("center_0", "center_110", self.logger)
+                sleep
             elif self.game_name == "lol":
                 sleep(90)
                 click("center_-520", "center_-340", self.logger)
@@ -268,7 +277,6 @@ def press_keys(keys_string, logger):
 # Do screenshot
 class MakeScreen(Action):
     def parse(self):
-        self.driver = self.params["driver"]
         self.screen_path = self.params["screen_path"]
         self.screen_name = self.params["arguments_line"]
         self.current_image_num = self.params["current_image_num"]
@@ -276,20 +284,22 @@ class MakeScreen(Action):
 
     def execute(self):
         if not self.screen_name:
-            make_screen(self.driver, self.screen_path, self.current_try, self.logger)
+            make_screen(self.screen_path, self.current_try, self.logger)
         else:
-            make_screen(self.driver, self.screen_path, self.current_try, self.logger, self.screen_name, self.current_image_num)
+            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name, self.current_image_num)
             self.params["current_image_num"] += 1
 
 
-def make_screen(driver, screen_path, current_try, logger, screen_name = "", current_image_num = 0):
+def make_screen(screen_path, current_try, logger, screen_name = "", current_image_num = 0):
     try:
-        screen_base64 = driver.get_screenshot_as_base64()
+        screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1))
+        command_process = subprocess.Popen("adb exec-out screencap -p", shell=False, stdin=PIPE, stdout=PIPE)
+        out, err = command_process.communicate()
 
-        screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1))
+        with open(screen_path, "wb") as file:
+            file.write(out)
 
-        with open(screen_path, "wb") as screen:
-            screen.write(base64.b64decode(screen_base64))
+        logger.error("Screencap command err: {}".format(err))
     except Exception as e:
         logger.error("Failed to make screenshot: {}".format(str(e)))
         logger.error("Traceback: {}".format(traceback.format_exc()))
@@ -306,7 +316,6 @@ class SleepAndScreen(Action):
         self.screen_name = parsed_arguments[3]
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
-        self.driver = self.params["driver"]
 
     def execute(self):
         sleep(float(self.initial_delay))
@@ -314,7 +323,7 @@ class SleepAndScreen(Action):
         screen_number = 1
 
         while True:
-            make_screen(self.driver, self.screen_path, self.current_try, self.logger, self.screen_name, self.current_image_num)
+            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1
@@ -330,21 +339,17 @@ class RecordVideo(Action):
     def parse(self):
         self.video_path = self.params["output_path"]
         self.video_name = self.params["case"]["case"] + ".mp4"
-        self.driver = self.params["driver"]
         self.duration = int(self.params["arguments_line"])
 
     def execute(self):
         try:
             self.logger.info("Start to record video")
-
-            self.driver.start_recording_screen(timeLimit = float(self.duration))
-            sleep(float(self.duration))
-            video_base64 = self.driver.stop_recording_screen()
-
+            execute_adb_command("adb shell screenrecord --time-limit={} /sdcard/video.mp4".format(self.duration))
             self.logger.info("Finish to record video")
             
-            with open(os.path.join(self.video_path, self.video_name), "wb") as video:
-                video.write(base64.b64decode(video_base64))
+            video_path = os.path.join(self.video_path, self.video_name)
+
+            execute_adb_command("adb pull /sdcard/video.mp4 {}".format(video_path))
         except Exception as e:
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
