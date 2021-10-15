@@ -41,7 +41,8 @@ ACTIONS_MAPPING = {
     "next_case": NextCase,
     "click_server": ClickServer,
     "start_test_actions_server": DoTestActions,
-    "gpuview": GPUView
+    "gpuview": GPUView,
+    "record_metrics": RecordMetrics
 }
 
 
@@ -135,8 +136,8 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 try:
                     request = connection.recv(1024).decode("utf-8")
 
-                    if "gpuview" not in request:
-                        # if new command received server must stop to execute test actions execution. Exception: gpuview command
+                    if "gpuview" not in request and "record_metrics" not in request:
+                        # if new command received server must stop to execute test actions execution. Exception: gpuview and record_metrics commands
                         instance_state.executing_test_actions = False
                 except Exception as e:
                     # execute test actions if it's requested by client and new command doesn't received

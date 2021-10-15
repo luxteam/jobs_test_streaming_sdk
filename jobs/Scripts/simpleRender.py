@@ -193,6 +193,10 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         # save keys from scripts in script_info
         test_case_report["script_info"] = case["script_info"]
 
+        if "used_memory" in case:
+            used_memory_key = 'used_memory_{}'.format(args.execution_type)
+            test_case_report[used_memory_key] = case["used_memory"]
+
     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
         json.dump([test_case_report], file, indent=4)
 
@@ -345,6 +349,7 @@ def createArgsParser():
     parser.add_argument('--common_actions_path', required=True)
     parser.add_argument('--collect_traces', required=True)
     parser.add_argument('--screen_resolution', required=True)
+    parser.add_argument('--track_used_memory', required=False, default=False)
 
     return parser
 

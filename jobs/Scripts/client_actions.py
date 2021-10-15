@@ -7,7 +7,7 @@ import json
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import collect_traces, parse_arguments, collect_iperf_info
+from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory
 import win32api
 from actions import *
 
@@ -77,6 +77,9 @@ class Retry(Action):
 # [Result] wait answer from server. Answer can be any
 class NextCase(Action):
     def execute(self):
+        if self.params["args"].track_used_memory:
+            track_used_memory(self.params["case"], "client")
+
         self.sock.send("next_case".encode("utf-8"))
 
     def analyze_result(self):
@@ -268,6 +271,25 @@ class SleepAndScreen(Action):
         except Exception as e:
             self.logger.warning("Failed to collect GPUView traces: {}".format(str(e)))
             self.logger.warning("Traceback: {}".format(traceback.format_exc()))
+
+
+# [Client + Server action] record metrics on client and server sides
+# [Result] wait answer from server. Answer must be 'done'
+class RecordMetrics(Action):
+    def parse(self):
+        self.action = self.params["action_line"]
+
+    def execute(self):
+        if "used_memory" not in self.params["case"]:
+            self.params["case"]["used_memory"] = []
+
+        if self.params["args"].track_used_memory:
+            track_used_memory(self.params["case"], "client")
+
+        self.sock.send(self.action.encode("utf-8"))
+
+    def analyze_result(self):
+        self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
 def do_test_actions(game_name, logger):
