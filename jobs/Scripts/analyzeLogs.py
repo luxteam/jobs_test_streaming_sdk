@@ -34,6 +34,18 @@ def get_resolution(keys):
     else:
         return '2560,1440'
 
+def get_codec(keys):
+    if '-Codec' in keys:
+        return keys.split('-Codec')[1].split()[0]
+    else:
+        return 'h.265'
+
+def get_capture(keys):
+    if '-Capture' in keys:
+        return keys.split('-Capture')[1].split()[0]
+    else:
+        return 'amd'
+
 def parse_block_line(line, saved_values):
     if 'Average latency' in line:
         # Line example:
@@ -192,48 +204,49 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
     else:
 
         if 'encoder_values' in saved_values:
+            # rule №15: ignore rules 1.1 and 1.2 if Capture dd
             # rule №1.1: encoder >= framerate -> problem with app
             # ignore for Android
-            if execution_type != "android":
-                bad_encoder_value = None
+            if get_capture(case["prepared_keys"]) != "dd" and get_capture(case["prepared_keys"]) != "false":
+                if execution_type != "android":
+                    bad_encoder_value = None
+
+                    for encoder_value in saved_values['encoder_values']:
+                        # find the worst value
+                        if encoder_value >= framerate:
+                            if bad_encoder_value is None or bad_encoder_value < encoder_value:
+                                bad_encoder_value = encoder_value
+
+                    if bad_encoder_value:
+                        json_content["message"].append("Application problem: Encoder is equal to or bigger than framerate. Encoder  {}. Framerate: {}".format(bad_encoder_value, framerate))
+                        if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
+
+                # rule №1.2: avrg encoder * 2 < encoder -> problem with app
+                avrg_encoder_value = mean(saved_values['encoder_values'])
+
+                # catch 3 value in succession
+                bad_avrg_encoder_values = []
+                bad_encoder_values = []
 
                 for encoder_value in saved_values['encoder_values']:
-                    # find the worst value
-                    if encoder_value >= framerate:
-                        if bad_encoder_value is None or bad_encoder_value < encoder_value:
-                            bad_encoder_value = encoder_value
+                    if avrg_encoder_value * 2 < encoder_value:
+                        bad_avrg_encoder_values.append(avrg_encoder_value)
+                        bad_encoder_values.append(encoder_value)
 
-                if bad_encoder_value:
-                    json_content["message"].append("Application problem: Encoder is equal to or bigger than framerate. Encoder  {}. Framerate: {}".format(bad_encoder_value, framerate))
-                    if json_content["test_status"] != "error":
-                        json_content["test_status"] = "failed"
+                    else:
+                        bad_avrg_encoder_values = []
+                        bad_encoder_values = []
 
-            # rule №1.2: avrg encoder * 2 < encoder -> problem with app
-            avrg_encoder_value = mean(saved_values['encoder_values'])
+                    if len(bad_avrg_encoder_values) >= 3:
+                        formatted_avrg_encoder_values = "[{}, {}, {}]".format(round(bad_avrg_encoder_values[0], 2), round(bad_avrg_encoder_values[1], 2), round(bad_avrg_encoder_values[2], 2))
+                        formatted_encoder_values = "[{}, {}, {}]".format(round(bad_encoder_values[0], 2), round(bad_encoder_values[1], 2), round(bad_encoder_values[2], 2))
 
-            # catch 3 value in succession
-            bad_avrg_encoder_values = []
-            bad_encoder_values = []
+                        json_content["message"].append("Application problem: At least 3 encoder values in sucession are much bigger than average encoder value. Encoder {}. Avrg encoder: {}".format(formatted_encoder_values, formatted_avrg_encoder_values))
+                        if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
 
-            for encoder_value in saved_values['encoder_values']:
-                if avrg_encoder_value * 2 < encoder_value:
-                    bad_avrg_encoder_values.append(avrg_encoder_value)
-                    bad_encoder_values.append(encoder_value)
-
-                else:
-                    bad_avrg_encoder_values = []
-                    bad_encoder_values = []
-
-                if len(bad_avrg_encoder_values) >= 3:
-                    formatted_avrg_encoder_values = "[{}, {}, {}]".format(round(bad_avrg_encoder_values[0], 2), round(bad_avrg_encoder_values[1], 2), round(bad_avrg_encoder_values[2], 2))
-                    formatted_encoder_values = "[{}, {}, {}]".format(round(bad_encoder_values[0], 2), round(bad_encoder_values[1], 2), round(bad_encoder_values[2], 2))
-
-                    json_content["message"].append("Application problem: At least 3 encoder values in sucession are much bigger than average encoder value. Encoder {}. Avrg encoder: {}".format(formatted_encoder_values, formatted_avrg_encoder_values))
-                    if json_content["test_status"] != "error":
-                        json_content["test_status"] = "failed"
-
-                    break
-
+                        break
 
         # rule №2.1: tx rate - rx rate > 8 -> problem with network
         if 'rx_rates' in saved_values and 'tx_rates' in saved_values:
@@ -253,19 +266,21 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         # rule №2.2: framerate - tx rate > 10 -> problem with app
         # ignore for Android
         if execution_type != "android":
-            if 'tx_rates' in saved_values:
-                bad_tx_rate = None
+            # Heaven can't show more than 120 fps
+            if not (framerate >= 110 and (case["game_name"] == "HeavenDX9" or case["game_name"] == "HeavenDX11")):
+                if 'tx_rates' in saved_values:
+                    bad_tx_rate = None
 
-                for tx_rate in saved_values['tx_rates']:
-                    # find the worst value
-                    if framerate - tx_rate > 10:
-                        if bad_tx_rate is None or tx_rate < bad_tx_rate:
-                            bad_tx_rate = tx_rate
+                    for tx_rate in saved_values['tx_rates']:
+                        # find the worst value
+                        if framerate - tx_rate > 10:
+                            if bad_tx_rate is None or tx_rate < bad_tx_rate:
+                                bad_tx_rate = tx_rate
 
-                if bad_tx_rate:
-                    json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
-                    if json_content["test_status"] != "error":
-                        json_content["test_status"] = "failed"
+                    if bad_tx_rate:
+                        json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
+                        if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
 
 
         # rule №4: encoder and decoder check. Problems with encoder -> warning. Problems with decoder -> issue with app
@@ -274,52 +289,39 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         # X-Y -> first time - skip. sec (X > 1, X > Y)
         # + rule №12
         if 'queue_encoder_values' in saved_values:
-            is_problem = False
+            # number of invalid blocks in succession
+            invalid_blocks_number = 0
 
-            for i in range(len(saved_values['queue_encoder_values']) - 1):
+            for i in range(len(saved_values['queue_encoder_values'])):
                 # ignore values less than 10
-                if saved_values['queue_encoder_values'][i] >= 10 or saved_values['queue_encoder_values'][i + 1] >= 10:
-                    if saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1] == 0:
-                        continue
-                    elif saved_values['queue_encoder_values'][i] == saved_values['queue_encoder_values'][i + 1]:
-                        is_problem = True
-                        json_content["message"].append("Application problem: encoder value stagnation ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
-                        break
-                    elif saved_values['queue_encoder_values'][i] < saved_values['queue_encoder_values'][i + 1] and saved_values['queue_encoder_values'][i] > 0:
-                        is_problem = True
-                        json_content["message"].append("Application problem: increase in encoder value ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
-                        break
-                    elif saved_values['queue_encoder_values'][i] > saved_values['queue_encoder_values'][i + 1] and saved_values['queue_encoder_values'][i + 1] > 0:
-                        is_problem = True
-                        json_content["message"].append("Application problem: decrease in encoder value ({}-{})".format(saved_values['queue_encoder_values'][i], saved_values['queue_encoder_values'][i + 1]))
-                        break
+                if saved_values['queue_encoder_values'][i] >= 10:
+                    invalid_blocks_number += 1
+                else:
+                    invalid_blocks_number = 0
 
-            if is_problem:
-                if json_content["test_status"] != "error":
-                    json_content["test_status"] = "failed"
+                if invalid_blocks_number >= 3:
+                    json_content["message"].append("Application problem: high encoder value ({}-{}-{})".format(saved_values['queue_encoder_values'][i - 2], saved_values['queue_encoder_values'][i - 1], saved_values['queue_encoder_values'][i]))
+                    
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
+
+                    break
 
         if 'queue_decoder_values' in saved_values:
-            is_problem = False
-            is_small_increasing = False
-            is_small_descreasing = False
+            # number of invalid blocks in succession
+            invalid_blocks_number = 0
 
-            for i in range(len(saved_values['queue_decoder_values']) - 1):
+            for i in range(len(saved_values['queue_decoder_values'])):
                 # ignore values less than 10
-                if saved_values['queue_decoder_values'][i] >= 10 or saved_values['queue_decoder_values'][i + 1] >= 10:
-                    if saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1] == 0:
-                        pass
-                    elif saved_values['queue_decoder_values'][i] == saved_values['queue_decoder_values'][i + 1]:
-                        is_problem = True
-                        json_content["message"].append("Application problem: decoder value stagnation ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
-                        break
-                    elif saved_values['queue_decoder_values'][i] < saved_values['queue_decoder_values'][i + 1] and saved_values['queue_decoder_values'][i] > 0:
-                        is_problem = True
-                        json_content["message"].append("Application problem: increase in decoder value ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
-                        break
-                    elif saved_values['queue_decoder_values'][i] > saved_values['queue_decoder_values'][i + 1] and saved_values['queue_decoder_values'][i + 1] > 0:
-                        is_problem = True
-                        json_content["message"].append("Application problem: decrease in decoder value ({}-{})".format(saved_values['queue_decoder_values'][i], saved_values['queue_decoder_values'][i + 1]))
-                        break
+                if saved_values['queue_decoder_values'][i] >= 10:
+                    invalid_blocks_number += 1
+                else:
+                    invalid_blocks_number = 0
+
+                if invalid_blocks_number >= 3:
+                    json_content["message"].append("Application problem: high decoder value ({}-{}-{})".format(saved_values['queue_decoder_values'][i - 2], saved_values['queue_decoder_values'][i - 1], saved_values['queue_decoder_values'][i]))
+
+                    break
 
         # rule №6.1: client latency <= decoder -> issue with app
         if 'client_latencies' in saved_values and 'decoder_values' in saved_values:
@@ -384,14 +386,17 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                 max_difference = 0.25
 
+                if get_codec(case["prepared_keys"]) == 'h.265':
+                    max_difference = 3.0
                 if video_bitrate == 1:
                     max_difference = 3.0
 
                 if difference > max_difference:
                     json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate, 2), round(difference * 100, 2)))
 
-                    if json_content["test_status"] != "error":
-                        json_content["test_status"] = "failed"
+                    if get_codec(case["prepared_keys"]) != 'h.265':
+                        if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
 
             average_bandwidth_tx_sum = 0
             # take the first video bitrate
@@ -472,6 +477,30 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     json_content["message"].append("Application problem: Encode Resolution in Flags doesn't match to Encode Resolution from logs. Resolution from Flags: {}, from logs {}".format(flag_resolution, saved_values['encode_resolution'][i]))
                     if json_content["test_status"] != "error":
                        json_content["test_status"] = "failed"
+
+        # rule №14: FPS > 150 -> warning
+        if 'rx_rates' in saved_values:
+            max_rx_rate = 0
+
+            for i in range(len(saved_values['rx_rates'])):
+                # find the worst value
+                if saved_values['rx_rates'][i] > max_rx_rate:
+                    max_rx_rate = saved_values['rx_rates'][i]
+
+            if max_rx_rate > 150:
+                json_content["message"].append("Application problem: too high RX Rate {}".format(max_rx_rate))
+
+        # rule №14: FPS > 150 -> warning
+        if 'tx_rates' in saved_values:
+            max_tx_rate = 0
+
+            for i in range(len(saved_values['tx_rates'])):
+                # find the worst value
+                if saved_values['tx_rates'][i] > max_tx_rate:
+                    max_tx_rate = saved_values['tx_rates'][i]
+
+            if max_tx_rate > 150:
+                json_content["message"].append("Application problem: too high TX Rate {}".format(max_tx_rate))
 
 
     json_content["message"].extend(saved_errors)

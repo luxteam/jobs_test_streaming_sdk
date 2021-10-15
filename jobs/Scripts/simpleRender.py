@@ -228,6 +228,8 @@ def execute_tests(args, current_conf):
 
     for case in [x for x in cases if not is_case_skipped(x, current_conf)]:
 
+        case["game_name"] = args.game_name
+
         case_start_time = time.time()
 
         # take tool keys based on type of the instance (server/client)
