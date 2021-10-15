@@ -491,16 +491,16 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 json_content["message"].append("Application problem: too high RX Rate {}".format(max_rx_rate))
 
         # rule №14: FPS > 150 -> warning
-        if 'rx_rates' in saved_values:
-            max_rx_rate = 0
+        if 'tx_rates' in saved_values:
+            max_tx_rate = 0
 
-            for i in range(len(saved_values['rx_rates'])):
+            for i in range(len(saved_values['tx_rates'])):
                 # find the worst value
-                if saved_values['rx_rates'][i] > max_rx_rate:
-                    max_rx_rate = saved_values['rx_rates'][i]
+                if saved_values['tx_rates'][i] > max_tx_rate:
+                    max_tx_rate = saved_values['tx_rates'][i]
 
-            if max_rx_rate > 150:
-                json_content["message"].append("Application problem: too high RX Rate {}".format(max_rx_rate))
+            if max_tx_rate > 150:
+                json_content["message"].append("Application problem: too high TX Rate {}".format(max_tx_rate))
 
 
     json_content["message"].extend(saved_errors)
