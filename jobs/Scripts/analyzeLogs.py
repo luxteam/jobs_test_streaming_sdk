@@ -300,7 +300,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     invalid_blocks_number = 0
 
                 if invalid_blocks_number >= 3:
-                    json_content["message"].append("Application problem: high encoder value ({}-{}-{})".format(saved_values['queue_encoder_values'][i - 2], saved_values['queue_encoder_values'][i - 1], saved_values['queue_encoder_values'][i])
+                    json_content["message"].append("Application problem: high encoder value ({}-{}-{})".format(saved_values['queue_encoder_values'][i - 2], saved_values['queue_encoder_values'][i - 1], saved_values['queue_encoder_values'][i]))
                     
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
@@ -319,7 +319,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     invalid_blocks_number = 0
 
                 if invalid_blocks_number >= 3:
-                    json_content["message"].append("Application problem: high decoder value ({}-{}-{})".format(saved_values['queue_decoder_values'][i - 2], saved_values['queue_decoder_values'][i - 1], saved_values['queue_decoder_values'][i])
+                    json_content["message"].append("Application problem: high decoder value ({}-{}-{})".format(saved_values['queue_decoder_values'][i - 2], saved_values['queue_decoder_values'][i - 1], saved_values['queue_decoder_values'][i]))
 
                     break
 
