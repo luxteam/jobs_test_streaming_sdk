@@ -259,19 +259,21 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         # rule №2.2: framerate - tx rate > 10 -> problem with app
         # ignore for Android
         if execution_type != "android":
-            if 'tx_rates' in saved_values:
-                bad_tx_rate = None
+            # Heaven can't show more than 120 fps
+            if not (framerate >= 110 and (case["game_name"] == "HeavenDX9" or case["game_name"] == "HeavenDX11")):
+                if 'tx_rates' in saved_values:
+                    bad_tx_rate = None
 
-                for tx_rate in saved_values['tx_rates']:
-                    # find the worst value
-                    if framerate - tx_rate > 10:
-                        if bad_tx_rate is None or tx_rate < bad_tx_rate:
-                            bad_tx_rate = tx_rate
+                    for tx_rate in saved_values['tx_rates']:
+                        # find the worst value
+                        if framerate - tx_rate > 10:
+                            if bad_tx_rate is None or tx_rate < bad_tx_rate:
+                                bad_tx_rate = tx_rate
 
-                if bad_tx_rate:
-                    json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
-                    if json_content["test_status"] != "error":
-                        json_content["test_status"] = "failed"
+                    if bad_tx_rate:
+                        json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
+                        if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
 
 
         # rule №4: encoder and decoder check. Problems with encoder -> warning. Problems with decoder -> issue with app
