@@ -34,6 +34,12 @@ def get_resolution(keys):
     else:
         return '2560,1440'
 
+def get_codec(keys):
+    if '-Codec' in keys:
+        return keys.split('-Codec')[1].split()[0]
+    else:
+        return 'h.265'
+
 def parse_block_line(line, saved_values):
     if 'Average latency' in line:
         # Line example:
@@ -384,14 +390,17 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                 max_difference = 0.25
 
+                if get_codec(case["prepared_keys"]) == 'h.265':
+                    max_difference = 3.0
                 if video_bitrate == 1:
                     max_difference = 3.0
 
                 if difference > max_difference:
                     json_content["message"].append("Application problem: Too high Bandwidth AVG. AVG total bandwidth for case: {}. AVG total bitrate for case: {}. Difference: {}%".format(round(average_bandwidth_tx_sum, 2), round(video_bitrate, 2), round(difference * 100, 2)))
 
-                    if json_content["test_status"] != "error":
-                        json_content["test_status"] = "failed"
+                    if get_codec(case["prepared_keys"]) != 'h.265':
+                        if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
 
             average_bandwidth_tx_sum = 0
             # take the first video bitrate
