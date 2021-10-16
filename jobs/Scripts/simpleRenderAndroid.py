@@ -269,6 +269,8 @@ def execute_tests(args):
                 else:
                     case["script_info"].append(keys_description)
 
+                case["prepared_keys"] = prepared_keys
+
                 params = {}
 
                 output_path = os.path.join(args.output, "Color")
