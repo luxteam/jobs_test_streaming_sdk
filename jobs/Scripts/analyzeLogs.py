@@ -28,11 +28,14 @@ def get_qos_status(keys):
     else:
         return True
 
-def get_resolution(keys):
+def get_resolution(keys, execution_type):
     if '-Resolution' in keys:
         return keys.split('-Resolution')[1].split()[0]
     else:
-        return '2560,1440'
+        if execution_type == "android":
+            return '2248,1080'
+        else:
+            return '2560,1440'
 
 def get_codec(keys):
     if '-Codec' in keys:
@@ -470,7 +473,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                json_content["test_status"] = "failed"
 
         # rule №13: -resolution X,Y != Encode Resolution -> failed
-        flag_resolution = get_resolution(case["prepared_keys"])
+        flag_resolution = get_resolution(case["prepared_keys"], execution_type)
         if flag_resolution:
             for i in range(1, len(saved_values['encode_resolution'])):
                 if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == flag_resolution)):
