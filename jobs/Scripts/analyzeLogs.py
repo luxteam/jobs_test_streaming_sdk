@@ -390,7 +390,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 max_difference = 0.25
 
                 if get_codec(case["prepared_keys"]) == 'h.265':
-                    max_difference = 3.0
+                    max_difference = 2.0
                 if video_bitrate == 1:
                     max_difference = 3.0
 
