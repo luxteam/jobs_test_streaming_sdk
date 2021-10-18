@@ -2,7 +2,7 @@
     {
         "case": "STR_DP_001",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Duplicate true -extStats true",
+        "server_keys": "-Resolution <resolution> -Duplicate true -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -11,7 +11,7 @@
     {
         "case": "STR_DP_002",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Duplicate true -extStats true",
+        "server_keys": "-Resolution <resolution> -Duplicate true -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [

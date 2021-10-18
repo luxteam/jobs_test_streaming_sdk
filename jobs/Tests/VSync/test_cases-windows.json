@@ -2,7 +2,7 @@
     {
         "case": "STR_VS_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -VSync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -11,7 +11,7 @@
     {
         "case": "STR_VS_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -VSync true",
         "transport_protocol": "tcp",
         "script_info": [

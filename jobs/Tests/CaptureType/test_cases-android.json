@@ -2,7 +2,7 @@
     {
         "case": "STR_ACP_001",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Capture false -extStats true",
+        "server_keys": "-Resolution <resolution> -Capture false -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -11,7 +11,7 @@
     {
         "case": "STR_ACP_002",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Capture false -extStats true",
+        "server_keys": "-Resolution <resolution> -Capture false -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [

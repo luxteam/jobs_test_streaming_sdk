@@ -2,7 +2,7 @@
     {
         "case": "STR_AQS_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -QoS false -extStats true",
+        "server_keys": "-Resolution <resolution> -QoS false -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -11,7 +11,7 @@
     {
         "case": "STR_AQS_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -AdjustFramerate false -extStats true",
+        "server_keys": "-Resolution <resolution> -AdjustFramerate false -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -20,7 +20,7 @@
     {
         "case": "STR_AQS_003",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -AdjustBitrate false -extStats true",
+        "server_keys": "-Resolution <resolution> -AdjustBitrate false -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -29,7 +29,7 @@
     {
         "case": "STR_AQS_004",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -FrameratePeriod 2 -extStats true",
+        "server_keys": "-Resolution <resolution> -FrameratePeriod 2 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -38,7 +38,7 @@
     {
         "case": "STR_AQS_005",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -BitratePeriod 5000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -BitratePeriod 5000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -47,7 +47,7 @@
     {
         "case": "STR_AQS_006",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -FramerateStep 2 -extStats true",
+        "server_keys": "-Resolution <resolution> -FramerateStep 2 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -56,7 +56,7 @@
     {
         "case": "STR_AQS_007",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -BitrateStep 5000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -BitrateStep 5000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -65,7 +65,7 @@
     {
         "case": "STR_AQS_008",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -MinFramerate 100 -extStats true",
+        "server_keys": "-Resolution <resolution> -MinFramerate 100 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -74,7 +74,7 @@
     {
         "case": "STR_AQS_009",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -MinBitrate 10000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -MinBitrate 10000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -83,7 +83,7 @@
     {
         "case": "STR_AQS_010",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -QoS false -extStats true",
+        "server_keys": "-Resolution <resolution> -QoS false -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -92,7 +92,7 @@
     {
         "case": "STR_AQS_011",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -AdjustFramerate false -extStats true",
+        "server_keys": "-Resolution <resolution> -AdjustFramerate false -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -101,7 +101,7 @@
     {
         "case": "STR_AQS_012",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -AdjustBitrate false -extStats true",
+        "server_keys": "-Resolution <resolution> -AdjustBitrate false -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -110,7 +110,7 @@
     {
         "case": "STR_AQS_013",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -FrameratePeriod 2 -extStats true",
+        "server_keys": "-Resolution <resolution> -FrameratePeriod 2 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -119,7 +119,7 @@
     {
         "case": "STR_AQS_014",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -BitratePeriod 5000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -BitratePeriod 5000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -128,7 +128,7 @@
     {
         "case": "STR_AQS_015",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -FramerateStep 2 -extStats true",
+        "server_keys": "-Resolution <resolution> -FramerateStep 2 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -137,7 +137,7 @@
     {
         "case": "STR_AQS_016",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -BitrateStep 5000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -BitrateStep 5000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -146,7 +146,7 @@
     {
         "case": "STR_AQS_017",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -MinFramerate 100 -extStats true",
+        "server_keys": "-Resolution <resolution> -MinFramerate 100 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -155,7 +155,7 @@
     {
         "case": "STR_AQS_018",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -MinBitrate 10000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -MinBitrate 10000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [

@@ -2,7 +2,7 @@
    {
         "case": "STR_RN_001",
         "status": "skipped",
-        "server_keys": "-Resolution 3840,2160 -extStats true",
+        "server_keys": "-Resolution 3840,2160 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -11,7 +11,7 @@
     {
         "case": "STR_RN_002",
         "status": "active",
-        "server_keys": "-Resolution 1920,1080 -extStats true",
+        "server_keys": "-Resolution 1920,1080 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -20,7 +20,7 @@
     {
         "case": "STR_RN_003",
         "status": "active",
-        "server_keys": "-Resolution 1280,720 -extStats true",
+        "server_keys": "-Resolution 1280,720 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -29,7 +29,7 @@
     {
         "case": "STR_RN_004",
         "status": "active",
-        "server_keys": "-Resolution 1920,1200 -extStats true",
+        "server_keys": "-Resolution 1920,1200 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen false",
         "transport_protocol": "udp",
         "script_info": [
@@ -38,7 +38,7 @@
    {
         "case": "STR_RN_005",
         "status": "skipped",
-        "server_keys": "-Resolution 3840,2160 -extStats true",
+        "server_keys": "-Resolution 3840,2160 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -47,7 +47,7 @@
     {
         "case": "STR_RN_006",
         "status": "active",
-        "server_keys": "-Resolution 1920,1080 -extStats true",
+        "server_keys": "-Resolution 1920,1080 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -56,7 +56,7 @@
     {
         "case": "STR_RN_007",
         "status": "active",
-        "server_keys": "-Resolution 1280,720 -extStats true",
+        "server_keys": "-Resolution 1280,720 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -65,7 +65,7 @@
     {
         "case": "STR_RN_008",
         "status": "active",
-        "server_keys": "-Resolution 1920,1200 -extStats true",
+        "server_keys": "-Resolution 1920,1200 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen false",
         "transport_protocol": "tcp",
         "script_info": [

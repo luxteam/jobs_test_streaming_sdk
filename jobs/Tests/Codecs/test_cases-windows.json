@@ -2,7 +2,7 @@
     {
         "case": "STR_COD_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Codec h.264 -extStats true",
+        "server_keys": "-Resolution <resolution> -Codec h.264 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -11,7 +11,7 @@
     {
         "case": "STR_COD_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Codec h.265 -extStats true",
+        "server_keys": "-Resolution <resolution> -Codec h.265 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -20,7 +20,7 @@
     {
         "case": "STR_COD_003",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Codec h.264 -extStats true",
+        "server_keys": "-Resolution <resolution> -Codec h.264 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -29,7 +29,7 @@
     {
         "case": "STR_COD_004",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Codec h.265 -extStats true",
+        "server_keys": "-Resolution <resolution> -Codec h.265 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [

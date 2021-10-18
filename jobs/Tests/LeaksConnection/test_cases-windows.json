@@ -2,7 +2,7 @@
     {
         "case": "STR_LCN_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "keep_server": true,
@@ -12,7 +12,7 @@
     {
         "case": "STR_LCN_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "keep_server": true,
@@ -22,7 +22,7 @@
     {
         "case": "STR_LCN_003",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "keep_server": true,
@@ -32,7 +32,7 @@
     {
         "case": "STR_LCN_004",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "keep_server": true,
@@ -42,7 +42,7 @@
     {
         "case": "STR_LCN_005",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -51,7 +51,7 @@
     {
         "case": "STR_LCN_006",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "keep_client": true,
@@ -61,7 +61,7 @@
     {
         "case": "STR_LCN_007",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "keep_client": true,
@@ -71,7 +71,7 @@
     {
         "case": "STR_LCN_008",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "keep_client": true,
@@ -81,7 +81,7 @@
     {
         "case": "STR_LCN_009",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "keep_client": true,
@@ -91,7 +91,7 @@
     {
         "case": "STR_LCN_010",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -100,7 +100,7 @@
     {
         "case": "STR_LCN_011",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "keep_server": true,
@@ -110,7 +110,7 @@
     {
         "case": "STR_LCN_012",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "keep_server": true,
@@ -120,7 +120,7 @@
     {
         "case": "STR_LCN_013",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "keep_server": true,
@@ -130,7 +130,7 @@
     {
         "case": "STR_LCN_014",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "keep_server": true,
@@ -140,7 +140,7 @@
     {
         "case": "STR_LCN_015",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -149,7 +149,7 @@
     {
         "case": "STR_LCN_016",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "keep_client": true,
@@ -159,7 +159,7 @@
     {
         "case": "STR_LCN_017",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "keep_client": true,
@@ -169,7 +169,7 @@
     {
         "case": "STR_LCN_018",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "keep_client": true,
@@ -179,7 +179,7 @@
     {
         "case": "STR_LCN_019",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "keep_client": true,
@@ -189,7 +189,7 @@
     {
         "case": "STR_LCN_020",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [

@@ -38,7 +38,7 @@
     {
         "case": "STR_ARC_005",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -extStats true",
+        "server_keys": "-Resolution <resolution> -RateControl cbr -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -74,7 +74,7 @@
     {
         "case": "STR_ARC_009",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -Bitrate 10000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -RateControl cbr -Bitrate 10000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -83,7 +83,7 @@
     {
         "case": "STR_ARC_010",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -Bitrate 1000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -RateControl cbr -Bitrate 1000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -128,7 +128,7 @@
     {
         "case": "STR_ARC_015",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -extStats true",
+        "server_keys": "-Resolution <resolution> -RateControl cbr -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -164,7 +164,7 @@
     {
         "case": "STR_ARC_019",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -Bitrate 10000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -RateControl cbr -Bitrate 10000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -173,7 +173,7 @@
     {
         "case": "STR_ARC_020",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -Bitrate 1000000 -extStats true",
+        "server_keys": "-Resolution <resolution> -RateControl cbr -Bitrate 1000000 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [

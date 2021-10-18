@@ -2,7 +2,7 @@
     {
         "case": "STR_DRT_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EnableDirtyRects true",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
@@ -11,7 +11,7 @@
     {
         "case": "STR_DRT_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EnableDirtyRects true -DrawDirtyRects true",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
@@ -20,7 +20,7 @@
     {
         "case": "STR_DRT_003",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EnableDirtyRects true",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
@@ -29,7 +29,7 @@
     {
         "case": "STR_DRT_004",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EnableDirtyRects true -DrawDirtyRects true",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
