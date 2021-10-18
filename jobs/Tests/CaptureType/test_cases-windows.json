@@ -6,8 +6,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Capture dd -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -17,8 +15,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Capture dd -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     }
 ]

@@ -6,8 +6,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -Framerate 30 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -17,8 +15,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -Framerate 60 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -28,8 +24,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -Framerate 120 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -39,8 +33,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -Framerate 144 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -50,8 +42,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -RateControl cbr -Framerate 30 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -61,8 +51,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -RateControl cbr -Framerate 60 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -72,8 +60,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -RateControl cbr -Framerate 120 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -83,8 +69,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -RateControl cbr -Framerate 144 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -94,8 +78,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -QoS true -Resolution <resolution> -RateControl cbr -Bitrate 10000000 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -105,8 +87,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -QoS true -Resolution <resolution> -RateControl cbr -Bitrate 1000000 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -116,8 +96,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -Framerate 30 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -127,8 +105,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -Framerate 60 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -138,8 +114,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -Framerate 120 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -149,8 +123,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -Framerate 144 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -160,8 +132,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -RateControl cbr -Framerate 30 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -171,8 +141,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -RateControl cbr -Framerate 60 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -182,8 +150,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -RateControl cbr -Framerate 120 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -193,8 +159,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -bitrate 50000000 -QoS true -Resolution <resolution> -RateControl cbr -Framerate 144 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -204,8 +168,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -QoS true -Resolution <resolution> -RateControl cbr -Bitrate 10000000 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -215,8 +177,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -QoS true -Resolution <resolution> -RateControl cbr -Bitrate 1000000 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     }
 ]

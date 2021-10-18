@@ -6,8 +6,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Render DX11",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -17,9 +15,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Render OpenGL",
-            "Client keys: -Fullscreen true",
-            "OpenGL breaks cause of different resolutions"
         ]
     },
     {
@@ -29,8 +24,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Render Vulkan",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -40,8 +33,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Render DX11",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
@@ -51,9 +42,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Render OpenGL",
-            "Client keys: -Fullscreen true",
-            "OpenGL breaks cause of different resolutions"
         ]
     },
     {
@@ -63,8 +51,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Render Vulkan",
-            "Client keys: -Fullscreen true"
         ]
     }
 ]

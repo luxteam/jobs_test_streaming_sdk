@@ -6,8 +6,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 3840,2160 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
     {
@@ -17,8 +15,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1920,1080 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
     {
@@ -28,8 +24,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1280,720 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
     {
@@ -39,8 +33,6 @@
         "client_keys": "-Fullscreen false",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1920,1200 -extStats true",
-            "Client keys: -Fullscreen false"
         ]
    },
    {
@@ -50,8 +42,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 3840,2160 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
     {
@@ -61,8 +51,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1920,1080 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
     {
@@ -72,8 +60,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1280,720 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
     {
@@ -83,8 +69,6 @@
         "client_keys": "-Fullscreen false",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution 1920,1200 -extStats true",
-            "Client keys: -Fullscreen false"
         ]
    }
 ]

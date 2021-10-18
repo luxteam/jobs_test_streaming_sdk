@@ -6,8 +6,6 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true",
-            "Client keys:"
         ]
     },
     {
@@ -17,8 +15,6 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
-            "Client keys:"
         ]
     },
     {
@@ -28,8 +24,6 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true",
-            "Client keys:"
         ]
     },
     {
@@ -39,8 +33,6 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -EnableDirtyRects true -DrawDirtyRects true",
-            "Client keys:"
         ]
     }
 ]

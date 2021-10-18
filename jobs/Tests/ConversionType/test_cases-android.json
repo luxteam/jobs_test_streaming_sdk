@@ -6,8 +6,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert DX11 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
       {
@@ -17,8 +15,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert OpenGL -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
       {
@@ -28,9 +24,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert Vulkan -extStats true",
-            "Client keys: -Fullscreen true",
-            "Vulkan needs -connectionurl"
         ]
    },
       {
@@ -40,8 +33,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert DX11 -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
       {
@@ -51,8 +42,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert OpenGL -extStats true",
-            "Client keys: -Fullscreen true"
         ]
    },
       {
@@ -62,9 +51,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Convert Vulkan -extStats true",
-            "Client keys: -Fullscreen true",
-            "Vulkan needs -connectionurl"
         ]
    }
 ]

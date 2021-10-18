@@ -6,8 +6,6 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -Microphone true",
-            "Client keys:"
         ]
     },
     {
@@ -17,8 +15,6 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Resolution <resolution> -extStats true -Microphone true",
-            "Client keys:"
         ]
     }
 ]
