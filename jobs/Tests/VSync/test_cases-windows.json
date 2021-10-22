@@ -2,23 +2,19 @@
     {
         "case": "STR_VS_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -VSync true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
-            "Client keys: -Fullscreen true -VSync true"
         ]
     },
     {
         "case": "STR_VS_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -VSync true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true",
-            "Client keys: -Fullscreen true -VSync true"
         ]
     }
  ]

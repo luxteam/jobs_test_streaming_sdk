@@ -6,7 +6,6 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Record memory leaks"
         ],
 
         "valorant_actions": [
