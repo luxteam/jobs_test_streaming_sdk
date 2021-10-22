@@ -2,23 +2,19 @@
     {
         "case": "STR_ADP_001",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Duplicate true -extStats true",
+        "server_keys": "-Resolution <resolution> -Duplicate true -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Duplicate true -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     },
     {
         "case": "STR_ADP_002",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -Duplicate true -extStats true",
+        "server_keys": "-Resolution <resolution> -Duplicate true -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Server keys: -Capture amd -Framerate 30 -bitrate 50000000 -QoS true -Resolution <resolution> -Duplicate true -extStats true",
-            "Client keys: -Fullscreen true"
         ]
     }
 ]

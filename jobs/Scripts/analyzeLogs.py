@@ -17,20 +17,20 @@ from jobs_launcher.core.config import *
 
 def get_framerate(keys):
     if '-Framerate ' in keys:
-        return int(keys.split('-Framerate')[1].split()[0])
+        return int(keys.split('-Framerate ')[1].split()[0])
     else:
         return 30
 
 def get_qos_status(keys):
     if '-QoS ' in keys:
-        value = keys.split('-QoS')[1].split()[0]
+        value = keys.split('-QoS ')[1].split()[0]
         return value != "False" and value != "false"
     else:
         return True
 
 def get_resolution(keys, execution_type):
-    if '-Resolution' in keys:
-        return keys.split('-Resolution')[1].split()[0]
+    if '-Resolution ' in keys:
+        return keys.split('-Resolution ')[1].split()[0]
     else:
         if execution_type == "android":
             return '2248,1080'
@@ -38,14 +38,14 @@ def get_resolution(keys, execution_type):
             return '2560,1440'
 
 def get_codec(keys):
-    if '-Codec' in keys:
-        return keys.split('-Codec')[1].split()[0]
+    if '-Codec ' in keys:
+        return keys.split('-Codec ')[1].split()[0]
     else:
         return 'h.265'
 
 def get_capture(keys):
-    if '-Capture' in keys:
-        return keys.split('-Capture')[1].split()[0]
+    if '-Capture ' in keys:
+        return keys.split('-Capture ')[1].split()[0]
     else:
         return 'amd'
 
