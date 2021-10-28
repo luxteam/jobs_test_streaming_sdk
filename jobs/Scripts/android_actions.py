@@ -29,6 +29,7 @@ class OpenGame(Action):
             "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url",
             "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
             "lol": "C:\\JN\\League of Legends.lnk",
+            "dota2": "C:\\JN\\dota2.exe.lnk",
             "nothing": None
         }
 
@@ -40,7 +41,8 @@ class OpenGame(Action):
             "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"],
             "apexlegends": ["Apex Legends", "r5apex.exe"],
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
-            "lol": ["League of Legends (TM) Client", "League of Legends.exe"],
+            "lol": ["League of Legends (TM) Client", "League of Legends.exe"],,
+            "dota2": ["Dota 2", "dota2.exe"],
             "nothing": [None, None]
         }
 

@@ -374,8 +374,7 @@
     ],
 
     "dota2_actions": [
-        "check_window \"dota2.exe\" \"dota2.exe\"",
-        "check_game \"dota2.exe\" \"dota2.exe\"",
+        "check_game \"Dota 2\" \"dota2.exe\"",
         "skip_if_done 20",
         "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
         "sleep 30",
@@ -383,30 +382,19 @@
         "sleep 5",
         "click_server center_-510 center_-570",
         "sleep 1",
-        
         "click_server center_-488 center_-230",
         "sleep 1",
-
         "click_server center_380 center_-292",
         "sleep 15",
-        
-        "click_server center_-955 center_-79",
-        "sleep 1",        
-
         "click_server center_-335 center_427",
         "click_server center_-335 center_427",
         "sleep 1",
-        
         "click_server center_-923 center_-370",
         "sleep 1",
-        
         "click_server center_-912 center_-328",
         "sleep 1",
-
         "click_server center_-797 center_-250",
         "sleep 1",
-        
-        "check_window \"dota2.exe\" \"dota2.exe\"",
         "check_game \"dota2.exe\" \"dota2.exe\"",
 
         "make_screen",
