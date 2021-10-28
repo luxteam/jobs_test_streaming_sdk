@@ -50,9 +50,14 @@ def get_capture(keys):
         return 'amd'
 
 def parse_block_line(line, saved_values):
+    # Line example:
+    # 2021-05-31 09:01:55.469     3F90 [RemoteGamePipeline]    Info: Average latency: full 35.08, client  1.69, server 21.83, encoder  3.42, network 11.56, decoder  1.26, Rx rate: 122.67 fps, Tx rate: 62.33 fps
     if 'Average latency' in line:
-        # Line example:
-        # 2021-05-31 09:01:55.469     3F90 [RemoteGamePipeline]    Info: Average latency: full 35.08, client  1.69, server 21.83, encoder  3.42, network 11.56, decoder  1.26, Rx rate: 122.67 fps, Tx rate: 62.33 fps
+        if 'average_latencies' not in saved_values:
+            saved_values['average_latencies'] = []
+        average_latency = float(line.split('full')[1].split(',')[0])
+        saved_values['average_latencies'].append(average_latency)
+        
         if 'client' in line:
             if 'client_latencies' not in saved_values:
                 saved_values['client_latencies'] = []
@@ -505,6 +510,19 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             if max_tx_rate > 150:
                 json_content["message"].append("Application problem: too high TX Rate {}".format(max_tx_rate))
 
+        # rule №16: average latency in Android > 70 -> failed
+        if execution_type == "android":
+            if 'average_latencies' in saved_values:
+                max_avg_latency = 0
+
+                for i in range(len(saved_values['average_latencies'])):
+                    if saved_values['average_latencies'][i] > 70 and saved_values['average_latencies'][i] > max_avg_latency:
+                        max_avg_latency = saved_values['average_latencies'][i]
+
+                if max_avg_latency != 0:
+                    json_content["message"].append("Application problem: too high Average Latency {}".format(max_avg_latency))
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
     json_content["message"].extend(saved_errors)
 
