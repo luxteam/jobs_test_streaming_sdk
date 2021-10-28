@@ -371,5 +371,62 @@
         "sleep 3",
         "record_video 10",
         "sleep_and_screen 5 4 4 nothing"
+    ],
+
+    "dota2_actions": [
+        "check_window \"dota2.exe\" \"dota2.exe\"",
+        "check_game \"dota2.exe\" \"dota2.exe\"",
+        "skip_if_done 20",
+        "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
+        "sleep 30",
+        "press_keys_server \"esc\"",
+        "sleep 5",
+        "click_server center_-510 center_-570",
+        "sleep 1",
+        
+        "click_server center_-488 center_-230",
+        "sleep 1",
+
+        "click_server center_380 center_-292",
+        "sleep 15",
+        
+        "click_server center_-955 center_-79",
+        "sleep 1",        
+
+        "click_server center_-335 center_427",
+        "click_server center_-335 center_427",
+        "sleep 1",
+        
+        "click_server center_-923 center_-370",
+        "sleep 1",
+        
+        "click_server center_-912 center_-328",
+        "sleep 1",
+
+        "click_server center_-797 center_-250",
+        "sleep 1",
+        
+        "check_window \"dota2.exe\" \"dota2.exe\"",
+        "check_game \"dota2.exe\" \"dota2.exe\"",
+
+        "make_screen",
+        "move 1000 800",
+        "click",
+        "start_test_actions_server",
+        "start_test_actions_client",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
+    "dota2_actions_android": [
+        "open_game",
+        "sleep 10",
+        "start_actions",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
     ]
 }

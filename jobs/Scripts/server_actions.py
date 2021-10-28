@@ -45,6 +45,7 @@ class CheckWindow(Action):
         result = False
 
         window = win32gui.FindWindow(None, self.window_name)
+        win32gui.Get
 
         if window is not None and window != 0:
             self.logger.info("Window {} was succesfully found".format(self.window_name))
@@ -344,6 +345,12 @@ class DoTestActions(Action):
 
                 if self.stage > 3:
                     self.stage = 0
+            elif self.game_name == "dota2":
+                sleep(1)
+                pydirectinput.press("r")
+                sleep(2)
+                pydirectinput.press("w")
+                sleep(2)
 
         except Exception as e:
             self.logger.error("Failed to do test actions: {}".format(str(e)))
