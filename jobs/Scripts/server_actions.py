@@ -352,8 +352,8 @@ class DoTestActions(Action):
                 pydirectinput.press("w")
                 sleep(2)
             elif self.game_name == "csgo":
+                global csgoFirstExec
                 if csgoFirstExec:
-                    global csgoFirstExec
                     csgoFirstExec = False
                     commands = [["`"], ["sv_cheats 1"], ["give weapon_deagle"], ["give weapon_molotov"], ["sv_infinite_ammo 1"], ["`"]]
                     for command in commands:

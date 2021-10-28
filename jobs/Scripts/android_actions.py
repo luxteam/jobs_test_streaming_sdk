@@ -13,6 +13,7 @@ from threading import Thread
 from utils import parse_arguments, execute_adb_command
 from actions import *
 import base64
+import keyboard
 
 pyautogui.FAILSAFE = False
 
@@ -217,7 +218,7 @@ class OpenGame(Action):
                 sleep(1)
                 click("center_160", "center_184", self.logger)
                 sleep(1)
-                
+
 def make_window_foreground(window, logger):
     try:
         win32gui.ShowWindow(window, 4)
@@ -425,6 +426,7 @@ class StartActions(Action):
         gpu_view_thread.daemon = True
         gpu_view_thread.start()
 
+csgoFirstExec = True
 
 def do_test_actions(game_name, logger):
     try:
@@ -459,6 +461,28 @@ def do_test_actions(game_name, logger):
                 sleep(3)
                 pydirectinput.press("w")
                 sleep(3)
+        elif game_name == "csgo":
+            global csgoFirstExec
+            if csgoFirstExec:
+                csgoFirstExec = False
+                commands = [["`"], ["sv_cheats 1"], ["give weapon_deagle"], ["give weapon_molotov"], ["sv_infinite_ammo 1"], ["`"]]
+                for command in commands:
+                    if command != ["`"] and command != ["sv_infinite_ammo 1"]:
+                        keyboard.write(command)
+                    elif command == ["sv_infinite_ammo 1"]:
+                        keyboard.write("sv_infinite_ammo 1")
+                    else:
+                        pydirectinput.press("`")
+                    sleep(0.5)
+                    pydirectinput.press("enter")
+            for i in range(10):
+                pydirectinput.press("4")
+                sleep(2)
+                pyautogui.click()
+                for i in range(10):
+                    pyautogui.click()
+                    sleep(0.5)
+                
         elif game_name == "lol":
             edge_x = win32api.GetSystemMetrics(0)
             edge_y = win32api.GetSystemMetrics(1)
