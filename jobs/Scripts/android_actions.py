@@ -217,7 +217,7 @@ class OpenGame(Action):
                 click("center_309", "center_88", self.logger)
                 sleep(1)
                 click("center_160", "center_184", self.logger)
-                sleep(1)
+                sleep(20)
 
 def make_window_foreground(window, logger):
     try:
