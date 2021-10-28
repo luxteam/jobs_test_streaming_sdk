@@ -30,6 +30,7 @@ class OpenGame(Action):
             "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
             "lol": "C:\\JN\\League of Legends.lnk",
             "dota2": "C:\\JN\\dota2.exe.lnk",
+            "csgo": "C:\\JN\\csgo.exe.lnk",
             "nothing": None
         }
 
@@ -41,8 +42,9 @@ class OpenGame(Action):
             "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"],
             "apexlegends": ["Apex Legends", "r5apex.exe"],
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
-            "lol": ["League of Legends (TM) Client", "League of Legends.exe"],,
+            "lol": ["League of Legends (TM) Client", "League of Legends.exe"],
             "dota2": ["Dota 2", "dota2.exe"],
+            "csgo": ["Counter-Strike: Global Offensive", "csgo.exe"],
             "nothing": [None, None]
         }
 
@@ -179,6 +181,24 @@ class OpenGame(Action):
                 sleep(60)
                 click("center_0", "center_0", self.logger)
                 press_keys("shift+x ctrl+shift+i shift+y:17 ctrl+e ctrl+r", self.logger)
+            elif self.game_name == "dota2":
+                sleep(30)
+                press_keys("esc", self.logger)
+                sleep(5)
+                click("center_-510", "center_-570", self.logger)
+                sleep(1)
+                click("center_-488", "center_-230", self.logger)
+                sleep(1)
+                click("center_380", "center_-292", self.logger)
+                sleep(15)
+                click("center_-335", "center_427", self.logger)
+                click("center_-335", "center_427", self.logger)
+                sleep(1)
+                click("center_-923", "center_-370", self.logger)
+                sleep(1)
+                click("center_-912", "center_-328", self.logger)
+                sleep(1)
+                click("center_-797", "center_-250", self.logger)
 
 
 def make_window_foreground(window, logger):
@@ -415,6 +435,12 @@ def do_test_actions(game_name, logger):
                 pydirectinput.press("x")
                 sleep(1)
                 pyautogui.click()
+                sleep(3)
+        elif game_name == "dota2":
+            for i in range(10):
+                pydirectinput.press("r")
+                sleep(3)
+                pydirectinput.press("w")
                 sleep(3)
         elif game_name == "lol":
             edge_x = win32api.GetSystemMetrics(0)
