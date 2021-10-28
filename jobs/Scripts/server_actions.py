@@ -45,7 +45,6 @@ class CheckWindow(Action):
         result = False
 
         window = win32gui.FindWindow(None, self.window_name)
-        win32gui.Get
 
         if window is not None and window != 0:
             self.logger.info("Window {} was succesfully found".format(self.window_name))
