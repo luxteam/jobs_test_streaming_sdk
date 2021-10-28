@@ -30,7 +30,7 @@ class OpenGame(Action):
             "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
             "lol": "C:\\JN\\League of Legends.lnk",
             "dota2": "C:\\JN\\dota2.exe.lnk",
-            "csgo": "C:\\JN\\csgo.exe.lnk",
+            "csgo": "C:\\JN\\csgo.exe.url",
             "nothing": None
         }
 
@@ -199,8 +199,25 @@ class OpenGame(Action):
                 click("center_-912", "center_-328", self.logger)
                 sleep(1)
                 click("center_-797", "center_-250", self.logger)
-
-
+            elif self.game_name == "csgo":
+                sleep(30)
+                press_keys("esc", self.logger)
+                sleep(5)
+                click("center_-919", "center_-437", self.logger)
+                sleep(1)
+                click("center_-662", "center_-463", self.logger)
+                sleep(1)
+                click("center_-662", "center_-249", self.logger)
+                sleep(1)
+                click("center_-4", "center_-118", self.logger)
+                sleep(1)
+                click("center_672", "center_551", self.logger)
+                sleep(1)
+                click("center_309", "center_88", self.logger)
+                sleep(1)
+                click("center_160", "center_184", self.logger)
+                sleep(1)
+                
 def make_window_foreground(window, logger):
     try:
         win32gui.ShowWindow(window, 4)

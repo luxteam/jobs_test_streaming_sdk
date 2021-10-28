@@ -416,5 +416,49 @@
         "sleep 4",
         "record_video 10",
         "sleep_and_screen 5 4 4 test_actions"
+    ],
+
+    "csgo_actions": [
+        "check_game \"Counter-Strike: Global Offensive\" \"csgo.exe\"",
+        "skip_if_done 18",
+        "execute_cmd \"C:\\JN\\csgo.exe.url\"",
+        "sleep 30",
+        "press_keys_server \"esc\"",
+        "sleep 5",
+        "click_server center_-919 center_-437",
+        "sleep 1",
+        "click_server center_-662 center_-463",
+        "sleep 1",
+        "click_server center_-662 center_-249",
+        "sleep 1",
+        "click_server center_-4 center_-118",
+        "sleep 1",
+        "click_server center_672 center_551",
+        "sleep 1",
+        "click_server center_309 center_88",
+        "sleep 1",
+        "click_server center_160 center_184",
+        "sleep 20",
+        "check_game \"Counter-Strike: Global Offensive\" \"csgo.exe\"",
+
+        "make_screen",
+        "move 1000 800",
+        "click",
+        "start_test_actions_server",
+        "start_test_actions_client",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
+    "csgo_actions_android": [
+        "open_game",
+        "sleep 10",
+        "start_actions",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
     ]
 }
