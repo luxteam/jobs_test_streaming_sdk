@@ -50,9 +50,14 @@ def get_capture(keys):
         return 'amd'
 
 def parse_block_line(line, saved_values):
+    # Line example:
+    # 2021-05-31 09:01:55.469     3F90 [RemoteGamePipeline]    Info: Average latency: full 35.08, client  1.69, server 21.83, encoder  3.42, network 11.56, decoder  1.26, Rx rate: 122.67 fps, Tx rate: 62.33 fps
     if 'Average latency' in line:
-        # Line example:
-        # 2021-05-31 09:01:55.469     3F90 [RemoteGamePipeline]    Info: Average latency: full 35.08, client  1.69, server 21.83, encoder  3.42, network 11.56, decoder  1.26, Rx rate: 122.67 fps, Tx rate: 62.33 fps
+        if 'average_latencies' not in saved_values:
+            saved_values['average_latencies'] = []
+        average_latency = float(line.split('full')[1].split(',')[0])
+        saved_values['average_latencies'].append(average_latency)
+        
         if 'client' in line:
             if 'client_latencies' not in saved_values:
                 saved_values['client_latencies'] = []
@@ -207,7 +212,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
     else:
 
         if 'encoder_values' in saved_values:
-            # rule №15: ignore rules 1.1 and 1.2 if Capture dd
+            # rule №1: ignore rules 1.1 and 1.2 if Capture dd
             # rule №1.1: encoder >= framerate -> problem with app
             # ignore for Android
             if get_capture(case["prepared_keys"]) != "dd" and get_capture(case["prepared_keys"]) != "false":
@@ -286,11 +291,11 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                             json_content["test_status"] = "failed"
 
 
-        # rule №4: encoder and decoder check. Problems with encoder -> warning. Problems with decoder -> issue with app
+        # rule №3: encoder and decoder check. Problems with encoder -> warning. Problems with decoder -> issue with app
         # 0-0 -> skip
         # X-Y -> first time - skip. second time - problem (Y > 1, X < Y)
         # X-Y -> first time - skip. sec (X > 1, X > Y)
-        # + rule №12
+        # decoder queue > 10 -> failed
         if 'queue_encoder_values' in saved_values:
             # number of invalid blocks in succession
             invalid_blocks_number = 0
@@ -326,7 +331,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                     break
 
-        # rule №6.1: client latency <= decoder -> issue with app
+        # rule №4.1: client latency <= decoder -> issue with app
         if 'client_latencies' in saved_values and 'decoder_values' in saved_values:
             bad_client_latency = None
             bad_decoder_value = None
@@ -343,7 +348,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        # rule №6.2: server latency <= encoder -> issue with app
+        # rule №4.2: server latency <= encoder -> issue with app
         if 'server_latencies' in saved_values and 'encoder_value' in saved_values:
             bad_server_latency = None
             bad_encoder_value = None
@@ -360,7 +365,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        # rule №7: |decyns value| > 50ms -> issue with app
+        # rule №5: |decyns value| > 50ms -> issue with app
         if 'decyns_values' in saved_values:
             bad_decyns_value = None
 
@@ -375,18 +380,16 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        # rule №8.1: (sum of video bitrate - sum of average bandwidth tx) / video bitrate > 0.25 or 3.0 -> issue with app
+        # rule №6.1: (sum of video bitrate - sum of average bandwidth tx) / video bitrate > 0.25 or 3.0 -> issue with app
         if 'average_bandwidth_tx' in saved_values and 'video_bitrate' in saved_values:
             def check_rule_8(average_bandwidth_tx_sum, video_bitrate, block_number):
                 if block_number == 0:
                     return
 
                 average_bandwidth_tx_sum /= 1000
-
                 average_bandwidth_tx_sum /= block_number
-
                 difference = (average_bandwidth_tx_sum - video_bitrate) / video_bitrate
-
+                
                 max_difference = 0.25
 
                 if get_codec(case["prepared_keys"]) == 'h.265':
@@ -427,7 +430,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
             check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
 
-        # rule №8.2: if QoS false -> all bitrates must be same
+        # rule №6.2: if QoS false -> all bitrates must be same
         if not get_qos_status(case["prepared_keys"]) and 'video_bitrate' in saved_values:
             video_bitrate_set = set(saved_values['video_bitrate'])
             # make symmetric difference of sets
@@ -439,7 +442,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        # rule №9: number of abnormal network latency values is bigger than 10% of total values -> issue with app
+        # rule №7: number of abnormal network latency values is bigger than 10% of total values -> issue with app
         # Abnormal value: avrg network latency * 2 < network latency
         if 'network_latencies' in saved_values:
             avrg_network_latency = mean(saved_values['network_latencies'])
@@ -453,7 +456,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             if abnormal_values_num > round(total_values_num * 0.1):
                 json_content["message"].append("Network problem: Too many high values of network latency (more than 10%)")
 
-        # rule №10: send time avg * 100 < send time worst -> issue with network
+        # rule №8: send time avg * 100 < send time worst -> issue with network
         if 'send_time_avg' in saved_values and 'send_time_worst' in saved_values:
             for i in range(len(saved_values['send_time_avg'])):
                 if saved_values['send_time_avg'][i] * 100 < saved_values['send_time_worst'][i]:
@@ -461,18 +464,21 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                     break
 
-        # rule №11: detect error messages: VIDEO_OP_CODE_FORCE_IDR, Input Queue Full
-        if 'code_force_idr' in saved_values and saved_values['code_force_idr']:
-            json_content["message"].append("Application problem: VIDEO_OP_CODE_FORCE_IDR detected")
-            if json_content["test_status"] != "error":
-               json_content["test_status"] = "failed"
-
+        #todo fix
+        # rule №9: detect error messages:
+        # rule №9.1 Input Queue Full
+        # rule №9.2 VIDEO_OP_CODE_FORCE_IDR
         if 'input_queue_full' in saved_values and saved_values['input_queue_full']:
             json_content["message"].append("Application problem: Input Queue Full detected")
-            if json_content["test_status"] != "error":
-               json_content["test_status"] = "failed"
+            #if json_content["test_status"] != "error":
+            #   json_content["test_status"] = "failed"
 
-        # rule №13: -resolution X,Y != Encode Resolution -> failed
+        if 'code_force_idr' in saved_values and saved_values['code_force_idr']:
+            json_content["message"].append("Application problem: VIDEO_OP_CODE_FORCE_IDR detected")
+            #if json_content["test_status"] != "error":
+            #   json_content["test_status"] = "failed"
+
+        # rule №10: -resolution X,Y != Encode Resolution -> failed
         flag_resolution = get_resolution(case["prepared_keys"], execution_type)
         if flag_resolution:
             for i in range(1, len(saved_values['encode_resolution'])):
@@ -493,7 +499,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             if max_rx_rate > 150:
                 json_content["message"].append("Application problem: too high RX Rate {}".format(max_rx_rate))
 
-        # rule №14: FPS > 150 -> warning
+        # FPS > 150 -> warning
         if 'tx_rates' in saved_values:
             max_tx_rate = 0
 
@@ -505,6 +511,19 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             if max_tx_rate > 150:
                 json_content["message"].append("Application problem: too high TX Rate {}".format(max_tx_rate))
 
+        # rule №12: average latency in Android > 70 -> failed
+        if execution_type == "android":
+            if 'average_latencies' in saved_values:
+                max_avg_latency = 0
+
+                for i in range(len(saved_values['average_latencies'])):
+                    if saved_values['average_latencies'][i] > 70 and saved_values['average_latencies'][i] > max_avg_latency:
+                        max_avg_latency = saved_values['average_latencies'][i]
+
+                if max_avg_latency != 0:
+                    json_content["message"].append("Application problem: too high Average Latency {}".format(max_avg_latency))
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
     json_content["message"].extend(saved_errors)
 
@@ -544,7 +563,7 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
 
                         parse_line(line, saved_values)
 
-                        # skip six first blocks of output with latency (it can contains abnormal data due to starting of Streaming SDK)
+                        # rule №0 - skip six first blocks of output with latency (it can contains abnormal data due to starting of Streaming SDK)
                         if block_number > 6:
                             if not end_of_block:
                                 parse_block_line(line, saved_values)
