@@ -470,13 +470,13 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         # rule №9.2 VIDEO_OP_CODE_FORCE_IDR
         if 'input_queue_full' in saved_values and saved_values['input_queue_full']:
             json_content["message"].append("Application problem: Input Queue Full detected")
-            if json_content["test_status"] != "error":
-               json_content["test_status"] = "failed"
+            #if json_content["test_status"] != "error":
+            #   json_content["test_status"] = "failed"
 
         if 'code_force_idr' in saved_values and saved_values['code_force_idr']:
             json_content["message"].append("Application problem: VIDEO_OP_CODE_FORCE_IDR detected")
-            if json_content["test_status"] != "error":
-               json_content["test_status"] = "failed"
+            #if json_content["test_status"] != "error":
+            #   json_content["test_status"] = "failed"
 
         # rule №10: -resolution X,Y != Encode Resolution -> failed
         flag_resolution = get_resolution(case["prepared_keys"], execution_type)
