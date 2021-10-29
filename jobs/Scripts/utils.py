@@ -373,17 +373,14 @@ def execute_adb_command(command):
 
 
 def track_used_memory(case, execution_type):
-    process_name = "RemoteGameClient.exe" if execution_type == "client" else "RemoteGameServer.exe"
-    target_process = None
+    #command = "powershell.exe (Get-Counter -Counter '\Process(remotegameserver)\Working Set - Private').CounterSamples[0].CookedValue"
+    #result = subprocess.check_output(command, shell=True, text=True)
+    #print(int(result) / 1024 ** 2)
+    process_name = "remotegameclient" if execution_type == "client" else "remotegameserver"
 
-    for process in psutil.process_iter():
-        if process_name in process.name():
-            target_process = process
-            break
-
-    if target_process:
-        value = target_process.memory_info().rss / (1024 * 1024)
-
+    if not(os.system("powershell.exe Get-Process -name " + process_name + " -ErrorAction SilentlyContinue > null")):
+        command = "powershell.exe (Get-Counter -Counter '\Process(" + process_name + ")\Working Set - Private').CounterSamples[0].CookedValue"
+        value = int(subprocess.check_output(command, shell=True, text=True)) / 1024 ** 2
         if "used_memory" in case and isinstance(case["used_memory"], list):
             case["used_memory"].append(value)
         else:
