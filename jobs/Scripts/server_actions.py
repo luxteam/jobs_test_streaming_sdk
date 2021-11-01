@@ -355,21 +355,26 @@ class DoTestActions(Action):
                 global csgoFirstExec
                 if csgoFirstExec:
                     csgoFirstExec = False
-                    commands = [["`"], ["sv_cheats 1"], ["give weapon_deagle"], ["give weapon_molotov"], ["sv_infinite_ammo 1"], ["`"]]
+                    commands = [
+                        "`",
+                        "sv_cheats 1",
+                        "give weapon_deagle",
+                        "give weapon_molotov",
+                        "sv_infinite_ammo 1",
+                        "`"
+                    ]
                     for command in commands:
-                        if command != ["`"] and command != ["sv_infinite_ammo 1"]:
+                        if command != "`":
                             keyboard.write(command)
-                        elif command == ["sv_infinite_ammo 1"]:
-                            keyboard.write("sv_infinite_ammo 1")
                         else:
                             pydirectinput.press("`")
                         sleep(0.5)
                         pydirectinput.press("enter")
 
                 pydirectinput.press("4")
-                sleep(2)
+                sleep(1.5)
                 pyautogui.click()
-
+                
         except Exception as e:
             self.logger.error("Failed to do test actions: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))

@@ -435,10 +435,9 @@
         "sleep 1",
         "click_server center_672 center_551",
         "sleep 1",
-        "click_server center_309 center_88",
-        "sleep 1",
-        "click_server center_160 center_184",
-        "sleep 20",
+        "click_server center_155 center_117",
+        "sleep 40",
+        "press_keys_server \"w_3\"",
         "check_game \"Counter-Strike: Global Offensive\" \"csgo.exe\"",
 
         "make_screen",

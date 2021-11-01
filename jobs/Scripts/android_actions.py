@@ -214,10 +214,26 @@ class OpenGame(Action):
                 sleep(1)
                 click("center_672", "center_551", self.logger)
                 sleep(1)
-                click("center_309", "center_88", self.logger)
-                sleep(1)
-                click("center_160", "center_184", self.logger)
-                sleep(20)
+                click("center_155", "center_117", self.logger)
+                sleep(40)
+                press_keys("w_3", self.logger)
+
+                # enter commands to csgo console
+                commands = [
+                    "`",
+                    "sv_cheats 1",
+                    "give weapon_deagle",
+                    "give weapon_molotov",
+                    "sv_infinite_ammo 1",
+                    "`"
+                ]
+                for command in commands:
+                    if command != "`":
+                        keyboard.write(command)
+                    else:
+                        pydirectinput.press("`")
+                    sleep(0.5)
+                    pydirectinput.press("enter")
 
 def make_window_foreground(window, logger):
     try:
@@ -426,8 +442,6 @@ class StartActions(Action):
         gpu_view_thread.daemon = True
         gpu_view_thread.start()
 
-csgoFirstExec = True
-
 def do_test_actions(game_name, logger):
     try:
         if game_name == "apexlegends":
@@ -456,33 +470,17 @@ def do_test_actions(game_name, logger):
                 pyautogui.click()
                 sleep(3)
         elif game_name == "dota2":
-            for i in range(10):
+            for i in range(6):
                 pydirectinput.press("r")
                 sleep(3)
                 pydirectinput.press("w")
                 sleep(3)
         elif game_name == "csgo":
-            global csgoFirstExec
-            if csgoFirstExec:
-                csgoFirstExec = False
-                commands = [["`"], ["sv_cheats 1"], ["give weapon_deagle"], ["give weapon_molotov"], ["sv_infinite_ammo 1"], ["`"]]
-                for command in commands:
-                    if command != ["`"] and command != ["sv_infinite_ammo 1"]:
-                        keyboard.write(command)
-                    elif command == ["sv_infinite_ammo 1"]:
-                        keyboard.write("sv_infinite_ammo 1")
-                    else:
-                        pydirectinput.press("`")
-                    sleep(0.5)
-                    pydirectinput.press("enter")
-            for i in range(10):
+            for i in range(5):
                 pydirectinput.press("4")
-                sleep(2)
+                sleep(1.5)
                 pyautogui.click()
-                for i in range(10):
-                    pyautogui.click()
-                    sleep(0.5)
-                
+            
         elif game_name == "lol":
             edge_x = win32api.GetSystemMetrics(0)
             edge_y = win32api.GetSystemMetrics(1)
