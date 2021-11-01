@@ -5,6 +5,7 @@ import argparse
 from statistics import stdev, mean
 import re
 import traceback
+import datetime
 
 sys.path.append(
     os.path.abspath(
@@ -180,10 +181,16 @@ def parse_line(line, saved_values):
         saved_values['hevc_video_bitrate'].add(hevc_video_bitrate)
 
     elif 'VIDEO_OP_CODE_FORCE_IDR' in line:
-        saved_values['code_force_idr'] = True
+        if 'code_force_idr' not in saved_values:
+            saved_values['code_force_idr'] = []
+        timestamp_idr = line.split('  ')[0]
+        saved_values['code_force_idr'].add(timestamp_idr)
 
     elif 'Input Queue Full' in line:
-        saved_values['input_queue_full'] = True
+        if 'input_queue_full' not in saved_values:
+            saved_values['input_queue_full'] = []
+        timestamp_iqf = line.split('  ')[0]
+        saved_values['input_queue_full'].add(timestamp_iqf)
 
 
 def parse_error(line, saved_errors):
@@ -464,19 +471,36 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                     break
 
-        #todo fix
         # rule №9: detect error messages:
         # rule №9.1 Input Queue Full
-        # rule №9.2 VIDEO_OP_CODE_FORCE_IDR
-        if 'input_queue_full' in saved_values and saved_values['input_queue_full']:
-            json_content["message"].append("Application problem: Input Queue Full detected")
-            #if json_content["test_status"] != "error":
-            #   json_content["test_status"] = "failed"
+        if 'input_queue_full' in saved_values and len(saved_values['input_queue_full']) > 1:
+            invalid_count = 0
 
-        if 'code_force_idr' in saved_values and saved_values['code_force_idr']:
-            json_content["message"].append("Application problem: VIDEO_OP_CODE_FORCE_IDR detected")
-            #if json_content["test_status"] != "error":
-            #   json_content["test_status"] = "failed"
+            for i in range(len(saved_values['input_queue_full'])-1):
+                if ((datetime.datetime.strptime(saved_values['input_queue_full'][i], "%Y-%m-%d %H:%M:%S.%f"))-(datetime.datetime.strptime(saved_values['input_queue_full'][i+1], "%Y-%m-%d %H:%M:%S.%f"))).microseconds <  3000000:
+                    invalid_count += 1
+                else:
+                    invalid_count = 0
+
+                if invalid_count >= 5:
+                    json_content["message"].append("Application problem: Input Queue Full detected")
+                    break
+
+        # rule №9.2 VIDEO_OP_CODE_FORCE_IDR
+        if 'code_force_idr' in saved_values and len(saved_values['code_force_idr']) > 1:
+            invalid_count = 0
+
+            for i in range(len(saved_values['code_force_idr'])-1):
+                if ((datetime.datetime.strptime(saved_values['code_force_idr'][i], "%Y-%m-%d %H:%M:%S.%f"))-(datetime.datetime.strptime(saved_values['code_force_idr'][i+1], "%Y-%m-%d %H:%M:%S.%f"))).microseconds <  3000000:
+                    invalid_count += 1
+                else:
+                    invalid_count = 0
+
+                if invalid_count >= 5:
+                    json_content["message"].append("Application problem: Input Queue Full detected")
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
+                    break
 
         # rule №10: -resolution X,Y != Encode Resolution -> failed
         flag_resolution = get_resolution(case["prepared_keys"], execution_type)
