@@ -259,6 +259,17 @@ def execute_tests(args, current_conf):
                         settings_json_path
                     )
 
+                    if case["case"].find('STR_CFG') != -1:
+                        copyfile(
+                            os.path.realpath(
+                                os.path.join(os.path.dirname(__file__),
+                                "..",
+                                "Configs",
+                                "{}.json".format(case["case"]))
+                            ),
+                            settings_json_path
+                        )
+
                     with open(settings_json_path, "r") as file:
                         settings_json_content = json.load(file)
 

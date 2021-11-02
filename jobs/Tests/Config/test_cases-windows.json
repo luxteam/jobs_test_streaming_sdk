@@ -1,0 +1,11 @@
+[
+    {
+        "case": "STR_CFG_001",
+        "status": "active",
+        "server_keys": "-Resolution 640,480",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    }
+]
