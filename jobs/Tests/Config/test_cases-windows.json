@@ -2,7 +2,7 @@
     {
         "case": "STR_CFG_001",
         "status": "active",
-        "server_keys": "-Resolution 640,480",
+        "server_keys": "",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
