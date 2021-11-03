@@ -476,7 +476,7 @@ def do_test_actions(game_name, logger):
                 pydirectinput.press("w")
                 sleep(3)
         elif game_name == "csgo":
-            for i in range(5):
+            for i in range(20):
                 pydirectinput.press("4")
                 sleep(1.5)
                 pyautogui.click()
