@@ -239,8 +239,17 @@ def save_android_log(args, case, last_log_line, current_try):
         log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_client" + ".log")
 
         with open(log_destination_path, "ab") as file:
+            # filter Android client logs
+            filtered_log_line = []
+
+            for line in log_lines:
+                prepared_line = line.decode("utf-8").lower()
+
+                if "amf_trace" in prepared_line or "remotegameclient" in prepared_line:
+                    filtered_log_line.append(line)
+
             file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
-            file.write(b"\n".join(log_lines))
+            file.write(b"\n".join(filtered_log_line))
 
         return last_log_line
     except Exception as e:
