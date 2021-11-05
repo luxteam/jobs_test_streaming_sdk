@@ -13,6 +13,7 @@ from threading import Thread
 from utils import parse_arguments, execute_adb_command
 from actions import *
 import base64
+import keyboard
 
 pyautogui.FAILSAFE = False
 
@@ -29,6 +30,8 @@ class OpenGame(Action):
             "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url",
             "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
             "lol": "C:\\JN\\League of Legends.lnk",
+            "dota2": "C:\\JN\\dota2.exe.lnk",
+            "csgo": "C:\\JN\\csgo.exe.url",
             "nothing": None
         }
 
@@ -41,6 +44,8 @@ class OpenGame(Action):
             "apexlegends": ["Apex Legends", "r5apex.exe"],
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
             "lol": ["League of Legends (TM) Client", "League of Legends.exe"],
+            "dota2": ["Dota 2", "dota2.exe"],
+            "csgo": ["Counter-Strike: Global Offensive", "csgo.exe"],
             "nothing": [None, None]
         }
 
@@ -177,7 +182,58 @@ class OpenGame(Action):
                 sleep(60)
                 click("center_0", "center_0", self.logger)
                 press_keys("shift+x ctrl+shift+i shift+y:17 ctrl+e ctrl+r", self.logger)
+            elif self.game_name == "dota2":
+                sleep(30)
+                press_keys("esc", self.logger)
+                sleep(5)
+                click("center_-510", "center_-570", self.logger)
+                sleep(1)
+                click("center_-407", "center_-230", self.logger)
+                sleep(1)
+                click("center_380", "center_-292", self.logger)
+                sleep(15)
+                click("center_-335", "center_427", self.logger)
+                click("center_-335", "center_427", self.logger)
+                sleep(1)
+                click("center_-923", "center_-370", self.logger)
+                sleep(1)
+                click("center_-912", "center_-328", self.logger)
+                sleep(1)
+                click("center_-797", "center_-250", self.logger)
+            elif self.game_name == "csgo":
+                sleep(30)
+                press_keys("esc", self.logger)
+                sleep(5)
+                click("center_-919", "center_-437", self.logger)
+                sleep(1)
+                click("center_-662", "center_-463", self.logger)
+                sleep(1)
+                click("center_-662", "center_-249", self.logger)
+                sleep(1)
+                click("center_-4", "center_-118", self.logger)
+                sleep(1)
+                click("center_672", "center_551", self.logger)
+                sleep(1)
+                click("center_155", "center_117", self.logger)
+                sleep(40)
+                press_keys("w_3", self.logger)
 
+                # enter commands to csgo console
+                commands = [
+                    "`",
+                    "sv_cheats 1",
+                    "give weapon_deagle",
+                    "give weapon_molotov",
+                    "sv_infinite_ammo 1",
+                    "`"
+                ]
+                for command in commands:
+                    if command != "`":
+                        keyboard.write(command)
+                    else:
+                        pydirectinput.press("`")
+                    sleep(0.5)
+                    pydirectinput.press("enter")
 
 def make_window_foreground(window, logger):
     try:
@@ -386,7 +442,6 @@ class StartActions(Action):
         gpu_view_thread.daemon = True
         gpu_view_thread.start()
 
-
 def do_test_actions(game_name, logger):
     try:
         if game_name == "apexlegends":
@@ -414,6 +469,18 @@ def do_test_actions(game_name, logger):
                 sleep(1)
                 pyautogui.click()
                 sleep(3)
+        elif game_name == "dota2":
+            for i in range(6):
+                pydirectinput.press("r")
+                sleep(3)
+                pydirectinput.press("w")
+                sleep(3)
+        elif game_name == "csgo":
+            for i in range(20):
+                pydirectinput.press("4")
+                sleep(1.5)
+                pyautogui.click()
+            
         elif game_name == "lol":
             edge_x = win32api.GetSystemMetrics(0)
             edge_y = win32api.GetSystemMetrics(1)

@@ -349,7 +349,9 @@ def close_game_process(game_name):
             "borderlands3": ["Borderlands3.exe"],
             "apexlegends": ["r5apex.exe"],
             "valorant": ["VALORANT-Win64-Shipping.exe"],
-            "lol": ["LeagueClient.exe", "League of Legends.exe"]
+            "lol": ["LeagueClient.exe", "League of Legends.exe"],
+            "csgo": ["csgo.exe"],
+            "dota2": ["dota2.exe"]
         }
 
         if game_name in games_processes:
