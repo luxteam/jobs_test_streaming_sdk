@@ -184,13 +184,13 @@ def parse_line(line, saved_values):
         if 'code_force_idr' not in saved_values:
             saved_values['code_force_idr'] = []
         timestamp_idr = line.split('  ')[0]
-        saved_values['code_force_idr'].add(timestamp_idr)
+        saved_values['code_force_idr'].append(timestamp_idr)
 
     elif 'Input Queue Full' in line:
         if 'input_queue_full' not in saved_values:
             saved_values['input_queue_full'] = []
         timestamp_iqf = line.split('  ')[0]
-        saved_values['input_queue_full'].add(timestamp_iqf)
+        saved_values['input_queue_full'].append(timestamp_iqf)
 
 
 def parse_error(line, saved_errors):
