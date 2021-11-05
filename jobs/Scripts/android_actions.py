@@ -160,7 +160,7 @@ class OpenGame(Action):
                 click("center_0", "center_225", self.logger)
                 sleep(30)
 
-                click("center_-260", "center_-20", self.logger)
+                click("center_-260", "center_-55", self.logger)
                 sleep(2)
                 click("center_0", "center_110", self.logger)
                 sleep

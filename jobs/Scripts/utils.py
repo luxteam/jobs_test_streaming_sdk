@@ -239,8 +239,17 @@ def save_android_log(args, case, last_log_line, current_try):
         log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_client" + ".log")
 
         with open(log_destination_path, "ab") as file:
+            # filter Android client logs
+            filtered_log_line = []
+
+            for line in log_lines:
+                prepared_line = line.decode("utf-8").lower()
+
+                if "amf_trace" in prepared_line or "remotegameclient" in prepared_line:
+                    filtered_log_line.append(line)
+
             file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
-            file.write(b"\n".join(log_lines))
+            file.write(b"\n".join(filtered_log_line))
 
         return last_log_line
     except Exception as e:
@@ -375,17 +384,14 @@ def execute_adb_command(command):
 
 
 def track_used_memory(case, execution_type):
-    process_name = "RemoteGameClient.exe" if execution_type == "client" else "RemoteGameServer.exe"
-    target_process = None
+    #command = "powershell.exe (Get-Counter -Counter '\Process(remotegameserver)\Working Set - Private').CounterSamples[0].CookedValue"
+    #result = subprocess.check_output(command, shell=True, text=True)
+    #print(int(result) / 1024 ** 2)
+    process_name = "remotegameclient" if execution_type == "client" else "remotegameserver"
 
-    for process in psutil.process_iter():
-        if process_name in process.name():
-            target_process = process
-            break
-
-    if target_process:
-        value = target_process.memory_info().rss / (1024 * 1024)
-
+    if not(os.system("powershell.exe Get-Process -name " + process_name + " -ErrorAction SilentlyContinue > null")):
+        command = "powershell.exe (Get-Counter -Counter '\Process(" + process_name + ")\Working Set - Private').CounterSamples[0].CookedValue"
+        value = int(subprocess.check_output(command, shell=True, text=True)) / 1024 ** 2
         if "used_memory" in case and isinstance(case["used_memory"], list):
             case["used_memory"].append(value)
         else:

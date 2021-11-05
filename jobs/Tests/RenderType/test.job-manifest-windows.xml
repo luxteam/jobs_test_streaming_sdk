@@ -21,6 +21,7 @@
         <argument>--common_actions_path "{CommonActions}"</argument>
         <argument>--collect_traces "{collectTraces}"</argument>
         <argument>--screen_resolution "{screenResolution}"</argument>
+        <argument>--track_used_memory True</argument>
     </execute>
 
     <execute command='python "{ResourcesDir}/makeCompareReport.py"'>
