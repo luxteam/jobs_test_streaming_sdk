@@ -1,7 +1,7 @@
 {
 	"Audio" : 
 	{
-		"In_CaptureSource" : true,
+		"In_CaptureSource" : false,
 		"In_ChannelLayout" : 0,
 		"In_Channels" : 2,
 		"In_SampleFormat" : "S16",
@@ -54,7 +54,7 @@
 	},
 	"Headset" : 
 	{
-		"DatagramSize" : 65507,
+		"DatagramSize" : 65535,
 		"EnableNetwork" : true,
 		"LogPath" : null,
 		"MaxUserCount" : 1,

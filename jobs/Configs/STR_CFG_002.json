@@ -1,8 +1,8 @@
 {
 	"Audio" : 
 	{
-		"In_CaptureSource" : true,
-		"In_ChannelLayout" : 0,
+		"In_CaptureSource" : false,
+		"In_ChannelLayout" : 1,
 		"In_Channels" : 2,
 		"In_SampleFormat" : "S16",
 		"In_SampleRate" : 44100,

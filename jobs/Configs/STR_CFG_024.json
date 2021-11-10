@@ -1,7 +1,7 @@
 {
 	"Audio" : 
 	{
-		"In_CaptureSource" : true,
+		"In_CaptureSource" : false,
 		"In_ChannelLayout" : 0,
 		"In_Channels" : 2,
 		"In_SampleFormat" : "S16",
@@ -42,7 +42,7 @@
 			"width" : 1.7453292608261108
 		},
 		"IPD" : 0.0640000030398369,
-		"KeepAspectRatio" : false,
+		"KeepAspectRatio" : true,
 		"MaxFrameRate" : 10000.0000000000000000,
 		"MinFrameRate" : 30.0000000000000000,
 		"NonLinearScale" : false,

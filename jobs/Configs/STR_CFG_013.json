@@ -1,7 +1,7 @@
 {
 	"Audio" : 
 	{
-		"In_CaptureSource" : true,
+		"In_CaptureSource" : false,
 		"In_ChannelLayout" : 0,
 		"In_Channels" : 2,
 		"In_SampleFormat" : "S16",
@@ -21,7 +21,7 @@
 	},
 	"Display" : 
 	{
-		"10BitSRGB" : false,
+		"10BitSRGB" : 10,
 		"DOF" : 6,
 		"DumpPath" : null,
 		"EnableDump" : false,

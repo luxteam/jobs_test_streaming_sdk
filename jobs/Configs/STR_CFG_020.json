@@ -1,7 +1,7 @@
 {
 	"Audio" : 
 	{
-		"In_CaptureSource" : true,
+		"In_CaptureSource" : false,
 		"In_ChannelLayout" : 0,
 		"In_Channels" : 2,
 		"In_SampleFormat" : "S16",
@@ -33,8 +33,8 @@
 		"EncoderStereo" : false,
 		"EyeResolution" : 
 		{
-			"height" : 1440,
-			"width" : 1440
+			"height" : 720,
+			"width" : 1280
 		},
 		"FOV" : 
 		{

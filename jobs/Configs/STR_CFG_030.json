@@ -1,7 +1,7 @@
 {
 	"Audio" : 
 	{
-		"In_CaptureSource" : true,
+		"In_CaptureSource" : false,
 		"In_ChannelLayout" : 0,
 		"In_Channels" : 2,
 		"In_SampleFormat" : "S16",
@@ -48,7 +48,7 @@
 		"NonLinearScale" : false,
 		"VideoBitrate" : 50000000,
 		"VideoCodec" : "hevc",
-		"VideoEnableHDR" : false,
+		"VideoEnableHDR" : true,
 		"VideoSliceCount" : 1,
 		"VideoSliceOutput" : false
 	},

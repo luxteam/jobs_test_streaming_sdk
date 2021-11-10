@@ -1,7 +1,7 @@
 {
 	"Audio" : 
 	{
-		"In_CaptureSource" : true,
+		"In_CaptureSource" : false,
 		"In_ChannelLayout" : 0,
 		"In_Channels" : 2,
 		"In_SampleFormat" : "S16",
@@ -45,7 +45,7 @@
 		"KeepAspectRatio" : false,
 		"MaxFrameRate" : 10000.0000000000000000,
 		"MinFrameRate" : 30.0000000000000000,
-		"NonLinearScale" : false,
+		"NonLinearScale" : true,
 		"VideoBitrate" : 50000000,
 		"VideoCodec" : "hevc",
 		"VideoEnableHDR" : false,

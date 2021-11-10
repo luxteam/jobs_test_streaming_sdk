@@ -1,7 +1,7 @@
 {
 	"Audio" : 
 	{
-		"In_CaptureSource" : true,
+		"In_CaptureSource" : false,
 		"In_ChannelLayout" : 0,
 		"In_Channels" : 2,
 		"In_SampleFormat" : "S16",
@@ -62,6 +62,6 @@
 		"Network" : "UDP",
 		"Port" : 1235,
 		"UserConnectionTimeout" : 30,
-		"VerifyFirewall" : true
+		"VerifyFirewall" : false
 	}
 }
