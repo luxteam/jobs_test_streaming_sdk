@@ -15,7 +15,6 @@ from actions import *
 import base64
 import keyboard
 from pyffmpeg import FFmpeg
-from threading import Thread
 
 pyautogui.FAILSAFE = False
 
@@ -396,7 +395,7 @@ def compress_video(temp_video_path, target_video_path, logger):
     recorder = FFmpeg()
     logger.info("Start video compressing")
 
-    recorder.options("ffmpeg -i {} -pix_fmt yuv420p {}".format(temp_video_path, target_video_path))
+    recorder.options("-i {} -pix_fmt yuv420p {}".format(temp_video_path, target_video_path))
 
     os.remove(temp_video_path)
 
@@ -423,7 +422,7 @@ class RecordVideo(Action):
 
             target_video_path = os.path.join(self.video_path, self.target_video_name)
 
-            compressing_thread = threading.Thread(target=compress_video, args=(temp_video_path, target_video_path, self.logger))
+            compressing_thread = Thread(target=compress_video, args=(temp_video_path, target_video_path, self.logger))
             compressing_thread.start()
         except Exception as e:
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
