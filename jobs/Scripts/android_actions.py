@@ -14,6 +14,8 @@ from utils import parse_arguments, execute_adb_command
 from actions import *
 import base64
 import keyboard
+from pyffmpeg import FFmpeg
+from threading import Thread
 
 pyautogui.FAILSAFE = False
 
@@ -390,11 +392,23 @@ class SleepAndScreen(Action):
                 sleep(float(self.delay))
 
 
+def compress_video(temp_video_path, target_video_path, logger):
+    recorder = FFmpeg()
+    logger.info("Start video compressing")
+
+    recorder.options("ffmpeg -i {} -pix_fmt yuv420p {}".format(temp_video_path, target_video_path))
+
+    os.remove(temp_video_path)
+
+    logger.info("Finish to compress video")
+
+
 # Record video
 class RecordVideo(Action):
     def parse(self):
         self.video_path = self.params["output_path"]
-        self.video_name = self.params["case"]["case"] + ".mp4"
+        self.target_video_name = self.params["case"]["case"] + ".mp4"
+        self.temp_video_name = self.params["case"]["case"] + "_temp.mp4"
         self.duration = int(self.params["arguments_line"])
 
     def execute(self):
@@ -402,10 +416,15 @@ class RecordVideo(Action):
             self.logger.info("Start to record video")
             execute_adb_command("adb shell screenrecord --time-limit={} /sdcard/video.mp4".format(self.duration))
             self.logger.info("Finish to record video")
-            
-            video_path = os.path.join(self.video_path, self.video_name)
 
-            execute_adb_command("adb pull /sdcard/video.mp4 {}".format(video_path))
+            temp_video_path = os.path.join(self.video_path, self.temp_video_name)
+
+            execute_adb_command("adb pull /sdcard/video.mp4 {}".format(temp_video_path))
+
+            target_video_path = os.path.join(self.video_path, self.target_video_name)
+
+            compressing_thread = threading.Thread(target=compress_video, args=(temp_video_path, target_video_path, self.logger))
+            compressing_thread.start()
         except Exception as e:
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
