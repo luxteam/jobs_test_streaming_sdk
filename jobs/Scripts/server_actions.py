@@ -9,12 +9,13 @@ import win32gui
 import win32api
 import pyautogui
 import pydirectinput
+import keyboard
 from threading import Thread
 from utils import close_process, collect_traces, parse_arguments, collect_iperf_info, track_used_memory
 from actions import *
 
+csgoFirstExec = True
 pyautogui.FAILSAFE = False
-
 
 # execute some cmd command on server (e.g. open game/benchmark)
 class ExecuteCMD(Action):
@@ -344,7 +345,36 @@ class DoTestActions(Action):
 
                 if self.stage > 3:
                     self.stage = 0
+            elif self.game_name == "dota2":
+                sleep(1)
+                pydirectinput.press("r")
+                sleep(2)
+                pydirectinput.press("w")
+                sleep(2)
+            elif self.game_name == "csgo":
+                global csgoFirstExec
+                if csgoFirstExec:
+                    csgoFirstExec = False
+                    commands = [
+                        "`",
+                        "sv_cheats 1",
+                        "give weapon_deagle",
+                        "give weapon_molotov",
+                        "sv_infinite_ammo 1",
+                        "`"
+                    ]
+                    for command in commands:
+                        if command != "`":
+                            keyboard.write(command)
+                        else:
+                            pydirectinput.press("`")
+                        sleep(0.5)
+                        pydirectinput.press("enter")
 
+                pydirectinput.press("4")
+                sleep(1.5)
+                pyautogui.click()
+                
         except Exception as e:
             self.logger.error("Failed to do test actions: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
