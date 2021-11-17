@@ -33,8 +33,8 @@
 		"EncoderStereo" : false,
 		"EyeResolution" : 
 		{
-			"height" : 720,
-			"width" : 1280
+			"height" : 1440,
+			"width" : 1440
 		},
 		"FOV" : 
 		{
@@ -49,8 +49,8 @@
 		"VideoBitrate" : 50000000,
 		"VideoCodec" : "hevc",
 		"VideoEnableHDR" : false,
-		"VideoSliceCount" : 1,
-		"VideoSliceOutput" : false
+		"VideoSliceCount" : 4,
+		"VideoSliceOutput" : true
 	},
 	"Headset" : 
 	{

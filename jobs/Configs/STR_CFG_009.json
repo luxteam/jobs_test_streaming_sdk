@@ -16,15 +16,15 @@
 	},
 	"Controller" : 
 	{
-		"DOF" : 3,
+		"DOF" : 6,
 		"Description" : null
 	},
 	"Display" : 
 	{
 		"10BitSRGB" : false,
 		"DOF" : 6,
-		"DumpPath" : null,
-		"EnableDump" : false,
+		"DumpPath" : "C:/User/user/dumpTest",
+		"EnableDump" : true,
 		"EncoderResolution" : 
 		{
 			"height" : 1440,

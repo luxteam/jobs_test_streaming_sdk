@@ -30,7 +30,7 @@
 			"height" : 1440,
 			"width" : 2560
 		},
-		"EncoderStereo" : true,
+		"EncoderStereo" : false,
 		"EyeResolution" : 
 		{
 			"height" : 1440,
@@ -50,7 +50,7 @@
 		"VideoCodec" : "hevc",
 		"VideoEnableHDR" : false,
 		"VideoSliceCount" : 1,
-		"VideoSliceOutput" : false
+		"VideoSliceOutput" : true
 	},
 	"Headset" : 
 	{

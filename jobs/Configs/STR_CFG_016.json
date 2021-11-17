@@ -16,13 +16,13 @@
 	},
 	"Controller" : 
 	{
-		"DOF" : 3,
+		"DOF" : 6,
 		"Description" : null
 	},
 	"Display" : 
 	{
 		"10BitSRGB" : false,
-		"DOF" : 3,
+		"DOF" : 6,
 		"DumpPath" : null,
 		"EnableDump" : false,
 		"EncoderResolution" : 
@@ -47,7 +47,7 @@
 		"MinFrameRate" : 30.0000000000000000,
 		"NonLinearScale" : false,
 		"VideoBitrate" : 50000000,
-		"VideoCodec" : "hevc",
+		"VideoCodec" : "havc",
 		"VideoEnableHDR" : false,
 		"VideoSliceCount" : 1,
 		"VideoSliceOutput" : false

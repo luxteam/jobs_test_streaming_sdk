@@ -16,7 +16,7 @@
 	},
 	"Controller" : 
 	{
-		"DOF" : 2,
+		"DOF" : 6,
 		"Description" : null
 	},
 	"Display" : 
@@ -27,8 +27,8 @@
 		"EnableDump" : false,
 		"EncoderResolution" : 
 		{
-			"height" : 1440,
-			"width" : 2560
+			"height" : 720,
+			"width" : 1280
 		},
 		"EncoderStereo" : false,
 		"EyeResolution" : 

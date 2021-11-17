@@ -27,8 +27,8 @@
 		"EnableDump" : false,
 		"EncoderResolution" : 
 		{
-			"height" : 720,
-			"width" : 1280
+			"height" : 1440,
+			"width" : 2560
 		},
 		"EncoderStereo" : false,
 		"EyeResolution" : 
@@ -49,7 +49,7 @@
 		"VideoBitrate" : 50000000,
 		"VideoCodec" : "hevc",
 		"VideoEnableHDR" : false,
-		"VideoSliceCount" : 1,
+		"VideoSliceCount" : 3,
 		"VideoSliceOutput" : false
 	},
 	"Headset" : 
