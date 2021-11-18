@@ -1,0 +1,128 @@
+[
+    {
+        "case": "STR_CFG_001",
+        "status": "active",
+        "server_keys": "-extStats true -Resolution 1280,720",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_002",
+        "status": "skipped",
+        "server_keys": "-extStats true -MAXUSERS 2",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_003",
+        "status": "active",
+        "server_keys": "-extStats true -FRAMERATE 80",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_004",
+        "status": "active",
+        "server_keys": "-extStats true -CaptureMode present -FRAMERATE 80",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_005",
+        "status": "active",
+        "server_keys": "-extStats true -SLICES 2",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_006",
+        "status": "active",
+        "server_keys": "-extStats true -BITRATE 60000000",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_007",
+        "status": "active",
+        "server_keys": "-extStats true -PROTOCOL udp",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_008",
+        "status": "active",
+        "server_keys": "-extStats true -Microphone false",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_009",
+        "status": "active",
+        "server_keys": "-extStats true -Firewall false",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_010",
+        "status": "active",
+        "server_keys": "-extStats true -MinFramerate 100",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_011",
+        "status": "active",
+        "server_keys": "-extStats true -CaptureMode present -MinFramerate 100",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_012",
+        "status": "active",
+        "server_keys": "-extStats true -Offline false",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_013",
+        "status": "active",
+        "server_keys": "-extStats true -Codec h.265",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_CFG_014",
+        "status": "active",
+        "server_keys": "-extStats true -EnableHDR false",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    }
+]
