@@ -509,7 +509,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == flag_resolution)):
                     json_content["message"].append("Application problem: Encode Resolution in Flags doesn't match to Encode Resolution from logs. Resolution from Flags: {}, from logs {}".format(flag_resolution, saved_values['encode_resolution'][i]))
                     if json_content["test_status"] != "error":
-                       json_content["test_status"] = "failed"
+                        if case["case"].find('STR_CFG') == -1: 
+                            json_content["test_status"] = "failed"
 
         # rule №14: FPS > 150 -> warning
         if 'rx_rates' in saved_values:
