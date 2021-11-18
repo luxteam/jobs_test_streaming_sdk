@@ -101,7 +101,7 @@
     {
         "case": "STR_CFG_012",
         "status": "active",
-        "server_keys": "-extStats true -CaptureMode present",
+        "server_keys": "-extStats true -CaptureMode asap",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
@@ -110,7 +110,7 @@
     {
         "case": "STR_CFG_013",
         "status": "active",
-        "server_keys": "-extStats true -CaptureMode present",
+        "server_keys": "-extStats true -CaptureMode asap",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
