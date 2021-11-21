@@ -1,6 +1,6 @@
 [
     {
-        "case": "STR_CFG_001",
+        "case": "STR_CFR_001",
         "status": "active",
         "server_keys": "-extStats true -Resolution 1280,720",
         "client_keys": "",
@@ -9,7 +9,7 @@
         ]
     },
     {
-        "case": "STR_CFG_002",
+        "case": "STR_CFR_002",
         "status": "skipped",
         "server_keys": "-extStats true -MAXUSERS 2",
         "client_keys": "",
@@ -18,7 +18,7 @@
         ]
     },
     {
-        "case": "STR_CFG_003",
+        "case": "STR_CFR_003",
         "status": "active",
         "server_keys": "-extStats true -FRAMERATE 80",
         "client_keys": "",
@@ -27,7 +27,7 @@
         ]
     },
     {
-        "case": "STR_CFG_004",
+        "case": "STR_CFR_004",
         "status": "active",
         "server_keys": "-extStats true -CaptureMode present -FRAMERATE 80",
         "client_keys": "",
@@ -36,7 +36,7 @@
         ]
     },
     {
-        "case": "STR_CFG_005",
+        "case": "STR_CFR_005",
         "status": "active",
         "server_keys": "-extStats true -SLICES 2",
         "client_keys": "",
@@ -45,7 +45,7 @@
         ]
     },
     {
-        "case": "STR_CFG_006",
+        "case": "STR_CFR_006",
         "status": "active",
         "server_keys": "-extStats true -BITRATE 60000000",
         "client_keys": "",
@@ -54,7 +54,7 @@
         ]
     },
     {
-        "case": "STR_CFG_007",
+        "case": "STR_CFR_007",
         "status": "active",
         "server_keys": "-extStats true -PROTOCOL udp",
         "client_keys": "",
@@ -63,7 +63,7 @@
         ]
     },
     {
-        "case": "STR_CFG_008",
+        "case": "STR_CFR_008",
         "status": "active",
         "server_keys": "-extStats true -Microphone false",
         "client_keys": "",
@@ -72,7 +72,7 @@
         ]
     },
     {
-        "case": "STR_CFG_009",
+        "case": "STR_CFR_009",
         "status": "active",
         "server_keys": "-extStats true -Firewall false",
         "client_keys": "",
@@ -81,7 +81,7 @@
         ]
     },
     {
-        "case": "STR_CFG_010",
+        "case": "STR_CFR_010",
         "status": "active",
         "server_keys": "-extStats true -MinFramerate 100",
         "client_keys": "",
@@ -90,7 +90,7 @@
         ]
     },
     {
-        "case": "STR_CFG_011",
+        "case": "STR_CFR_011",
         "status": "active",
         "server_keys": "-extStats true -CaptureMode present -MinFramerate 100",
         "client_keys": "",
@@ -99,7 +99,7 @@
         ]
     },
     {
-        "case": "STR_CFG_012",
+        "case": "STR_CFR_012",
         "status": "active",
         "server_keys": "-extStats true -Offline false",
         "client_keys": "",
@@ -108,7 +108,7 @@
         ]
     },
     {
-        "case": "STR_CFG_013",
+        "case": "STR_CFR_013",
         "status": "active",
         "server_keys": "-extStats true -Codec h.265",
         "client_keys": "",
@@ -117,7 +117,7 @@
         ]
     },
     {
-        "case": "STR_CFG_014",
+        "case": "STR_CFR_014",
         "status": "active",
         "server_keys": "-extStats true -EnableHDR false",
         "client_keys": "",
