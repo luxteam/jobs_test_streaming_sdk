@@ -640,12 +640,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         
             flag = False
             for i in range(len(saved_values['bitrate'])):
-                if json_bitrate_int ^ saved_values['bitrate'][i]:
-                    pos = i
+                if json_bitrate_int ^ saved_values['bitrate']:
+                    #pos = i
                     flag = True
 
             if flag:
-                json_content["message"].append("Config problem: Bitrate in JSON doesn't match to Bitrate from logs. Bitrate from JSON: {}, from logs {}".format(json_bitrate_int, saved_values['bitrate'][pos]))
+                json_content["message"].append("Config problem: Bitrate in JSON doesn't match to Bitrate from logs. Bitrate from JSON: {}, from logs {}".format(json_bitrate_int, saved_values['bitrate']))
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
@@ -704,12 +704,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
             flag = False
             for i in range(len(saved_values['bitrate'])):
-                if int_flags_bitrate ^ saved_values['bitrate'][i]:
-                    pos = i
+                if int_flags_bitrate ^ saved_values['bitrate']:
+                    #pos = i
                     flag = True
 
             if flag:
-                json_content["message"].append("Config problem: Bitrate in flags doesn't match to Bitrate from logs. Bitrate from flags: {}, from logs {}".format(int_flags_bitrate, saved_values['bitrate'][pos]))
+                json_content["message"].append("Config problem: Bitrate in flags doesn't match to Bitrate from logs. Bitrate from flags: {}, from logs {}".format(int_flags_bitrate, saved_values['bitrate']))
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
