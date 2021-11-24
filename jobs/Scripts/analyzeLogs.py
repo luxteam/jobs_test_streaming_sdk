@@ -625,7 +625,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
               min_tx_rate = 1000
 
               for i in range(len(saved_values['tx_rates'])):
-                if saved_values['tx_rates'][i] < min_tx_rate and saved_values['tx_rates'][i] > 10:
+                if saved_values['tx_rates'][i] < min_tx_rate:
                     min_tx_rate = saved_values['tx_rates'][i]
 
                 if json_maxframerate - 10 >= min_tx_rate:
@@ -733,7 +733,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
               min_tx_rate = 1000
 
               for i in range(len(saved_values['tx_rates'])):
-                if saved_values['tx_rates'][i] < min_tx_rate and saved_values['tx_rates'][i] > 10:
+                if saved_values['tx_rates'][i] < min_tx_rate:
                     min_tx_rate = saved_values['tx_rates'][i]
 
                 if flags_minframerate - 10 >= min_tx_rate:
