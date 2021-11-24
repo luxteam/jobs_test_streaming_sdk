@@ -6,6 +6,7 @@ from statistics import stdev, mean
 import re
 import traceback
 import datetime
+from jobs.Scripts.actions import ServerActionException
 
 sys.path.append(
     os.path.abspath(
@@ -191,6 +192,18 @@ def parse_line(line, saved_values):
             saved_values['input_queue_full'] = []
         timestamp_iqf = line.split('  ')[0]
         saved_values['input_queue_full'].append(timestamp_iqf)
+    
+    elif 'Info: Initialize(): Codec:' in line:
+        if 'codec' not in saved_values:
+            saved_values['codec'] = []
+        codec_type = line.split('Info: Initialize(): Codec: ')[1]
+        saved_values['codec'].append(codec_type)
+
+    elif 'using fragment size of Tx:' in line:
+        if 'datagram_size' not in saved_values:
+            saved_values['datagram_size'] = []
+        datagram_size = line.split('using fragment size of Tx: ')[1]
+        saved_values['datagram_size'].append(datagram_size)
 
 
 def parse_error(line, saved_errors):
@@ -549,6 +562,121 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     json_content["message"].append("Application problem: too high Average Latency {}".format(max_avg_latency))
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
+
+        #rules for Config & ConfigRewrite (CN/CRN)
+        #where Config = C, ConfirReswrite = CR, N - case number
+        settings_json_path = os.path.join(os.getenv("APPDATA"), "..", "Local", "AMD", "RemoteGameServer", "settings", "settings.json")
+        with open(settings_json_path, "r") as file:
+            settings_json_content = json.load(file)
+
+        #rule C10: resolution from json != resolution from logs -> failed
+        if case["case"].find('STR_CFG_010') == 0:
+            json_resolution = f'{settings_json_content["Display"]["EncoderResolution"]["width"]}'+","+f'{settings_json_content["Display"]["EncoderResolution"]["height"]}'
+
+            for i in range(1, len(saved_values['encode_resolution'])):
+                if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == json_resolution)):
+                    json_content["message"].append("Config problem: Encode Resolution in JSON doesn't match to Encode Resolution from logs. Resolution from JSON: {}, from logs {}".format(json_resolution, saved_values['encode_resolution'][i]))
+                    if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
+
+        #rule C11: can't be catched
+
+        #rule C12: MaxFrameRate + 10 <= TX Rate -> failed
+        if case["case"].find('STR_CFG_012') == 0:
+            json_maxframerate = f'{settings_json_content["Display"]["MaxFrameRate"]}'
+        
+            if 'tx_rates' in saved_values:
+              max_tx_rate = 0
+
+              for i in range(len(saved_values['tx_rates'])):
+                if saved_values['tx_rates'][i] > max_tx_rate:
+                    max_tx_rate = saved_values['tx_rates'][i]
+
+                if json_maxframerate + 10 <= max_tx_rate:
+                    json_content["message"].append("Config problem: too high TX Rate {}".format(max_tx_rate))
+
+        #rule C13: MinFrameRate - 10 >= TX Rate -> failed
+        if case["case"].find('STR_CFG_013') == 0:
+            json_maxframerate = f'{settings_json_content["Display"]["MinFrameRate"]}'
+        
+            if 'tx_rates' in saved_values:
+              min_tx_rate = 1000
+
+              for i in range(len(saved_values['tx_rates'])):
+                if saved_values['tx_rates'][i] < min_tx_rate and saved_values['tx_rates'][i] > 10:
+                    min_tx_rate = saved_values['tx_rates'][i]
+
+                if json_maxframerate - 10 >= min_tx_rate:
+                    json_content["message"].append("Config problem: too low TX Rate {}".format(min_tx_rate))
+
+        #rule C14: VideoBitrate != Bitrate from logs -> failed
+        if case["case"].find('STR_CFG_014') == 0:
+            json_bitrate_int = int(f'{settings_json_content["Display"]["VideoBitrate"]}')
+        
+        flag = False
+        for i in range(len(saved_values['bitrate'])):
+            if json_bitrate_int != saved_values['bitrate'][i]:
+                pos = i
+                flag = True
+
+        if flag:
+            json_content["message"].append("Config problem: Bitrate in JSON doesn't match to Bitrate from logs. Bitrate from JSON: {}, from logs {}".format(json_bitrate_int, saved_values['bitrate'][pos]))
+            if json_content["test_status"] != "error":
+                json_content["test_status"] = "failed"
+
+        #rule C15: VideoCodec != Codec from logs -> failed
+        if case["case"].find('STR_CFG_015') == 0:
+            json_codec = f'{settings_json_content["Display"]["VideoCodec"]}'.upper()
+
+        value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
+        
+        if value != json_codec:
+            json_content["message"].append("Config problem: Codec in JSON doesn't match to Codec from logs. Bitrate from JSON: {}, from logs {}".format(json_codec, value))
+            if json_content["test_status"] != "error":
+                json_content["test_status"] = "failed"
+
+        #rule C16: Cheching that just started
+
+        #rule C17: can't be catched
+
+        #rule C21: DatagramSize != fragment size from logs -> failed
+        if case["case"].find('STR_CFG_021') == 0:
+            json_datagram = f'{settings_json_content["Headset"]["DatagramSize"]}'
+
+        value = saved_values['datagram_size'][0].strip()
+
+        if value != json_datagram:
+            json_content["message"].append("Config problem: DatagramSize in JSON doesn't match to datagram size from logs. Datagram size from JSON: {}, from logs {}".format(json_datagram, value))
+            if json_content["test_status"] != "error":
+                json_content["test_status"] = "failed"
+        
+
+        #rule CR1: resolution from flags != resolution from logs -> failed = common check
+
+        #rule CR3: FRAMERATE from flags < TX Rate + 10 -> failed
+
+        #rule CR4: Cheching that just started
+
+        #rule CR5: can't be catched now
+
+        #rule CR6: BITRATE from flags != Bitrate from logs -> failed
+
+        #rule CR7: PROTOCOL from flags != protocol from logs -> failed
+
+        #rule CR8: can't be catched now
+
+        #rule CR9: can't be catched
+
+        #rule CR10: Cheching that just started
+
+        #rule CR11: MinFramerate from flags > TX Rate - 10 -> failed
+
+        #rule CR12: Checking that just connected
+
+        #rule CR13: Codec from flags != Codec from logs -> failed
+
+        #rule CR14: can't be catched now
+
 
     json_content["message"].extend(saved_errors)
 

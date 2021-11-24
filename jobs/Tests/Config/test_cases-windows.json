@@ -190,7 +190,7 @@
     },
     {
         "case": "STR_CFG_022",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-extStats true",
         "client_keys": "",
         "transport_protocol": "udp",
