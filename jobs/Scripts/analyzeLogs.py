@@ -638,27 +638,27 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         if case["case"].find('STR_CFG_014') == 0:
             json_bitrate_int = int(f'{settings_json_content["Display"]["VideoBitrate"]}')
         
-        flag = False
-        for i in range(len(saved_values['bitrate'])):
-            if json_bitrate_int != saved_values['bitrate'][i]:
-                pos = i
-                flag = True
+            flag = False
+            for i in range(len(saved_values['bitrate'])):
+                if json_bitrate_int != saved_values['bitrate'][i]:
+                    pos = i
+                    flag = True
 
-        if flag:
-            json_content["message"].append("Config problem: Bitrate in JSON doesn't match to Bitrate from logs. Bitrate from JSON: {}, from logs {}".format(json_bitrate_int, saved_values['bitrate'][pos]))
-            if json_content["test_status"] != "error":
-                json_content["test_status"] = "failed"
+            if flag:
+                json_content["message"].append("Config problem: Bitrate in JSON doesn't match to Bitrate from logs. Bitrate from JSON: {}, from logs {}".format(json_bitrate_int, saved_values['bitrate'][pos]))
+                if json_content["test_status"] != "error":
+                    json_content["test_status"] = "failed"
 
         #rule C15: VideoCodec != Codec from logs -> failed
         if case["case"].find('STR_CFG_015') == 0:
             json_codec = f'{settings_json_content["Display"]["VideoCodec"]}'.upper()
 
-        value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
+            value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
         
-        if value != json_codec:
-            json_content["message"].append("Config problem: Codec in JSON doesn't match to Codec from logs. Codec from JSON: {}, from logs {}".format(json_codec, value))
-            if json_content["test_status"] != "error":
-                json_content["test_status"] = "failed"
+            if value != json_codec:
+                json_content["message"].append("Config problem: Codec in JSON doesn't match to Codec from logs. Codec from JSON: {}, from logs {}".format(json_codec, value))
+                if json_content["test_status"] != "error":
+                    json_content["test_status"] = "failed"
 
         #rule C16: Cheching that just started
 
@@ -668,12 +668,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         if case["case"].find('STR_CFG_021') == 0:
             json_datagram = f'{settings_json_content["Headset"]["DatagramSize"]}'
 
-        value = saved_values['datagram_size'][0].strip()
+            value = saved_values['datagram_size'][0].strip()
 
-        if value != json_datagram:
-            json_content["message"].append("Config problem: DatagramSize in JSON doesn't match to datagram size from logs. Datagram size from JSON: {}, from logs {}".format(json_datagram, value))
-            if json_content["test_status"] != "error":
-                json_content["test_status"] = "failed"
+            if value != json_datagram:
+                json_content["message"].append("Config problem: DatagramSize in JSON doesn't match to datagram size from logs. Datagram size from JSON: {}, from logs {}".format(json_datagram, value))
+                if json_content["test_status"] != "error":
+                    json_content["test_status"] = "failed"
         
 
         #rule CR1: resolution from flags != resolution from logs -> failed = common check
@@ -702,25 +702,25 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         if case["case"].find('STR_CFR_006') == 0:
             int_flags_bitrate = int(get_bitrate(case["prepared_keys"]))
 
-        flag = False
-        for i in range(len(saved_values['bitrate'])):
-            if int_flags_bitrate != saved_values['bitrate'][i]:
-                pos = i
-                flag = True
+            flag = False
+            for i in range(len(saved_values['bitrate'])):
+                if int_flags_bitrate != saved_values['bitrate'][i]:
+                    pos = i
+                    flag = True
 
-        if flag:
-            json_content["message"].append("Config problem: Bitrate in flags doesn't match to Bitrate from logs. Bitrate from flags: {}, from logs {}".format(int_flags_bitrate, saved_values['bitrate'][pos]))
-            if json_content["test_status"] != "error":
-                json_content["test_status"] = "failed"
+            if flag:
+                json_content["message"].append("Config problem: Bitrate in flags doesn't match to Bitrate from logs. Bitrate from flags: {}, from logs {}".format(int_flags_bitrate, saved_values['bitrate'][pos]))
+                if json_content["test_status"] != "error":
+                    json_content["test_status"] = "failed"
 
         #rule CR7: PROTOCOL from flags != protocol from logs -> failed
         if case["case"].find('STR_CFR_007') == 0:
             server_protocol = get_server_protocol(case["prepared_keys"]).upper()
 
-        if server_protocol != saved_values['protocol'][0]:
-            json_content["message"].append("Config problem: Protocol in flags doesn't match to Protocol from logs. Protocol from flags: {}, from logs {}".format(server_protocol, saved_values['protocol'][0]))
-            if json_content["test_status"] != "error":
-                json_content["test_status"] = "failed"
+            if server_protocol != saved_values['protocol'][0]:
+                json_content["message"].append("Config problem: Protocol in flags doesn't match to Protocol from logs. Protocol from flags: {}, from logs {}".format(server_protocol, saved_values['protocol'][0]))
+                if json_content["test_status"] != "error":
+                    json_content["test_status"] = "failed"
 
         #rule CR8: can't be catched now
 
@@ -750,12 +750,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         if case["case"].find('STR_CFR_013') == 0:
             flags_codec = get_codec(case["prepared_keys"]).upper()
 
-        value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
-        
-        if value != flags_codec:
-            json_content["message"].append("Config problem: Codec in flags doesn't match to Codec from logs. Codec from flags: {}, from logs {}".format(flags_codec, value))
-            if json_content["test_status"] != "error":
-                json_content["test_status"] = "failed"
+            value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
+
+            if value != flags_codec:
+                json_content["message"].append("Config problem: Codec in flags doesn't match to Codec from logs. Codec from flags: {}, from logs {}".format(flags_codec, value))
+                if json_content["test_status"] != "error":
+                    json_content["test_status"] = "failed"
 
         #rule CR14: can't be catched now
 
