@@ -276,6 +276,8 @@ def execute_tests(args):
                 keys_description = "Server keys: {}".format(prepared_keys)
                 case["script_info"].append(keys_description)
 
+                case["prepared_keys"] = prepared_keys
+
                 params = {}
 
                 output_path = os.path.join(args.output, "Color")

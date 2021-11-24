@@ -145,7 +145,7 @@ def prepare_empty_reports(args, current_conf):
                     case["script_info"].append(keys_description)
             else:
                 test_case_report['script_info'] = case['script_info']
-
+                
             test_case_report['test_group'] = args.test_group
             test_case_report['tool'] = 'StreamingSDK'
             test_case_report['render_time'] = 0.0
@@ -208,6 +208,8 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report["number_of_tries"] += 1
 
         test_case_report["message"] = test_case_report["message"] + list(error_messages)
+
+        test_case_report["keys"] = case["prepared_keys"]
 
         if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
             test_case_report["group_timeout_exceeded"] = False
@@ -294,6 +296,8 @@ def execute_tests(args, current_conf):
 
                 prepared_keys = prepare_keys(args, case)
                 execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
+
+                case["prepared_keys"] = prepared_keys
 
                 if args.execution_type == "server":
                     keys_description = "Server keys: {}".format(prepared_keys)
