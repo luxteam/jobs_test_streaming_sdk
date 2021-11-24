@@ -110,13 +110,23 @@ def prepare_empty_reports(args):
             test_case_report['test_case'] = case['case']
             test_case_report['render_device'] = render_device
 
+            test_case_report['script_info'] = case['script_info']
+
             if case['status'] == 'skipped':
                 prepared_keys = prepare_keys(args, case)
 
                 keys_description = "Server keys: {}".format(prepared_keys)
-                case["script_info"].append(keys_description)
-            else:
-                test_case_report['script_info'] = case['script_info']
+                test_case_report["script_info"].append(keys_description)                
+
+            script_info = []
+
+            # ignore client keys (they aren't used in Android autotests)
+            for i in range(len(test_case_report["script_info"])):
+                if "Client keys" not in test_case_report["script_info"][i]:
+                    # ignore line with client keys (they aren't used by Android autotests)
+                    script_info.append(test_case_report["script_info"][i])
+
+            test_case_report["script_info"] = script_info
 
             test_case_report['test_group'] = args.test_group
             test_case_report['tool'] = 'StreamingSDK'
@@ -132,16 +142,6 @@ def prepare_empty_reports(args):
             test_case_report["number_of_tries"] = 0
             test_case_report["server_configuration"] = render_device + " " + platform_name
             test_case_report["message"] = []
-
-            script_info = []
-
-            # ignore client keys (they aren't used in Android autotests)
-            for i in range(len(test_case_report["script_info"])):
-                if "Client keys" not in test_case_report["script_info"][i]:
-                    # ignore line with client keys (they aren't used by Android autotests)
-                    script_info.append(test_case_report["script_info"][i])
-
-            test_case_report["script_info"] = script_info
 
             if case['status'] == 'skipped':
                 test_case_report['test_status'] = 'skipped'

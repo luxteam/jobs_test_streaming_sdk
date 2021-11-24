@@ -137,12 +137,13 @@ def prepare_empty_reports(args, current_conf):
 
                 if args.execution_type == "server":
                     keys_description = "Server keys: {}".format(prepared_keys)
-                    case["script_info"] = []
-                    case["script_info"].append(keys_description)
+                    test_case_report["script_info"] = []
+                    test_case_report["script_info"].append(keys_description)
 
                 elif args.execution_type == "client":
                     keys_description = "Client keys: {}".format(prepared_keys)
-                    case["script_info"].append(keys_description)
+                    test_case_report['script_info'] = case['script_info']
+                    test_case_report["script_info"].append(keys_description)
             else:
                 test_case_report['script_info'] = case['script_info']
                 
