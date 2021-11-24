@@ -259,7 +259,7 @@ def execute_tests(args, current_conf):
                         settings_json_path
                     )
 
-                    if case["case"].find('STR_CFG') != -1:
+                    if case["case"].find('STR_CFG') != -1 or case["case"].find('STR_CFR') != -1:
                         copyfile(
                             os.path.realpath(
                                 os.path.join(os.path.dirname(__file__),
