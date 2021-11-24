@@ -79,7 +79,7 @@ def copy_test_cases(args):
 def prepare_keys(args, case):
     prepared_keys = case["server_keys"]
     # TODO remove hardcoded values
-    prepared_keys = prepared_keys.replace("<resolution>", "1920,1080")
+    return prepared_keys.replace("<resolution>", "1920,1080")
 
 
 def prepare_empty_reports(args):
