@@ -604,7 +604,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule C12: MaxFrameRate + 10 <= TX Rate -> failed
         if case["case"].find('STR_CFG_012') == 0:
-            json_maxframerate = f'{settings_json_content["Display"]["MaxFrameRate"]}'
+            json_maxframerate = int(f'{settings_json_content["Display"]["MaxFrameRate"]}')
         
             if 'tx_rates' in saved_values:
               max_tx_rate = 0
@@ -620,7 +620,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule C13: MinFrameRate - 10 >= TX Rate -> failed
         if case["case"].find('STR_CFG_013') == 0:
-            json_maxframerate = f'{settings_json_content["Display"]["MinFrameRate"]}'
+            json_maxframerate = int(f'{settings_json_content["Display"]["MinFrameRate"]}')
         
             if 'tx_rates' in saved_values:
               min_tx_rate = 1000
@@ -640,7 +640,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         
             flag = False
             for i in range(len(saved_values['bitrate'])):
-                if json_bitrate_int != saved_values['bitrate'][i]:
+                if json_bitrate_int != int(saved_values['bitrate'][i]):
                     pos = i
                     flag = True
 
