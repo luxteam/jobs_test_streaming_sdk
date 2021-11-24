@@ -700,16 +700,16 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule CR6: BITRATE from flags != Bitrate from logs -> failed
         if case["case"].find('STR_CFR_006') == 0:
-            flags_bitrate = get_bitrate(case["prepared_keys"])
+            int_flags_bitrate = int(get_bitrate(case["prepared_keys"]))
 
         flag = False
         for i in range(len(saved_values['bitrate'])):
-            if flags_bitrate != saved_values['bitrate'][i]:
+            if int_flags_bitrate != saved_values['bitrate'][i]:
                 pos = i
                 flag = True
 
         if flag:
-            json_content["message"].append("Config problem: Bitrate in flags doesn't match to Bitrate from logs. Bitrate from flags: {}, from logs {}".format(flags_bitrate, saved_values['bitrate'][pos]))
+            json_content["message"].append("Config problem: Bitrate in flags doesn't match to Bitrate from logs. Bitrate from flags: {}, from logs {}".format(int_flags_bitrate, saved_values['bitrate'][pos]))
             if json_content["test_status"] != "error":
                 json_content["test_status"] = "failed"
 
