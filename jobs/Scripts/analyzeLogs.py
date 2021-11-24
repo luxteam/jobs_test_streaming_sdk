@@ -59,8 +59,8 @@ def get_bitrate(keys):
         return 50000000
 
 def get_server_protocol(keys):
-    if '-Protocol ' in keys:
-        return keys.split('-Protocol ')[1].split()[0]
+    if '-PROTOCOL ' in keys:
+        return keys.split('-PROTOCOL ')[1].split()[0]
 
 def get_min_framerate(keys):
     if '-MinFramerate ' in keys:
@@ -704,7 +704,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
             flag = False
             for i in range(len(saved_values['bitrate'])):
-                if int_flags_bitrate != saved_values['bitrate'][i]:
+                if int_flags_bitrate ^ saved_values['bitrate'][i]:
                     pos = i
                     flag = True
 
@@ -730,7 +730,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule CR11: MinFramerate from flags - 10 >= TX Rate -> failed
         if case["case"].find('STR_CFR_011') == 0:
-            flags_minframerate = get_min_framerate(case["prepared_keys"])
+            flags_minframerate = int(get_min_framerate(case["prepared_keys"]))
         
             if 'tx_rates' in saved_values:
               min_tx_rate = 1000
