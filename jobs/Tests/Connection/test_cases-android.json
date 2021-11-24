@@ -7,6 +7,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "Connect server before client"
         ]
     },
     {
@@ -17,6 +18,7 @@
         "transport_protocol": "udp",
         "start_first": "client",
         "script_info": [
+            "Connect client before server"
         ]
     },
     {
@@ -27,6 +29,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "Connect server before client"
         ]
     },
     {
@@ -37,6 +40,7 @@
         "transport_protocol": "tcp",
         "start_first": "client",
         "script_info": [
+            "Connect client before server"
         ]
     },
     {
@@ -47,6 +51,7 @@
         "transport_protocol": "udp",
         "keep_server": true,
         "script_info": [
+            "Keep server, restart client (try #1)"
         ]
     },
     {
@@ -57,6 +62,7 @@
         "transport_protocol": "udp",
         "keep_server": true,
         "script_info": [
+            "Keep server, restart client (try #2)"
         ]
     },
     {
@@ -67,6 +73,7 @@
         "transport_protocol": "udp",
         "keep_server": true,
         "script_info": [
+            "Keep server, restart client (try #3)"
         ]
     },
     {
@@ -77,6 +84,7 @@
         "transport_protocol": "udp",
         "keep_server": true,
         "script_info": [
+            "Keep server, restart client (try #4)"
         ]
     },
     {
@@ -86,6 +94,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Keep server, restart client (try #5)"
         ]
     },
     {
@@ -96,6 +105,7 @@
         "transport_protocol": "udp",
         "keep_client": true,
         "script_info": [
+            "Keep client, restart server (try #1)"
         ]
     },
     {
@@ -106,6 +116,7 @@
         "transport_protocol": "udp",
         "keep_client": true,
         "script_info": [
+            "Keep client, restart server (try #2)"
         ]
     },
     {
@@ -116,6 +127,7 @@
         "transport_protocol": "udp",
         "keep_client": true,
         "script_info": [
+            "Keep client, restart server (try #3)"
         ]
     },
     {
@@ -126,6 +138,7 @@
         "transport_protocol": "udp",
         "keep_client": true,
         "script_info": [
+            "Keep client, restart server (try #4)"
         ]
     },
     {
@@ -135,6 +148,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Keep client, restart server (try #5)"
         ]
     },
     {
@@ -145,6 +159,7 @@
         "transport_protocol": "tcp",
         "keep_server": true,
         "script_info": [
+            "Keep server, restart client (try #1)"
         ]
     },
     {
@@ -155,6 +170,7 @@
         "transport_protocol": "tcp",
         "keep_server": true,
         "script_info": [
+            "Keep server, restart client (try #2)"
         ]
     },
     {
@@ -165,6 +181,7 @@
         "transport_protocol": "tcp",
         "keep_server": true,
         "script_info": [
+            "Keep server, restart client (try #3)"
         ]
     },
     {
@@ -175,6 +192,7 @@
         "transport_protocol": "tcp",
         "keep_server": true,
         "script_info": [
+            "Keep server, restart client (try #4)"
         ]
     },
     {
@@ -184,6 +202,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Keep server, restart client (try #5)"
         ]
     },
     {
@@ -194,6 +213,7 @@
         "transport_protocol": "tcp",
         "keep_client": true,
         "script_info": [
+            "Keep client, restart server (try #1)"
         ]
     },
     {
@@ -204,6 +224,7 @@
         "transport_protocol": "tcp",
         "keep_client": true,
         "script_info": [
+            "Keep client, restart server (try #2)"
         ]
     },
     {
@@ -214,6 +235,7 @@
         "transport_protocol": "tcp",
         "keep_client": true,
         "script_info": [
+            "Keep client, restart server (try #3)"
         ]
     },
     {
@@ -224,6 +246,7 @@
         "transport_protocol": "tcp",
         "keep_client": true,
         "script_info": [
+            "Keep client, restart server (try #4)"
         ]
     },
     {
@@ -233,6 +256,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Keep client, restart server (try #5)"
         ]
     }
 ]

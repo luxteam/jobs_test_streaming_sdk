@@ -76,6 +76,12 @@ def copy_test_cases(args):
         exit(-1)
 
 
+def prepare_keys(args, case):
+    prepared_keys = case["server_keys"]
+    # TODO remove hardcoded values
+    prepared_keys = prepared_keys.replace("<resolution>", "1920,1080")
+
+
 def prepare_empty_reports(args):
     main_logger.info('Create empty report files')
 
@@ -103,7 +109,15 @@ def prepare_empty_reports(args):
             test_case_report = {}
             test_case_report['test_case'] = case['case']
             test_case_report['render_device'] = render_device
-            test_case_report['script_info'] = case['script_info']
+
+            if case['status'] == 'skipped':
+                prepared_keys = prepare_keys(args, case)
+
+                keys_description = "Server keys: {}".format(prepared_keys)
+                case["script_info"].append(keys_description)
+            else:
+                test_case_report['script_info'] = case['script_info']
+
             test_case_report['test_group'] = args.test_group
             test_case_report['tool'] = 'StreamingSDK'
             test_case_report['render_time'] = 0.0
@@ -250,9 +264,7 @@ def execute_tests(args):
                 main_logger.info("Network in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["Network"]))
                 main_logger.info("Datagram size in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["DatagramSize"]))
 
-                prepared_keys = case["server_keys"]
-                # TODO remove hardcoded values
-                prepared_keys = prepared_keys.replace("<resolution>", "1920,1080")
+                prepared_keys = prepare_keys(args, case)
 
                 server_execution_script = "{tool} {keys}".format(tool=args.server_tool, keys=prepared_keys)
 
@@ -262,14 +274,7 @@ def execute_tests(args):
                     f.write(server_execution_script)
 
                 keys_description = "Server keys: {}".format(prepared_keys)
-                for i in range(len(case["script_info"])):
-                    if "Server keys" in case["script_info"][i]:
-                        case["script_info"][i] = keys_description
-                        break
-                else:
-                    case["script_info"].append(keys_description)
-
-                case["prepared_keys"] = prepared_keys
+                case["script_info"].append(keys_description)
 
                 params = {}
 
