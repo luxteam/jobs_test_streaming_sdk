@@ -7,7 +7,6 @@ import re
 import traceback
 import datetime
 from typing import Protocol
-from jobs.Scripts.actions import ServerActionException
 
 sys.path.append(
     os.path.abspath(
@@ -639,9 +638,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             json_bitrate_int = set(f'{settings_json_content["Display"]["VideoBitrate"]}')
         
             flag = False
-            for i in range(len(saved_values['bitrate'])):
-                if json_bitrate_int ^ saved_values['bitrate']:
-                    #pos = i
+            for saved_bitrate in saved_values['bitrate']:
+                if json_bitrate_int != saved_bitrate:
                     flag = True
 
             if flag:
@@ -703,9 +701,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             int_flags_bitrate = set(get_bitrate(case["prepared_keys"]))
 
             flag = False
-            for i in range(len(saved_values['bitrate'])):
-                if int_flags_bitrate ^ saved_values['bitrate']:
-                    #pos = i
+            for saved_bitrate in saved_values['bitrate']:
+                if int_flags_bitrate != saved_bitrate:
                     flag = True
 
             if flag:
