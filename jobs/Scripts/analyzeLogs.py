@@ -6,6 +6,7 @@ from statistics import stdev, mean
 import re
 import traceback
 import datetime
+from typing import Protocol
 from jobs.Scripts.actions import ServerActionException
 
 sys.path.append(
@@ -50,6 +51,20 @@ def get_capture(keys):
         return keys.split('-Capture ')[1].split()[0]
     else:
         return 'amd'
+
+def get_bitrate(keys):
+    if '-Bitrate ' in keys:
+        return keys.split('-Bitrate ')[1].split()[0]
+    else:
+        return 50000000
+
+def get_server_protocol(keys):
+    if '-Protocol ' in keys:
+        return keys.split('-Protocol ')[1].split()[0]
+
+def get_min_framerate(keys):
+    if '-MinFramerate ' in keys:
+        return keys.split('-MinFramerate ')[1].split()[0]
 
 def parse_block_line(line, saved_values):
     # Line example:
@@ -204,6 +219,12 @@ def parse_line(line, saved_values):
             saved_values['datagram_size'] = []
         datagram_size = line.split('using fragment size of Tx: ')[1]
         saved_values['datagram_size'].append(datagram_size)
+
+    elif 'listening for incoming connections on' in line:
+        if 'protocol' not in saved_values:
+            saved_values['protocol'] = []
+        server_protocol = line.split('listening for incoming connections on ')[1].split(':')[0]
+        saved_values['protocol'].append(server_protocol)
 
 
 def parse_error(line, saved_errors):
@@ -594,6 +615,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                 if json_maxframerate + 10 <= max_tx_rate:
                     json_content["message"].append("Config problem: too high TX Rate {}".format(max_tx_rate))
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
         #rule C13: MinFrameRate - 10 >= TX Rate -> failed
         if case["case"].find('STR_CFG_013') == 0:
@@ -608,6 +631,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                 if json_maxframerate - 10 >= min_tx_rate:
                     json_content["message"].append("Config problem: too low TX Rate {}".format(min_tx_rate))
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
         #rule C14: VideoBitrate != Bitrate from logs -> failed
         if case["case"].find('STR_CFG_014') == 0:
@@ -631,7 +656,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
         
         if value != json_codec:
-            json_content["message"].append("Config problem: Codec in JSON doesn't match to Codec from logs. Bitrate from JSON: {}, from logs {}".format(json_codec, value))
+            json_content["message"].append("Config problem: Codec in JSON doesn't match to Codec from logs. Codec from JSON: {}, from logs {}".format(json_codec, value))
             if json_content["test_status"] != "error":
                 json_content["test_status"] = "failed"
 
@@ -653,15 +678,49 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule CR1: resolution from flags != resolution from logs -> failed = common check
 
-        #rule CR3: FRAMERATE from flags < TX Rate + 10 -> failed
+        #rule CR3: FRAMERATE from flags + 10 <= TX Rate -> failed
+        if case["case"].find('STR_CFR_003') == 0:
+            flags_framerate = get_framerate(case["prepared_keys"])
+        
+            if 'tx_rates' in saved_values:
+              max_tx_rate = 0
+
+              for i in range(len(saved_values['tx_rates'])):
+                if saved_values['tx_rates'][i] > max_tx_rate:
+                    max_tx_rate = saved_values['tx_rates'][i]
+
+                if flags_framerate + 10 <= max_tx_rate:
+                    json_content["message"].append("Config problem: too high TX Rate {}".format(max_tx_rate))
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
         #rule CR4: Cheching that just started
 
         #rule CR5: can't be catched now
 
         #rule CR6: BITRATE from flags != Bitrate from logs -> failed
+        if case["case"].find('STR_CFR_006') == 0:
+            flags_bitrate = get_bitrate(case["prepared_keys"])
+
+        flag = False
+        for i in range(len(saved_values['bitrate'])):
+            if flags_bitrate != saved_values['bitrate'][i]:
+                pos = i
+                flag = True
+
+        if flag:
+            json_content["message"].append("Config problem: Bitrate in flags doesn't match to Bitrate from logs. Bitrate from flags: {}, from logs {}".format(flags_bitrate, saved_values['bitrate'][pos]))
+            if json_content["test_status"] != "error":
+                json_content["test_status"] = "failed"
 
         #rule CR7: PROTOCOL from flags != protocol from logs -> failed
+        if case["case"].find('STR_CFR_007') == 0:
+            server_protocol = get_server_protocol(case["prepared_keys"]).upper()
+
+        if server_protocol != saved_values['protocol'][0]:
+            json_content["message"].append("Config problem: Protocol in flags doesn't match to Protocol from logs. Protocol from flags: {}, from logs {}".format(server_protocol, saved_values['protocol'][0]))
+            if json_content["test_status"] != "error":
+                json_content["test_status"] = "failed"
 
         #rule CR8: can't be catched now
 
@@ -669,11 +728,34 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule CR10: Cheching that just started
 
-        #rule CR11: MinFramerate from flags > TX Rate - 10 -> failed
+        #rule CR11: MinFramerate from flags - 10 >= TX Rate -> failed
+        if case["case"].find('STR_CFR_011') == 0:
+            flags_minframerate = get_min_framerate(case["prepared_keys"])
+        
+            if 'tx_rates' in saved_values:
+              min_tx_rate = 1000
+
+              for i in range(len(saved_values['tx_rates'])):
+                if saved_values['tx_rates'][i] < min_tx_rate and saved_values['tx_rates'][i] > 10:
+                    min_tx_rate = saved_values['tx_rates'][i]
+
+                if flags_minframerate - 10 >= min_tx_rate:
+                    json_content["message"].append("Config problem: too low TX Rate {}".format(min_tx_rate))
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
         #rule CR12: Checking that just connected
 
         #rule CR13: Codec from flags != Codec from logs -> failed
+        if case["case"].find('STR_CFR_013') == 0:
+            flags_codec = get_codec(case["prepared_keys"]).upper()
+
+        value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
+        
+        if value != flags_codec:
+            json_content["message"].append("Config problem: Codec in flags doesn't match to Codec from logs. Codec from flags: {}, from logs {}".format(flags_codec, value))
+            if json_content["test_status"] != "error":
+                json_content["test_status"] = "failed"
 
         #rule CR14: can't be catched now
 
