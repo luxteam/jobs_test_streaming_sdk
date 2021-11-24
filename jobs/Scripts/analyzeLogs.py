@@ -640,7 +640,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         
             flag = False
             for i in range(len(saved_values['bitrate'])):
-                if json_bitrate_int != int(saved_values['bitrate'][i]):
+                if json_bitrate_int ^ saved_values['bitrate'][i]:
                     pos = i
                     flag = True
 
