@@ -635,7 +635,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule C14: VideoBitrate != Bitrate from logs -> failed
         if case["case"].find('STR_CFG_014') == 0:
-            json_bitrate_int = set(f'{settings_json_content["Display"]["VideoBitrate"]}')
+            json_bitrate_int = int(f'{settings_json_content["Display"]["VideoBitrate"]}')
         
             flag = False
             for saved_bitrate in saved_values['bitrate']:
@@ -698,7 +698,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule CR6: BITRATE from flags != Bitrate from logs -> failed
         if case["case"].find('STR_CFR_006') == 0:
-            int_flags_bitrate = set(get_bitrate(case["prepared_keys"]))
+            int_flags_bitrate = int(get_bitrate(case["prepared_keys"]))
 
             flag = False
             for saved_bitrate in saved_values['bitrate']:
