@@ -544,6 +544,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     if json_content["test_status"] != "error":
                         if case["case"].find('STR_CFG') == -1: 
                             json_content["test_status"] = "failed"
+                    break
 
         # rule №14: FPS > 150 -> warning
         if 'rx_rates' in saved_values:
@@ -585,6 +586,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rules for Config & ConfigRewrite (CN/CRN)
         #where Config = C, ConfirReswrite = CR, N - case number
+        #C1-C9 - skipped
         settings_json_path = os.path.join(os.getenv("APPDATA"), "..", "Local", "AMD", "RemoteGameServer", "settings", "settings.json")
         with open(settings_json_path, "r") as file:
             settings_json_content = json.load(file)
@@ -598,6 +600,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     json_content["message"].append("Config problem: Encode Resolution in JSON doesn't match to Encode Resolution from logs. Resolution from JSON: {}, from logs {}".format(json_resolution, saved_values['encode_resolution'][i]))
                     if json_content["test_status"] != "error":
                             json_content["test_status"] = "failed"
+                    break
 
         #rule C11: can't be catched
 
@@ -606,11 +609,11 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             json_maxframerate = int(f'{settings_json_content["Display"]["MaxFrameRate"]}')
         
             if 'tx_rates' in saved_values:
-              max_tx_rate = 0
+                max_tx_rate = 0
 
-              for i in range(len(saved_values['tx_rates'])):
-                if saved_values['tx_rates'][i] > max_tx_rate:
-                    max_tx_rate = saved_values['tx_rates'][i]
+                for i in range(len(saved_values['tx_rates'])):
+                    if saved_values['tx_rates'][i] > max_tx_rate:
+                        max_tx_rate = saved_values['tx_rates'][i]
 
                 if json_maxframerate + 10 <= max_tx_rate:
                     json_content["message"].append("Config problem: too high TX Rate {}".format(max_tx_rate))
@@ -622,11 +625,11 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             json_maxframerate = int(f'{settings_json_content["Display"]["MinFrameRate"]}')
         
             if 'tx_rates' in saved_values:
-              min_tx_rate = 1000
+                min_tx_rate = 1000
 
-              for i in range(len(saved_values['tx_rates'])):
-                if saved_values['tx_rates'][i] < min_tx_rate:
-                    min_tx_rate = saved_values['tx_rates'][i]
+                for i in range(len(saved_values['tx_rates'])):
+                    if saved_values['tx_rates'][i] < min_tx_rate:
+                        min_tx_rate = saved_values['tx_rates'][i]
 
                 if json_maxframerate - 10 >= min_tx_rate:
                     json_content["message"].append("Config problem: too low TX Rate {}".format(min_tx_rate))
@@ -635,7 +638,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule C14: VideoBitrate != Bitrate from logs -> failed
         if case["case"].find('STR_CFG_014') == 0:
-            json_bitrate_int = int(f'{settings_json_content["Display"]["VideoBitrate"]}')
+            json_bitrate_int = int(f'{settings_json_content["Display"]["VideoBitrate"]}') / 1000000
         
             flag = False
             for saved_bitrate in saved_values['bitrate']:
@@ -681,12 +684,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             flags_framerate = get_framerate(case["prepared_keys"])
         
             if 'tx_rates' in saved_values:
-              max_tx_rate = 0
+                max_tx_rate = 0
 
-              for i in range(len(saved_values['tx_rates'])):
-                if saved_values['tx_rates'][i] > max_tx_rate:
-                    max_tx_rate = saved_values['tx_rates'][i]
-
+                for i in range(len(saved_values['tx_rates'])):
+                    if saved_values['tx_rates'][i] > max_tx_rate:
+                        max_tx_rate = saved_values['tx_rates'][i]
+    
                 if flags_framerate + 10 <= max_tx_rate:
                     json_content["message"].append("Config problem: too high TX Rate {}".format(max_tx_rate))
                     if json_content["test_status"] != "error":
@@ -698,7 +701,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rule CR6: BITRATE from flags != Bitrate from logs -> failed
         if case["case"].find('STR_CFR_006') == 0:
-            int_flags_bitrate = int(get_bitrate(case["prepared_keys"]))
+            int_flags_bitrate = int(get_bitrate(case["prepared_keys"])) / 1000000
 
             flag = False
             for saved_bitrate in saved_values['bitrate']:
@@ -730,11 +733,11 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             flags_minframerate = int(get_min_framerate(case["prepared_keys"]))
         
             if 'tx_rates' in saved_values:
-              min_tx_rate = 1000
+                min_tx_rate = 1000
 
-              for i in range(len(saved_values['tx_rates'])):
-                if saved_values['tx_rates'][i] < min_tx_rate:
-                    min_tx_rate = saved_values['tx_rates'][i]
+                for i in range(len(saved_values['tx_rates'])):
+                    if saved_values['tx_rates'][i] < min_tx_rate:
+                        min_tx_rate = saved_values['tx_rates'][i]
 
                 if flags_minframerate - 10 >= min_tx_rate:
                     json_content["message"].append("Config problem: too low TX Rate {}".format(min_tx_rate))
@@ -747,8 +750,13 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         if case["case"].find('STR_CFR_013') == 0:
             flags_codec = get_codec(case["prepared_keys"]).upper()
 
-            value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
+            if (flags_codec == "H.265" or flags_codec == "H265"):
+                flags_codec = "HEVC"
 
+            if (flags_codec == "H.264" or flags_codec == "H264"):
+                flags_codec = "AVC"
+
+            value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
             if value != flags_codec:
                 json_content["message"].append("Config problem: Codec in flags doesn't match to Codec from logs. Codec from flags: {}, from logs {}".format(flags_codec, value))
                 if json_content["test_status"] != "error":
