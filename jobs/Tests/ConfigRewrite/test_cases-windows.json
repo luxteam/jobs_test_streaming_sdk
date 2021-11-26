@@ -138,5 +138,145 @@
         "script_info": [
             "Config values - VideoEnableHDR: true"
         ]
+    },
+    {
+        "case": "STR_CFR_015",
+        "status": "active",
+        "server_keys": "-extStats true -Resolution 1280,720",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - height: 2160, width: 3840 in EncoderResolution part"
+        ]
+    },
+    {
+        "case": "STR_CFR_016",
+        "status": "skipped",
+        "server_keys": "-extStats true -MAXUSERS 2",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - MaxUserCount: 1"
+        ]
+    },
+    {
+        "case": "STR_CFR_017",
+        "status": "active",
+        "server_keys": "-extStats true -FRAMERATE 80",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - MaxFrameRate: 30"
+        ]
+    },
+    {
+        "case": "STR_CFR_018",
+        "status": "active",
+        "server_keys": "-extStats true -CaptureMode present -FRAMERATE 80",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - MaxFrameRate: 30"
+        ]
+    },
+    {
+        "case": "STR_CFR_019",
+        "status": "active",
+        "server_keys": "-extStats true -SLICES 2",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - VideoSliceOutput: true, VideoSliceCount: 3"
+        ]
+    },
+    {
+        "case": "STR_CFR_020",
+        "status": "active",
+        "server_keys": "-extStats true -BITRATE 60000000",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - VideoBitrate: 40000000"
+        ]
+    },
+    {
+        "case": "STR_CFR_021",
+        "status": "active",
+        "server_keys": "-extStats true -PROTOCOL udp",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - Network: \"TCP\""
+        ]
+    },
+    {
+        "case": "STR_CFR_022",
+        "status": "active",
+        "server_keys": "-extStats true -Microphone false",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - Microphone: true"
+        ]
+    },
+    {
+        "case": "STR_CFR_023",
+        "status": "active",
+        "server_keys": "-extStats true -Firewall false",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - VerifyFirewall: true"
+        ]
+    },
+    {
+        "case": "STR_CFR_024",
+        "status": "active",
+        "server_keys": "-extStats true -MinFramerate 100",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - MinFrameRate: 80"
+        ]
+    },
+    {
+        "case": "STR_CFR_025",
+        "status": "active",
+        "server_keys": "-extStats true -CaptureMode present -MinFramerate 100",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - MinFrameRate: 80"
+        ]
+    },
+    {
+        "case": "STR_CFR_026",
+        "status": "skipped",
+        "server_keys": "-extStats true -Offline false",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - EnableNetwork: false"
+        ]
+    },
+    {
+        "case": "STR_CFR_027",
+        "status": "active",
+        "server_keys": "-extStats true -Codec h.265",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - VideoCodec: \"avc\""
+        ]
+    },
+    {
+        "case": "STR_CFR_028",
+        "status": "active",
+        "server_keys": "-extStats true -EnableHDR false",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Config values - VideoEnableHDR: true"
+        ]
     }
 ]
