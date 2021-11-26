@@ -6,6 +6,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Audio block",
+            "In_CaptureSource = true"
         ]
     },
     {
@@ -15,6 +17,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Audio block",
+            "In_ChannelLayout: 1"
         ]
     },
     {
@@ -24,6 +28,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Audio block",
+            "In_Channels: 1"
         ]
     },
     {
@@ -33,6 +39,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Audio block",
+            "In_SampleFormat: \"DBL\""
         ]
     },
     {
@@ -42,6 +50,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Audio block",
+            "In_SampleRate: 21050"
         ]
     },
     {
@@ -51,6 +61,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Audio block",
+            "In_StreamSampleRate: 21050"
         ]
     },
     {
@@ -60,6 +72,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Audio block",
+            "Out_AudioBitrate: 256000"
         ]
     },
     {
@@ -69,6 +83,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Audio block",
+            "Out_TimeShift: 3000"
         ]
     },
     {
@@ -78,6 +94,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "EnableDump: true, DumpPath: \"C:/User/user/DumpTest\""
         ]
     },
     {
@@ -87,6 +105,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "height: 720, width: 1280 in EncoderResolution part"
         ]
     },
     {
@@ -96,24 +116,30 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "KeepAspectRatio: true"
         ]
     },
     {
         "case": "STR_CFG_012",
         "status": "active",
-        "server_keys": "-extStats true -CaptureMode asap",
+        "server_keys": "-extStats true -CaptureMode present",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "MaxFrameRate: 50"
         ]
     },
     {
         "case": "STR_CFG_013",
         "status": "active",
-        "server_keys": "-extStats true -CaptureMode asap",
+        "server_keys": "-extStats true -CaptureMode present",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "MinFrameRate: 70"
         ]
     },
     {
@@ -123,6 +149,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "VideoBitrate: 80000000"
         ]
     },
     {
@@ -132,6 +160,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "VideoCodec: \"avc\""
         ]
     },
     {
@@ -141,6 +171,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "VideoCodec: \"havc\""
         ]
     },
     {
@@ -150,6 +182,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "VideoEnableHDR: true"
         ]
     },
     {
@@ -159,6 +193,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "VideoSliceCount: 3"
         ]
     },
     {
@@ -168,6 +204,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "VideoSliceOutput: true"
         ]
     },
     {
@@ -177,6 +215,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Display block",
+            "VideoSliceOutput: true",
+            "VideoSliceCount: 4"
         ]
     },
     {
@@ -186,6 +227,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Headset block",
+            "DatagramSize: 32753"
         ]
     },
     {
@@ -195,6 +238,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Headset block",
+            "VerifyFirewall: false"
         ]
     }
 ]
