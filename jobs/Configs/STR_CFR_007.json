@@ -1,0 +1,67 @@
+{
+	"Audio" : 
+	{
+		"In_CaptureSource" : false,
+		"In_ChannelLayout" : 0,
+		"In_Channels" : 2,
+		"In_SampleFormat" : "S16",
+		"In_SampleRate" : 44100,
+		"In_StreamSampleRate" : 0,
+		"Out_AudioBitrate" : 128000,
+		"Out_TimeShift" : 0
+	},
+	"Common" : 
+	{
+		"SettingsVersion" : 10
+	},
+	"Controller" : 
+	{
+		"DOF" : 6,
+		"Description" : null
+	},
+	"Display" : 
+	{
+		"10BitSRGB" : false,
+		"DOF" : 6,
+		"DumpPath" : null,
+		"EnableDump" : false,
+		"EncoderResolution" : 
+		{
+			"height" : 1440,
+			"width" : 2560
+		},
+		"EncoderStereo" : false,
+		"EyeResolution" : 
+		{
+			"height" : 1440,
+			"width" : 1440
+		},
+		"FOV" : 
+		{
+			"height" : 1.7453292608261108,
+			"width" : 1.7453292608261108
+		},
+		"IPD" : 0.0640000030398369,
+		"KeepAspectRatio" : false,
+		"MaxFrameRate" : 10000.0000000000000000,
+		"MinFrameRate" : 30.0000000000000000,
+		"NonLinearScale" : false,
+		"VideoBitrate" : 50000000,
+		"VideoCodec" : "hevc",
+		"VideoEnableHDR" : false,
+		"VideoSliceCount" : 1,
+		"VideoSliceOutput" : false
+	},
+	"Headset" : 
+	{
+		"DatagramSize" : 65507,
+		"EnableNetwork" : true,
+		"LogPath" : null,
+		"MaxUserCount" : 1,
+		"Microphone" : false,
+		"Network" : "TCP",
+		"Port" : 1235,
+		"UserConnectionTimeout" : 30,
+		"VerifyFirewall" : true
+	}
+}
