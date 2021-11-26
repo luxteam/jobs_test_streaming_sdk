@@ -21,6 +21,34 @@ def get_test_status(test_status_one, test_status_two):
             return status
 
 
+def format_script_info(script_info):
+    client_keys = None
+    server_keys = None
+    other_info = []
+
+    for line in script_info:
+        if line.startswith("Client keys:"):
+            client_keys = line
+        elif line.startswith("Server keys:"):
+            server_keys = line
+        else:
+            other_info.append(line)
+
+    result = []
+
+    if client_keys:
+        result.append(server_keys)
+        result.append("")
+        result.append(client_keys)
+    else:
+        result.append(server_keys)
+
+    result.append("")
+    result.extend(other_info)
+
+    return result
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
@@ -54,6 +82,8 @@ if __name__ == '__main__':
                             target_file_content[i]["message"] += source_file_content[i]["message"]
 
                         target_file_content[i]["script_info"].extend(source_file_content[i]["script_info"])
+
+                        target_file_content[i]["script_info"] = format_script_info(target_file_content[i]["script_info"])
 
                     with open(target_file_path, "w", encoding="utf8") as f:
                         json.dump(target_file_content, f, indent=4, sort_keys=True)
@@ -97,6 +127,8 @@ if __name__ == '__main__':
                                 target_group_data["render_results"][i]["message"] += source_group_data["render_results"][i]["message"]
 
                             target_group_data["render_results"][i]["script_info"].extend(source_group_data["render_results"][i]["script_info"])
+
+                            target_group_data["render_results"][i]["script_info"] = format_script_info(target_group_data["render_results"][i]["script_info"])
 
                     with open(target_file_path, "w", encoding="utf8") as f:
                         json.dump(target_file_content, f, indent=4, sort_keys=True)
