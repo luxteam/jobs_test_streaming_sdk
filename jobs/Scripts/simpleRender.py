@@ -99,6 +99,21 @@ def calculate_status(status_in_json, execution_status):
             return status
 
 
+def prepare_keys(args, case):
+    keys = case["server_keys"] if args.execution_type == "server" else case["client_keys"]
+
+    if args.execution_type == "server":
+        # replace 'x' in resolution by ',' (1920x1080 -> 1920,1080)
+        # place the current screen resolution in keys of the server instance
+        return keys.replace("<resolution>", args.screen_resolution.replace("x", ","))
+    else:
+        return "{keys} -connectionurl {transport_protocol}://{ip_address}:1235".format(
+            keys=keys,
+            transport_protocol=case["transport_protocol"],
+            ip_address=args.ip_address
+        )
+
+
 def prepare_empty_reports(args, current_conf):
     main_logger.info('Create empty report files')
 
@@ -116,7 +131,22 @@ def prepare_empty_reports(args, current_conf):
             test_case_report = {}
             test_case_report['test_case'] = case['case']
             test_case_report['render_device'] = args.server_gpu_name
-            test_case_report['script_info'] = case['script_info']
+
+            if case['status'] == 'skipped':
+                prepared_keys = prepare_keys(args, case)
+
+                if args.execution_type == "server":
+                    keys_description = "Server keys: {}".format(prepared_keys)
+                    test_case_report["script_info"] = []
+                    test_case_report["script_info"].append(keys_description)
+
+                elif args.execution_type == "client":
+                    keys_description = "Client keys: {}".format(prepared_keys)
+                    test_case_report['script_info'] = case['script_info']
+                    test_case_report["script_info"].append(keys_description)
+            else:
+                test_case_report['script_info'] = case['script_info']
+                
             test_case_report['test_group'] = args.test_group
             test_case_report['tool'] = 'StreamingSDK'
             test_case_report['render_time'] = 0.0
@@ -276,18 +306,8 @@ def execute_tests(args, current_conf):
                     main_logger.info("Network in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["Network"]))
                     main_logger.info("Datagram size in settings.json ({}): {}".format(case["case"], settings_json_content["Headset"]["DatagramSize"]))
 
-                    # replace 'x' in resolution by ',' (1920x1080 -> 1920,1080)
-                    # place the current screen resolution in keys of the server instance
-                    prepared_keys = keys.replace("<resolution>", args.screen_resolution.replace("x", ","))
-                    execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
-                else:
-                    prepared_keys = "{keys} -connectionurl {transport_protocol}://{ip_address}:1235".format(
-                        keys=keys,
-                        transport_protocol=case["transport_protocol"],
-                        ip_address=args.ip_address
-                    )
-
-                    execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
+                prepared_keys = prepare_keys(args, case)
+                execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
 
                 case["prepared_keys"] = prepared_keys
 
@@ -295,25 +315,13 @@ def execute_tests(args, current_conf):
                     keys_description = "Server keys: {}".format(prepared_keys)
                     case["script_info"] = []
                     case["script_info"].append(keys_description)
-                        
 
                 elif args.execution_type == "client":
                     keys_description = "Client keys: {}".format(prepared_keys)
-                    for i in range(len(case["script_info"])):
-                        if "Client keys" in case["script_info"][i]:
-                            case["script_info"][i] = keys_description
-                            break
-                    else:
-                        case["script_info"].append(keys_description)
-
-                    # delete line with information about Server keys. It'll be taken from the server results
-                    for i in range(len(case["script_info"])):
-                        if "Server keys" in case["script_info"][i]:
-                            case["script_info"].pop(i)
-                            break
+                    case["script_info"].append(keys_description)
 
                 script_path = os.path.join(args.output, "{}.bat".format(case["case"]))
-       
+
                 with open(script_path, "w") as f:
                     f.write(execution_script)
 
