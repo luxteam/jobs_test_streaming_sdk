@@ -116,7 +116,12 @@ def prepare_empty_reports(args):
                 prepared_keys = prepare_keys(args, case)
 
                 keys_description = "Server keys: {}".format(prepared_keys)
-                test_case_report["script_info"].append(keys_description)                
+
+                formatted_script_info = []
+                formatted_script_info.append(keys_description)
+                formatted_script_info.append("")
+                formatted_script_info.extend(test_case_report["script_info"])
+                test_case_report["script_info"] = formatted_script_info
 
             script_info = []
 
@@ -274,7 +279,12 @@ def execute_tests(args):
                     f.write(server_execution_script)
 
                 keys_description = "Server keys: {}".format(prepared_keys)
-                case["script_info"].append(keys_description)
+
+                formatted_script_info = []
+                formatted_script_info.append(keys_description)
+                formatted_script_info.append("")
+                formatted_script_info.extend(test_case_report["script_info"])
+                test_case_report["script_info"] = formatted_script_info
 
                 case["prepared_keys"] = prepared_keys
 
