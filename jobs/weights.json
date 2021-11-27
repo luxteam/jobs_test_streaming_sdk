@@ -80,14 +80,6 @@
         {
             "suite_name": "Microphone",
             "value": 2
-        },
-        {
-            "suite_name": "ConfigRewrite",
-            "value": 28
-        },
-        {
-            "suite_name": "Config",
-            "value": 44
         }
     ]
 }

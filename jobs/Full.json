@@ -20,8 +20,6 @@
         "Connection":"",
         "DirtyRectangles":"",
         "Flags":"",
-        "Microphone":"",
-        "Config":"",
-        "ConfigRewrite":""
+        "Microphone":""
     }
 }
