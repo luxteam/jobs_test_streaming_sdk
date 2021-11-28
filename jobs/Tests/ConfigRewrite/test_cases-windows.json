@@ -202,7 +202,7 @@
     {
         "case": "STR_CFR_021",
         "status": "active",
-        "server_keys": "-extStats true -PROTOCOL udp",
+        "server_keys": "-extStats true -PROTOCOL tcp",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
