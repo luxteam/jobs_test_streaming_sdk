@@ -213,10 +213,10 @@ def parse_line(line, saved_values):
         codec_type = line.split('Info: Initialize(): Codec: ')[1]
         saved_values['codec'].append(codec_type)
 
-    elif 'using maximum fragment size of Tx:' in line:
+    elif '[WVRServerSession]' in line:
         if 'datagram_size' not in saved_values:
             saved_values['datagram_size'] = []
-        datagram_size = line.split('using maximum fragment size of Tx: ')[1]
+        datagram_size = line.split('size of Tx: ')[1]
         saved_values['datagram_size'].append(datagram_size)
 
     elif 'listening for incoming connections on' in line:
