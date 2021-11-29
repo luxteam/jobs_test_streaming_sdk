@@ -592,7 +592,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             settings_json_content = json.load(file)
 
         #rule C10, C32: resolution from json != resolution from logs -> failed
-        if case["case"].find('STR_CFG_010') == 0 or case["case"].find('STR_CFG_032'):
+        if case["case"].find('STR_CFG_010') == 0 or case["case"].find('STR_CFG_032') == 0:
             json_resolution = f'{settings_json_content["Display"]["EncoderResolution"]["width"]}'+","+f'{settings_json_content["Display"]["EncoderResolution"]["height"]}'
 
             for i in range(1, len(saved_values['encode_resolution'])):
