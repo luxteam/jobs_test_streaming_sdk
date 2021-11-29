@@ -668,7 +668,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         #rule C18-C20, C40-C42: skipped
 
         #rule C21, C43: DatagramSize != fragment size from logs -> failed
-        if case["case"].find('STR_CFG_021') == 0 or case["case"].find('STR_CFG_043') == 0:
+        if case["case"].find('STR_CFG_021') == 0:
             json_datagram = f'{settings_json_content["Headset"]["DatagramSize"]}'
 
             value = saved_values['datagram_size'][0].strip()
