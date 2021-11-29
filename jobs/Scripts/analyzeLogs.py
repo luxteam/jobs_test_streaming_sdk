@@ -213,7 +213,7 @@ def parse_line(line, saved_values):
         codec_type = line.split('Info: Initialize(): Codec: ')[1]
         saved_values['codec'].append(codec_type)
 
-    elif '[WVRServerSession]' in line:
+    elif '[WVRServerSession]' in line and 'size of Tx:' in line:
         if 'datagram_size' not in saved_values:
             saved_values['datagram_size'] = []
         datagram_size = line.split('size of Tx: ')[1]
