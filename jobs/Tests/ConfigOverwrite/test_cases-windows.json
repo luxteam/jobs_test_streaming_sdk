@@ -32,7 +32,7 @@
     {
         "case": "STR_CFR_004",
         "status": "active",
-        "server_keys": "-extStats true -CaptureMode present -FRAMERATE 80",
+        "server_keys": "-extStats true -CaptureMode asap -FRAMERATE 80",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
@@ -102,7 +102,7 @@
     {
         "case": "STR_CFR_011",
         "status": "active",
-        "server_keys": "-extStats true -CaptureMode present -MinFramerate 100",
+        "server_keys": "-extStats true -CaptureMode asap -MinFramerate 100",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
@@ -172,7 +172,7 @@
     {
         "case": "STR_CFR_018",
         "status": "active",
-        "server_keys": "-extStats true -CaptureMode present -FRAMERATE 80",
+        "server_keys": "-extStats true -CaptureMode asap -FRAMERATE 80",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
@@ -242,7 +242,7 @@
     {
         "case": "STR_CFR_025",
         "status": "active",
-        "server_keys": "-extStats true -CaptureMode present -MinFramerate 100",
+        "server_keys": "-extStats true -CaptureMode asap -MinFramerate 100",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
