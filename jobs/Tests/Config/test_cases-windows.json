@@ -465,17 +465,6 @@
     },
     {
         "case": "STR_CFG_043",
-        "status": "active",
-        "server_keys": "-extStats true",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-            "Headset block",
-            "DatagramSize: 32753"
-        ]
-    },
-    {
-        "case": "STR_CFG_044",
         "status": "skipped",
         "server_keys": "-extStats true",
         "client_keys": "",

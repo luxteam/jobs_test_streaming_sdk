@@ -213,10 +213,10 @@ def parse_line(line, saved_values):
         codec_type = line.split('Info: Initialize(): Codec: ')[1]
         saved_values['codec'].append(codec_type)
 
-    elif 'using maximum fragment size of Tx:' in line:
+    elif '[WVRServerSession]' in line and 'size of Tx:' in line:
         if 'datagram_size' not in saved_values:
             saved_values['datagram_size'] = []
-        datagram_size = line.split('using maximum fragment size of Tx: ')[1]
+        datagram_size = line.split('size of Tx: ')[1]
         saved_values['datagram_size'].append(datagram_size)
 
     elif 'listening for incoming connections on' in line:
@@ -586,13 +586,13 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         #rules for Config & ConfigRewrite (CN/CRN)
         #where Config = C, ConfirReswrite = CR, N - case number
-        #C1-C9 - skipped
+        #C1-C9, C23-C31 - skipped
         settings_json_path = os.path.join(os.getenv("APPDATA"), "..", "Local", "AMD", "RemoteGameServer", "settings", "settings.json")
         with open(settings_json_path, "r") as file:
             settings_json_content = json.load(file)
 
-        #rule C10: resolution from json != resolution from logs -> failed
-        if case["case"].find('STR_CFG_010') == 0:
+        #rule C10, C32: resolution from json != resolution from logs -> failed
+        if case["case"].find('STR_CFG_010') == 0 or case["case"].find('STR_CFG_032') == 0:
             json_resolution = f'{settings_json_content["Display"]["EncoderResolution"]["width"]}'+","+f'{settings_json_content["Display"]["EncoderResolution"]["height"]}'
 
             for i in range(1, len(saved_values['encode_resolution'])):
@@ -602,10 +602,10 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                             json_content["test_status"] = "failed"
                     break
 
-        #rule C11: can't be catched
+        #rule C11, C33: can't be catched
 
-        #rule C12: MaxFrameRate + 10 <= TX Rate -> failed
-        if case["case"].find('STR_CFG_012') == 0:
+        #rule C12, C34: MaxFrameRate + 10 <= TX Rate -> failed
+        if case["case"].find('STR_CFG_012') == 0 or case["case"].find('STR_CFG_034') == 0:
             json_maxframerate = int(f'{settings_json_content["Display"]["MaxFrameRate"]}')
         
             if 'tx_rates' in saved_values:
@@ -620,8 +620,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
 
-        #rule C13: MinFrameRate - 10 >= TX Rate -> failed
-        if case["case"].find('STR_CFG_013') == 0:
+        #rule C13, C35: MinFrameRate - 10 >= TX Rate -> failed
+        if case["case"].find('STR_CFG_013') == 0 or case["case"].find('STR_CFG_035') == 0:
             json_maxframerate = int(f'{settings_json_content["Display"]["MinFrameRate"]}')
         
             if 'tx_rates' in saved_values:
@@ -636,8 +636,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
 
-        #rule C14: VideoBitrate != Bitrate from logs -> failed
-        if case["case"].find('STR_CFG_014') == 0:
+        #rule C14, C36: VideoBitrate != Bitrate from logs -> failed
+        if case["case"].find('STR_CFG_014') == 0 or case["case"].find('STR_CFG_036') == 0:
             json_bitrate_int = int(f'{settings_json_content["Display"]["VideoBitrate"]}') / 1000000
         
             flag = False
@@ -650,8 +650,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        #rule C15: VideoCodec != Codec from logs -> failed
-        if case["case"].find('STR_CFG_015') == 0:
+        #rule C15, C37: VideoCodec != Codec from logs -> failed
+        if case["case"].find('STR_CFG_015') == 0 or case["case"].find('STR_CFG_037') == 0:
             json_codec = f'{settings_json_content["Display"]["VideoCodec"]}'.upper()
 
             value = saved_values['codec'][len(saved_values['codec']) - 1].strip()
@@ -661,11 +661,13 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        #rule C16: Cheching that just started
+        #rule C16, C38: Cheching that just started
 
-        #rule C17: can't be catched
+        #rule C17, C39: can't be catched
+        
+        #rule C18-C20, C40-C42: skipped
 
-        #rule C21: DatagramSize != fragment size from logs -> failed
+        #rule C21, C43: DatagramSize != fragment size from logs -> failed
         if case["case"].find('STR_CFG_021') == 0:
             json_datagram = f'{settings_json_content["Headset"]["DatagramSize"]}'
 
@@ -676,11 +678,14 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
         
+        #rule C22, C44: skipped
 
-        #rule CR1: resolution from flags != resolution from logs -> failed = common check
+        #rule CR1, CR15: resolution from flags != resolution from logs -> failed = common check
 
-        #rule CR3: FRAMERATE from flags + 10 <= TX Rate -> failed
-        if case["case"].find('STR_CFR_003') == 0:
+        #rule CR2, CR16: skipped
+
+        #rule CR3, CR17: FRAMERATE from flags + 10 <= TX Rate -> failed
+        if case["case"].find('STR_CFR_003') == 0 or case["case"].find('STR_CFR_017') == 0:
             flags_framerate = get_framerate(case["prepared_keys"])
         
             if 'tx_rates' in saved_values:
@@ -695,12 +700,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
 
-        #rule CR4: Cheching that just started
+        #rule CR4, CR18: Checking that just started
 
-        #rule CR5: can't be catched now
+        #rule CR5, CR19: can't be catched now
 
-        #rule CR6: BITRATE from flags != Bitrate from logs -> failed
-        if case["case"].find('STR_CFR_006') == 0:
+        #rule CR6, CR20: BITRATE from flags != Bitrate from logs -> failed
+        if case["case"].find('STR_CFR_006') == 0 or case["case"].find('STR_CFR_020') == 0:
             int_flags_bitrate = int(get_bitrate(case["prepared_keys"])) / 1000000
 
             flag = False
@@ -713,8 +718,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        #rule CR7: PROTOCOL from flags != protocol from logs -> failed
-        if case["case"].find('STR_CFR_007') == 0:
+        #rule CR7, CR21: PROTOCOL from flags != protocol from logs -> failed
+        if case["case"].find('STR_CFR_007') == 0 or case["case"].find('STR_CFR_021') == 0:
             server_protocol = get_server_protocol(case["prepared_keys"]).upper()
 
             if server_protocol != saved_values['protocol'][0]:
@@ -722,14 +727,14 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        #rule CR8: can't be catched now
+        #rule CR8, CR22: can't be catched now
 
-        #rule CR9: can't be catched
+        #rule CR9, CR23: can't be catched
 
-        #rule CR10: Cheching that just started
+        #rule CR10, CR24: Checking that just started
 
-        #rule CR11: MinFramerate from flags - 10 >= TX Rate -> failed
-        if case["case"].find('STR_CFR_011') == 0:
+        #rule CR11, CR25: MinFramerate from flags - 10 >= TX Rate -> failed
+        if case["case"].find('STR_CFR_011') == 0 or case["case"].find('STR_CFR_025') == 0:
             flags_minframerate = int(get_min_framerate(case["prepared_keys"]))
         
             if 'tx_rates' in saved_values:
@@ -744,10 +749,10 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
 
-        #rule CR12: Checking that just connected
+        #rule CR12, CR26: Checking that just connected
 
-        #rule CR13: Codec from flags != Codec from logs -> failed
-        if case["case"].find('STR_CFR_013') == 0:
+        #rule CR13, CR27: Codec from flags != Codec from logs -> failed
+        if case["case"].find('STR_CFR_013') == 0 or case["case"].find('STR_CFR_027') == 0:
             flags_codec = get_codec(case["prepared_keys"]).upper()
 
             if (flags_codec == "H.265" or flags_codec == "H265"):
@@ -762,7 +767,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        #rule CR14: can't be catched now
+        #rule CR14, CR28: can't be catched now
 
 
     json_content["message"].extend(saved_errors)
