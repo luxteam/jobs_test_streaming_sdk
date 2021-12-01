@@ -187,7 +187,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
             test_case_report["group_timeout_exceeded"] = False
 
-        video_path = os.path.join("Color", case["case"] + ".mp4")
+        video_path = os.path.join("Color", case["case"] + "android.mp4")
 
         if os.path.exists(os.path.join(args.output, video_path)):
             test_case_report[VIDEO_KEY] = video_path
