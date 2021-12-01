@@ -338,12 +338,13 @@ class MakeScreen(Action):
         self.screen_name = self.params["arguments_line"]
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
+        self.client_type = self.params["client_type"]
 
     def execute(self):
         if not self.screen_name:
             make_screen(self.screen_path, self.current_try, self.logger)
         else:
-            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name, self.current_image_num)
+            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
 
@@ -373,6 +374,7 @@ class SleepAndScreen(Action):
         self.screen_name = parsed_arguments[3]
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
+        self.client_type = self.params["client_type"]
 
     def execute(self):
         sleep(float(self.initial_delay))
@@ -380,7 +382,7 @@ class SleepAndScreen(Action):
         screen_number = 1
 
         while True:
-            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name, self.current_image_num)
+            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1
@@ -406,8 +408,8 @@ def compress_video(temp_video_path, target_video_path, logger):
 class RecordVideo(Action):
     def parse(self):
         self.video_path = self.params["output_path"]
-        self.target_video_name = self.params["case"]["case"] + ".mp4"
-        self.temp_video_name = self.params["case"]["case"] + "_temp.mp4"
+        self.target_video_name = self.params["case"]["case"] + self.params["client_type"] + ".mp4"
+        self.temp_video_name = self.params["case"]["case"] + self.params["client_type"] + "_temp.mp4"
         self.duration = int(self.params["arguments_line"])
 
     def execute(self):

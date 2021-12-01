@@ -140,6 +140,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             params["args"] = args
             params["case"] = case
             params["game_name"] = game_name
+            params["client_type"] = "win_client"
 
             # execute actions one by one
             for action in actions:

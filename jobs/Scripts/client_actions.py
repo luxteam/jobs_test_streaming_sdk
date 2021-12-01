@@ -139,6 +139,7 @@ class MakeScreen(Action):
         self.screen_name = self.params["arguments_line"]
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
+        self.client_type = self.params["client_type"]
 
     def execute(self):
         if not self.screen_name:
@@ -147,7 +148,7 @@ class MakeScreen(Action):
             if self.test_group == "Multiconnection":
                 self.sock.send(self.action.encode("utf-8"))
 
-            make_screen(self.screen_path, self.current_try, self.screen_name, self.current_image_num)
+            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
 
@@ -167,7 +168,7 @@ class RecordVideo(Action):
         self.test_group = self.params["args"].test_group
         self.audio_device_name = self.params["audio_device_name"]
         self.video_path = self.params["output_path"]
-        self.video_name = self.params["case"]["case"]
+        self.video_name = self.params["case"]["case"] + self.params["client_type"]
         self.resolution = self.params["args"].screen_resolution
         self.duration = int(self.params["arguments_line"])
 
@@ -259,6 +260,7 @@ class SleepAndScreen(Action):
         self.collect_traces = self.params["args"].collect_traces
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
+        self.client_type = self.params["client_type"]
 
     def execute(self):
         if self.test_group == "Multiconnection":
@@ -269,7 +271,7 @@ class SleepAndScreen(Action):
         screen_number = 1
 
         while True:
-            make_screen(self.screen_path, self.current_try, self.screen_name, self.current_image_num)
+            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1

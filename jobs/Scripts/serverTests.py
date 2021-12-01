@@ -143,6 +143,7 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
             params["case"] = case
             params["game_name"] = game_name
             params["processes"] = processes
+            params["client_type"] = "android"
 
             test_action_command = DoTestActions(sock, params, instance_state, main_logger)
             test_action_command.parse()
@@ -199,7 +200,7 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 # close Streaming SDK android app
                 close_android_app()
                 save_android_log(args, case, None, current_try, log_name_postfix="_android")
-            
+
             last_log_line = save_logs(args, case, last_log_line, current_try)
 
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
