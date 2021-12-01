@@ -1,0 +1,11 @@
+[
+    {
+        "case": "STR_MCN_002",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    }
+]

@@ -130,14 +130,20 @@ class StartTestActionsServer(Action):
 
 
 # [Client action] do screenshot
+# This action triggers actions on server side in Multiconnection group
 class MakeScreen(Action):
     def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
         self.screen_path = self.params["screen_path"]
         self.screen_name = self.params["arguments_line"]
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
 
     def execute(self):
+        if self.test_group == "Multiconnection":
+            self.sock.send(self.action.encode("utf-8"))
+
         if not self.screen_name:
             make_screen(self.screen_path, self.current_try)
         else:
@@ -154,8 +160,11 @@ def make_screen(screen_path, current_try, screen_name = "", current_image_num = 
 
 
 # [Client action] record video
+# This action triggers actions on server side in Multiconnection group
 class RecordVideo(Action):
     def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
         self.audio_device_name = self.params["audio_device_name"]
         self.video_path = self.params["output_path"]
         self.video_name = self.params["case"]["case"]
@@ -163,6 +172,9 @@ class RecordVideo(Action):
         self.duration = int(self.params["arguments_line"])
 
     def execute(self):
+        if self.test_group == "Multiconnection":
+            self.sock.send(self.action.encode("utf-8"))
+
         video_full_path = os.path.join(self.video_path, self.video_name + ".mp4")
         time_flag_value = strftime("%H:%M:%S", gmtime(int(self.duration)))
 
@@ -230,8 +242,11 @@ class PressKeys(Action):
 
 # [Client action] make sequence of screens with delay. It supports initial delay before the first test case
 # Starts collecting of the traces if it's required
+# This action triggers actions on server side in Multiconnection group
 class SleepAndScreen(Action):
     def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
         parsed_arguments = parse_arguments(self.params["arguments_line"])
         self.initial_delay = parsed_arguments[0]
         self.number_of_screens = parsed_arguments[1]
@@ -246,6 +261,9 @@ class SleepAndScreen(Action):
         self.current_try = self.params["current_try"]
 
     def execute(self):
+        if self.test_group == "Multiconnection":
+            self.sock.send(self.action.encode("utf-8"))
+
         sleep(float(self.initial_delay))
 
         screen_number = 1

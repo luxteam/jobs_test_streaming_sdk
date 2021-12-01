@@ -207,7 +207,7 @@ def save_logs(args, case, last_log_line, current_try):
         return None
 
 
-def save_android_log(args, case, last_log_line, current_try):
+def save_android_log(args, case, last_log_line, current_try, log_name_postfix="_client"):
     try:
         command_process = subprocess.Popen("adb logcat -d", shell=False, stdin=PIPE, stdout=PIPE)
         out, err = command_process.communicate()
@@ -236,7 +236,7 @@ def save_android_log(args, case, last_log_line, current_try):
         if first_log_line_index != 0:
             log_lines = log_lines[first_log_line_index:]
 
-        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_client" + ".log")
+        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + log_name_postfix + ".log")
 
         with open(log_destination_path, "ab") as file:
             # filter Android client logs

@@ -11,7 +11,7 @@ import pyautogui
 import pydirectinput
 import keyboard
 from threading import Thread
-from utils import close_process, collect_traces, parse_arguments, collect_iperf_info, track_used_memory
+from utils import close_process, collect_traces, parse_arguments, collect_iperf_info, track_used_memory, execute_adb_command
 from actions import *
 
 csgoFirstExec = True
@@ -40,6 +40,7 @@ class CheckWindow(Action):
         self.window_name = parsed_arguments[0]
         self.process_name = parsed_arguments[1]
         self.is_game = (self.params["command"] == "check_game")
+        self.test_group = self.params["args"].test_group
 
     @Action.server_action_decorator
     def execute(self):
@@ -51,6 +52,11 @@ class CheckWindow(Action):
             self.logger.info("Window {} was succesfully found".format(self.window_name))
 
             if self.is_game:
+                # start Android client for multiconnection group
+                if self.test_group == "Multiconnection":
+                    execute_adb_command("adb logcat -c")
+                    execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
+
                 make_window_foreground(window, self.logger)
         else:
             self.logger.error("Window {} wasn't found at all".format(self.window_name))
@@ -374,6 +380,8 @@ class DoTestActions(Action):
                 pydirectinput.press("4")
                 sleep(1.5)
                 pyautogui.click()
+            else:
+                sleep(0.5)
                 
         except Exception as e:
             self.logger.error("Failed to do test actions: {}".format(str(e)))

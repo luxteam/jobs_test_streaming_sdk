@@ -199,6 +199,9 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report["server_log"] = os.path.join("tool_logs", case["case"] + "_server.log")
         test_case_report["client_log"] = os.path.join("tool_logs", case["case"] + "_client.log")
 
+        if args.test_group == "Multiconnection":
+            test_case_report["android_log"] = os.path.join("tool_logs", case["case"] + "_android.log")
+
         if args.collect_traces == "AfterTests" or args.collect_traces == "BeforeTests":
             if args.execution_type == "server":
                 test_case_report["server_trace_archive"] = os.path.join("gpuview", case["case"] + "_server.zip")
@@ -255,6 +258,10 @@ def execute_tests(args, current_conf):
 
     # copy log from last log line (it's actual for groups without restarting of client / server)
     last_log_line = None
+
+    if args.test_group == "Multiconnection":
+        # first time video recording on Android device can be unstable, do it before tests
+        execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
 
     for case in [x for x in cases if not is_case_skipped(x, current_conf)]:
 
@@ -336,6 +343,12 @@ def execute_tests(args, current_conf):
                 break
             except Exception as e:
                 PROCESS = close_streaming_process(args.execution_type, case, PROCESS)
+
+                if args.test_group == "Multiconnection" and args.execution_type == "server":
+                    # close Streaming SDK android app
+                    close_android_app()
+                    last_log_line_client = save_android_log(args, case, None, current_try, log_name_postfix="_android")
+
                 last_log_line = save_logs(args, case, last_log_line, current_try)
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "failed", error_messages = error_messages)

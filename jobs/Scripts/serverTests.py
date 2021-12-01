@@ -15,6 +15,7 @@ from utils import *
 from threading import Thread
 from instance_state import ServerInstanceState
 from server_actions import *
+from android_actions import MakeScreen, SleepAndScreen, RecordVideo
 from analyzeLogs import analyze_logs
 
 ROOT_PATH = os.path.abspath(os.path.join(
@@ -43,12 +44,24 @@ ACTIONS_MAPPING = {
     "start_test_actions_server": DoTestActions,
     "gpuview": GPUView,
     "record_metrics": RecordMetrics
+    "make_screen": MakeScreen,
+    "sleep_and_screen": SleepAndScreen,
+    "record_video": RecordVideo
 }
+
+
+ANDROID_ACTIONS = ["make_screen", "sleep_and_screen", "record_video"]
 
 
 # Server receives commands from client and executes them
 # Server doesn't decide to retry case or do next test case. Exception: fail on server side which generates abort on server side
 def start_server_side_tests(args, case, process, script_path, last_log_line, current_try):
+    output_path = os.path.join(args.output, "Color")
+
+    screen_path = os.path.join(output_path, case["case"])
+    if not os.path.exists(screen_path):
+        os.makedirs(screen_path)
+    
     archive_path = os.path.join(args.output, "gpuview")
     if not os.path.exists(archive_path):
         os.makedirs(archive_path)
@@ -121,7 +134,10 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
             connection.setblocking(False)
 
             # build params dict with all necessary variables for test actions
+            params["output_path"] = output_path
+            params["screen_path"] = screen_path
             params["archive_path"] = archive_path
+            params["current_image_num"] = 1
             params["current_try"] = current_try
             params["args"] = args
             params["case"] = case
@@ -135,10 +151,6 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
             while instance_state.wait_next_command:
                 try:
                     request = connection.recv(1024).decode("utf-8")
-
-                    if "gpuview" not in request and "record_metrics" not in request:
-                        # if new command received server must stop to execute test actions execution. Exception: gpuview and record_metrics commands
-                        instance_state.executing_test_actions = False
                 except Exception as e:
                     # execute test actions if it's requested by client and new command doesn't received
                     if instance_state.executing_test_actions:
@@ -157,6 +169,10 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                     arguments_line = parts[1]
                 else:
                     arguments_line = None
+
+                if command != "gpuview" and command != "record_metrics" and command not in ANDROID_ACTIONS :
+                    # if new command received server must stop to execute test actions execution. Exception: gpuview and record_metrics commands
+                    instance_state.executing_test_actions = False
 
                 params["action_line"] = request
                 params["command"] = command
