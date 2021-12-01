@@ -43,7 +43,7 @@ ACTIONS_MAPPING = {
     "click_server": ClickServer,
     "start_test_actions_server": DoTestActions,
     "gpuview": GPUView,
-    "record_metrics": RecordMetrics
+    "record_metrics": RecordMetrics,
     "make_screen": MakeScreen,
     "sleep_and_screen": SleepAndScreen,
     "record_video": RecordVideo
