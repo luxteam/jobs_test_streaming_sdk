@@ -584,7 +584,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
 
-        #rules for Config & ConfigRewrite (CN/CRN)
+        #rules for Config & ConfigOverwrite (CN/CRN)
         #where Config = C, ConfirReswrite = CR, N - case number
         #C1-C9, C23-C31 - skipped
         settings_json_path = os.path.join(os.getenv("APPDATA"), "..", "Local", "AMD", "RemoteGameServer", "settings", "settings.json")
