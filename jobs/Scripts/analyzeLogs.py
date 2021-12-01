@@ -667,14 +667,14 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         
         #rule C18-C20, C40-C42: skipped
 
-        #rule C21, C43: DatagramSize != fragment size from logs -> failed
+        #rule C21, C43: DatagramSize < fragment size from logs -> failed
         if case["case"].find('STR_CFG_021') == 0:
             json_datagram = f'{settings_json_content["Headset"]["DatagramSize"]}'
 
             value = saved_values['datagram_size'][0].strip()
 
-            if value != json_datagram:
-                json_content["message"].append("Config problem: DatagramSize in JSON doesn't match to datagram size from logs. Datagram size from JSON: {}, from logs {}".format(json_datagram, value))
+            if value > json_datagram:
+                json_content["message"].append("Config problem: DatagramSize in JSON fewer than datagram size from logs. Datagram size from JSON: {}, from logs {}".format(json_datagram, value))
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
         
