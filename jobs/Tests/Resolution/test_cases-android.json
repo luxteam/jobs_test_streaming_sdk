@@ -1,7 +1,7 @@
 [
    {
         "case": "STR_ARN_001",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution 3840,2160 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -28,7 +28,7 @@
    },
    {
         "case": "STR_ARN_004",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution 3840,2160 -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",

@@ -1,7 +1,7 @@
 [
    {
         "case": "STR_RN_001",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution 3840,2160 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -37,7 +37,7 @@
    },
    {
         "case": "STR_RN_005",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution 3840,2160 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",

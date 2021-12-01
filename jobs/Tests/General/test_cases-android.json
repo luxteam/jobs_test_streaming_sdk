@@ -64,7 +64,7 @@
     },
     {
         "case": "STR_AGN_008",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 10000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -73,7 +73,7 @@
     },
     {
         "case": "STR_AGN_009",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 20000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -82,7 +82,7 @@
     },
     {
         "case": "STR_AGN_010",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 30000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -91,7 +91,7 @@
     },
     {
         "case": "STR_AGN_011",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 40000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -100,7 +100,7 @@
     },
     {
         "case": "STR_AGN_012",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 50000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -109,7 +109,7 @@
     },
     {
         "case": "STR_AGN_013",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 75000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -118,7 +118,7 @@
     },
     {
         "case": "STR_AGN_014",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 100000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -136,7 +136,7 @@
     },
     {
         "case": "STR_AGN_016",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -QoS true -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -208,7 +208,7 @@
     },
     {
         "case": "STR_AGN_024",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 10000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -217,7 +217,7 @@
     },
     {
         "case": "STR_AGN_025",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 20000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -226,7 +226,7 @@
     },
     {
         "case": "STR_AGN_026",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 30000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -235,7 +235,7 @@
     },
     {
         "case": "STR_AGN_027",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 40000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -244,7 +244,7 @@
     },
     {
         "case": "STR_AGN_028",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 50000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -253,7 +253,7 @@
     },
     {
         "case": "STR_AGN_029",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 75000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -262,7 +262,7 @@
     },
     {
         "case": "STR_AGN_030",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 100000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
