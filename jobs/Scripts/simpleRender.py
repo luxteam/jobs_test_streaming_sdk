@@ -347,7 +347,7 @@ def execute_tests(args, current_conf):
                 if args.test_group == "Multiconnection" and args.execution_type == "server":
                     # close Streaming SDK android app
                     close_android_app()
-                    last_log_line_client = save_android_log(args, case, None, current_try, log_name_postfix="_android")
+                    save_android_log(args, case, None, current_try, log_name_postfix="_android")
 
                 last_log_line = save_logs(args, case, last_log_line, current_try)
                 execution_time = time.time() - case_start_time

@@ -194,6 +194,12 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 main_logger.info("Finish action execution\n\n\n")
 
             process = close_streaming_process(args.execution_type, case, process)
+
+            if args.test_group == "Multiconnection" and args.execution_type == "server":
+                # close Streaming SDK android app
+                close_android_app()
+                save_android_log(args, case, None, current_try, log_name_postfix="_android")
+            
             last_log_line = save_logs(args, case, last_log_line, current_try)
 
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:

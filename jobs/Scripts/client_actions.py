@@ -141,12 +141,12 @@ class MakeScreen(Action):
         self.current_try = self.params["current_try"]
 
     def execute(self):
-        if self.test_group == "Multiconnection":
-            self.sock.send(self.action.encode("utf-8"))
-
         if not self.screen_name:
             make_screen(self.screen_path, self.current_try)
         else:
+            if self.test_group == "Multiconnection":
+                self.sock.send(self.action.encode("utf-8"))
+
             make_screen(self.screen_path, self.current_try, self.screen_name, self.current_image_num)
             self.params["current_image_num"] += 1
 
