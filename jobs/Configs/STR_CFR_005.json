@@ -49,8 +49,8 @@
 		"VideoBitrate" : 50000000,
 		"VideoCodec" : "hevc",
 		"VideoEnableHDR" : false,
-		"VideoSliceCount" : 3,
-		"VideoSliceOutput" : true
+		"VideoSliceCount" : 1,
+		"VideoSliceOutput" : false
 	},
 	"Headset" : 
 	{
@@ -59,7 +59,7 @@
 		"LogPath" : null,
 		"MaxUserCount" : 1,
 		"Microphone" : false,
-		"Network" : "UDP",
+		"Network" : "TCP",
 		"Port" : 1235,
 		"UserConnectionTimeout" : 30,
 		"VerifyFirewall" : true
