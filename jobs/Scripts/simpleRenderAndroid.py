@@ -303,6 +303,7 @@ def execute_tests(args):
                 params["args"] = args
                 params["case"] = case
                 params["game_name"] = args.game_name.lower()
+                params["client_type"] = "android"
 
                 # get list of actions for the current game / benchmark
                 actions_key = "{}_actions_android".format(args.game_name.lower())
