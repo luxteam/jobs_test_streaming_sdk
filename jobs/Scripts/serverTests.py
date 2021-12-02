@@ -233,4 +233,4 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
         with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
             json.dump(state, json_file, indent=4)
 
-        return process, last_log_line
+    return process, last_log_line
