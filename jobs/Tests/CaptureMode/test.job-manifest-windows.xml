@@ -3,13 +3,13 @@
 
     <outpath value="{OutputDir}"/>
 
-    <execute command='python "{ResourcesDir}/simpleRender.py"' timeout="9000">
+    <execute command='python "{ResourcesDir}/simpleRender.py"' timeout="1800">
         <argument>--client_tool "{clientTool}"</argument>
         <argument>--server_tool "{serverTool}"</argument>
         <argument>--output "{OutputDir}"</argument>
-        <argument>--test_group LeaksGeneral</argument>
+        <argument>--test_group CaptureMode</argument>
         <argument>--test_cases "{TestCases}"</argument>
-        <argument>--retries 1</argument>
+        <argument>--retries {retries}</argument>
         <argument>--execution_type "{executionType}"</argument>
         <argument>--ip_address "{ipAddress}"</argument>
         <argument>--communication_port "{communicationPort}"</argument>
