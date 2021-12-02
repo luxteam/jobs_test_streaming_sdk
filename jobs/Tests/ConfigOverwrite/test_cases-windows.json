@@ -11,7 +11,7 @@
     },
     {
         "case": "STR_CFR_002",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-extStats true -MAXUSERS 2",
         "client_keys": "",
         "transport_protocol": "udp",
@@ -21,7 +21,7 @@
     },
     {
         "case": "STR_CFR_003",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-extStats true -SLICES 2",
         "client_keys": "",
         "transport_protocol": "udp",
@@ -61,7 +61,7 @@
     },
     {
         "case": "STR_CFR_007",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-extStats true -Firewall false",
         "client_keys": "",
         "transport_protocol": "udp",
@@ -81,7 +81,7 @@
     },
     {
         "case": "STR_CFR_009",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-extStats true -Offline false",
         "client_keys": "",
         "transport_protocol": "udp",
@@ -121,7 +121,7 @@
     },
     {
         "case": "STR_CFR_013",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-extStats true -MAXUSERS 2",
         "client_keys": "",
         "transport_protocol": "tcp",
@@ -131,7 +131,7 @@
     },
     {
         "case": "STR_CFR_014",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-extStats true -SLICES 2",
         "client_keys": "",
         "transport_protocol": "tcp",
@@ -171,7 +171,7 @@
     },
     {
         "case": "STR_CFR_018",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-extStats true -Firewall false",
         "client_keys": "",
         "transport_protocol": "tcp",
@@ -191,7 +191,7 @@
     },
     {
         "case": "STR_CFR_020",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-extStats true -Offline false",
         "client_keys": "",
         "transport_protocol": "tcp",
