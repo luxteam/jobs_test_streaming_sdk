@@ -1,7 +1,7 @@
 [
     {
         "case": "STR_ADP_001",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Duplicate true -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -10,7 +10,7 @@
     },
     {
         "case": "STR_ADP_002",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Duplicate true -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",

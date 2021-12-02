@@ -81,7 +81,7 @@
     },
     {
         "case": "STR_CFR_009",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-extStats true -Offline false",
         "client_keys": "",
         "transport_protocol": "udp",
@@ -191,7 +191,7 @@
     },
     {
         "case": "STR_CFR_020",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-extStats true -Offline false",
         "client_keys": "",
         "transport_protocol": "tcp",

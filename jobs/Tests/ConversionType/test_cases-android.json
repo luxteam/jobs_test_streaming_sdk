@@ -19,7 +19,7 @@
    },
       {
         "case": "STR_ACT_003",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Convert Vulkan -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -46,7 +46,7 @@
    },
       {
         "case": "STR_ACT_006",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Convert Vulkan -extStats true -Framerate 30",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",

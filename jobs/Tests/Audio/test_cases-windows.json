@@ -10,7 +10,7 @@
     },
     {
         "case": "STR_AUD_002",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -Stereo true",
         "transport_protocol": "udp",
@@ -19,7 +19,7 @@
     },
     {
         "case": "STR_AUD_003",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -AudioFile <<FILE>> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -37,7 +37,7 @@
     },
     {
         "case": "STR_AUD_005",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -Stereo true",
         "transport_protocol": "tcp",
@@ -46,7 +46,7 @@
     },
     {
         "case": "STR_AUD_006",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -AudioFile <<FILE>> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
