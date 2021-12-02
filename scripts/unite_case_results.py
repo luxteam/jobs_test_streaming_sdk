@@ -86,10 +86,10 @@ if __name__ == '__main__':
                         target_file_content[i]["script_info"] = format_script_info(target_file_content[i]["script_info"])
 
                         if VIDEO_KEY in source_file_content[i]:
-                            target_file_content[i]["android_" + VIDEO_KEY] += source_file_content[i][VIDEO_KEY]
+                            target_file_content[i]["android_" + VIDEO_KEY] = source_file_content[i][VIDEO_KEY]
 
                         if SCREENS_COLLECTION_KEY in source_file_content[i]:
-                            target_file_content[i]["android_" + SCREENS_COLLECTION_KEY] += source_file_content[i][SCREENS_COLLECTION_KEY]
+                            target_file_content[i]["android_" + SCREENS_COLLECTION_KEY] = source_file_content[i][SCREENS_COLLECTION_KEY]
 
                     with open(target_file_path, "w", encoding="utf8") as f:
                         json.dump(target_file_content, f, indent=4, sort_keys=True)
@@ -137,10 +137,10 @@ if __name__ == '__main__':
                             target_group_data["render_results"][i]["script_info"] = format_script_info(target_group_data["render_results"][i]["script_info"])
 
                             if VIDEO_KEY in source_group_data["render_results"][i]:
-                                target_group_data["render_results"][i]["android_" + VIDEO_KEY] += source_group_data["render_results"][i][VIDEO_KEY]
+                                target_group_data["render_results"][i]["android_" + VIDEO_KEY] = source_group_data["render_results"][i][VIDEO_KEY]
 
                             if SCREENS_COLLECTION_KEY in source_group_data["render_results"][i]:
-                                target_group_data["render_results"][i]["android_" + SCREENS_COLLECTION_KEY] += source_group_data["render_results"][i][SCREENS_COLLECTION_KEY] 
+                                target_group_data["render_results"][i]["android_" + SCREENS_COLLECTION_KEY] = source_group_data["render_results"][i][SCREENS_COLLECTION_KEY] 
 
                     with open(target_file_path, "w", encoding="utf8") as f:
                         json.dump(target_file_content, f, indent=4, sort_keys=True)
