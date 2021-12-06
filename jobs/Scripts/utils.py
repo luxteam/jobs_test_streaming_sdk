@@ -209,7 +209,7 @@ def save_logs(args, case, last_log_line, current_try):
         return None
 
 
-def save_android_log(args, case, last_log_line, current_try, log_name_postfix="_client"):
+def save_android_log(args, case, current_try, log_name_postfix="_client"):
     try:
         command_process = subprocess.Popen("adb logcat -d", shell=False, stdin=PIPE, stdout=PIPE)
         out, err = command_process.communicate()
@@ -220,23 +220,6 @@ def save_android_log(args, case, last_log_line, current_try, log_name_postfix="_
 
         for log_line in raw_logs:
             log_lines.append(log_line.decode("utf-8", "ignore").encode("utf-8", "ignore"))
-
-        # index of first line of the current log in whole log file
-        first_log_line_index = 0
-
-        for i in range(len(log_lines)):
-            if last_log_line is not None and last_log_line in log_lines[i]:
-                first_log_line_index = i + 1
-                break
-
-        # update last log line
-        for i in range(len(log_lines) - 1, -1, -1):
-            if log_lines[i] and log_lines[i] != b"\r":
-                last_log_line = log_lines[i]
-                break
-
-        if first_log_line_index != 0:
-            log_lines = log_lines[first_log_line_index:]
 
         log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + log_name_postfix + ".log")
 
@@ -253,7 +236,7 @@ def save_android_log(args, case, last_log_line, current_try, log_name_postfix="_
             file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
             file.write(b"\n".join(filtered_log_line))
 
-        return last_log_line
+        execute_adb_command("adb logcat -c")
     except Exception as e:
         main_logger.error("Failed during android logs saving. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))

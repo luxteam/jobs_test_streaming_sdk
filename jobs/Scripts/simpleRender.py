@@ -263,7 +263,6 @@ def execute_tests(args, current_conf):
 
     # copy log from last log line (it's actual for groups without restarting of client / server)
     last_log_line = None
-    last_log_line_android = None
 
     if args.test_group == "MulticonnectionWA":
         # first time video recording on Android device can be unstable, do it before tests
@@ -339,7 +338,7 @@ def execute_tests(args, current_conf):
                     f.write(execution_script)
 
                 if args.execution_type == "server":
-                    PROCESS, last_log_line, android_client_closed, last_log_line_android = start_server_side_tests(args, case, PROCESS, android_client_closed, script_path, last_log_line, last_log_line_android, current_try)
+                    PROCESS, last_log_line, android_client_closed = start_server_side_tests(args, case, PROCESS, android_client_closed, script_path, last_log_line, current_try)
                 else:
                     PROCESS, last_log_line = start_client_side_tests(args, case, PROCESS, script_path, last_log_line, audio_device_name, current_try)
 
