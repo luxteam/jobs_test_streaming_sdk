@@ -18,7 +18,7 @@
         },
         {
             "suite_name": "CaptureType",
-            "value": 0
+            "value": 4
         },
         {
             "suite_name": "ConversionType",
@@ -80,6 +80,14 @@
         {
             "suite_name": "Microphone",
             "value": 2
-        }
+        },
+        {
+            "suite_name": "Config",
+            "value": 43
+        },
+        {
+            "suite_name": "ConfigOverwrite",
+            "value": 22
+        }        
     ]
 }

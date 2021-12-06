@@ -20,6 +20,9 @@
         "Connection":"",
         "DirtyRectangles":"",
         "Flags":"",
-        "Microphone":""
+        "Microphone":"",
+        "Config":"",
+        "ConfigOverwrite":"",
+        "CaptureMode": ""
     }
 }
