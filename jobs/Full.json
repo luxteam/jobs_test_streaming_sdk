@@ -22,6 +22,7 @@
         "Flags":"",
         "Microphone":"",
         "Config":"",
-        "ConfigOverwrite":""
+        "ConfigOverwrite":"",
+        "CaptureMode": ""
     }
 }
