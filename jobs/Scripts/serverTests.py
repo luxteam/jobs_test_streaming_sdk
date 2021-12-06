@@ -211,7 +211,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             if args.test_group == "MulticonnectionWA":
                 # close Streaming SDK android app
                 android_client_closed = close_android_app(case, True)
-                save_android_log(args, case, None, current_try, log_name_postfix="_android")
+                save_android_log(args, case, None, log_name_postfix="_android")
 
             last_log_line = save_logs(args, case, last_log_line, current_try)
 
