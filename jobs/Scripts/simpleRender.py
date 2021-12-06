@@ -28,6 +28,8 @@ from jobs_launcher.core.system_info import get_gpu
 
 # process of Streaming SDK client / server
 PROCESS = None
+# Multiconnection: save state of android client
+android_client_closed = True
 
 
 def get_audio_device_name():
@@ -261,6 +263,7 @@ def execute_tests(args, current_conf):
 
     # copy log from last log line (it's actual for groups without restarting of client / server)
     last_log_line = None
+    last_log_line_android = None
 
     if args.test_group == "Multiconnection":
         # first time video recording on Android device can be unstable, do it before tests
@@ -280,7 +283,7 @@ def execute_tests(args, current_conf):
         main_logger.info("Start test case {}. Try: {}".format(case["case"], current_try))
 
         while current_try < args.retries:
-            global PROCESS
+            global PROCESS, android_client_closed
 
             error_messages = set()
 
@@ -336,7 +339,7 @@ def execute_tests(args, current_conf):
                     f.write(execution_script)
 
                 if args.execution_type == "server":
-                    PROCESS, last_log_line = start_server_side_tests(args, case, PROCESS, script_path, last_log_line, current_try)
+                    PROCESS, last_log_line = start_server_side_tests(args, case, PROCESS, android_client_closed, script_path, last_log_line, last_log_line_android, current_try)
                 else:
                     PROCESS, last_log_line = start_client_side_tests(args, case, PROCESS, script_path, last_log_line, audio_device_name, current_try)
 

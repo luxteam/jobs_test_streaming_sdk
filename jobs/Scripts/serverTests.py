@@ -55,7 +55,7 @@ ANDROID_ACTIONS = ["make_screen", "sleep_and_screen", "record_video"]
 
 # Server receives commands from client and executes them
 # Server doesn't decide to retry case or do next test case. Exception: fail on server side which generates abort on server side
-def start_server_side_tests(args, case, process, script_path, last_log_line, current_try):
+def start_server_side_tests(args, case, process, android_client_closed, script_path, last_log_line, last_log_line_android, current_try):
     output_path = os.path.join(args.output, "Color")
 
     screen_path = os.path.join(output_path, case["case"])
@@ -76,6 +76,12 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
             if should_collect_traces:
                 collect_traces(archive_path, archive_name + "_server.zip")
+
+    # TODO: make single parameter to configure launching order
+    # start android client before server
+    if "android_start" in case and case["android_start"] == "before_server":
+        if android_client_closed:
+            multiconnection_start_android(args.test_group)
 
     # start server before client
     if "start_first" in case and case["start_first"] == "server":
@@ -124,6 +130,11 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
                     if should_collect_traces:
                         collect_traces(archive_path, archive_name + "_server.zip")
+
+            # TODO: make single parameter to configure launching order
+            # start android client after server or default behaviour
+            if ("android_start" in case and case["android_start"] == "before_server") or "android_start" not in case:
+                multiconnection_start_android(args.test_group)
 
             if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))
@@ -196,10 +207,10 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
             process = close_streaming_process(args.execution_type, case, process)
 
-            if args.test_group == "Multiconnection" and args.execution_type == "server":
+            if args.test_group == "Multiconnection":
                 # close Streaming SDK android app
-                close_android_app()
-                save_android_log(args, case, None, current_try, log_name_postfix="_android")
+                android_client_closed = close_android_app(case, True)
+                last_log_line_android = save_android_log(args, case, None, current_try, log_name_postfix="_android")
 
             last_log_line = save_logs(args, case, last_log_line, current_try)
 

@@ -142,9 +142,11 @@ def close_streaming_process(execution_type, case, process):
         return None
 
 
-def close_android_app(case=None):
+def close_android_app(case=None, multiconnection=False):
     try:
-        if case is None or should_case_be_closed("client", case):
+        key = "android" if multiconnection else "client"
+
+        if case is None or should_case_be_closed(key, case):
             execute_adb_command("adb shell am force-stop com.amd.remotegameclient")
 
             return True
@@ -398,3 +400,10 @@ def track_used_memory(case, execution_type):
             case["used_memory"] = value
     else:
         main_logger.error("Target process not found")
+
+
+def multiconnection_start_android(test_group):
+    # start Android client for multiconnection group
+    if test_group == "Multiconnection":
+        execute_adb_command("adb logcat -c")
+        execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
