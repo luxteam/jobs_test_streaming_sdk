@@ -1568,7 +1568,7 @@
     },
     {
         "case": "STR_GEN_002",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Capture 1 -extStats true -Framerate 30 -bitrate 10000000 -QoS false -Resolution <resolution>",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
