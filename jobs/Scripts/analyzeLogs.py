@@ -37,7 +37,7 @@ def get_resolution(keys, execution_type):
         if execution_type == "android":
             return '2248,1080'
         else:
-            return '1920,1080'
+            return '2560,1440'
 
 def get_codec(keys):
     if '-Codec ' in keys:
