@@ -134,7 +134,8 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             # TODO: make single parameter to configure launching order
             # start android client after server or default behaviour
             if ("android_start" in case and case["android_start"] == "after_server") or "android_start" not in case:
-                multiconnection_start_android(args.test_group)
+                if android_client_closed:
+                    multiconnection_start_android(args.test_group)
 
             if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))
