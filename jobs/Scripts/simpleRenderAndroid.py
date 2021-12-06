@@ -231,7 +231,6 @@ def execute_tests(args):
 
     # copy log from last log line
     last_log_line_server = None
-    last_log_line_client = None
 
     # first time video recording can be unstable, do it before tests
     execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
@@ -377,7 +376,7 @@ def execute_tests(args):
                 # close Streaming SDK server instance
                 process = close_streaming_process("server", case, process)
                 last_log_line_server = save_logs(args, case, last_log_line_server, current_try)
-                last_log_line_client = save_android_log(args, case, last_log_line_client, current_try)
+                save_android_log(args, case, current_try)
 
                 try:
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
