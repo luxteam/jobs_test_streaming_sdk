@@ -81,7 +81,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
     # start android client before server
     if "android_start" in case and case["android_start"] == "before_server":
         if android_client_closed:
-            multiconnection_start_android(args.test_group)
+            android_client_closed = multiconnection_start_android(args.test_group)
 
     # start server before client
     if "start_first" in case and case["start_first"] == "server":
@@ -133,7 +133,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
             # TODO: make single parameter to configure launching order
             # start android client after server or default behaviour
-            if ("android_start" in case and case["android_start"] == "before_server") or "android_start" not in case:
+            if ("android_start" in case and case["android_start"] == "after_server") or "android_start" not in case:
                 multiconnection_start_android(args.test_group)
 
             if is_workable_condition(process):
@@ -267,4 +267,4 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
         with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
             json.dump(state, json_file, indent=4)
 
-        return process, last_log_line
+        return process, last_log_line, android_client_closed
