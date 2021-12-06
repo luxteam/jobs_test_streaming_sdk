@@ -7,5 +7,87 @@
         "transport_protocol": "udp",
         "script_info": [
         ]
+    },
+    {
+        "case": "STR_MCN_014",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "client",
+        "android_start": "after_server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCN_015",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "android_start": "before_server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCN_016",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_server": true,
+        "keep_android": true,
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCN_017",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCN_018",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_server": true,
+        "keep_client": true,
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCN_019",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCN_020",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_client": true,
+        "keep_android": true,
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCN_021",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
     }
 ]

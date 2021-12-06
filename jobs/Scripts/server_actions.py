@@ -11,7 +11,7 @@ import pyautogui
 import pydirectinput
 import keyboard
 from threading import Thread
-from utils import close_process, collect_traces, parse_arguments, collect_iperf_info, track_used_memory, execute_adb_command
+from utils import *
 from actions import *
 
 csgoFirstExec = True
@@ -52,11 +52,6 @@ class CheckWindow(Action):
             self.logger.info("Window {} was succesfully found".format(self.window_name))
 
             if self.is_game:
-                # start Android client for multiconnection group
-                if self.test_group == "Multiconnection":
-                    execute_adb_command("adb logcat -c")
-                    execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
-
                 make_window_foreground(window, self.logger)
         else:
             self.logger.error("Window {} wasn't found at all".format(self.window_name))
