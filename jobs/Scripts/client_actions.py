@@ -145,7 +145,7 @@ class MakeScreen(Action):
         if not self.screen_name:
             make_screen(self.screen_path, self.current_try)
         else:
-            if self.test_group == "Multiconnection":
+            if self.test_group == "MulticonnectionWA":
                 self.sock.send(self.action.encode("utf-8"))
 
             make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
@@ -173,7 +173,7 @@ class RecordVideo(Action):
         self.duration = int(self.params["arguments_line"])
 
     def execute(self):
-        if self.test_group == "Multiconnection":
+        if self.test_group == "MulticonnectionWA":
             self.sock.send(self.action.encode("utf-8"))
 
         video_full_path = os.path.join(self.video_path, self.video_name + ".mp4")
@@ -263,7 +263,7 @@ class SleepAndScreen(Action):
         self.client_type = self.params["client_type"]
 
     def execute(self):
-        if self.test_group == "Multiconnection":
+        if self.test_group == "MulticonnectionWA":
             self.sock.send(self.action.encode("utf-8"))
 
         sleep(float(self.initial_delay))

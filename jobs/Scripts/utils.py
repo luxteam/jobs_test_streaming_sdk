@@ -404,6 +404,6 @@ def track_used_memory(case, execution_type):
 
 def multiconnection_start_android(test_group):
     # start Android client for multiconnection group
-    if test_group == "Multiconnection":
+    if test_group == "MulticonnectionWA":
         execute_adb_command("adb logcat -c")
         execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
