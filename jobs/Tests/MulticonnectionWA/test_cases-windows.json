@@ -2,7 +2,7 @@
     {
         "case": "STR_MCWA_001",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -11,7 +11,7 @@
     {
         "case": "STR_MCWA_002",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -20,7 +20,7 @@
     {
         "case": "STR_MCWA_003",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -29,7 +29,7 @@
     {
         "case": "STR_MCWA_004",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -38,7 +38,7 @@
     {
         "case": "STR_MCWA_005",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -47,7 +47,7 @@
     {
         "case": "STR_MCWA_006",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -56,7 +56,7 @@
     {
         "case": "STR_MCWA_007",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -65,7 +65,7 @@
     {
         "case": "STR_MCWA_008",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -74,7 +74,7 @@
     {
         "case": "STR_MCWA_009",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -83,7 +83,7 @@
     {
         "case": "STR_MCWA_010",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -resolution <resolution> -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -Resolution <resolution> -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -92,7 +92,7 @@
     {
         "case": "STR_MCWA_011",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -101,7 +101,7 @@
     {
         "case": "STR_MCWA_012",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
@@ -202,7 +202,7 @@
     {
         "case": "STR_MCWA_022",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -211,7 +211,7 @@
     {
         "case": "STR_MCWA_023",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -220,7 +220,7 @@
     {
         "case": "STR_MCWA_024",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -229,7 +229,7 @@
     {
         "case": "STR_MCWA_025",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -238,7 +238,7 @@
     {
         "case": "STR_MCWA_026",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -247,7 +247,7 @@
     {
         "case": "STR_MCWA_027",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -256,7 +256,7 @@
     {
         "case": "STR_MCWA_028",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -265,7 +265,7 @@
     {
         "case": "STR_MCWA_029",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -274,7 +274,7 @@
     {
         "case": "STR_MCWA_030",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -283,7 +283,7 @@
     {
         "case": "STR_MCWA_031",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -resolution <resolution> -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -Resolution <resolution> -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -292,7 +292,7 @@
     {
         "case": "STR_MCWA_032",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -301,7 +301,7 @@
     {
         "case": "STR_MCWA_033",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
