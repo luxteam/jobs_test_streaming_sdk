@@ -228,6 +228,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             while wait_iperf_command:
                 try:
                     iperf_command = connection.recv(1024).decode("utf-8")
+                    wait_iperf_command = False
                 except Exception as e:
                     sleep(1)
 
