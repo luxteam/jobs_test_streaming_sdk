@@ -268,4 +268,4 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
         with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
             json.dump(state, json_file, indent=4)
 
-        return process, last_log_line, android_client_closed
+    return process, last_log_line, android_client_closed

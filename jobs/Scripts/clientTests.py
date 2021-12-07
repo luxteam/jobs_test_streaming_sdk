@@ -224,4 +224,4 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
 
         sock.close()
 
-        return process, last_log_line
+    return process, last_log_line
