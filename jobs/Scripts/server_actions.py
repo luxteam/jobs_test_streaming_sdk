@@ -347,11 +347,19 @@ class DoTestActions(Action):
                 if self.stage > 3:
                     self.stage = 0
             elif self.game_name == "dota2":
-                sleep(1)
-                pydirectinput.press("r")
-                sleep(2)
-                pydirectinput.press("w")
-                sleep(2)
+                if self.stage == 0:
+                    sleep(1)
+                elif self.stage == 1:
+                    pydirectinput.press("r")
+                    sleep(2)
+                elif self.stage == 2:    
+                    pydirectinput.press("w")
+                    sleep(2)
+
+                self.stage += 1
+
+                if self.stage > 2:
+                    self.stage = 0           
             elif self.game_name == "csgo":
                 global csgoFirstExec
                 if csgoFirstExec:
