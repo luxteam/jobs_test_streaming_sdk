@@ -221,6 +221,18 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             json_content["test_status"] = "passed"
             analyze_logs(args.output, json_content, case)
 
+            wait_iperf_command = True
+            iperf_command = None
+
+            # wait iperf command
+            while wait_iperf_command:
+                try:
+                    iperf_command = connection.recv(1024).decode("utf-8")
+                except Exception as e:
+                    sleep(1)
+
+            main_logger.error("Received command: {}".format(iperf_command))
+
             # execute iperf if it's necessary
             params["json_content"] = json_content
             command_object = IPerf(connection, params, instance_state, main_logger)
