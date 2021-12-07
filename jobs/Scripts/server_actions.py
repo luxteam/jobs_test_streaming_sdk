@@ -347,48 +347,34 @@ class DoTestActions(Action):
                 if self.stage > 3:
                     self.stage = 0
             elif self.game_name == "dota2":
-                if self.stage == 0:
-                    sleep(1)
-                elif self.stage == 1:
-                    pydirectinput.press("r")
-                    sleep(2)
-                elif self.stage == 2:    
-                    pydirectinput.press("w")
-                    sleep(2)
-
-                self.stage += 1
-
-                if self.stage > 2:
-                    self.stage = 0
+                sleep(1)
+                pydirectinput.press("r")
+                sleep(1)
+                pydirectinput.press("w")
+                sleep(1)
             elif self.game_name == "csgo":
-                if self.stage == 0:
-                    global csgoFirstExec
-                    if csgoFirstExec:
-                        csgoFirstExec = False
-                        commands = [
-                            "`",
-                            "sv_cheats 1",
-                            "give weapon_deagle",
-                            "give weapon_molotov",
-                            "sv_infinite_ammo 1",
-                            "`"
-                        ]
-                        for command in commands:
-                            if command != "`":
-                                keyboard.write(command)
-                            else:
-                                pydirectinput.press("`")
-                            sleep(0.3)
-                            pydirectinput.press("enter")
-                elif self.stage == 1:
-                    pydirectinput.press("4")
-                    sleep(1.5)
-                    pyautogui.click()
+                global csgoFirstExec
+                if csgoFirstExec:
+                    csgoFirstExec = False
+                    commands = [
+                        "`",
+                        "sv_cheats 1",
+                        "give weapon_deagle",
+                        "give weapon_molotov",
+                        "sv_infinite_ammo 1",
+                        "`"
+                    ]
+                    for command in commands:
+                        if command != "`":
+                            keyboard.write(command)
+                        else:
+                            pydirectinput.press("`")
+                        sleep(0.25)
+                        pydirectinput.press("enter")
 
-                self.stage += 1
-
-                if self.stage > 1:
-                    self.stage = 0
+                pydirectinput.press("4")
+                sleep(1.5)
+                pyautogui.click()
             else:
                 sleep(0.5)
                 
