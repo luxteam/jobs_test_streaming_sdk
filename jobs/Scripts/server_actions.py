@@ -359,30 +359,36 @@ class DoTestActions(Action):
                 self.stage += 1
 
                 if self.stage > 2:
-                    self.stage = 0           
+                    self.stage = 0
             elif self.game_name == "csgo":
-                global csgoFirstExec
-                if csgoFirstExec:
-                    csgoFirstExec = False
-                    commands = [
-                        "`",
-                        "sv_cheats 1",
-                        "give weapon_deagle",
-                        "give weapon_molotov",
-                        "sv_infinite_ammo 1",
-                        "`"
-                    ]
-                    for command in commands:
-                        if command != "`":
-                            keyboard.write(command)
-                        else:
-                            pydirectinput.press("`")
-                        sleep(0.5)
-                        pydirectinput.press("enter")
+                if self.stage == 0:
+                    global csgoFirstExec
+                    if csgoFirstExec:
+                        csgoFirstExec = False
+                        commands = [
+                            "`",
+                            "sv_cheats 1",
+                            "give weapon_deagle",
+                            "give weapon_molotov",
+                            "sv_infinite_ammo 1",
+                            "`"
+                        ]
+                        for command in commands:
+                            if command != "`":
+                                keyboard.write(command)
+                            else:
+                                pydirectinput.press("`")
+                            sleep(0.3)
+                            pydirectinput.press("enter")
+                elif self.stage == 1:
+                    pydirectinput.press("4")
+                    sleep(1.5)
+                    pyautogui.click()
 
-                pydirectinput.press("4")
-                sleep(1.5)
-                pyautogui.click()
+                self.stage += 1
+
+                if self.stage > 1:
+                    self.stage = 0
             else:
                 sleep(0.5)
                 
