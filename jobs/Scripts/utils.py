@@ -157,14 +157,18 @@ def close_android_app(case=None, multiconnection=False):
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
-def save_logs(args, case, last_log_line, current_try):
+def save_logs(args, case, last_log_line, current_try, is_multiconnection=False):
     try:
-        if hasattr(args, "execution_type"):
-            execution_type = args.execution_type
-        else:
-            execution_type = "server"
+        if not is_multiconnection:
+            if hasattr(args, "execution_type"):
+                execution_type = args.execution_type
+            else:
+                execution_type = "server"
 
-        tool_path = args.server_tool if execution_type == "server" else args.client_tool
+            tool_path = args.server_tool if execution_type == "server" else args.client_tool
+        else:
+            tool_path = args.tool
+
         tool_path = os.path.abspath(tool_path)
 
         log_source_path = tool_path + ".log"
