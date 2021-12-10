@@ -156,8 +156,8 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 connection_sc.setblocking(False)
 
             # TODO: make single parameter to configure launching order
-            # default behaviour or start second client before server
-            if "second_client_start" not in case or case["second_client_start"] == "before_client":
+            # start second client before server
+            if "second_client_start" in case and case["second_client_start"] == "before_client":
                 connection_sc.send(case["case"].encode("utf-8"))
 
             # start client before server
@@ -176,8 +176,8 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     multiconnection_start_android(args.test_group)
 
             # TODO: make single parameter to configure launching order
-            # start second client before server
-            if "second_client_start" in case and case["second_client_start"] == "after_server":
+            # start second client after server or default behaviour
+            if "second_client_start" not in case or case["second_client_start"] == "after_server":
                 connection_sc.send(case["case"].encode("utf-8"))
 
             if is_workable_condition(process):
@@ -291,6 +291,9 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                 json.dump([json_content], file, indent=4)
 
+            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                connection_sc.send("finish passed".encode("utf-8"))
+
         else:
             raise Exception("Unknown client request: {}".format(request))
     except Exception as e:
@@ -301,12 +304,14 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
         if not instance_state.is_aborted:
             connection.send("abort".encode("utf-8"))
 
-        connection_sc.send("finish error".encode("utf-8"))
+        if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+            connection_sc.send("finish error".encode("utf-8"))
 
         raise e
     finally:
         connection.close()
-        connection_sc.close()
+        if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+            connection_sc.close()
 
         # restart game if it's required
         global REBOOTING_GAMES

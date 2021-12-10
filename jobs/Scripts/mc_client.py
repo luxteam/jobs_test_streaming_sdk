@@ -310,23 +310,18 @@ def execute_tests(args, current_conf):
                     command_object = ACTIONS_MAPPING[command](sock, params, instance_state, main_logger)
                     command_object.do_action()
                 else:
-                    raise ServerActionException("Unknown client command: {}".format(command))
+                    raise ServerActionException("Unknown request: {}".format(request))
 
                 main_logger.info("Finish action execution\n\n\n")
-
-            process = close_streaming_process("client", case, process)
-
-            with open(os.path.join(args.output, "test_cases.json"), "w+") as f:
-                json.dump(cases, f, indent=4)
 
             process = close_streaming_process("client", case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
             execution_time = time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
-
         except Exception as e:
             main_logger.error("Fatal error: {}".format(str(e)))
             main_logger.error("Traceback: {}".format(traceback.format_exc()))
+            process = close_streaming_process("client", case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
             execution_time = time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "error", error_messages = [])

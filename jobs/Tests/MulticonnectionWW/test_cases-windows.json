@@ -6,7 +6,7 @@
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
-        "start_first": "client",
+        "start_first": "server",
         "script_info": [
         ]
     }
