@@ -80,7 +80,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
     archive_name = case["case"]
 
-    # default launching of client and server (order doesn't matter)
+    # default launching of client and server (order doesn't matter). Exception: Multiconnection
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
         if start_streaming is not None and process is None:
             should_collect_traces = (args.collect_traces == "BeforeTests")
@@ -90,8 +90,8 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 collect_traces(archive_path, archive_name + "_server.zip")
 
     # TODO: make single parameter to configure launching order
-    # start android client before server
-    if "android_start" in case and case["android_start"] == "before_server":
+    # start android client before server or default behaviour
+    if "android_start" not in case or case["android_start"] == "before_server":
         if android_client_closed:
             multiconnection_start_android(args.test_group)
 
@@ -150,6 +150,16 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
         # server waits ready from client
         if request == "ready":
 
+            # non-blocking usage
+            connection.setblocking(False)
+            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                connection_sc.setblocking(False)
+
+            # TODO: make single parameter to configure launching order
+            # default behaviour or start second client before server
+            if "second_client_start" not in case or case["second_client_start"] == "before_client":
+                connection_sc.send(case["case"].encode("utf-8"))
+
             # start client before server
             if "start_first" in case and case["start_first"] == "client":
                 if start_streaming is not None and process is None:
@@ -160,20 +170,20 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                         collect_traces(archive_path, archive_name + "_server.zip")
 
             # TODO: make single parameter to configure launching order
-            # start android client after server or default behaviour
-            if ("android_start" in case and case["android_start"] == "after_server") or "android_start" not in case:
+            # start android client after server
+            if "android_start" in case and case["android_start"] == "after_server":
                 if android_client_closed:
                     multiconnection_start_android(args.test_group)
+
+            # TODO: make single parameter to configure launching order
+            # start second client before server
+            if "second_client_start" in case and case["second_client_start"] == "after_server":
+                connection_sc.send(case["case"].encode("utf-8"))
 
             if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))
             else:
                 connection.send("fail".encode("utf-8"))
-
-            # non-blocking usage
-            connection.setblocking(False)
-            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
-                connection_sc.setblocking(False)
 
             # build params dict with all necessary variables for test actions
             params["output_path"] = output_path

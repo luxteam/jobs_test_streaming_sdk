@@ -134,7 +134,7 @@ def prepare_empty_reports(args, current_conf):
             test_case_report['render_time'] = 0.0
             test_case_report['execution_time'] = 0.0
             test_case_report['transport_protocol'] = case['transport_protocol'].upper()
-            test_case_report['tool_path'] = args.server_tool if args.execution_type == 'server' else args.client_tool
+            test_case_report['tool_path'] = args.tool
             test_case_report['date_time'] = datetime.now().strftime(
                 '%m/%d/%Y %H:%M:%S')
             test_case_report[SCREENS_PATH_KEY] = os.path.join(args.output, "Color", case["case"])
@@ -222,6 +222,7 @@ def execute_tests(args, current_conf):
                     break
                 except Exception:
                     main_logger.info("Could not connect to server. Try it again")
+                    sleep(1)
 
             # find test case
             with open(os.path.join(os.path.abspath(args.output), "test_cases.json"), "r") as json_file:
@@ -268,7 +269,7 @@ def execute_tests(args, current_conf):
             params["client_type"] = "second_client"
 
             case_start_time = time.time()
-            process = start_streaming(args.execution_type, script_path, not should_collect_traces)
+            process = start_streaming("client", script_path, not should_collect_traces)
 
             # while client doesn't sent 'next_case' command server waits next command
             while not instance_state.finish_command_received:
@@ -302,12 +303,12 @@ def execute_tests(args, current_conf):
 
                 main_logger.info("Finish action execution\n\n\n")
 
-            process = close_streaming_process(args.execution_type, case, process)
+            process = close_streaming_process("client", case, process)
 
             with open(os.path.join(args.output, "test_cases.json"), "w+") as f:
                 json.dump(cases, f, indent=4)
 
-            process = close_streaming_process(args.execution_type, case, process)
+            process = close_streaming_process("client", case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try)
             execution_time = time.time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])

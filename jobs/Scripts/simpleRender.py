@@ -264,7 +264,7 @@ def execute_tests(args, current_conf):
     # copy log from last log line (it's actual for groups without restarting of client / server)
     last_log_line = None
 
-    if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
+    if (args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA") and args.execution_type == "server":
         # first time video recording on Android device can be unstable, do it before tests
         execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
 
