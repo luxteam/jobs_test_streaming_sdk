@@ -155,11 +155,6 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
                 connection_sc.setblocking(False)
 
-            # TODO: make single parameter to configure launching order
-            # start second client before server
-            if "second_client_start" in case and case["second_client_start"] == "before_client":
-                connection_sc.send(case["case"].encode("utf-8"))
-
             # start client before server
             if "start_first" in case and case["start_first"] == "client":
                 if start_streaming is not None and process is None:
@@ -175,9 +170,8 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 if android_client_closed:
                     multiconnection_start_android(args.test_group)
 
-            # TODO: make single parameter to configure launching order
-            # start second client after server or default behaviour
-            if "second_client_start" not in case or case["second_client_start"] == "after_server":
+            # start second client after server
+            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
                 connection_sc.send(case["case"].encode("utf-8"))
 
             if is_workable_condition(process):
