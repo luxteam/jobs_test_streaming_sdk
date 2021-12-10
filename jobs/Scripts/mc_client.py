@@ -277,7 +277,7 @@ def execute_tests(args, current_conf):
             params["client_type"] = "second_client"
 
             case_start_time = time()
-            process = start_streaming("client", script_path, not should_collect_traces)
+            process = start_streaming("client", script_path, False)
 
             # while client doesn't sent 'next_case' command server waits next command
             while not instance_state.finish_command_received:
