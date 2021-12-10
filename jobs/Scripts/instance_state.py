@@ -19,6 +19,16 @@ class ClientInstanceState:
         """
 
 
+class SecondClientInstanceState:
+    def __init__(self):
+        self.finish_command_received = False
+
+    def format_current_state(self):
+        return f"""
+            Finish command received: {self.finish_command_received}
+        """
+
+
 class ServerInstanceState:
     # server stores only its state
     def __init__(self):

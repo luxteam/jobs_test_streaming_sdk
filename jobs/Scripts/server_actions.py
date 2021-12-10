@@ -409,10 +409,20 @@ class GPUView(Action):
 # record metrics on server side
 class RecordMetrics(Action):
     def parse(self):
-        pass
+        self.test_group = self.params["args"].test_group
+
+        if self.test_group == "MulticonnectionWW" or self.test_group == "MulticonnectionWWA":
+            self.action = self.params["action_line"]
 
     @Action.server_action_decorator
     def execute(self):
+        try:
+            if self.test_group == "MulticonnectionWW" or self.test_group == "MulticonnectionWWA":
+                self.sock.send(self.action.encode("utf-8"))
+        except Exception as e:
+            self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
         if "used_memory" not in self.params["case"]:
             self.params["case"]["used_memory"] = []
 
@@ -420,3 +430,42 @@ class RecordMetrics(Action):
             track_used_memory(self.params["case"], "server")
 
         return True
+
+
+class MakeScreen(Action):
+    def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
+
+    def execute(self):
+        try:
+            self.sock.send(self.action.encode("utf-8"))
+        except Exception as e:
+            self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+class SleepAndScreen(Action):
+    def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
+
+    def execute(self):
+        try:
+            self.sock.send(self.action.encode("utf-8"))
+        except Exception as e:
+            self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+class RecordVideo(Action):
+    def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
+
+    def execute(self):
+        try:
+            self.sock.send(self.action.encode("utf-8"))
+        except Exception as e:
+            self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))

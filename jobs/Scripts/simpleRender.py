@@ -264,7 +264,7 @@ def execute_tests(args, current_conf):
     # copy log from last log line (it's actual for groups without restarting of client / server)
     last_log_line = None
 
-    if args.test_group == "MulticonnectionWA":
+    if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
         # first time video recording on Android device can be unstable, do it before tests
         execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
 
@@ -349,7 +349,7 @@ def execute_tests(args, current_conf):
             except Exception as e:
                 PROCESS = close_streaming_process(args.execution_type, case, PROCESS)
 
-                if args.test_group == "MulticonnectionWA" and args.execution_type == "server":
+                if (args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA") and args.execution_type == "server":
                     # close Streaming SDK android app
                     close_android_app()
                     save_android_log(args, case, None, log_name_postfix="_android")
