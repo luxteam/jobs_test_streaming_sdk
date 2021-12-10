@@ -209,6 +209,8 @@ def execute_tests(args, current_conf):
     last_log_line = None
 
     more_tests = True
+    previous_test_case = None
+    current_try = 0
 
     while tests_left > 0:
         try:
@@ -236,6 +238,12 @@ def execute_tests(args, current_conf):
                     break
             else:
                 raise Exception("Could not find test case with name '{}'".format(response))
+
+            if case == previous_test_case:
+                current_try += 1
+            else:
+                previous_test_case = case
+                current_try = 0
 
             prepared_keys = prepare_keys(args, case)
             execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
