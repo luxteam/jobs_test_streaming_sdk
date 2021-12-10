@@ -167,6 +167,7 @@ def save_logs(args, case, last_log_line, current_try, is_multiconnection=False):
 
             tool_path = args.server_tool if execution_type == "server" else args.client_tool
         else:
+            execution_type = "sc_client"
             tool_path = args.tool
 
         tool_path = os.path.abspath(tool_path)
