@@ -7,7 +7,7 @@
         <argument>--client_tool "{clientTool}"</argument>
         <argument>--server_tool "{serverTool}"</argument>
         <argument>--output "{OutputDir}"</argument>
-        <argument>--test_group MulticonnectionWW</argument>
+        <argument>--test_group MulticonnectionWWA</argument>
         <argument>--test_cases "{TestCases}"</argument>
         <argument>--retries 1</argument>
         <argument>--execution_type "{executionType}"</argument>

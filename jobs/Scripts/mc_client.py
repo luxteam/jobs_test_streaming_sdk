@@ -196,6 +196,8 @@ def execute_tests(args, current_conf):
     with open(os.path.join(os.path.abspath(args.output), "test_cases.json"), "r") as json_file:
         cases = json.load(json_file)
 
+    tests_left = len(cases)
+
     tool_path = args.tool
 
     tool_path = os.path.abspath(tool_path)
@@ -208,7 +210,7 @@ def execute_tests(args, current_conf):
 
     more_tests = True
 
-    while more_tests:
+    while tests_left > 0:
         try:
             # Connect to server to sync autotests
             while True:
@@ -316,6 +318,9 @@ def execute_tests(args, current_conf):
             last_log_line = save_logs(args, case, last_log_line, current_try)
             execution_time = time.time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "error", error_messages = [])
+
+        finally:
+            tests_left -= 1
 
     return 0
 
