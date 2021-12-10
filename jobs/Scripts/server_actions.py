@@ -411,14 +411,11 @@ class RecordMetrics(Action):
     def parse(self):
         self.test_group = self.params["args"].test_group
 
-        if self.test_group == "MulticonnectionWW" or self.test_group == "MulticonnectionWWA":
-            self.action = self.params["action_line"]
-
     @Action.server_action_decorator
     def execute(self):
         try:
             if self.test_group == "MulticonnectionWW" or self.test_group == "MulticonnectionWWA":
-                self.sock.send(self.action.encode("utf-8"))
+                self.sock.send("record_metrics".encode("utf-8"))
         except Exception as e:
             self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
