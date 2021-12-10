@@ -276,7 +276,7 @@ def execute_tests(args, current_conf):
             params["case"] = case
             params["client_type"] = "second_client"
 
-            case_start_time = time.time()
+            case_start_time = time()
             process = start_streaming("client", script_path, not should_collect_traces)
 
             # while client doesn't sent 'next_case' command server waits next command
@@ -318,14 +318,14 @@ def execute_tests(args, current_conf):
 
             process = close_streaming_process("client", case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try)
-            execution_time = time.time() - case_start_time
+            execution_time = time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
 
         except Exception as e:
             main_logger.error("Fatal error: {}".format(str(e)))
             main_logger.error("Traceback: {}".format(traceback.format_exc()))
             last_log_line = save_logs(args, case, last_log_line, current_try)
-            execution_time = time.time() - case_start_time
+            execution_time = time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "error", error_messages = [])
 
         finally:
