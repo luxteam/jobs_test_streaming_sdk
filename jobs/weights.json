@@ -88,6 +88,10 @@
         {
             "suite_name": "ConfigOverwrite",
             "value": 22
+        },
+        {
+            "suite_name": "CaptureMode",
+            "value": 4
         }        
     ]
 }

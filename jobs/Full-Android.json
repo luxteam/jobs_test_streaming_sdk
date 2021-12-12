@@ -1,0 +1,26 @@
+{
+    "split":true,
+    "groups":{
+        "Audio":"",
+        "CaptureType":"",
+        "Codecs":"",
+        "ConversionType":"",
+        "Duplicate":"",
+        "General":"",
+        "MPO":"",
+        "Monitors":"",
+        "QoS":"",
+        "RateControl":"",
+        "RenderType":"",
+        "Resolution":"",
+        "Slices":"",
+        "Smoke":"",
+        "VSync":"",
+        "GeneralQoS":"",
+        "Connection":"",
+        "DirtyRectangles":"",
+        "Flags":"",
+        "Microphone":"",
+        "CaptureMode": ""
+    }
+}

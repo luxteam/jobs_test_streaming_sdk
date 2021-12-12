@@ -18,7 +18,7 @@
         ]
     },
     {
-        "case": "STR_CPT_002",
+        "case": "STR_CPT_003",
         "status": "active",
         "server_keys": "-Resolution <resolution> -CaptureMode asap -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -27,7 +27,7 @@
         ]
     },
     {
-        "case": "STR_CPT_002",
+        "case": "STR_CPT_004",
         "status": "active",
         "server_keys": "-Resolution <resolution> -CaptureMode asap -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
