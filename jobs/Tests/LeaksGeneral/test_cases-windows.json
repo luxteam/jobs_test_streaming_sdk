@@ -1424,7 +1424,7 @@
         ],
 
         "csgo_actions": [
-            "check_game \"Counter-Strike: Global Offensive\" \"csgo.exe\"",
+            "check_game \"Counter-Strike: Global Offensive - Direct3D 9\" \"csgo.exe\"",
             "skip_if_done 18",
             "execute_cmd \"C:\\JN\\csgo.exe.url\"",
             "sleep 30",
@@ -1443,7 +1443,7 @@
             "click_server center_155 center_117",
             "sleep 40",
             "press_keys_server \"w_3\"",
-            "check_game \"Counter-Strike: Global Offensive\" \"csgo.exe\"",
+            "check_game \"Counter-Strike: Global Offensive - Direct3D 9\" \"csgo.exe\"",
 
             "make_screen",
             "move 1000 800",
@@ -2991,7 +2991,7 @@
         ],
 
         "csgo_actions": [
-            "check_game \"Counter-Strike: Global Offensive\" \"csgo.exe\"",
+            "check_game \"Counter-Strike: Global Offensive - Direct3D 9\" \"csgo.exe\"",
             "skip_if_done 18",
             "execute_cmd \"C:\\JN\\csgo.exe.url\"",
             "sleep 30",
@@ -3010,7 +3010,7 @@
             "click_server center_155 center_117",
             "sleep 40",
             "press_keys_server \"w_3\"",
-            "check_game \"Counter-Strike: Global Offensive\" \"csgo.exe\"",
+            "check_game \"Counter-Strike: Global Offensive - Direct3D 9\" \"csgo.exe\"",
 
             "make_screen",
             "move 1000 800",
