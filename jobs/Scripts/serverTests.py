@@ -129,7 +129,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             request = connection.recv(1024).decode("utf-8")
         else:
             connection_sc, address_sc = sock.accept()
-            request_sc = connection.recv(1024).decode("utf-8")
+            request_sc = connection_sc.recv(1024).decode("utf-8")
 
     game_name = args.game_name.lower()
 
