@@ -11,6 +11,8 @@ import traceback
 from time import sleep, time
 import socket
 from subprocess import PIPE, STDOUT
+import pyscreenshot
+import pyautogui
 from instance_state import SecondClientInstanceState
 from utils import *
 from mc_actions import *
@@ -21,6 +23,8 @@ ROOT_PATH = os.path.abspath(os.path.join(
 sys.path.append(ROOT_PATH)
 from jobs_launcher.core.config import *
 from jobs_launcher.core.system_info import get_gpu
+
+pyautogui.FAILSAFE = False
 
 
 # mapping of commands and their implementations
@@ -162,7 +166,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report = json.loads(file.read())[0]
         test_case_report["test_status"] = test_case_status
         test_case_report["execution_time"] = execution_time
-        test_case_report["log"] = os.path.join("tool_logs", case["case"] + "_second_client.log")
+        test_case_report["second_client_log"] = os.path.join("tool_logs", case["case"] + "_second_client.log")
         test_case_report["testing_start"] = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         test_case_report["message"] = test_case_report["message"] + list(error_messages)
         test_case_report["keys"] = case["prepared_keys"]
@@ -281,6 +285,9 @@ def execute_tests(args, current_conf):
 
             case_start_time = time()
             process = start_streaming("client", script_path, False)
+
+            pyscreenshot.grab()
+            pyautogui.click(x=1000, y=800)
 
             # while client doesn't sent 'next_case' command server waits next command
             while not instance_state.finish_command_received:
