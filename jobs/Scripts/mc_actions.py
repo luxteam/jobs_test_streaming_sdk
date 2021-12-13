@@ -111,7 +111,8 @@ class Finish(Action):
         pass
 
     def execute(self):
-        pass
+        if self.params["args"].track_used_memory:
+            track_used_memory(self.params["case"], "client")
 
     def analyze_result(self):
         self.state.finish_command_received = True
