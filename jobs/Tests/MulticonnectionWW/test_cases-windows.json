@@ -9,5 +9,104 @@
         "start_first": "server",
         "script_info": [
         ]
+    },
+    {
+        "case": "STR_MCWW_002",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_003",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_004",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_005",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_006",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_007",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_008",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_009",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_010",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
     }
 ]
