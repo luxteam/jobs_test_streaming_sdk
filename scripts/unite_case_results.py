@@ -43,7 +43,7 @@ def format_script_info(script_info):
             server_keys = line
         elif line.startswith("Second Client keys:"):
             second_client_keys = line
-        else:
+        elif line:
             other_info.append(line)
 
     result = []
