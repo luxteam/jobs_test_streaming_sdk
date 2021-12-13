@@ -162,7 +162,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report = json.loads(file.read())[0]
         test_case_report["test_status"] = test_case_status
         test_case_report["execution_time"] = execution_time
-        test_case_report["log"] = os.path.join("tool_logs", case["case"] + "_second_client.log")
+        test_case_report["second_client_log"] = os.path.join("tool_logs", case["case"] + "_second_client.log")
         test_case_report["testing_start"] = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         test_case_report["message"] = test_case_report["message"] + list(error_messages)
         test_case_report["keys"] = case["prepared_keys"]
