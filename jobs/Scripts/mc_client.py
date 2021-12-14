@@ -282,8 +282,6 @@ def execute_tests(args, current_conf):
             params["client_type"] = "second_client"
             params["audio_device_name"] = audio_device_name
 
-            sleep(3)
-
             case_start_time = time()
             process = start_streaming("client", script_path, False)
 
