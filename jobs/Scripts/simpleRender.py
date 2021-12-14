@@ -201,7 +201,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report["server_log"] = os.path.join("tool_logs", case["case"] + "_server.log")
         test_case_report["client_log"] = os.path.join("tool_logs", case["case"] + "_client.log")
 
-        if args.test_group == "MulticonnectionWA":
+        if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
             test_case_report["android_log"] = os.path.join("tool_logs", case["case"] + "_android.log")
 
         if args.collect_traces == "AfterTests" or args.collect_traces == "BeforeTests":
