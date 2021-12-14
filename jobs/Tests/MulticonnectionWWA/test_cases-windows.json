@@ -2,7 +2,7 @@
     {
         "case": "STR_MCWWA_001",
         "status": "active",
-        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "server_keys": "-MAXUSERS 3 -framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
