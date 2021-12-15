@@ -161,6 +161,9 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     should_collect_traces = (args.collect_traces == "BeforeTests")
                     process = start_streaming(args.execution_type, script_path, not should_collect_traces)
 
+                    if args.test_group == "MulticonnectionWW":
+                        sleep(3)
+
                     if should_collect_traces:
                         collect_traces(archive_path, archive_name + "_server.zip")
 
