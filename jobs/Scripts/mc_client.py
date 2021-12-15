@@ -284,6 +284,8 @@ def execute_tests(args, current_conf):
 
             case_start_time = time()
 
+            sleep(2)
+
             if process is None:
                 process = start_streaming("second_client", script_path, False)
 
