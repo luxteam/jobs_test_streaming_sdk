@@ -129,10 +129,10 @@ def prepare_empty_reports(args, current_conf):
                 prepared_keys = prepare_keys(args, case)
 
                 keys_description = "Second client keys: {}".format(prepared_keys)
-                test_case_report["script_info"] = case["script_info"]
+                test_case_report["script_info"] = []
                 test_case_report["script_info"].append(keys_description)
             else:
-                test_case_report["script_info"] = case["script_info"]
+                test_case_report["script_info"] = []
                 
             test_case_report['test_group'] = args.test_group
             test_case_report['tool'] = 'StreamingSDK'
@@ -256,6 +256,7 @@ def execute_tests(args, current_conf):
             case["prepared_keys"] = prepared_keys
 
             keys_description = "Second client keys: {}".format(prepared_keys)
+            case["script_info"] = []
             case["script_info"].append(keys_description)
 
             script_path = os.path.join(args.output, "{}.bat".format(case["case"]))
