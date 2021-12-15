@@ -1,13 +1,97 @@
 [
     {
-        "case": "STR_MCWW_001",
+        "case": "STR_MCWW_018",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "client",
+        "script_info": [
+            "Connect the first client before server",
+            "Connect the second client after server"
+        ]
+    },
+    {
+        "case": "STR_MCWW_019",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "start_first": "server",
+        "keep_server": true,
+        "keep_second_client": true,
         "script_info": [
+            "Keep server, restart one client (try #1)"
         ]
-    }
+    },
+    {
+        "case": "STR_MCWW_020",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "keep_server": true,
+        "keep_second_client": true,
+        "script_info": [
+            "Keep server, restart one client (try #2)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_021",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "keep_server": "server",
+        "keep_client": true,
+        "script_info": [
+            "Keep server, restart all clients (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_022",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "keep_server": "server",
+        "keep_client": true,
+        "script_info": [
+            "Keep server, restart all clients (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_023",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "keep_client": true,
+        "keep_second_client": true,
+        "script_info": [
+            "Keep clients, restart server (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_024",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "keep_client": true,
+        "keep_second_client": true,
+        "script_info": [
+            "Keep clients, restart server (try #2)"
+        ]
+    },
 ]
