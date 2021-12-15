@@ -34,9 +34,6 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "start_first": "server",
-        "keep_server": true,
-        "keep_second_client": true,
-        "keep_android": true,
         "script_info": [
             "Keep server, restart the first client (try #2)"
         ]
@@ -64,9 +61,6 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "start_first": "server",
-        "keep_server": true,
-        "keep_client": true,
-        "keep_android": true,
         "script_info": [
             "Keep server, restart the second client (try #2)"
         ]
@@ -94,9 +88,6 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "start_first": "server",
-        "keep_server": true,
-        "keep_client": true,
-        "keep_second_client": true,
         "script_info": [
             "Keep server, restart mobile client (try #2)"
         ]
@@ -123,8 +114,6 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "start_first": "server",
-        "keep_server": true,
-        "keep_android": true,
         "script_info": [
             "Keep server, restart two desktop clients (try #2)"
         ]
@@ -151,8 +140,6 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "start_first": "server",
-        "keep_server": true,
-        "keep_second_client": true,
         "script_info": [
             "Keep server, restart mobile and one desktop clients (try #2)"
         ]
@@ -180,9 +167,6 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "start_first": "server",
-        "keep_client": true,
-        "keep_second_client": true,
-        "keep_android": true,
         "script_info": [
             "Keep clients, restart server (try #2)"
         ]

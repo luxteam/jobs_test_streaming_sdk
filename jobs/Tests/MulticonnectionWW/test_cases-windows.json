@@ -34,8 +34,6 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "start_first": "server",
-        "keep_server": true,
-        "keep_second_client": true,
         "script_info": [
             "Keep server, restart one client (try #2)"
         ]
@@ -47,8 +45,8 @@
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
-        "keep_server": "server",
-        "keep_client": true,
+        "start_first": "server",
+        "keep_server": true,
         "script_info": [
             "Keep server, restart all clients (try #1)"
         ]
@@ -60,8 +58,7 @@
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
-        "keep_server": "server",
-        "keep_client": true,
+        "start_first": "server",
         "script_info": [
             "Keep server, restart all clients (try #1)"
         ]
@@ -88,8 +85,6 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "start_first": "server",
-        "keep_client": true,
-        "keep_second_client": true,
         "script_info": [
             "Keep clients, restart server (try #2)"
         ]
