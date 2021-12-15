@@ -104,7 +104,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             if should_collect_traces:
                 collect_traces(archive_path, archive_name + "_server.zip")
             else:
-                sleep(10)
+                sleep(3)
 
     # configure socket
     sock = socket.socket()
