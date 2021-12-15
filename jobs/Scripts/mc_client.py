@@ -283,7 +283,9 @@ def execute_tests(args, current_conf):
             params["audio_device_name"] = audio_device_name
 
             case_start_time = time()
-            process = start_streaming("client", script_path, False)
+
+            if process is None:
+                process = start_streaming("second_client", script_path, False)
 
             pyscreenshot.grab()
             pyautogui.click(x=1000, y=800)
@@ -320,14 +322,14 @@ def execute_tests(args, current_conf):
 
                 main_logger.info("Finish action execution\n\n\n")
 
-            process = close_streaming_process("client", case, process)
+            process = close_streaming_process("second_client", case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
             execution_time = time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
         except Exception as e:
             main_logger.error("Fatal error: {}".format(str(e)))
             main_logger.error("Traceback: {}".format(traceback.format_exc()))
-            process = close_streaming_process("client", case, process)
+            process = close_streaming_process("second_client", case, process)
             last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
             execution_time = time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "error", error_messages = [])
