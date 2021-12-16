@@ -856,6 +856,7 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                         if number_of_problems >= 5:
                             main_logger.warning("Android client could not connect")
                             json_content["message"].add("Android client could not connect")
+                            json_content["test_status"] = "error"
                             break
 
         elif execution_type == "windows_client" or execution_type == "second_windows_client":
@@ -888,6 +889,8 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                         else:
                             main_logger.warning("Second windows client client could not connect")
                             json_content["message"].add("Second windows client could not connect")
+
+                        json_content["test_status"] = "error"
 
         else:
             main_logger.info("Test case skipped: {}".format(json_content["test_case"]))

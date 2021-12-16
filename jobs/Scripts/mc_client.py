@@ -166,7 +166,11 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report = json.loads(file.read())[0]
         test_case_report["test_status"] = test_case_status
         test_case_report["execution_time"] = execution_time
-        test_case_report["second_client_log"] = os.path.join("tool_logs", case["case"] + "_second_client.log")
+
+        log_path = os.path.join("tool_logs", case["case"] + "_second_client.log")
+        if os.path.exists(log_path):
+            test_case_report["second_client_log"] = log_path
+
         test_case_report["testing_start"] = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         test_case_report["message"] = test_case_report["message"] + list(error_messages)
         test_case_report["keys"] = case["prepared_keys"]
@@ -287,8 +291,9 @@ def execute_tests(args, current_conf):
 
             case_start_time = time()
 
-            if process is None:
-                process = start_streaming("second_client", script_path, False)
+            if "-MAXUSERS 1" not in case["server_keys"]:
+                if process is None:
+                    process = start_streaming("second_client", script_path, False)
 
             pyscreenshot.grab()
             pyautogui.click(x=1000, y=800)
@@ -312,6 +317,10 @@ def execute_tests(args, current_conf):
                 else:
                     arguments_line = None
 
+                if "-MAXUSERS 1" in case["server_keys"] and command != "finish":
+                    main_logger.info("Ignore action")
+                    continue
+
                 params["action_line"] = request
                 params["command"] = command
                 params["arguments_line"] = arguments_line
@@ -325,20 +334,21 @@ def execute_tests(args, current_conf):
 
                 main_logger.info("Finish action execution\n\n\n")
 
-            process = close_streaming_process("second_client", case, process)
-            last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
+            if "-MAXUSERS 1" not in case["server_keys"]:
+                process = close_streaming_process("second_client", case, process)
+                last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
 
-            with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
-                json_content = json.load(file)[0]
+                with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
+                    json_content = json.load(file)[0]
 
-            if "Multiconnection" in args.test_group:
-                analyze_logs(args.output, json_content, case)
+                if "Multiconnection" in args.test_group:
+                    analyze_logs(args.output, json_content, case)
 
-            with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
-                json.dump([json_content], file, indent=4)
+                with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
+                    json.dump([json_content], file, indent=4)
 
-            execution_time = time() - case_start_time
-            save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
+                execution_time = time() - case_start_time
+                save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
         except Exception as e:
             main_logger.error("Fatal error: {}".format(str(e)))
             main_logger.error("Traceback: {}".format(traceback.format_exc()))
