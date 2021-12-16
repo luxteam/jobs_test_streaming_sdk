@@ -104,7 +104,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             if should_collect_traces:
                 collect_traces(archive_path, archive_name + "_server.zip")
             else:
-                sleep(3)
+                sleep(2)
 
     # configure socket
     sock = socket.socket()
@@ -161,21 +161,25 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     should_collect_traces = (args.collect_traces == "BeforeTests")
                     process = start_streaming(args.execution_type, script_path, not should_collect_traces)
 
-                    if args.test_group == "MulticonnectionWW":
-                        sleep(3)
+                    if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                        sleep(2)
 
                     if should_collect_traces:
                         collect_traces(archive_path, archive_name + "_server.zip")
+
+            # start second client after server
+            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                connection_sc.send(case["case"].encode("utf-8"))
+                # small delay to give client time to connect
+                sleep(2)
 
             # TODO: make single parameter to configure launching order
             # start android client after server
             if "android_start" in case and case["android_start"] == "after_server":
                 if android_client_closed:
                     multiconnection_start_android(args.test_group)
-
-            # start second client after server
-            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
-                connection_sc.send(case["case"].encode("utf-8"))
+                    # small delay to give client time to connect
+                    sleep(2)
 
             if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))
@@ -254,6 +258,9 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
             process = close_streaming_process(args.execution_type, case, process)
 
+            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                connection_sc.send("finish passed".encode("utf-8"))
+
             if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
                 # close Streaming SDK android app
                 android_client_closed = close_android_app(case, True)
@@ -287,9 +294,6 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                 json.dump([json_content], file, indent=4)
-
-            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
-                connection_sc.send("finish passed".encode("utf-8"))
 
         else:
             raise Exception("Unknown client request: {}".format(request))
