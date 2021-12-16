@@ -274,6 +274,9 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             json_content["test_status"] = "passed"
             analyze_logs(args.output, json_content, case)
 
+            if "Multiconnection" in args.test_group:
+                analyze_logs(args.output, json_content, case, execution_type="android_client")
+
             wait_iperf_command = True
             iperf_command = None
 
