@@ -229,7 +229,7 @@ def execute_tests(args, current_conf):
                     break
                 except Exception:
                     main_logger.info("Could not connect to server. Try it again")
-                    sleep(1)
+                    sleep(0.5)
 
             # find test case
             with open(os.path.join(os.path.abspath(args.output), "test_cases.json"), "r") as json_file:
@@ -298,7 +298,7 @@ def execute_tests(args, current_conf):
                 try:
                     request = sock.recv(1024).decode("utf-8")
                 except Exception as e:
-                    sleep(1)
+                    sleep(0.5)
                     continue
 
                 main_logger.info("Received action: {}".format(request))
