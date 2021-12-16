@@ -161,21 +161,25 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     should_collect_traces = (args.collect_traces == "BeforeTests")
                     process = start_streaming(args.execution_type, script_path, not should_collect_traces)
 
-                    if args.test_group == "MulticonnectionWW":
+                    if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
                         sleep(3)
 
                     if should_collect_traces:
                         collect_traces(archive_path, archive_name + "_server.zip")
+
+            # start second client after server
+            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                connection_sc.send(case["case"].encode("utf-8"))
+                # small delay to give client time to connect
+                sleep(3)
 
             # TODO: make single parameter to configure launching order
             # start android client after server
             if "android_start" in case and case["android_start"] == "after_server":
                 if android_client_closed:
                     multiconnection_start_android(args.test_group)
-
-            # start second client after server
-            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
-                connection_sc.send(case["case"].encode("utf-8"))
+                    # small delay to give client time to connect
+                    sleep(3)
 
             if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))

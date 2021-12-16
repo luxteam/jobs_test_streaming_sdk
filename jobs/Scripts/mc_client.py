@@ -244,6 +244,8 @@ def execute_tests(args, current_conf):
             else:
                 raise Exception("Could not find test case with name '{}'".format(response))
 
+            main_logger.info("Start test case: {}".format(response))
+
             if case == previous_test_case:
                 current_try += 1
             else:
