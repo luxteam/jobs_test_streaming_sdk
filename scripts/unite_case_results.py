@@ -57,7 +57,7 @@ def format_script_info(script_info):
 
     if second_client_keys:
         result.append("")
-        result.extend(second_client_keys)
+        result.append(second_client_keys)
 
     result.append("")
     result.extend(other_info)
