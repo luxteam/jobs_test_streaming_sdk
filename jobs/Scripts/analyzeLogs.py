@@ -855,9 +855,11 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
 
                         if number_of_problems >= 5:
                             main_logger.warning("Android client could not connect")
-                            json_content["message"].add("Android client could not connect")
+                            json_content["message"].append("Android client could not connect")
                             json_content["test_status"] = "error"
                             break
+
+                        main_logger.warning("Number of lines with connection problem: {}".format(number_of_problems))
 
         elif execution_type == "windows_client" or execution_type == "second_windows_client":
             if execution_type == "windows_client":
@@ -882,13 +884,15 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                         if "Info: Average latency:" in line:
                             number_of_metrics_lines += 1
 
+                    main_logger.warning("Found {} metrics lines".format(number_of_metrics_lines))
+
                     if number_of_metrics_lines < 5:
                         if execution_type == "windows_client":
                             main_logger.warning("First windows client client could not connect")
-                            json_content["message"].add("First windows client could not connect")
+                            json_content["message"].append("First windows client could not connect")
                         else:
                             main_logger.warning("Second windows client client could not connect")
-                            json_content["message"].add("Second windows client could not connect")
+                            json_content["message"].append("Second windows client could not connect")
 
                         json_content["test_status"] = "error"
 

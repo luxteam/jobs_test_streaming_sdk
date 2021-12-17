@@ -78,7 +78,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             if should_collect_traces:
                 collect_traces(archive_path, archive_name + "_client.zip")
             else:
-                sleep(2)
+                sleep(3)
 
     response = None
 
