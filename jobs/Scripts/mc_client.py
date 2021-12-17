@@ -168,7 +168,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report["execution_time"] = execution_time
 
         log_path = os.path.join("tool_logs", case["case"] + "_second_client.log")
-        if os.path.exists(log_path):
+        if os.path.exists(os.path.join(args.output, log_path)):
             test_case_report["second_client_log"] = log_path
 
         test_case_report["testing_start"] = datetime.now().strftime("%m/%d/%Y %H:%M:%S")

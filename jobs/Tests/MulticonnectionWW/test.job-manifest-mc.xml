@@ -3,7 +3,7 @@
 
     <outpath value="{OutputDir}"/>
 
-    <execute command='python "{ResourcesDir}/mc_client.py"' timeout="4200">
+    <execute command='python "{ResourcesDir}/mc_client.py"' timeout="4800">
         <argument>--tool "{clientTool}"</argument>
         <argument>--output "{OutputDir}"</argument>
         <argument>--test_group MulticonnectionWW</argument>
