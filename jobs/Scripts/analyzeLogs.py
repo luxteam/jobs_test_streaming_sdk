@@ -853,13 +853,13 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                         if "DiscoverServers() ends result=false" in line:
                             number_of_problems += 1
 
-                        if number_of_problems >= 5:
+                        if number_of_problems >= 10:
                             main_logger.warning("Android client could not connect")
                             json_content["message"].append("Android client could not connect")
                             json_content["test_status"] = "error"
                             break
 
-                        main_logger.warning("Number of lines with connection problem: {}".format(number_of_problems))
+                    main_logger.warning("Number of lines with connection problem: {}".format(number_of_problems))
 
         elif execution_type == "windows_client" or execution_type == "second_windows_client":
             if execution_type == "windows_client":
