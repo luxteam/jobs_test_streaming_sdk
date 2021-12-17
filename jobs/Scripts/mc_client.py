@@ -347,8 +347,9 @@ def execute_tests(args, current_conf):
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                     json.dump([json_content], file, indent=4)
 
-                execution_time = time() - case_start_time
-                save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
+            execution_time = time() - case_start_time
+            save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
+
         except Exception as e:
             main_logger.error("Fatal error: {}".format(str(e)))
             main_logger.error("Traceback: {}".format(traceback.format_exc()))
