@@ -37,6 +37,9 @@ def format_script_info(script_info):
     other_info = []
 
     for line in script_info:
+        if line is None:
+            continue
+
         if line.startswith("Client keys:"):
             client_keys = line
         elif line.startswith("Server keys:"):
