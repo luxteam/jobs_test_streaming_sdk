@@ -46,7 +46,7 @@ class OpenGame(Action):
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
             "lol": ["League of Legends (TM) Client", "League of Legends.exe"],
             "dota2": ["Dota 2", "dota2.exe"],
-            "csgo": ["Counter-Strike: Global Offensive", "csgo.exe"],
+            "csgo": ["Counter-Strike: Global Offensive - Direct3D 9", "csgo.exe"],
             "nothing": [None, None]
         }
 

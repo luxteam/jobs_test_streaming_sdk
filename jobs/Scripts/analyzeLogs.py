@@ -584,7 +584,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
 
-        #rules for Config & ConfigRewrite (CN/CRN)
+        #rules for Config & ConfigOverwrite (CN/CRN)
         #where Config = C, ConfirReswrite = CR, N - case number
         #C1-C9, C23-C31 - skipped
         settings_json_path = os.path.join(os.getenv("APPDATA"), "..", "Local", "AMD", "RemoteGameServer", "settings", "settings.json")
@@ -667,45 +667,27 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         
         #rule C18-C20, C40-C42: skipped
 
-        #rule C21, C43: DatagramSize != fragment size from logs -> failed
+        #rule C21, C43: DatagramSize < fragment size from logs -> failed
         if case["case"].find('STR_CFG_021') == 0:
             json_datagram = f'{settings_json_content["Headset"]["DatagramSize"]}'
 
             value = saved_values['datagram_size'][0].strip()
 
-            if value != json_datagram:
-                json_content["message"].append("Config problem: DatagramSize in JSON doesn't match to datagram size from logs. Datagram size from JSON: {}, from logs {}".format(json_datagram, value))
+            if value > json_datagram:
+                json_content["message"].append("Config problem: DatagramSize in JSON fewer than datagram size from logs. Datagram size from JSON: {}, from logs {}".format(json_datagram, value))
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
         
         #rule C22, C44: skipped
 
-        #rule CR1, CR15: resolution from flags != resolution from logs -> failed = common check
+        #rule CR1, CR12: resolution from flags != resolution from logs -> failed = common check
 
-        #rule CR2, CR16: skipped
+        #rule CR2, CR13: skipped
 
-        #rule CR3, CR17: FRAMERATE from flags + 10 <= TX Rate -> failed
-        if case["case"].find('STR_CFR_003') == 0 or case["case"].find('STR_CFR_017') == 0:
-            flags_framerate = get_framerate(case["prepared_keys"])
-        
-            if 'tx_rates' in saved_values:
-                max_tx_rate = 0
+        #rule CR3, CR14: can't be catched now, skipped
 
-                for i in range(len(saved_values['tx_rates'])):
-                    if saved_values['tx_rates'][i] > max_tx_rate:
-                        max_tx_rate = saved_values['tx_rates'][i]
-    
-                if flags_framerate + 10 <= max_tx_rate:
-                    json_content["message"].append("Config problem: too high TX Rate {}".format(max_tx_rate))
-                    if json_content["test_status"] != "error":
-                        json_content["test_status"] = "failed"
-
-        #rule CR4, CR18: Checking that just started
-
-        #rule CR5, CR19: can't be catched now
-
-        #rule CR6, CR20: BITRATE from flags != Bitrate from logs -> failed
-        if case["case"].find('STR_CFR_006') == 0 or case["case"].find('STR_CFR_020') == 0:
+        #rule CR4, CR15: BITRATE from flags != Bitrate from logs -> failed
+        if case["case"].find('STR_CFR_004') == 0 or case["case"].find('STR_CFR_015') == 0:
             int_flags_bitrate = int(get_bitrate(case["prepared_keys"])) / 1000000
 
             flag = False
@@ -718,8 +700,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        #rule CR7, CR21: PROTOCOL from flags != protocol from logs -> failed
-        if case["case"].find('STR_CFR_007') == 0 or case["case"].find('STR_CFR_021') == 0:
+        #rule CR5, CR16: PROTOCOL from flags != protocol from logs -> failed
+        if case["case"].find('STR_CFR_005') == 0 or case["case"].find('STR_CFR_016') == 0:
             server_protocol = get_server_protocol(case["prepared_keys"]).upper()
 
             if server_protocol != saved_values['protocol'][0]:
@@ -727,14 +709,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        #rule CR8, CR22: can't be catched now
+        #rule CR6, CR17: can't be catched now
 
-        #rule CR9, CR23: can't be catched
+        #rule CR7, CR18: can't be catched, skipped
 
-        #rule CR10, CR24: Checking that just started
-
-        #rule CR11, CR25: MinFramerate from flags - 10 >= TX Rate -> failed
-        if case["case"].find('STR_CFR_011') == 0 or case["case"].find('STR_CFR_025') == 0:
+        #rule CR8, CR19: MinFramerate from flags - 10 >= TX Rate -> failed
+        if case["case"].find('STR_CFR_008') == 0 or case["case"].find('STR_CFR_019') == 0:
             flags_minframerate = int(get_min_framerate(case["prepared_keys"]))
         
             if 'tx_rates' in saved_values:
@@ -749,10 +729,10 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
 
-        #rule CR12, CR26: Checking that just connected
+        #rule CR9, CR20: Checking that just connected
 
-        #rule CR13, CR27: Codec from flags != Codec from logs -> failed
-        if case["case"].find('STR_CFR_013') == 0 or case["case"].find('STR_CFR_027') == 0:
+        #rule CR10, CR21: Codec from flags != Codec from logs -> failed
+        if case["case"].find('STR_CFR_010') == 0 or case["case"].find('STR_CFR_021') == 0:
             flags_codec = get_codec(case["prepared_keys"]).upper()
 
             if (flags_codec == "H.265" or flags_codec == "H265"):
@@ -767,7 +747,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        #rule CR14, CR28: can't be catched now
+        #rule CR11, CR22: can't be catched now
 
 
     json_content["message"].extend(saved_errors)
