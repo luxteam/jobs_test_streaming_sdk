@@ -21,27 +21,7 @@
     },
     {
         "case": "STR_CFR_003",
-        "status": "active",
-        "server_keys": "-extStats true -FRAMERATE 80",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-            "Config values - MaxFrameRate: 30"
-        ]
-    },
-    {
-        "case": "STR_CFR_004",
-        "status": "active",
-        "server_keys": "-extStats true -CaptureMode present -FRAMERATE 80",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-            "Config values - MaxFrameRate: 30"
-        ]
-    },
-    {
-        "case": "STR_CFR_005",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-extStats true -SLICES 2",
         "client_keys": "",
         "transport_protocol": "udp",
@@ -50,7 +30,7 @@
         ]
     },
     {
-        "case": "STR_CFR_006",
+        "case": "STR_CFR_004",
         "status": "active",
         "server_keys": "-extStats true -BITRATE 60000000",
         "client_keys": "",
@@ -60,7 +40,7 @@
         ]
     },
     {
-        "case": "STR_CFR_007",
+        "case": "STR_CFR_005",
         "status": "active",
         "server_keys": "-extStats true -PROTOCOL udp",
         "client_keys": "",
@@ -70,7 +50,7 @@
         ]
     },
     {
-        "case": "STR_CFR_008",
+        "case": "STR_CFR_006",
         "status": "active",
         "server_keys": "-extStats true -Microphone false",
         "client_keys": "",
@@ -80,8 +60,8 @@
         ]
     },
     {
-        "case": "STR_CFR_009",
-        "status": "active",
+        "case": "STR_CFR_007",
+        "status": "skipped",
         "server_keys": "-extStats true -Firewall false",
         "client_keys": "",
         "transport_protocol": "udp",
@@ -90,27 +70,17 @@
         ]
     },
     {
-        "case": "STR_CFR_010",
+        "case": "STR_CFR_008",
         "status": "active",
-        "server_keys": "-extStats true -MinFramerate 100",
+        "server_keys": "-extStats true -CaptureMode asap -MinFramerate 40",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "Config values - MinFrameRate: 80"
+            "Config values - MinFrameRate: 20"
         ]
     },
     {
-        "case": "STR_CFR_011",
-        "status": "active",
-        "server_keys": "-extStats true -CaptureMode present -MinFramerate 100",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-            "Config values - MinFrameRate: 80"
-        ]
-    },
-    {
-        "case": "STR_CFR_012",
+        "case": "STR_CFR_009",
         "status": "skipped",
         "server_keys": "-extStats true -Offline false",
         "client_keys": "",
@@ -120,7 +90,7 @@
         ]
     },
     {
-        "case": "STR_CFR_013",
+        "case": "STR_CFR_010",
         "status": "active",
         "server_keys": "-extStats true -Codec h.265",
         "client_keys": "",
@@ -130,7 +100,7 @@
         ]
     },
     {
-        "case": "STR_CFR_014",
+        "case": "STR_CFR_011",
         "status": "active",
         "server_keys": "-extStats true -EnableHDR false",
         "client_keys": "",
@@ -140,7 +110,7 @@
         ]
     },
     {
-        "case": "STR_CFR_015",
+        "case": "STR_CFR_012",
         "status": "active",
         "server_keys": "-extStats true -Resolution 1280,720",
         "client_keys": "",
@@ -150,7 +120,7 @@
         ]
     },
     {
-        "case": "STR_CFR_016",
+        "case": "STR_CFR_013",
         "status": "skipped",
         "server_keys": "-extStats true -MAXUSERS 2",
         "client_keys": "",
@@ -160,28 +130,8 @@
         ]
     },
     {
-        "case": "STR_CFR_017",
-        "status": "active",
-        "server_keys": "-extStats true -FRAMERATE 80",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-            "Config values - MaxFrameRate: 30"
-        ]
-    },
-    {
-        "case": "STR_CFR_018",
-        "status": "active",
-        "server_keys": "-extStats true -CaptureMode present -FRAMERATE 80",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-            "Config values - MaxFrameRate: 30"
-        ]
-    },
-    {
-        "case": "STR_CFR_019",
-        "status": "active",
+        "case": "STR_CFR_014",
+        "status": "skipped",
         "server_keys": "-extStats true -SLICES 2",
         "client_keys": "",
         "transport_protocol": "tcp",
@@ -190,7 +140,7 @@
         ]
     },
     {
-        "case": "STR_CFR_020",
+        "case": "STR_CFR_015",
         "status": "active",
         "server_keys": "-extStats true -BITRATE 60000000",
         "client_keys": "",
@@ -200,7 +150,7 @@
         ]
     },
     {
-        "case": "STR_CFR_021",
+        "case": "STR_CFR_016",
         "status": "active",
         "server_keys": "-extStats true -PROTOCOL tcp",
         "client_keys": "",
@@ -210,7 +160,7 @@
         ]
     },
     {
-        "case": "STR_CFR_022",
+        "case": "STR_CFR_017",
         "status": "active",
         "server_keys": "-extStats true -Microphone false",
         "client_keys": "",
@@ -220,8 +170,8 @@
         ]
     },
     {
-        "case": "STR_CFR_023",
-        "status": "active",
+        "case": "STR_CFR_018",
+        "status": "skipped",
         "server_keys": "-extStats true -Firewall false",
         "client_keys": "",
         "transport_protocol": "tcp",
@@ -230,27 +180,17 @@
         ]
     },
     {
-        "case": "STR_CFR_024",
+        "case": "STR_CFR_019",
         "status": "active",
-        "server_keys": "-extStats true -MinFramerate 100",
+        "server_keys": "-extStats true -CaptureMode asap -MinFramerate 40",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "Config values - MinFrameRate: 80"
+            "Config values - MinFrameRate: 20"
         ]
     },
     {
-        "case": "STR_CFR_025",
-        "status": "active",
-        "server_keys": "-extStats true -CaptureMode present -MinFramerate 100",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-            "Config values - MinFrameRate: 80"
-        ]
-    },
-    {
-        "case": "STR_CFR_026",
+        "case": "STR_CFR_020",
         "status": "skipped",
         "server_keys": "-extStats true -Offline false",
         "client_keys": "",
@@ -260,7 +200,7 @@
         ]
     },
     {
-        "case": "STR_CFR_027",
+        "case": "STR_CFR_021",
         "status": "active",
         "server_keys": "-extStats true -Codec h.265",
         "client_keys": "",
@@ -270,7 +210,7 @@
         ]
     },
     {
-        "case": "STR_CFR_028",
+        "case": "STR_CFR_022",
         "status": "active",
         "server_keys": "-extStats true -EnableHDR false",
         "client_keys": "",

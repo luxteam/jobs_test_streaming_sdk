@@ -43,14 +43,14 @@
 		},
 		"IPD" : 0.0640000030398369,
 		"KeepAspectRatio" : false,
-		"MaxFrameRate" : 30,
+		"MaxFrameRate" : 10000.0000000000000000,
 		"MinFrameRate" : 30.0000000000000000,
 		"NonLinearScale" : false,
 		"VideoBitrate" : 50000000,
 		"VideoCodec" : "hevc",
 		"VideoEnableHDR" : false,
-		"VideoSliceCount" : 1,
-		"VideoSliceOutput" : false
+		"VideoSliceCount" : 3,
+		"VideoSliceOutput" : true
 	},
 	"Headset" : 
 	{

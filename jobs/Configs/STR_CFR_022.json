@@ -48,7 +48,7 @@
 		"NonLinearScale" : false,
 		"VideoBitrate" : 50000000,
 		"VideoCodec" : "hevc",
-		"VideoEnableHDR" : false,
+		"VideoEnableHDR" : true,
 		"VideoSliceCount" : 1,
 		"VideoSliceOutput" : false
 	},
@@ -58,7 +58,7 @@
 		"EnableNetwork" : true,
 		"LogPath" : null,
 		"MaxUserCount" : 1,
-		"Microphone" : true,
+		"Microphone" : false,
 		"Network" : "TCP",
 		"Port" : 1235,
 		"UserConnectionTimeout" : 30,
