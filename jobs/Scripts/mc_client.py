@@ -342,7 +342,7 @@ def execute_tests(args, current_conf):
                     json_content = json.load(file)[0]
 
                 if "Multiconnection" in args.test_group:
-                    analyze_logs(args.output, json_content, case)
+                    analyze_logs(args.output, json_content, case, execution_type="second_windows_client")
 
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                     json.dump([json_content], file, indent=4)
