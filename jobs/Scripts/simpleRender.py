@@ -156,6 +156,8 @@ def prepare_empty_reports(args, current_conf):
             test_case_report['tool_path'] = args.server_tool if args.execution_type == 'server' else args.client_tool
             test_case_report['date_time'] = datetime.now().strftime(
                 '%m/%d/%Y %H:%M:%S')
+            if 'jira_issue' in case:
+                test_case_report['jira_issue'] = case['jira_issue']
             min_latency_key = 'min_{}_latency'.format(args.execution_type)
             test_case_report[min_latency_key] = -0.0
             max_latency_key = 'max_{}_latency'.format(args.execution_type)
