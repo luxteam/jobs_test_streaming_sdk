@@ -332,7 +332,7 @@ def press_keys(keys_string, logger):
 
 
 # Do screenshot
-class MakeScreen(Action):
+class MakeScreen(MulticonnectionAction):
     def parse(self):
         self.screen_path = self.params["screen_path"]
         self.screen_name = self.params["arguments_line"]
@@ -346,6 +346,15 @@ class MakeScreen(Action):
         else:
             make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
+
+            if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
+                if self.test_group == "MulticonnectionWA":
+                    self.logger.info("Wait second client answer")
+                    response = self.sock.recv(1024).decode("utf-8")
+                    self.logger.info("Second client answer: {}".format(response))
+                    self.sock.send(response)
+                else:
+                    self.sock.send("done")
 
 
 def make_screen(screen_path, current_try, logger, screen_name = "", current_image_num = 0):
@@ -364,7 +373,7 @@ def make_screen(screen_path, current_try, logger, screen_name = "", current_imag
 
 
 # Make sequence of screens with delay. It supports initial delay before the first test case
-class SleepAndScreen(Action):
+class SleepAndScreen(MulticonnectionAction):
     def parse(self):
         parsed_arguments = parse_arguments(self.params["arguments_line"])
         self.initial_delay = parsed_arguments[0]
@@ -392,6 +401,15 @@ class SleepAndScreen(Action):
             else:
                 sleep(float(self.delay))
 
+        if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
+            if self.test_group == "MulticonnectionWA":
+                self.logger.info("Wait second client answer")
+                response = self.sock.recv(1024).decode("utf-8")
+                self.logger.info("Second client answer: {}".format(response))
+                self.sock.send(response)
+            else:
+                self.sock.send("done")
+
 
 def compress_video(temp_video_path, target_video_path, logger):
     recorder = FFmpeg()
@@ -405,7 +423,7 @@ def compress_video(temp_video_path, target_video_path, logger):
 
 
 # Record video
-class RecordVideo(Action):
+class RecordVideo(MulticonnectionAction):
     def parse(self):
         self.video_path = self.params["output_path"]
         self.target_video_name = self.params["case"]["case"] + self.params["client_type"] + ".mp4"
@@ -429,6 +447,15 @@ class RecordVideo(Action):
         except Exception as e:
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
+        if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
+            if self.test_group == "MulticonnectionWA":
+                self.logger.info("Wait second client answer")
+                response = self.sock.recv(1024).decode("utf-8")
+                self.logger.info("Second client answer: {}".format(response))
+                self.sock.send(response)
+            else:
+                self.sock.send("done")
 
 
 def click(x_description, y_description, logger, delay = 0.2):

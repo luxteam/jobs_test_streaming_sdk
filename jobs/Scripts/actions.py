@@ -14,6 +14,12 @@ class ServerActionException(Exception):
         super().__init__(self.message)
 
 
+class MulticonnectionAction(Action):
+    def __init__(self, main_sock, params, state, logger, second_sock=None):
+        super().__init__(main_sock, params, state, logger)
+        self.second_sock = second_sock
+
+
 class Action(ABC):
     def __init__(self, sock, params, state, logger):
         self.sock = sock

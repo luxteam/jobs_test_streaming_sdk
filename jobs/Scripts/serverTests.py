@@ -249,11 +249,13 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 elif command in MULTIONNECTION_ACTIONS:
                     # multiconnection tests can require to execute different commands for android client / second windows client
                     if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
-                        command_object = MULTICONNECTION_ACTIONS_MAPPING["windows"][command](connection_sc, params, instance_state, main_logger)
+                        command_object = MULTICONNECTION_ACTIONS_MAPPING["windows"][command](connection, params, instance_state, main_logger, second_sock=connection_sc)
                         command_object.do_action()
 
                     if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
-                        command_object = MULTICONNECTION_ACTIONS_MAPPING["android"][command](connection, params, instance_state, main_logger)
+                        if args.test_group == "MulticonnectionWA":
+                            connection_sc = None
+                        command_object = MULTICONNECTION_ACTIONS_MAPPING["android"][command](connection, params, instance_state, main_logger, second_sock=connection_sc)
                         command_object.do_action()
                 else:
                     raise ServerActionException("Unknown server command: {}".format(command))
