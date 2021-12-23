@@ -152,7 +152,7 @@ class MakeScreen(Action):
             self.params["current_image_num"] += 1
 
     def analyze_result(self):
-        if "Multiconnection" in self.test_group:
+        if self.screen_name and "Multiconnection" in self.test_group:
             self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
