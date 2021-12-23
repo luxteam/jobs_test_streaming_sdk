@@ -143,6 +143,8 @@ def prepare_empty_reports(args):
             test_case_report['client_tool_path'] = args.client_tool
             test_case_report['date_time'] = datetime.now().strftime(
                 '%m/%d/%Y %H:%M:%S')
+            if 'jira_issue' in case:
+                test_case_report['jira_issue'] = case['jira_issue']
             test_case_report[SCREENS_PATH_KEY] = os.path.join(args.output, "Color", case["case"])
             test_case_report["number_of_tries"] = 0
             test_case_report["server_configuration"] = render_device + " " + platform_name
