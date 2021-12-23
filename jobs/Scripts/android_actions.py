@@ -339,6 +339,7 @@ class MakeScreen(MulticonnectionAction):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
+        self.test_group = self.params["args"].test_group
 
     def execute(self):
         if not self.screen_name:
@@ -384,6 +385,7 @@ class SleepAndScreen(MulticonnectionAction):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
+        self.test_group = self.params["args"].test_group
 
     def execute(self):
         sleep(float(self.initial_delay))
@@ -429,6 +431,7 @@ class RecordVideo(MulticonnectionAction):
         self.target_video_name = self.params["case"]["case"] + self.params["client_type"] + ".mp4"
         self.temp_video_name = self.params["case"]["case"] + self.params["client_type"] + "_temp.mp4"
         self.duration = int(self.params["arguments_line"])
+        self.test_group = self.params["args"].test_group
 
     def execute(self):
         try:
