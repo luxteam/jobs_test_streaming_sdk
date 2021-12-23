@@ -321,6 +321,7 @@ def execute_tests(args, current_conf):
 
                 if "-MAXUSERS 1" in case["server_keys"] and command != "finish":
                     main_logger.info("Ignore action")
+                    sock.send("done".encode("utf-8"))
                     continue
 
                 params["action_line"] = request
