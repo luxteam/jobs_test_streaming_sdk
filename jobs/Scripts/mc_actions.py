@@ -31,6 +31,7 @@ class MakeScreen(Action):
         else:
             make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
+            self.sock.send("done".encode("utf-8"))
 
 
 def make_screen(screen_path, current_try, screen_name = "", current_image_num = 0):
@@ -70,6 +71,9 @@ class SleepAndScreen(Action):
             else:
                 sleep(float(self.delay))
 
+        self.logger.info("Finish to do screens")
+        self.sock.send("done".encode("utf-8"))
+
 
 # [Client + Server action] record metrics on client and server sides
 class RecordMetrics(Action):
@@ -107,6 +111,8 @@ class RecordVideo(Action):
             .format(resolution=self.resolution, time=time_flag_value, video=video_full_path))
 
         self.logger.info("Finish to record video")
+
+        self.sock.send("done".encode("utf-8"))
 
 
 class Finish(Action):

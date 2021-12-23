@@ -429,40 +429,58 @@ class RecordMetrics(Action):
         return True
 
 
-class MakeScreen(Action):
+class MakeScreen(MulticonnectionAction):
     def parse(self):
         self.action = self.params["action_line"]
         self.test_group = self.params["args"].test_group
 
     def execute(self):
         try:
-            self.sock.send(self.action.encode("utf-8"))
+            self.second_sock.send(self.action.encode("utf-8"))
+
+            if self.test_group == "MulticonnectionWW":
+                self.logger.info("Wait second client answer")
+                response = self.sock.recv(1024).decode("utf-8")
+                self.logger.info("Second client answer: {}".format(response))
+                self.sock.send(response)
+        except Exception as e:
+            self.logger.error("Failed to communicate with second windows client: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+class SleepAndScreen(MulticonnectionAction):
+    def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
+
+    def execute(self):
+        try:
+            self.second_sock.send(self.action.encode("utf-8"))
+
+            if self.test_group == "MulticonnectionWW":
+                self.logger.info("Wait second client answer")
+                response = self.second_sock.recv(1024).decode("utf-8")
+                self.logger.info("Second client answer: {}".format(response))
+                self.sock.send(response)
         except Exception as e:
             self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
-class SleepAndScreen(Action):
+class RecordVideo(MulticonnectionAction):
     def parse(self):
         self.action = self.params["action_line"]
         self.test_group = self.params["args"].test_group
 
     def execute(self):
         try:
-            self.sock.send(self.action.encode("utf-8"))
-        except Exception as e:
-            self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
-            self.logger.error("Traceback: {}".format(traceback.format_exc()))
+            self.second_sock.send(self.action.encode("utf-8"))
 
-
-class RecordVideo(Action):
-    def parse(self):
-        self.action = self.params["action_line"]
-        self.test_group = self.params["args"].test_group
-
-    def execute(self):
-        try:
-            self.sock.send(self.action.encode("utf-8"))
+            if self.test_group == "MulticonnectionWW":
+                self.logger.info("Wait second client answer")
+                response = self.second_sock.recv(1024).decode("utf-8")
+                self.logger.info("Second client answer: {}".format(response))
+                self.sock.send(response)
         except Exception as e:
             self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))

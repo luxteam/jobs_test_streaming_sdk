@@ -151,6 +151,10 @@ class MakeScreen(Action):
             make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
+    def analyze_result(self):
+        if "Multiconnection" in self.test_group:
+            self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
+
 
 def make_screen(screen_path, current_try, screen_name = "", current_image_num = 0):
     screen = pyscreenshot.grab()
@@ -186,6 +190,10 @@ class RecordVideo(Action):
             .format(resolution=self.resolution, audio_device_name=self.audio_device_name, time=time_flag_value, video=video_full_path))
 
         self.logger.info("Finish to record video")
+
+    def analyze_result(self):
+        if "Multiconnection" in self.test_group:
+            self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
 # [Client action] move mouse to the specified position
@@ -291,6 +299,10 @@ class SleepAndScreen(Action):
         except Exception as e:
             self.logger.warning("Failed to collect GPUView traces: {}".format(str(e)))
             self.logger.warning("Traceback: {}".format(traceback.format_exc()))
+
+    def analyze_result(self):
+        if "Multiconnection" in self.test_group:
+            self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
 # [Client + Server action] record metrics on client and server sides

@@ -224,6 +224,8 @@ def execute_tests(args, current_conf):
     while tests_left > 0:
         try:
             # Connect to server to sync autotests
+            main_logger.info("Start trying to connect to server")
+
             while True:
                 try:
                     sock = socket.socket()
@@ -334,6 +336,8 @@ def execute_tests(args, current_conf):
 
                 main_logger.info("Finish action execution\n\n\n")
 
+            main_logger.info("Finish to wait new actions")
+
             if "-MAXUSERS 1" not in case["server_keys"]:
                 process = close_streaming_process("second_client", case, process)
                 last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
@@ -360,6 +364,7 @@ def execute_tests(args, current_conf):
 
         finally:
             tests_left -= 1
+            main_logger.info("End of test case")
 
     return 0
 
