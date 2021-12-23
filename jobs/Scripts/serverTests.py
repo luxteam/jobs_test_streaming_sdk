@@ -156,8 +156,6 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
             # non-blocking usage
             connection.setblocking(False)
-            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
-                connection_sc.setblocking(False)
 
             # start client before server
             if "start_first" in case and case["start_first"] == "client":
