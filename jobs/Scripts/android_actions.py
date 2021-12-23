@@ -355,7 +355,7 @@ class MakeScreen(MulticonnectionAction):
                     self.logger.info("Second client answer: {}".format(response))
                     self.sock.send(response.encode("utf-8"))
                 else:
-                    self.sock.send("done")
+                    self.sock.send("done".encode("utf-8"))
 
 
 def make_screen(screen_path, current_try, logger, screen_name = "", current_image_num = 0):
@@ -410,7 +410,7 @@ class SleepAndScreen(MulticonnectionAction):
                 self.logger.info("Second client answer: {}".format(response))
                 self.sock.send(response.encode("utf-8"))
             else:
-                self.sock.send("done")
+                self.sock.send("done".encode("utf-8"))
 
 
 def compress_video(temp_video_path, target_video_path, logger):
@@ -452,13 +452,13 @@ class RecordVideo(MulticonnectionAction):
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
 
         if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
-            if self.test_group == "MulticonnectionWA":
+            if self.test_group == "MulticonnectionWWA":
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
                 self.sock.send(response.encode("utf-8"))
             else:
-                self.sock.send("done")
+                self.sock.send("done".encode("utf-8"))
 
 
 def click(x_description, y_description, logger, delay = 0.2):
