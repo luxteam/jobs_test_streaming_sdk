@@ -349,7 +349,7 @@ class MakeScreen(MulticonnectionAction):
             self.params["current_image_num"] += 1
 
             if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
-                if self.test_group == "MulticonnectionWA":
+                if self.test_group == "MulticonnectionWWA":
                     self.logger.info("Wait second client answer")
                     response = self.second_sock.recv(1024).decode("utf-8")
                     self.logger.info("Second client answer: {}".format(response))
@@ -404,7 +404,7 @@ class SleepAndScreen(MulticonnectionAction):
                 sleep(float(self.delay))
 
         if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
-            if self.test_group == "MulticonnectionWA":
+            if self.test_group == "MulticonnectionWWA":
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
