@@ -350,7 +350,7 @@ class MakeScreen(MulticonnectionAction):
             if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
                 if self.test_group == "MulticonnectionWA":
                     self.logger.info("Wait second client answer")
-                    response = self.sock.recv(1024).decode("utf-8")
+                    response = self.second_sock.recv(1024).decode("utf-8")
                     self.logger.info("Second client answer: {}".format(response))
                     self.sock.send(response)
                 else:
@@ -404,7 +404,7 @@ class SleepAndScreen(MulticonnectionAction):
         if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
             if self.test_group == "MulticonnectionWA":
                 self.logger.info("Wait second client answer")
-                response = self.sock.recv(1024).decode("utf-8")
+                response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
                 self.sock.send(response)
             else:
@@ -451,7 +451,7 @@ class RecordVideo(MulticonnectionAction):
         if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
             if self.test_group == "MulticonnectionWA":
                 self.logger.info("Wait second client answer")
-                response = self.sock.recv(1024).decode("utf-8")
+                response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
                 self.sock.send(response)
             else:
