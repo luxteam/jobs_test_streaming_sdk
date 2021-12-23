@@ -288,7 +288,10 @@ class SleepAndScreen(Action):
                 break
             else:
                 sleep(float(self.delay))
-                
+
+        if "Multiconnection" in self.test_group:
+            self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
+
         try:
             self.sock.send("gpuview".encode("utf-8"))
             response = self.sock.recv(1024).decode("utf-8")
@@ -299,10 +302,6 @@ class SleepAndScreen(Action):
         except Exception as e:
             self.logger.warning("Failed to collect GPUView traces: {}".format(str(e)))
             self.logger.warning("Traceback: {}".format(traceback.format_exc()))
-
-    def analyze_result(self):
-        if "Multiconnection" in self.test_group:
-            self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
 # [Client + Server action] record metrics on client and server sides
