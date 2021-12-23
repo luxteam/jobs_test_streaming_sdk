@@ -442,7 +442,7 @@ class MakeScreen(MulticonnectionAction):
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
-                self.sock.send(response)
+                self.sock.send(response.encode("utf-8"))
         except Exception as e:
             self.logger.error("Failed to communicate with second windows client: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
@@ -461,7 +461,7 @@ class SleepAndScreen(MulticonnectionAction):
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
-                self.sock.send(response)
+                self.sock.send(response.encode("utf-8"))
         except Exception as e:
             self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
@@ -480,7 +480,7 @@ class RecordVideo(MulticonnectionAction):
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
-                self.sock.send(response)
+                self.sock.send(response.encode("utf-8"))
         except Exception as e:
             self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))

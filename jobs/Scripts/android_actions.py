@@ -352,7 +352,7 @@ class MakeScreen(MulticonnectionAction):
                     self.logger.info("Wait second client answer")
                     response = self.second_sock.recv(1024).decode("utf-8")
                     self.logger.info("Second client answer: {}".format(response))
-                    self.sock.send(response)
+                    self.sock.send(response.encode("utf-8"))
                 else:
                     self.sock.send("done")
 
@@ -406,7 +406,7 @@ class SleepAndScreen(MulticonnectionAction):
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
-                self.sock.send(response)
+                self.sock.send(response.encode("utf-8"))
             else:
                 self.sock.send("done")
 
@@ -453,7 +453,7 @@ class RecordVideo(MulticonnectionAction):
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
-                self.sock.send(response)
+                self.sock.send(response.encode("utf-8"))
             else:
                 self.sock.send("done")
 
