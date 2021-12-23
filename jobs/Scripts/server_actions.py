@@ -440,7 +440,7 @@ class MakeScreen(MulticonnectionAction):
 
             if self.test_group == "MulticonnectionWW":
                 self.logger.info("Wait second client answer")
-                response = self.sock.recv(1024).decode("utf-8")
+                response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
                 self.sock.send(response)
         except Exception as e:
