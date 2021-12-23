@@ -361,6 +361,7 @@ def execute_tests(args, current_conf):
                 main_logger.error("Traceback: {}".format(traceback.format_exc()))
             finally:
                 current_try += 1
+                main_logger.info("End of test case")
         else:
             main_logger.error("Failed to execute case '{}' at all".format(case["case"]))
             rc = -1

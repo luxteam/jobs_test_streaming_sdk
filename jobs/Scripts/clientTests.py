@@ -83,6 +83,8 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
     response = None
 
     # Connect to server to sync autotests
+    main_logger.info("Start trying to connect to server: {}".format(case["case"]))
+
     while True:
         try:
             sock = socket.socket()
@@ -175,6 +177,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 main_logger.info("Finish action execution\n\n\n")
 
             # say server to start next case
+            main_logger.info("Send NextCase command")
             command_object = NextCase(sock, params, instance_state, main_logger)
             command_object.do_action()
 
@@ -190,6 +193,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             json_content["test_status"] = "passed"
 
             # execute iperf if it's necessary
+            main_logger.info("Send iperf command")
             command_object = IPerf(sock, params, instance_state, main_logger)
             command_object.do_action()
 

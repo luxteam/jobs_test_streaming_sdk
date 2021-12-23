@@ -115,11 +115,15 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
     else:
         sock.listen(1)
 
+    main_logger.info("Start trying to receive connection: {}".format(case["case"]))
+
     connection, address = sock.accept()
     request = connection.recv(1024).decode("utf-8")
 
     if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
         # check which client is main client, which client is second multiconnection client
+        main_logger.info("Start trying to receive second connection: {}".format(case["case"]))
+
         if request == "second_client":
             connection_sc = connection
             address_sc = address
@@ -256,6 +260,8 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
                 main_logger.info("Finish action execution\n\n\n")
 
+            main_logger.info("Finish to wait new actions")
+
             process = close_streaming_process(args.execution_type, case, process)
 
             if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
@@ -274,11 +280,13 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             json_content["test_status"] = "passed"
             analyze_logs(args.output, json_content, case)
 
-            if "Multiconnection" in args.test_group:
+            if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
                 analyze_logs(args.output, json_content, case, execution_type="android_client")
 
             wait_iperf_command = True
             iperf_command = None
+
+            main_logger.info("Start to wait iperf command")
 
             # wait iperf command
             while wait_iperf_command:
@@ -286,6 +294,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     iperf_command = connection.recv(1024).decode("utf-8")
                     wait_iperf_command = False
                 except Exception as e:
+                    main_logger.info("Waiting iperf command...")
                     sleep(1)
 
             main_logger.error("Received command: {}".format(iperf_command))

@@ -134,6 +134,11 @@ def close_streaming_process(execution_type, case, process):
 
             process = None
 
+        if process:
+            main_logger.info("StreamingSDK instance was killed")
+        else:
+            main_logger.info("Keep StreamingSDK instance")
+
         return process
     except Exception as e:
         main_logger.error("Failed to close Streaming SDK process. Exception: {}".format(str(e)))
@@ -148,10 +153,13 @@ def close_android_app(case=None, multiconnection=False):
 
         if case is None or should_case_be_closed(key, case):
             execute_adb_command("adb shell am force-stop com.amd.remotegameclient")
+            main_logger.info("Android client was killed")
 
             return True
 
-        return False
+        else:
+            main_logger.info("Keep Android client instance")
+            return False
     except Exception as e:
         main_logger.error("Failed to close Streaming SDK Android app. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
@@ -206,6 +214,8 @@ def save_logs(args, case, last_log_line, current_try, is_multiconnection=False):
             file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
             file.write(logs)
 
+        main_logger.info("Finish logs saving for {}".format(execution_type))
+
         return last_log_line
     except Exception as e:
         main_logger.error("Failed during logs saving. Exception: {}".format(str(e)))
@@ -242,6 +252,8 @@ def save_android_log(args, case, current_try, log_name_postfix="_client"):
             file.write(b"\n".join(filtered_log_line))
 
         execute_adb_command("adb logcat -c")
+
+        main_logger.info("Finish logs saving for Android client")
     except Exception as e:
         main_logger.error("Failed during android logs saving. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
