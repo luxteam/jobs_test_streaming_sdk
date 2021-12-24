@@ -117,20 +117,12 @@ def close_streaming_process(execution_type, case, process):
     try:
         if should_case_be_closed(execution_type, case):
             # close the current Streaming SDK process
+            main_logger.info("Start closing")
+
             if process is not None:
                 close_process(process)
 
-            # additional try to kill Streaming SDK server/client (to be sure that all processes are closed)
-
-            status = 0
-
-            while status != 128:
-                status = subprocess.call("taskkill /f /im RemoteGameClient.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-            status = 0
-
-            while status != 128:
-                status = subprocess.call("taskkill /f /im RemoteGameServer.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+             main_logger.info("Finish closing")
 
             process = None
 
