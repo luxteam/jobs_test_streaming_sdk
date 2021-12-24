@@ -122,7 +122,7 @@ def close_streaming_process(execution_type, case, process):
             if process is not None:
                 close_process(process)
 
-             main_logger.info("Finish closing")
+            main_logger.info("Finish closing")
 
             process = None
 
