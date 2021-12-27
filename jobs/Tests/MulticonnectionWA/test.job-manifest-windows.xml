@@ -9,7 +9,7 @@
         <argument>--output "{OutputDir}"</argument>
         <argument>--test_group MulticonnectionWA</argument>
         <argument>--test_cases "{TestCases}"</argument>
-        <argument>--retries {retries}</argument>
+        <argument>--retries 1</argument>
         <argument>--execution_type "{executionType}"</argument>
         <argument>--ip_address "{ipAddress}"</argument>
         <argument>--communication_port "{communicationPort}"</argument>
