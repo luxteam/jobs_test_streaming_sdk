@@ -218,8 +218,7 @@ def save_logs(args, case, last_log_line, current_try, is_multiconnection=False):
 
 def save_android_log(args, case, current_try, log_name_postfix="_client"):
     try:
-        command_process = subprocess.Popen("adb logcat -d", shell=False, stdin=PIPE, stdout=PIPE)
-        out, err = command_process.communicate()
+        out, err = execute_adb_command("adb logcat -d", return_output=True)
 
         raw_logs = out.split(b"\r\n")
 
@@ -369,12 +368,25 @@ def make_window_minimized(window):
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
-def execute_adb_command(command):
-    command_process = subprocess.Popen(command, shell=False, stdin=PIPE, stdout=PIPE)
-    out, err = command_process.communicate()
-    main_logger.info("ADB command executed: {}".format(command))
-    main_logger.info("ADB command out: {}".format(out))
-    main_logger.error("ADB command err: {}".format(err))
+def execute_adb_command(command, return_output=False):
+    max_tries = 3
+    current_try = 0
+
+    while current_try < max_tries:
+        current_try++
+
+        try:
+            command_process = subprocess.Popen(command, shell=False, stdin=PIPE, stdout=PIPE)
+            out, err = command_process.communicate(timeout=30)
+            main_logger.info("ADB command executed (try #{}): {}".format(command, current_try))
+            if return_output:
+                return out, err
+            else:
+                main_logger.info("ADB command out (try #{}): {}".format(out, current_try))
+                main_logger.info("ADB command err (try #{}): {}".format(err, current_try))
+                break
+        except (psutil.TimeoutExpired, subprocess.TimeoutExpired) as err:
+            main_logger.error("Failed to execute ADB command due to timeout (try #{}): {}".format(command, current_try))
 
 
 def track_used_memory(case, execution_type):

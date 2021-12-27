@@ -361,8 +361,7 @@ class MakeScreen(MulticonnectionAction):
 def make_screen(screen_path, current_try, logger, screen_name = "", current_image_num = 0):
     try:
         screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1))
-        command_process = subprocess.Popen("adb exec-out screencap -p", shell=False, stdin=PIPE, stdout=PIPE)
-        out, err = command_process.communicate()
+        out, err = execute_adb_command("adb exec-out screencap -p", return_output=True)
 
         with open(screen_path, "wb") as file:
             file.write(out)
