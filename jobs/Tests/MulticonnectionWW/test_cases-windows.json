@@ -252,7 +252,7 @@
     },
     {
         "case": "STR_MCWW_023",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
@@ -266,7 +266,7 @@
     },
     {
         "case": "STR_MCWW_024",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
@@ -529,7 +529,7 @@
     },
     {
         "case": "STR_MCWW_047",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
@@ -543,7 +543,7 @@
     },
     {
         "case": "STR_MCWW_048",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",

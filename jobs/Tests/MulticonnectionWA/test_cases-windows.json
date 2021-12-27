@@ -179,7 +179,7 @@
     },
     {
         "case": "STR_MCWA_020",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -191,7 +191,7 @@
     },
     {
         "case": "STR_MCWA_021",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -379,7 +379,7 @@
     },
     {
         "case": "STR_MCWA_041",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -391,7 +391,7 @@
     },
     {
         "case": "STR_MCWA_042",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",

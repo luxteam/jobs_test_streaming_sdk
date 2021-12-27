@@ -146,7 +146,7 @@
     },
     {
         "case": "STR_MCWWA_012",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 3 -Framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
@@ -161,7 +161,7 @@
     },
     {
         "case": "STR_MCWWA_013",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 3 -Framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
@@ -318,7 +318,7 @@
     },
     {
         "case": "STR_MCWWA_025",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 3 -Framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
@@ -333,7 +333,7 @@
     },
     {
         "case": "STR_MCWWA_026",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-MAXUSERS 3 -Framerate 60 -Resolution <resolution> -extStats true",
         "client_keys": "-fullscreen true",
         "second_client_keys": "-fullscreen true",
