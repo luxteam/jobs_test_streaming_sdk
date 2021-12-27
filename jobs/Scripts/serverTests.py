@@ -104,7 +104,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             if should_collect_traces:
                 collect_traces(archive_path, archive_name + "_server.zip")
             else:
-                sleep(5)
+                sleep(10)
 
     # configure socket
     sock = socket.socket()
@@ -164,7 +164,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     process = start_streaming(args.execution_type, script_path, not should_collect_traces)
 
                     if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
-                        sleep(5)
+                        sleep(10)
 
                     if should_collect_traces:
                         collect_traces(archive_path, archive_name + "_server.zip")
@@ -175,7 +175,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 if android_client_closed:
                     multiconnection_start_android(args.test_group)
                     # small delay to give client time to connect
-                    sleep(5)
+                    sleep(10)
 
             # start second client after server
             if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
