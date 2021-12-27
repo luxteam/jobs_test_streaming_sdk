@@ -339,6 +339,8 @@ def execute_tests(args, current_conf):
 
             main_logger.info("Finish to wait new actions")
 
+            status = "passed"
+
             if "-MAXUSERS 1" not in case["server_keys"]:
                 process = close_streaming_process("second_client", case, process)
                 last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
@@ -346,14 +348,18 @@ def execute_tests(args, current_conf):
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                     json_content = json.load(file)[0]
 
+                json_content["test_status"] = "passed"
+
                 if "Multiconnection" in args.test_group:
                     analyze_logs(args.output, json_content, case, execution_type="second_windows_client")
 
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                     json.dump([json_content], file, indent=4)
 
+                status = json_content["test_status"]
+
             execution_time = time() - case_start_time
-            save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
+            save_results(args, case, cases, execution_time = execution_time, test_case_status = status, error_messages = [])
 
         except Exception as e:
             main_logger.error("Fatal error: {}".format(str(e)))

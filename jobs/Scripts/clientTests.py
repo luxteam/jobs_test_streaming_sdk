@@ -187,10 +187,10 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                 json_content = json.load(file)[0]
 
+            json_content["test_status"] = "passed"
+
             if "Multiconnection" in args.test_group:
                 analyze_logs(args.output, json_content, case, execution_type="windows_client")
-
-            json_content["test_status"] = "passed"
 
             # execute iperf if it's necessary
             main_logger.info("Send iperf command")
