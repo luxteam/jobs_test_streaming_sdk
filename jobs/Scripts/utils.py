@@ -385,7 +385,7 @@ def execute_adb_command(command, return_output=False):
     current_try = 0
 
     while current_try < max_tries:
-        current_try++
+        current_try += 1
 
         try:
             command_process = subprocess.Popen(command, shell=False, stdin=PIPE, stdout=PIPE)
