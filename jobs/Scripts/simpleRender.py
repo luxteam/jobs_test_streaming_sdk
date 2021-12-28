@@ -28,6 +28,8 @@ from jobs_launcher.core.system_info import get_gpu
 
 # process of Streaming SDK client / server
 PROCESS = None
+# Multiconnection: save state of android client
+android_client_closed = True
 
 
 def get_audio_device_name():
@@ -201,6 +203,9 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report["server_log"] = os.path.join("tool_logs", case["case"] + "_server.log")
         test_case_report["client_log"] = os.path.join("tool_logs", case["case"] + "_client.log")
 
+        if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
+            test_case_report["android_log"] = os.path.join("tool_logs", case["case"] + "_android.log")
+
         if args.collect_traces == "AfterTests" or args.collect_traces == "BeforeTests":
             if args.execution_type == "server":
                 test_case_report["server_trace_archive"] = os.path.join("gpuview", case["case"] + "_server.zip")
@@ -217,7 +222,10 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
             test_case_report["group_timeout_exceeded"] = False
 
-        video_path = os.path.join("Color", case["case"] + ".mp4")
+        if args.execution_type == "server":
+            video_path = os.path.join("Color", case["case"] + "android.mp4")
+        else:
+            video_path = os.path.join("Color", case["case"] + "win_client.mp4")
 
         if os.path.exists(os.path.join(args.output, video_path)):
             test_case_report[VIDEO_KEY] = video_path
@@ -258,6 +266,10 @@ def execute_tests(args, current_conf):
     # copy log from last log line (it's actual for groups without restarting of client / server)
     last_log_line = None
 
+    if (args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA") and args.execution_type == "server":
+        # first time video recording on Android device can be unstable, do it before tests
+        execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
+
     for case in [x for x in cases if not is_case_skipped(x, current_conf)]:
 
         case["game_name"] = args.game_name
@@ -272,7 +284,7 @@ def execute_tests(args, current_conf):
         main_logger.info("Start test case {}. Try: {}".format(case["case"], current_try))
 
         while current_try < args.retries:
-            global PROCESS
+            global PROCESS, android_client_closed
 
             error_messages = set()
 
@@ -328,7 +340,7 @@ def execute_tests(args, current_conf):
                     f.write(execution_script)
 
                 if args.execution_type == "server":
-                    PROCESS, last_log_line = start_server_side_tests(args, case, PROCESS, script_path, last_log_line, current_try)
+                    PROCESS, last_log_line, android_client_closed = start_server_side_tests(args, case, PROCESS, android_client_closed, script_path, last_log_line, current_try)
                 else:
                     PROCESS, last_log_line = start_client_side_tests(args, case, PROCESS, script_path, last_log_line, audio_device_name, current_try)
 
@@ -338,6 +350,12 @@ def execute_tests(args, current_conf):
                 break
             except Exception as e:
                 PROCESS = close_streaming_process(args.execution_type, case, PROCESS)
+
+                if (args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA") and args.execution_type == "server":
+                    # close Streaming SDK android app
+                    close_android_app()
+                    save_android_log(args, case, current_try, log_name_postfix="_android")
+
                 last_log_line = save_logs(args, case, last_log_line, current_try)
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "failed", error_messages = error_messages)
@@ -345,6 +363,7 @@ def execute_tests(args, current_conf):
                 main_logger.error("Traceback: {}".format(traceback.format_exc()))
             finally:
                 current_try += 1
+                main_logger.info("End of test case")
         else:
             main_logger.error("Failed to execute case '{}' at all".format(case["case"]))
             rc = -1

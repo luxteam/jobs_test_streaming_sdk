@@ -15,6 +15,7 @@ from utils import *
 from threading import Thread
 from instance_state import ServerInstanceState
 from server_actions import *
+import android_actions
 from analyzeLogs import analyze_logs
 
 ROOT_PATH = os.path.abspath(os.path.join(
@@ -46,16 +47,40 @@ ACTIONS_MAPPING = {
 }
 
 
+MULTIONNECTION_ACTIONS = ["make_screen", "sleep_and_screen", "record_video"]
+
+
+MULTICONNECTION_ACTIONS_MAPPING = {
+    "windows": {
+        "make_screen": MakeScreen,
+        "sleep_and_screen": SleepAndScreen,
+        "record_video": RecordVideo
+    },
+
+    "android": {
+        "make_screen": android_actions.MakeScreen,
+        "sleep_and_screen": android_actions.SleepAndScreen,
+        "record_video": android_actions.RecordVideo
+    }
+}
+
+
 # Server receives commands from client and executes them
 # Server doesn't decide to retry case or do next test case. Exception: fail on server side which generates abort on server side
-def start_server_side_tests(args, case, process, script_path, last_log_line, current_try):
+def start_server_side_tests(args, case, process, android_client_closed, script_path, last_log_line, current_try):
+    output_path = os.path.join(args.output, "Color")
+
+    screen_path = os.path.join(output_path, case["case"])
+    if not os.path.exists(screen_path):
+        os.makedirs(screen_path)
+    
     archive_path = os.path.join(args.output, "gpuview")
     if not os.path.exists(archive_path):
         os.makedirs(archive_path)
 
     archive_name = case["case"]
 
-    # default launching of client and server (order doesn't matter)
+    # default launching of client and server (order doesn't matter). Exception: Multiconnection
     if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
         if start_streaming is not None and process is None:
             should_collect_traces = (args.collect_traces == "BeforeTests")
@@ -63,6 +88,12 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
             if should_collect_traces:
                 collect_traces(archive_path, archive_name + "_server.zip")
+
+    # TODO: make single parameter to configure launching order
+    # start android client before server or default behaviour
+    if "android_start" not in case or case["android_start"] == "before_server":
+        if android_client_closed:
+            multiconnection_start_android(args.test_group)
 
     # start server before client
     if "start_first" in case and case["start_first"] == "server":
@@ -79,10 +110,30 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
     sock = socket.socket()
     sock.bind(("", int(args.communication_port)))
     # max one connection
-    sock.listen(1)
-    connection, address = sock.accept()
+    if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+        sock.listen(2)
+    else:
+        sock.listen(1)
 
+    main_logger.info("Start trying to receive connection: {}".format(case["case"]))
+
+    connection, address = sock.accept()
     request = connection.recv(1024).decode("utf-8")
+
+    if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+        # check which client is main client, which client is second multiconnection client
+        main_logger.info("Start trying to receive second connection: {}".format(case["case"]))
+
+        if request == "second_client":
+            connection_sc = connection
+            address_sc = address
+            request_sc = request
+
+            connection, address = sock.accept()
+            request = connection.recv(1024).decode("utf-8")
+        else:
+            connection_sc, address_sc = sock.accept()
+            request_sc = connection_sc.recv(1024).decode("utf-8")
 
     game_name = args.game_name.lower()
 
@@ -103,42 +154,59 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
         # server waits ready from client
         if request == "ready":
 
+            # non-blocking usage
+            connection.setblocking(False)
+
             # start client before server
             if "start_first" in case and case["start_first"] == "client":
                 if start_streaming is not None and process is None:
                     should_collect_traces = (args.collect_traces == "BeforeTests")
                     process = start_streaming(args.execution_type, script_path, not should_collect_traces)
 
+                    if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                        sleep(10)
+
                     if should_collect_traces:
                         collect_traces(archive_path, archive_name + "_server.zip")
+
+            # TODO: make single parameter to configure launching order
+            # start android client after server
+            if "android_start" in case and case["android_start"] == "after_server":
+                if android_client_closed:
+                    multiconnection_start_android(args.test_group)
+                    # small delay to give client time to connect
+                    sleep(10)
+
+            # start second client after server
+            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                connection_sc.send(case["case"].encode("utf-8"))
+                # small delay to give client time to connect
+                sleep(5)
 
             if is_workable_condition(process):
                 connection.send("ready".encode("utf-8"))
             else:
                 connection.send("fail".encode("utf-8"))
 
-            # non-blocking usage
-            connection.setblocking(False)
-
             # build params dict with all necessary variables for test actions
+            params["output_path"] = output_path
+            params["screen_path"] = screen_path
             params["archive_path"] = archive_path
+            params["current_image_num"] = 1
             params["current_try"] = current_try
             params["args"] = args
             params["case"] = case
             params["game_name"] = game_name
             params["processes"] = processes
+            params["client_type"] = "android"
 
-            test_action_command = DoTestActions(sock, params, instance_state, main_logger)
+            test_action_command = DoTestActions(connection, params, instance_state, main_logger)
             test_action_command.parse()
 
             # while client doesn't sent 'next_case' command server waits next command
             while instance_state.wait_next_command:
                 try:
                     request = connection.recv(1024).decode("utf-8")
-
-                    if "gpuview" not in request and "record_metrics" not in request:
-                        # if new command received server must stop to execute test actions execution. Exception: gpuview and record_metrics commands
-                        instance_state.executing_test_actions = False
                 except Exception as e:
                     # execute test actions if it's requested by client and new command doesn't received
                     if instance_state.executing_test_actions:
@@ -158,6 +226,10 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
                 else:
                     arguments_line = None
 
+                if command != "gpuview" and command != "record_metrics" and command not in MULTIONNECTION_ACTIONS :
+                    # if new command received server must stop to execute test actions execution. Exception: gpuview and record_metrics commands
+                    instance_state.executing_test_actions = False
+
                 params["action_line"] = request
                 params["command"] = command
                 params["arguments_line"] = arguments_line
@@ -172,12 +244,34 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
                     command_object = ACTIONS_MAPPING[command](connection, params, instance_state, main_logger)
                     command_object.do_action()
+                elif command in MULTIONNECTION_ACTIONS:
+                    # multiconnection tests can require to execute different commands for android client / second windows client
+                    if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                        command_object = MULTICONNECTION_ACTIONS_MAPPING["windows"][command](connection, params, instance_state, main_logger, second_sock=connection_sc)
+                        command_object.do_action()
+
+                    if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
+                        if args.test_group == "MulticonnectionWA":
+                            connection_sc = None
+                        command_object = MULTICONNECTION_ACTIONS_MAPPING["android"][command](connection, params, instance_state, main_logger, second_sock=connection_sc)
+                        command_object.do_action()
                 else:
                     raise ServerActionException("Unknown server command: {}".format(command))
 
                 main_logger.info("Finish action execution\n\n\n")
 
+            main_logger.info("Finish to wait new actions")
+
             process = close_streaming_process(args.execution_type, case, process)
+
+            if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+                connection_sc.send("finish passed".encode("utf-8"))
+
+            if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
+                # close Streaming SDK android app
+                android_client_closed = close_android_app(case, True)
+                save_android_log(args, case, current_try, log_name_postfix="_android")
+
             last_log_line = save_logs(args, case, last_log_line, current_try)
 
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
@@ -185,6 +279,25 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
 
             json_content["test_status"] = "passed"
             analyze_logs(args.output, json_content, case)
+
+            if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
+                analyze_logs(args.output, json_content, case, execution_type="android_client")
+
+            wait_iperf_command = True
+            iperf_command = None
+
+            main_logger.info("Start to wait iperf command")
+
+            # wait iperf command
+            while wait_iperf_command:
+                try:
+                    iperf_command = connection.recv(1024).decode("utf-8")
+                    wait_iperf_command = False
+                except Exception as e:
+                    main_logger.info("Waiting iperf command...")
+                    sleep(1)
+
+            main_logger.error("Received command: {}".format(iperf_command))
 
             # execute iperf if it's necessary
             params["json_content"] = json_content
@@ -204,9 +317,14 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
         if not instance_state.is_aborted:
             connection.send("abort".encode("utf-8"))
 
+        if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+            connection_sc.send("finish error".encode("utf-8"))
+
         raise e
     finally:
         connection.close()
+        if args.test_group == "MulticonnectionWW" or args.test_group == "MulticonnectionWWA":
+            connection_sc.close()
 
         # restart game if it's required
         global REBOOTING_GAMES
@@ -233,4 +351,4 @@ def start_server_side_tests(args, case, process, script_path, last_log_line, cur
         with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
             json.dump(state, json_file, indent=4)
 
-    return process, last_log_line
+    return process, last_log_line, android_client_closed

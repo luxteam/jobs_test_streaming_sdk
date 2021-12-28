@@ -11,7 +11,7 @@ import pyautogui
 import pydirectinput
 import keyboard
 from threading import Thread
-from utils import close_process, collect_traces, parse_arguments, collect_iperf_info, track_used_memory
+from utils import *
 from actions import *
 
 csgoFirstExec = True
@@ -40,6 +40,7 @@ class CheckWindow(Action):
         self.window_name = parsed_arguments[0]
         self.process_name = parsed_arguments[1]
         self.is_game = (self.params["command"] == "check_game")
+        self.test_group = self.params["args"].test_group
 
     @Action.server_action_decorator
     def execute(self):
@@ -348,9 +349,9 @@ class DoTestActions(Action):
             elif self.game_name == "dota2":
                 sleep(1)
                 pydirectinput.press("r")
-                sleep(2)
+                sleep(1)
                 pydirectinput.press("w")
-                sleep(2)
+                sleep(1)
             elif self.game_name == "csgo":
                 global csgoFirstExec
                 if csgoFirstExec:
@@ -368,12 +369,14 @@ class DoTestActions(Action):
                             keyboard.write(command)
                         else:
                             pydirectinput.press("`")
-                        sleep(0.5)
+                        sleep(0.25)
                         pydirectinput.press("enter")
 
                 pydirectinput.press("4")
                 sleep(1.5)
                 pyautogui.click()
+            else:
+                sleep(0.5)
                 
         except Exception as e:
             self.logger.error("Failed to do test actions: {}".format(str(e)))
@@ -406,10 +409,17 @@ class GPUView(Action):
 # record metrics on server side
 class RecordMetrics(Action):
     def parse(self):
-        pass
+        self.test_group = self.params["args"].test_group
 
     @Action.server_action_decorator
     def execute(self):
+        try:
+            if self.test_group == "MulticonnectionWW" or self.test_group == "MulticonnectionWWA":
+                self.sock.send("record_metrics".encode("utf-8"))
+        except Exception as e:
+            self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
         if "used_memory" not in self.params["case"]:
             self.params["case"]["used_memory"] = []
 
@@ -417,3 +427,60 @@ class RecordMetrics(Action):
             track_used_memory(self.params["case"], "server")
 
         return True
+
+
+class MakeScreen(MulticonnectionAction):
+    def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
+
+    def execute(self):
+        try:
+            self.second_sock.send(self.action.encode("utf-8"))
+
+            if self.test_group == "MulticonnectionWW":
+                self.logger.info("Wait second client answer")
+                response = self.second_sock.recv(1024).decode("utf-8")
+                self.logger.info("Second client answer: {}".format(response))
+                self.sock.send(response.encode("utf-8"))
+        except Exception as e:
+            self.logger.error("Failed to communicate with second windows client: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+class SleepAndScreen(MulticonnectionAction):
+    def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
+
+    def execute(self):
+        try:
+            self.second_sock.send(self.action.encode("utf-8"))
+
+            if self.test_group == "MulticonnectionWW":
+                self.logger.info("Wait second client answer")
+                response = self.second_sock.recv(1024).decode("utf-8")
+                self.logger.info("Second client answer: {}".format(response))
+                self.sock.send(response.encode("utf-8"))
+        except Exception as e:
+            self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+class RecordVideo(MulticonnectionAction):
+    def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
+
+    def execute(self):
+        try:
+            self.second_sock.send(self.action.encode("utf-8"))
+
+            if self.test_group == "MulticonnectionWW":
+                self.logger.info("Wait second client answer")
+                response = self.second_sock.recv(1024).decode("utf-8")
+                self.logger.info("Second client answer: {}".format(response))
+                self.sock.send(response.encode("utf-8"))
+        except Exception as e:
+            self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))

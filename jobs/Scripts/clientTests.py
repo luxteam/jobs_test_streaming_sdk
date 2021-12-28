@@ -13,6 +13,7 @@ from subprocess import PIPE, STDOUT
 sys.path.append(os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir)))
 from jobs_launcher.core.config import *
+from analyzeLogs import analyze_logs
 
 
 # mapping of commands and their implementations
@@ -82,6 +83,8 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
     response = None
 
     # Connect to server to sync autotests
+    main_logger.info("Start trying to connect to server: {}".format(case["case"]))
+
     while True:
         try:
             sock = socket.socket()
@@ -140,6 +143,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             params["args"] = args
             params["case"] = case
             params["game_name"] = game_name
+            params["client_type"] = "win_client"
 
             # execute actions one by one
             for action in actions:
@@ -173,6 +177,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 main_logger.info("Finish action execution\n\n\n")
 
             # say server to start next case
+            main_logger.info("Send NextCase command")
             command_object = NextCase(sock, params, instance_state, main_logger)
             command_object.do_action()
 
@@ -184,7 +189,11 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
 
             json_content["test_status"] = "passed"
 
+            if "Multiconnection" in args.test_group:
+                analyze_logs(args.output, json_content, case, execution_type="windows_client")
+
             # execute iperf if it's necessary
+            main_logger.info("Send iperf command")
             command_object = IPerf(sock, params, instance_state, main_logger)
             command_object.do_action()
 

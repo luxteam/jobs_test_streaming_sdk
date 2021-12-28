@@ -1,0 +1,556 @@
+[
+    {
+        "case": "STR_MCWW_001",
+        "status": "active",
+        "server_keys": "-MAXUSERS 1 -Framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_002",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_003",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_004",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_005",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_006",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_007",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_008",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_009",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_010",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_011",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_012",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Resolution <resolution> -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_013",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_014",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "",
+        "second_client_keys": "",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_015",
+        "status": "active",
+        "server_keys": "-CaptureMode present -MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_016",
+        "status": "active",
+        "server_keys": "-CaptureMode asap -MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_017",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen false -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_018",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "client",
+        "script_info": [
+            "Connect the first client before server",
+            "Connect the second client after server"
+        ]
+    },
+    {
+        "case": "STR_MCWW_019",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "keep_server": true,
+        "keep_second_client": true,
+        "script_info": [
+            "Keep server, restart one client (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_020",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+            "Keep server, restart one client (try #2)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_021",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "keep_server": true,
+        "script_info": [
+            "Keep server, restart all clients (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_022",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+            "Keep server, restart all clients (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_023",
+        "status": "skipped",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "keep_client": true,
+        "keep_second_client": true,
+        "script_info": [
+            "Keep clients, restart server (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_024",
+        "status": "skipped",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+            "Keep clients, restart server (try #2)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_025",
+        "status": "active",
+        "server_keys": "-MAXUSERS 1 -Framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_026",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_027",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_028",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_029",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_030",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_031",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_032",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -framerate 60 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_033",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_034",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_035",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_036",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Resolution <resolution> -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_037",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_038",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "",
+        "second_client_keys": "",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_039",
+        "status": "active",
+        "server_keys": "-CaptureMode present -MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_040",
+        "status": "active",
+        "server_keys": "-CaptureMode asap -MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_041",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
+        "client_keys": "-fullscreen false -stereo false -mpo false -vsync true",
+        "second_client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_MCWW_042",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "client",
+        "script_info": [
+            "Connect the first client before server",
+            "Connect the second client after server"
+        ]
+    },
+    {
+        "case": "STR_MCWW_043",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "keep_server": true,
+        "keep_second_client": true,
+        "script_info": [
+            "Keep server, restart one client (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_044",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+            "Keep server, restart one client (try #2)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_045",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "keep_server": true,
+        "script_info": [
+            "Keep server, restart all clients (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_046",
+        "status": "active",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+            "Keep server, restart all clients (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_047",
+        "status": "skipped",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "keep_client": true,
+        "keep_second_client": true,
+        "script_info": [
+            "Keep clients, restart server (try #1)"
+        ]
+    },
+    {
+        "case": "STR_MCWW_048",
+        "status": "skipped",
+        "server_keys": "-MAXUSERS 2 -framerate 60 -Resolution <resolution> -extStats true",
+        "client_keys": "-fullscreen true",
+        "second_client_keys": "-fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+            "Keep clients, restart server (try #2)"
+        ]
+    }
+]

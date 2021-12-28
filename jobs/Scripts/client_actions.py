@@ -130,19 +130,30 @@ class StartTestActionsServer(Action):
 
 
 # [Client action] do screenshot
+# This action triggers actions on server side in Multiconnection group
 class MakeScreen(Action):
     def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
         self.screen_path = self.params["screen_path"]
         self.screen_name = self.params["arguments_line"]
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
+        self.client_type = self.params["client_type"]
 
     def execute(self):
         if not self.screen_name:
             make_screen(self.screen_path, self.current_try)
         else:
-            make_screen(self.screen_path, self.current_try, self.screen_name, self.current_image_num)
+            if "Multiconnection" in self.test_group:
+                self.sock.send(self.action.encode("utf-8"))
+
+            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
+
+    def analyze_result(self):
+        if self.screen_name and "Multiconnection" in self.test_group:
+            self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
 def make_screen(screen_path, current_try, screen_name = "", current_image_num = 0):
@@ -154,15 +165,21 @@ def make_screen(screen_path, current_try, screen_name = "", current_image_num = 
 
 
 # [Client action] record video
+# This action triggers actions on server side in Multiconnection group
 class RecordVideo(Action):
     def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
         self.audio_device_name = self.params["audio_device_name"]
         self.video_path = self.params["output_path"]
-        self.video_name = self.params["case"]["case"]
+        self.video_name = self.params["case"]["case"] + self.params["client_type"]
         self.resolution = self.params["args"].screen_resolution
         self.duration = int(self.params["arguments_line"])
 
     def execute(self):
+        if "Multiconnection" in self.test_group:
+            self.sock.send(self.action.encode("utf-8"))
+
         video_full_path = os.path.join(self.video_path, self.video_name + ".mp4")
         time_flag_value = strftime("%H:%M:%S", gmtime(int(self.duration)))
 
@@ -173,6 +190,10 @@ class RecordVideo(Action):
             .format(resolution=self.resolution, audio_device_name=self.audio_device_name, time=time_flag_value, video=video_full_path))
 
         self.logger.info("Finish to record video")
+
+    def analyze_result(self):
+        if "Multiconnection" in self.test_group:
+            self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
 # [Client action] move mouse to the specified position
@@ -230,8 +251,11 @@ class PressKeys(Action):
 
 # [Client action] make sequence of screens with delay. It supports initial delay before the first test case
 # Starts collecting of the traces if it's required
+# This action triggers actions on server side in Multiconnection group
 class SleepAndScreen(Action):
     def parse(self):
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
         parsed_arguments = parse_arguments(self.params["arguments_line"])
         self.initial_delay = parsed_arguments[0]
         self.number_of_screens = parsed_arguments[1]
@@ -244,14 +268,18 @@ class SleepAndScreen(Action):
         self.collect_traces = self.params["args"].collect_traces
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
+        self.client_type = self.params["client_type"]
 
     def execute(self):
+        if "Multiconnection" in self.test_group:
+            self.sock.send(self.action.encode("utf-8"))
+
         sleep(float(self.initial_delay))
 
         screen_number = 1
 
         while True:
-            make_screen(self.screen_path, self.current_try, self.screen_name, self.current_image_num)
+            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1
@@ -260,7 +288,10 @@ class SleepAndScreen(Action):
                 break
             else:
                 sleep(float(self.delay))
-                
+
+        if "Multiconnection" in self.test_group:
+            self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
+
         try:
             self.sock.send("gpuview".encode("utf-8"))
             response = self.sock.recv(1024).decode("utf-8")

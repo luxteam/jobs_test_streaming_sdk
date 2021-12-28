@@ -117,22 +117,31 @@ def close_streaming_process(execution_type, case, process):
     try:
         if should_case_be_closed(execution_type, case):
             # close the current Streaming SDK process
+            main_logger.info("Start closing")
+
             if process is not None:
                 close_process(process)
+
+            main_logger.info("Finish closing")
 
             # additional try to kill Streaming SDK server/client (to be sure that all processes are closed)
 
             status = 0
 
             while status != 128:
-                status = subprocess.call("taskkill /f /im RemoteGameClient.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                status = subprocess.call("taskkill /f /im RemoteGameClient.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
 
             status = 0
 
             while status != 128:
-                status = subprocess.call("taskkill /f /im RemoteGameServer.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                status = subprocess.call("taskkill /f /im RemoteGameServer.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
 
             process = None
+
+        if process:
+            main_logger.info("StreamingSDK instance was killed")
+        else:
+            main_logger.info("Keep StreamingSDK instance")
 
         return process
     except Exception as e:
@@ -142,27 +151,37 @@ def close_streaming_process(execution_type, case, process):
         return None
 
 
-def close_android_app(case=None):
+def close_android_app(case=None, multiconnection=False):
     try:
-        if case is None or should_case_be_closed("client", case):
+        key = "android" if multiconnection else "client"
+
+        if case is None or should_case_be_closed(key, case):
             execute_adb_command("adb shell am force-stop com.amd.remotegameclient")
+            main_logger.info("Android client was killed")
 
             return True
 
-        return False
+        else:
+            main_logger.info("Keep Android client instance")
+            return False
     except Exception as e:
         main_logger.error("Failed to close Streaming SDK Android app. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
-def save_logs(args, case, last_log_line, current_try):
+def save_logs(args, case, last_log_line, current_try, is_multiconnection=False):
     try:
-        if hasattr(args, "execution_type"):
-            execution_type = args.execution_type
-        else:
-            execution_type = "server"
+        if not is_multiconnection:
+            if hasattr(args, "execution_type"):
+                execution_type = args.execution_type
+            else:
+                execution_type = "server"
 
-        tool_path = args.server_tool if execution_type == "server" else args.client_tool
+            tool_path = args.server_tool if execution_type == "server" else args.client_tool
+        else:
+            execution_type = "second_client"
+            tool_path = args.tool
+
         tool_path = os.path.abspath(tool_path)
 
         log_source_path = tool_path + ".log"
@@ -199,6 +218,8 @@ def save_logs(args, case, last_log_line, current_try):
             file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
             file.write(logs)
 
+        main_logger.info("Finish logs saving for {}".format(execution_type))
+
         return last_log_line
     except Exception as e:
         main_logger.error("Failed during logs saving. Exception: {}".format(str(e)))
@@ -207,10 +228,9 @@ def save_logs(args, case, last_log_line, current_try):
         return None
 
 
-def save_android_log(args, case, last_log_line, current_try):
+def save_android_log(args, case, current_try, log_name_postfix="_client"):
     try:
-        command_process = subprocess.Popen("adb logcat -d", shell=False, stdin=PIPE, stdout=PIPE)
-        out, err = command_process.communicate()
+        out, err = execute_adb_command("adb logcat -d", return_output=True)
 
         raw_logs = out.split(b"\r\n")
 
@@ -219,24 +239,7 @@ def save_android_log(args, case, last_log_line, current_try):
         for log_line in raw_logs:
             log_lines.append(log_line.decode("utf-8", "ignore").encode("utf-8", "ignore"))
 
-        # index of first line of the current log in whole log file
-        first_log_line_index = 0
-
-        for i in range(len(log_lines)):
-            if last_log_line is not None and last_log_line in log_lines[i]:
-                first_log_line_index = i + 1
-                break
-
-        # update last log line
-        for i in range(len(log_lines) - 1, -1, -1):
-            if log_lines[i] and log_lines[i] != b"\r":
-                last_log_line = log_lines[i]
-                break
-
-        if first_log_line_index != 0:
-            log_lines = log_lines[first_log_line_index:]
-
-        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_client" + ".log")
+        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + log_name_postfix + ".log")
 
         with open(log_destination_path, "ab") as file:
             # filter Android client logs
@@ -251,7 +254,9 @@ def save_android_log(args, case, last_log_line, current_try):
             file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
             file.write(b"\n".join(filtered_log_line))
 
-        return last_log_line
+        execute_adb_command("adb logcat -c")
+
+        main_logger.info("Finish logs saving for Android client")
     except Exception as e:
         main_logger.error("Failed during android logs saving. Exception: {}".format(str(e)))
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
@@ -375,12 +380,25 @@ def make_window_minimized(window):
         main_logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
-def execute_adb_command(command):
-    command_process = subprocess.Popen(command, shell=False, stdin=PIPE, stdout=PIPE)
-    out, err = command_process.communicate()
-    main_logger.info("ADB command executed: {}".format(command))
-    main_logger.info("ADB command out: {}".format(out))
-    main_logger.error("ADB command err: {}".format(err))
+def execute_adb_command(command, return_output=False):
+    max_tries = 3
+    current_try = 0
+
+    while current_try < max_tries:
+        current_try++
+
+        try:
+            command_process = subprocess.Popen(command, shell=False, stdin=PIPE, stdout=PIPE)
+            out, err = command_process.communicate(timeout=30)
+            main_logger.info("ADB command executed (try #{}): {}".format(command, current_try))
+            if return_output:
+                return out, err
+            else:
+                main_logger.info("ADB command out (try #{}): {}".format(out, current_try))
+                main_logger.info("ADB command err (try #{}): {}".format(err, current_try))
+                break
+        except (psutil.TimeoutExpired, subprocess.TimeoutExpired) as err:
+            main_logger.error("Failed to execute ADB command due to timeout (try #{}): {}".format(command, current_try))
 
 
 def track_used_memory(case, execution_type):
@@ -398,3 +416,10 @@ def track_used_memory(case, execution_type):
             case["used_memory"] = value
     else:
         main_logger.error("Target process not found")
+
+
+def multiconnection_start_android(test_group):
+    # start Android client for multiconnection group
+    if test_group == "MulticonnectionWA" or test_group == "MulticonnectionWWA":
+        execute_adb_command("adb logcat -c")
+        execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")

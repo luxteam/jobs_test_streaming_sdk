@@ -537,7 +537,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
         # rule №10: -resolution X,Y != Encode Resolution -> failed
         flag_resolution = get_resolution(case["prepared_keys"], execution_type)
-        if flag_resolution:
+        if flag_resolution and 'encode_resolution' in saved_values:
             for i in range(1, len(saved_values['encode_resolution'])):
                 if not ((saved_values['encode_resolution'][i-1] == saved_values['encode_resolution'][i]) and (saved_values['encode_resolution'][i] == flag_resolution)):
                     json_content["message"].append("Application problem: Encode Resolution in Flags doesn't match to Encode Resolution from logs. Resolution from Flags: {}, from logs {}".format(flag_resolution, saved_values['encode_resolution'][i]))
@@ -815,6 +815,67 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
             main_logger.info("Test case processed: {}".format(json_content["test_case"]))
             main_logger.info("Saved values: {}".format(saved_values))
             main_logger.info("Saved errors: {}".format(saved_errors))
+
+        elif execution_type == "android_client":
+            log_key = "android_log"
+
+            if log_key in json_content:
+                log_path = os.path.join(work_dir, json_content[log_key]).replace('/', os.path.sep).replace('\\', os.path.sep)
+            else:
+                log_path = os.path.join(work_dir, "tool_logs", json_content["test_case"] + "_android.log")
+
+            if os.path.exists(log_path):
+                with open(log_path, 'r') as log_file:
+                    number_of_problems = 0
+                    log = log_file.readlines()
+
+                    for line in log:
+                        if "DiscoverServers() ends result=false" in line:
+                            number_of_problems += 1
+
+                        if number_of_problems >= 10:
+                            main_logger.warning("Android client could not connect")
+                            json_content["message"].append("Android client could not connect")
+                            json_content["test_status"] = "error"
+                            break
+
+                    main_logger.warning("Number of lines with connection problem: {}".format(number_of_problems))
+
+        elif execution_type == "windows_client" or execution_type == "second_windows_client":
+            if execution_type == "windows_client":
+                log_key = "client_log"
+            else:
+                log_key = "second_client_log"
+
+            if log_key in json_content:
+                log_path = os.path.join(work_dir, json_content[log_key]).replace('/', os.path.sep).replace('\\', os.path.sep)
+            else:
+                if execution_type == "windows_client":
+                    log_path = os.path.join(work_dir, "tool_logs", json_content["test_case"] + "_client.log")
+                else:
+                    log_path = os.path.join(work_dir, "tool_logs", json_content["test_case"] + "_second_client.log")
+
+            if os.path.exists(log_path):
+                with open(log_path, 'r') as log_file:
+                    number_of_metrics_lines = 0
+                    log = log_file.readlines()
+
+                    for line in log:
+                        if "Info: Average latency:" in line:
+                            number_of_metrics_lines += 1
+
+                    main_logger.warning("Found {} metrics lines".format(number_of_metrics_lines))
+
+                    if number_of_metrics_lines < 5:
+                        if execution_type == "windows_client":
+                            main_logger.warning("First windows client client could not connect")
+                            json_content["message"].append("First windows client could not connect")
+                        else:
+                            main_logger.warning("Second windows client client could not connect")
+                            json_content["message"].append("Second windows client could not connect")
+
+                        json_content["test_status"] = "error"
+
         else:
             main_logger.info("Test case skipped: {}".format(json_content["test_case"]))
     except Exception as e:

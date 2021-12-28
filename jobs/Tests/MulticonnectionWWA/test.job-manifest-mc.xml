@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<job-manifest enable="False">
+
+    <outpath value="{OutputDir}"/>
+
+    <execute command='python "{ResourcesDir}/mc_client.py"' timeout="3000">
+        <argument>--tool "{clientTool}"</argument>
+        <argument>--output "{OutputDir}"</argument>
+        <argument>--test_group MulticonnectionWWA</argument>
+        <argument>--test_cases "{TestCases}"</argument>
+        <argument>--ip_address "{ipAddress}"</argument>
+        <argument>--communication_port "{communicationPort}"</argument>
+        <argument>--server_gpu_name "{serverGPUName}"</argument>
+        <argument>--server_os_name "{serverOSName}"</argument>
+        <argument>--screen_resolution "{screenResolution}"</argument>
+        <argument>--track_used_memory True</argument>
+    </execute>
+
+    <execute command='python "{ResourcesDir}/makeCompareReport.py"'>
+        <argument>--work_dir "{OutputDir}"</argument>
+        <argument>--execution_type "client"</argument>
+    </execute>
+
+</job-manifest>

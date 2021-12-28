@@ -189,7 +189,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
             test_case_report["group_timeout_exceeded"] = False
 
-        video_path = os.path.join("Color", case["case"] + ".mp4")
+        video_path = os.path.join("Color", case["case"] + "android.mp4")
 
         if os.path.exists(os.path.join(args.output, video_path)):
             test_case_report[VIDEO_KEY] = video_path
@@ -233,7 +233,6 @@ def execute_tests(args):
 
     # copy log from last log line
     last_log_line_server = None
-    last_log_line_client = None
 
     # first time video recording can be unstable, do it before tests
     execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
@@ -305,6 +304,7 @@ def execute_tests(args):
                 params["args"] = args
                 params["case"] = case
                 params["game_name"] = args.game_name.lower()
+                params["client_type"] = "android"
 
                 # get list of actions for the current game / benchmark
                 actions_key = "{}_actions_android".format(args.game_name.lower())
@@ -378,7 +378,7 @@ def execute_tests(args):
                 # close Streaming SDK server instance
                 process = close_streaming_process("server", case, process)
                 last_log_line_server = save_logs(args, case, last_log_line_server, current_try)
-                last_log_line_client = save_android_log(args, case, last_log_line_client, current_try)
+                save_android_log(args, case, current_try)
 
                 try:
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
