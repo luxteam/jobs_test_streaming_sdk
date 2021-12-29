@@ -243,17 +243,26 @@ def parse_error(line, saved_errors):
 
 
 def update_status(json_content, case, saved_values, saved_errors, framerate, execution_type):
-    if "client_latencies" not in saved_values or "server_latencies" not in saved_values:
-        if "Multiconnection" not in case["test_group"]:
+    should_analyze_metrics = True
+
+    if "Multiconnection" not in case["test_group"]:
+        if "client_latencies" not in saved_values or "server_latencies" not in saved_values:
             if "expected_connection_problems" not in case or "client" not in case["expected_connection_problems"]:
                 json_content["test_status"] = "error"
                 json_content["message"].append("Application problem: Client could not connect")
-    elif max(saved_values["client_latencies"]) == 0 or max(saved_values["server_latencies"]) == 0:
-        if "Multiconnection" not in case["test_group"]:
+                should_analyze_metrics = False
+        elif max(saved_values["client_latencies"]) == 0 or max(saved_values["server_latencies"]) == 0:
             if "expected_connection_problems" not in case or "client" not in case["expected_connection_problems"]:
                 json_content["test_status"] = "error"
                 json_content["message"].append("Application problem: Client could not connect")
-    else:
+                should_analyze_metrics = False
+        else:
+            if "expected_connection_problems" in case and "client" in case["expected_connection_problems"]:
+                json_content["test_status"] = "error"
+                json_content["message"].append("Client has connected, but it wasn't expected")
+                should_analyze_metrics = False
+
+    if should_analyze_metrics:
         if 'encoder_values' in saved_values:
             # rule №1: ignore rules 1.1 and 1.2 if Capture dd
             # rule №1.1: encoder >= framerate -> problem with app
@@ -843,6 +852,10 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                                 json_content["test_status"] = "error"
 
                             break
+                    else:
+                        if "expected_connection_problems" in case and "android_client" in case["expected_connection_problems"]:
+                            json_content["message"].append("Android client has connected, but it wasn't expected")
+                            json_content["test_status"] = "error"
 
                     main_logger.warning("Number of lines with connection problem: {}".format(number_of_problems))
 
@@ -881,6 +894,17 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                             if "expected_connection_problems" not in case or "second_client" not in case["expected_connection_problems"]:
                                 main_logger.warning("Second windows client client could not connect")
                                 json_content["message"].append("Second windows client could not connect")
+                                json_content["test_status"] = "error"
+                    else:
+                        if execution_type == "windows_client":
+                            if "expected_connection_problems" in case and "client" in case["expected_connection_problems"]:
+                                main_logger.warning("First windows client client could not connect")
+                                json_content["message"].append("First windows client has connected, but it wasn't expected")
+                                json_content["test_status"] = "error"
+                        else:
+                            if "expected_connection_problems" in case and "second_client" in case["expected_connection_problems"]:
+                                main_logger.warning("Second windows client client could not connect")
+                                json_content["message"].append("Second windows client has connected, but it wasn't expected")
                                 json_content["test_status"] = "error"
 
         else:
