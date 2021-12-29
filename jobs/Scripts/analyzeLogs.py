@@ -244,13 +244,16 @@ def parse_error(line, saved_errors):
 
 def update_status(json_content, case, saved_values, saved_errors, framerate, execution_type):
     if "client_latencies" not in saved_values or "server_latencies" not in saved_values:
-        json_content["test_status"] = "error"
-        json_content["message"].append("Application problem: Client could not connect")
+        if "Multiconnection" not in case["test_group"]:
+            if "expected_connection_problems" not in case or "client" not in case["expected_connection_problems"]:
+                json_content["test_status"] = "error"
+                json_content["message"].append("Application problem: Client could not connect")
     elif max(saved_values["client_latencies"]) == 0 or max(saved_values["server_latencies"]) == 0:
-        json_content["test_status"] = "error"
-        json_content["message"].append("Application problem: Client could not connect")
+        if "Multiconnection" not in case["test_group"]:
+            if "expected_connection_problems" not in case or "client" not in case["expected_connection_problems"]:
+                json_content["test_status"] = "error"
+                json_content["message"].append("Application problem: Client could not connect")
     else:
-
         if 'encoder_values' in saved_values:
             # rule №1: ignore rules 1.1 and 1.2 if Capture dd
             # rule №1.1: encoder >= framerate -> problem with app
@@ -835,8 +838,10 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
 
                         if number_of_problems >= 10:
                             main_logger.warning("Android client could not connect")
-                            json_content["message"].append("Android client could not connect")
-                            json_content["test_status"] = "error"
+                            if "expected_connection_problems" not in case or "android_client" not in case["expected_connection_problems"]:
+                                json_content["message"].append("Android client could not connect")
+                                json_content["test_status"] = "error"
+
                             break
 
                     main_logger.warning("Number of lines with connection problem: {}".format(number_of_problems))
@@ -868,13 +873,15 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
 
                     if number_of_metrics_lines < 5:
                         if execution_type == "windows_client":
-                            main_logger.warning("First windows client client could not connect")
-                            json_content["message"].append("First windows client could not connect")
+                            if "expected_connection_problems" not in case or "client" not in case["expected_connection_problems"]:
+                                main_logger.warning("First windows client client could not connect")
+                                json_content["message"].append("First windows client could not connect")
+                                json_content["test_status"] = "error"
                         else:
-                            main_logger.warning("Second windows client client could not connect")
-                            json_content["message"].append("Second windows client could not connect")
-
-                        json_content["test_status"] = "error"
+                            if "expected_connection_problems" not in case or "second_client" not in case["expected_connection_problems"]:
+                                main_logger.warning("Second windows client client could not connect")
+                                json_content["message"].append("Second windows client could not connect")
+                                json_content["test_status"] = "error"
 
         else:
             main_logger.info("Test case skipped: {}".format(json_content["test_case"]))
