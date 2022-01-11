@@ -394,6 +394,11 @@ class GPUView(Action):
         self.archive_name = self.params["case"]["case"]
 
     def execute(self):
+        if "Encryption" in self.test_group:
+            compressing_thread = Thread(target=analyze_encryption, args=("server", self.params["args"].transport_protocol, 
+                self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], self.params["client_address"]))
+            compressing_thread.start()
+
         if self.collect_traces == "AfterTests":
             self.sock.send("start".encode("utf-8"))
 

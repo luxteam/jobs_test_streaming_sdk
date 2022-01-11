@@ -7,7 +7,7 @@ import json
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory
+from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory, analyze_encryption
 import win32api
 from actions import *
 
@@ -296,6 +296,11 @@ class SleepAndScreen(Action):
             self.sock.send("gpuview".encode("utf-8"))
             response = self.sock.recv(1024).decode("utf-8")
             self.logger.info("Server response for 'gpuview' action: {}".format(response))
+
+            if "Encryption" in self.test_group:
+            compressing_thread = Thread(target=analyze_encryption, args=("client", self.params["args"].transport_protocol, 
+                self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], self.params["args"].server_address))
+                compressing_thread.start()
 
             if self.collect_traces == "AfterTests":
                 collect_traces(self.archive_path, self.archive_name + "_client.zip")

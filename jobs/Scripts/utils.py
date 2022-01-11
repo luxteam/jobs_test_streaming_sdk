@@ -4,7 +4,7 @@ import os
 from glob import glob
 import zipfile
 import subprocess
-from subprocess import PIPE
+from subprocess import PIPE, STDOUT
 import shlex
 import win32api
 import sys
@@ -415,3 +415,80 @@ def multiconnection_start_android(test_group):
     if test_group == "MulticonnectionWA" or test_group == "MulticonnectionWWA":
         execute_adb_command("adb logcat -c")
         execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
+
+
+def analyze_encryption(execution_type, transport_protocol, is_encrypted, messages, server_address=None):
+    encryption_is_valid = validate_encryption(execution_type, server_address, transport_protocol, "src", is_encrypted)
+
+    if execution_type == "client":
+        if not encryption_is_valid:
+            messages.add("Found invalid encryption. Packet: server -> client (found on client side)")
+    else:
+        if not encryption_is_valid:
+            messages.add("Found invalid encryption. Packet: server -> client (found on server side)")
+
+    encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, server_address)
+
+    if execution_type == "client":
+        if not encryption_is_valid:
+            messages.add("Found invalid encryption. Packet: client -> server (found on client side)")
+    else:
+        if not encryption_is_valid:
+            messages.add("Found invalid encryption. Packet: client -> server (found on server side)")
+
+
+# address is address of the opposite side
+def validate_encryption(execution_type, transport_protocol, direction, is_encrypted, address):
+    # get list of all interfaces
+    tshark_interfaces_process = psutil.Popen("tshark -D", stdout=PIPE, stderr=STDOUT, shell=True)
+
+    for line in tshark_interfaces_process.stdout:
+        line = line.decode("utf8")
+        if "Ethernet" in line:
+            device_name = line.split(".")[1].strip()
+            break
+    else:
+        raise Exception("Interface wasn't found")
+
+    pcap_file_path = "captured_packets.pcap"
+
+    # remove old pcap file
+    if os.path.exists(pcap_file_path):
+        os.remove(pcap_file_path)
+
+    if execution_type == "client":
+        capture_filter = "{direction} host {address} and {transport_protocol}".format(direction=direction, address=address, transport_protocol=transport_protocol)
+    else:
+        capture_filter = "{direction} host {address} and {transport_protocol}".format(direction=direction, address=address, transport_protocol=transport_protocol)
+
+    # capture necessary packets
+    tshark_capture_command = "tshark -i \"{interface}\" -f \"{capture_filter}\" -a duration:5 -w {file_path}".format(
+        interface=interface_name, capture_filter=capture_filter, file_path=pcap_file_path)
+
+    tshark_capture_proc = psutil.Popen(tshark_capture_command, stdout=PIPE, stderr=PIPE, shell=True)
+
+    # press space few times on client side to generate packets from client
+    if execution_type == "client" and direction == "dst":
+        for i in range(5):
+            pydirectinput.keyDown("space")
+            sleep(0.5)
+
+    tshark_capture_proc.communicate()
+
+    with open(pcap_file_path, "r") as file:
+        lines = file.readlines()
+
+    non_encrypted_packet_found = False
+
+    for line in lines:
+        # find "id" key 
+        if "\"id\":" in line:
+            non_encrypted_packet_found = True
+            break
+
+    if is_encrypted == not non_encrypted_packet_found:
+        main_logger.info("Encryption is valid")
+        return True
+    else:
+        main_logger.warning("Encryption isn't valid")
+        return False

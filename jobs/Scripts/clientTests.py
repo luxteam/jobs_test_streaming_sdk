@@ -96,6 +96,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             main_logger.info("Could not connect to server. Try it again")
 
     params = {}
+    error_messages = set()
 
     try:
         # create state object
@@ -144,6 +145,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             params["case"] = case
             params["game_name"] = game_name
             params["client_type"] = "win_client"
+            params["messages"] = error_messages
 
             # execute actions one by one
             for action in actions:
@@ -187,7 +189,15 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                 json_content = json.load(file)[0]
 
-            json_content["test_status"] = "passed"
+            # check that encryption is valid
+            for message in error_messages:
+                if message.starts_with("Found invalid encryption"):
+                    json_content["test_status"] = "error"
+                    break
+            else:
+                json_content["test_status"] = "passed"
+
+            json_content["message"] = json_content["message"] + list(error_messages)
 
             if "Multiconnection" in args.test_group:
                 analyze_logs(args.output, json_content, case, execution_type="windows_client")

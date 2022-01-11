@@ -345,7 +345,7 @@ def execute_tests(args, current_conf):
                     PROCESS, last_log_line = start_client_side_tests(args, case, PROCESS, script_path, last_log_line, audio_device_name, current_try)
 
                 execution_time = time.time() - case_start_time
-                save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
+                save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = error_messages)
 
                 break
             except Exception as e:

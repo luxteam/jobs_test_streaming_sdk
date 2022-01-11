@@ -363,7 +363,7 @@ def execute_tests(args):
                     main_logger.info("Finish action execution\n\n\n")
 
                 execution_time = time.time() - case_start_time
-                save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = [])
+                save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = error_messages)
 
                 break
             except Exception as e:
@@ -384,7 +384,14 @@ def execute_tests(args):
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                         json_content = json.load(file)[0]
 
-                    json_content["test_status"] = "passed"
+                    # check that encryption is valid
+                    for message in error_messages:
+                        if message.starts_with("Found invalid encryption"):
+                            json_content["test_status"] = "error"
+                            break
+                    else:
+                        json_content["test_status"] = "passed"
+
                     analyze_logs(args.output, json_content, case, execution_type = "android")
 
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:

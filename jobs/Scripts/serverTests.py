@@ -146,6 +146,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
     params = {}
     processes = {}
+    error_messages = set()
 
     try:
         # create state object
@@ -199,6 +200,8 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             params["game_name"] = game_name
             params["processes"] = processes
             params["client_type"] = "android"
+            params["messages"] = error_messages
+            params["client_address"] = address[0]
 
             test_action_command = DoTestActions(connection, params, instance_state, main_logger)
             test_action_command.parse()
@@ -277,7 +280,16 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                 json_content = json.load(file)[0]
 
-            json_content["test_status"] = "passed"
+            # check that encryption is valid
+            for message in error_messages:
+                if message.starts_with("Found invalid encryption"):
+                    json_content["test_status"] = "error"
+                    break
+            else:
+                json_content["test_status"] = "passed"
+
+            json_content["message"] = json_content["message"] + list(error_messages)
+
             analyze_logs(args.output, json_content, case)
 
             if args.test_group == "MulticonnectionWA" or args.test_group == "MulticonnectionWWA":
