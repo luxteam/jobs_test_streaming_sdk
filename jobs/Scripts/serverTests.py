@@ -43,7 +43,8 @@ ACTIONS_MAPPING = {
     "click_server": ClickServer,
     "start_test_actions_server": DoTestActions,
     "gpuview": GPUView,
-    "record_metrics": RecordMetrics
+    "record_metrics": RecordMetrics,
+    "encryption": Encryption
 }
 
 
@@ -67,7 +68,7 @@ MULTICONNECTION_ACTIONS_MAPPING = {
 
 # Server receives commands from client and executes them
 # Server doesn't decide to retry case or do next test case. Exception: fail on server side which generates abort on server side
-def start_server_side_tests(args, case, process, android_client_closed, script_path, last_log_line, current_try):
+def start_server_side_tests(args, case, process, android_client_closed, script_path, last_log_line, current_try, error_messages):
     output_path = os.path.join(args.output, "Color")
 
     screen_path = os.path.join(output_path, case["case"])
@@ -146,7 +147,6 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
     params = {}
     processes = {}
-    error_messages = set()
 
     try:
         # create state object
@@ -281,12 +281,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 json_content = json.load(file)[0]
 
             # check that encryption is valid
-            for message in error_messages:
-                if message.starts_with("Found invalid encryption"):
-                    json_content["test_status"] = "error"
-                    break
-            else:
-                json_content["test_status"] = "passed"
+            json_content["test_status"] = "error" if contains_encryption_errors(error_messages) else "passed"
 
             json_content["message"] = json_content["message"] + list(error_messages)
 

@@ -385,12 +385,7 @@ def execute_tests(args):
                         json_content = json.load(file)[0]
 
                     # check that encryption is valid
-                    for message in error_messages:
-                        if message.starts_with("Found invalid encryption"):
-                            json_content["test_status"] = "error"
-                            break
-                    else:
-                        json_content["test_status"] = "passed"
+                    json_content["test_status"] = "error" if contains_encryption_errors(error_messages) else "passed"
 
                     analyze_logs(args.output, json_content, case, execution_type = "android")
 

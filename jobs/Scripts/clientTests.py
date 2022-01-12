@@ -45,7 +45,7 @@ ACTIONS_MAPPING = {
 # Client reads list of actions and executes them one by one.
 # It sends actions which must be executed on server to it.
 # Also client does screenshots and records video.
-def start_client_side_tests(args, case, process, script_path, last_log_line, audio_device_name, current_try):
+def start_client_side_tests(args, case, process, script_path, last_log_line, audio_device_name, current_try, error_messages):
     output_path = os.path.join(args.output, "Color")
 
     screen_path = os.path.join(output_path, case["case"])
@@ -96,7 +96,6 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             main_logger.info("Could not connect to server. Try it again")
 
     params = {}
-    error_messages = set()
 
     try:
         # create state object
@@ -190,12 +189,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 json_content = json.load(file)[0]
 
             # check that encryption is valid
-            for message in error_messages:
-                if message.starts_with("Found invalid encryption"):
-                    json_content["test_status"] = "error"
-                    break
-            else:
-                json_content["test_status"] = "passed"
+            json_content["test_status"] = "error" if contains_encryption_errors(error_messages) else "passed"
 
             json_content["message"] = json_content["message"] + list(error_messages)
 

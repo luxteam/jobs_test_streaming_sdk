@@ -417,8 +417,9 @@ def multiconnection_start_android(test_group):
         execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
 
 
-def analyze_encryption(execution_type, transport_protocol, is_encrypted, messages, server_address=None):
-    encryption_is_valid = validate_encryption(execution_type, server_address, transport_protocol, "src", is_encrypted)
+# address is address of the opposite side
+def analyze_encryption(execution_type, transport_protocol, is_encrypted, messages, address=None):
+    encryption_is_valid = validate_encryption(execution_type, transport_protocol, "src", is_encrypted, address)
 
     if execution_type == "client":
         if not encryption_is_valid:
@@ -427,7 +428,7 @@ def analyze_encryption(execution_type, transport_protocol, is_encrypted, message
         if not encryption_is_valid:
             messages.add("Found invalid encryption. Packet: server -> client (found on server side)")
 
-    encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, server_address)
+    encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, address)
 
     if execution_type == "client":
         if not encryption_is_valid:
@@ -491,4 +492,13 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
         return True
     else:
         main_logger.warning("Encryption isn't valid")
+        return False
+
+
+def contains_encryption_errors(error_messages):
+    for message in error_messages:
+        if message.starts_with("Found invalid encryption"):
+            return True
+            break
+    else:
         return False

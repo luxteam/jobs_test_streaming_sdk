@@ -340,9 +340,9 @@ def execute_tests(args, current_conf):
                     f.write(execution_script)
 
                 if args.execution_type == "server":
-                    PROCESS, last_log_line, android_client_closed = start_server_side_tests(args, case, PROCESS, android_client_closed, script_path, last_log_line, current_try)
+                    PROCESS, last_log_line, android_client_closed = start_server_side_tests(args, case, PROCESS, android_client_closed, script_path, last_log_line, current_try, error_messages)
                 else:
-                    PROCESS, last_log_line = start_client_side_tests(args, case, PROCESS, script_path, last_log_line, audio_device_name, current_try)
+                    PROCESS, last_log_line = start_client_side_tests(args, case, PROCESS, script_path, last_log_line, audio_device_name, current_try, error_messages)
 
                 execution_time = time.time() - case_start_time
                 save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = error_messages)

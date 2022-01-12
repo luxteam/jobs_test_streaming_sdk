@@ -387,6 +387,19 @@ class DoTestActions(Action):
 
 
 # collect gpuview traces on server side
+class Encryption(Action):
+    def parse(self):
+        self.test_group = self.params["args"].test_group
+
+    def execute(self):
+        self.sock.send("start".encode("utf-8"))
+
+        compressing_thread = Thread(target=analyze_encryption, args=("server", self.params["args"].transport_protocol, 
+            self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], self.params["client_address"]))
+        compressing_thread.start()
+
+
+# collect gpuview traces on server side
 class GPUView(Action):
     def parse(self):
         self.collect_traces = self.params["args"].collect_traces
@@ -394,11 +407,6 @@ class GPUView(Action):
         self.archive_name = self.params["case"]["case"]
 
     def execute(self):
-        if "Encryption" in self.test_group:
-            compressing_thread = Thread(target=analyze_encryption, args=("server", self.params["args"].transport_protocol, 
-                self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], self.params["client_address"]))
-            compressing_thread.start()
-
         if self.collect_traces == "AfterTests":
             self.sock.send("start".encode("utf-8"))
 
