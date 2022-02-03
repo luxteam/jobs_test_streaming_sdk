@@ -485,7 +485,7 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
             non_encrypted_packet_found = True
             break
 
-    if is_encrypted == not non_encrypted_packet_found:
+    if is_encrypted == (not non_encrypted_packet_found):
         main_logger.info("Encryption is valid")
         return True
     else:
