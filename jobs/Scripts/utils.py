@@ -446,6 +446,10 @@ def decode_payload(payload):
 
 # address is address of the opposite side
 def validate_encryption(execution_type, transport_protocol, direction, is_encrypted, address):
+    # analyze ony first N packets, because there are too much packets (~1sec = 100 packets)
+    packets_to_analyze = 20
+    main_logger.info("Check first {} packets".format(packets_to_analyze))
+
     if execution_type == "client":
         capture_filter = "{direction} host {address} and {transport_protocol} {direction} port 1235".format(direction=direction, address=address, transport_protocol=transport_protocol)
     else:
@@ -457,24 +461,31 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
     main_logger.info("Capture filter: {}".format(capture_filter))
 
     packets = pyshark.LiveCapture("eth", bpf_filter=capture_filter)
-    packets.sniff(timeout=5)
+    packets.sniff(timeout=1)
 
     main_logger.info(packets)
 
     non_encrypted_packet_found = False
 
-    for packet in packets:
+    if packets_to_analyze > len(packets):
+        packets_to_analyze = len(packets)
+
+    for packet in packets[:packets_to_analyze]:
         try:
             if transport_protocol == "udp":
                 payload = packet.udp.payload
             else:
                 payload = packet.tcp.payload
         except:
-            main_logger.warning("Could not find payload")
+            main_logger.warning("Could not get payload")
+            main_logger.error("Traceback: {}".format(traceback.format_exc()))
             continue
 
-        # find "id" key 
-        if "\"id\":" in decode_payload(payload):
+        # find "id" key
+        decoded_payload = decode_payload(payload)
+        main_logger.info("Decoded payload: {}".format(decoded_payload))
+
+        if "\"id\":" in decoded_payload:
             non_encrypted_packet_found = True
             break
 
