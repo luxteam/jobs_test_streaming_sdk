@@ -10,7 +10,7 @@ import win32api
 import pyautogui
 import pydirectinput
 from threading import Thread
-from utils import parse_arguments, execute_adb_command, analyze_encryption
+from utils import parse_arguments, execute_adb_command
 from actions import *
 import base64
 import keyboard
@@ -390,11 +390,6 @@ class SleepAndScreen(MulticonnectionAction):
         sleep(float(self.initial_delay))
 
         screen_number = 1
-
-        if "Encryption" in self.test_group:
-            compressing_thread = Thread(target=analyze_encryption, args=("android", self.params["args"].transport_protocol, 
-                self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], params["args"].android_address))
-            compressing_thread.start()
 
         while True:
             make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
