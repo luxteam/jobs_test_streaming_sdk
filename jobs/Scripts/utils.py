@@ -441,7 +441,7 @@ def decode_payload(payload):
     result = ""
     for byte in payload.split(":"):
         result += chr(int(byte, 16))
-    return result
+    return result.encode("cp1251", "ignore").decode("utf8", "ignore")
 
 
 # address is address of the opposite side
@@ -476,8 +476,11 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
                 payload = packet.udp.payload
             else:
                 payload = packet.tcp.payload
-        except:
+        except AttributeError:
             main_logger.warning("Could not get payload")
+            continue
+        except Exception as e:
+            main_logger.error("Failed to get packet payload. Exception: {}".format(str(e)))
             main_logger.error("Traceback: {}".format(traceback.format_exc()))
             continue
 
