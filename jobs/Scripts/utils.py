@@ -13,6 +13,7 @@ from shutil import copyfile
 from datetime import datetime
 import pydirectinput, pyautogui
 import win32gui
+import pyshark
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -436,58 +437,44 @@ def analyze_encryption(execution_type, transport_protocol, is_encrypted, message
             messages.add("Found invalid encryption. Packet: client -> server (found on server side)")
 
 
+def decode_payload(payload):
+    result = ""
+    for byte in payload.split(":"):
+        result += chr(int(byte, 16))
+    return result
+
+
 # address is address of the opposite side
 def validate_encryption(execution_type, transport_protocol, direction, is_encrypted, address):
-    # get list of all interfaces
-    tshark_interfaces_process = psutil.Popen("tshark -D", stdout=PIPE, stderr=STDOUT, shell=True)
-
-    for line in tshark_interfaces_process.stdout:
-        line = line.decode("utf8")
-        if "(Ethernet)" in line:
-            # Example line: 3. \Device\NPF_{C964BDAE-0BCE-4EBD-9AAC-0E5461F4B1CB} (Ethernet)
-            interface_name = line.split(".")[1].strip().split()[0]
-            main_logger.info("Interface name: {}".format(interface_name))
-            break
-    else:
-        raise Exception("Interface wasn't found")
-
-    pcap_file_path = "captured_packets.pcap"
-
-    # remove old pcap file
-    if os.path.exists(pcap_file_path):
-        os.remove(pcap_file_path)
-
     if execution_type == "client":
-        capture_filter = "{direction} host {address} and {transport_protocol}".format(direction=direction, address=address, transport_protocol=transport_protocol)
+        capture_filter = "{direction} host {address} and {transport_protocol} {direction} port 1235".format(direction=direction, address=address, transport_protocol=transport_protocol)
     else:
-        capture_filter = "{direction} host {address} and {transport_protocol}".format(direction=direction, address=address, transport_protocol=transport_protocol)
+        if direction == "src":
+            capture_filter = "src host {address} and {transport_protocol} dst port 1235".format(address=address, transport_protocol=transport_protocol)
+        else:
+            capture_filter = "dst host {address} and {transport_protocol} src port 1235".format(address=address, transport_protocol=transport_protocol)
 
-    # capture necessary packets
-    tshark_capture_command = "tshark -i \"{interface}\" -f \"{capture_filter}\" -a duration:5 -w {file_path}".format(
-        interface=interface_name, capture_filter=capture_filter, file_path=pcap_file_path)
-
-    main_logger.info("tshark capture command: {}".format(tshark_capture_command))
-
-    tshark_capture_proc = psutil.Popen(tshark_capture_command, stdout=PIPE, stderr=PIPE, shell=True)
-
-    # press space few times on client side to generate packets from client
-    if execution_type == "client" and direction == "dst":
-        for i in range(5):
-            pydirectinput.keyDown("space")
-            sleep(0.5)
-
-    tshark_capture_proc.communicate()
-
-    with open(pcap_file_path, "r") as file:
-        lines = file.readlines()
+    packets = pyshark.LiveCapture("eth", bpf_filter=capture_filter)
+    packets.sniff(timeout=5)
 
     non_encrypted_packet_found = False
 
-    for line in lines:
+    for packet in packets:
+        try:
+            if transport_protocol == "udp":
+                payload = packet.udp.payload
+            else:
+                payload = packet.tcp.payload
+        except:
+            main_logger.warning("Could not find payload")
+            continue
+
         # find "id" key 
-        if "\"id\":" in line:
+        if "\"id\":" in decode_payload(payload):
             non_encrypted_packet_found = True
             break
+
+    packets.close()
 
     if is_encrypted == (not non_encrypted_packet_found):
         main_logger.info("Encryption is valid")
