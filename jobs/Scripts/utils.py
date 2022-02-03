@@ -504,7 +504,7 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
 
 def contains_encryption_errors(error_messages):
     for message in error_messages:
-        if message.starts_with("Found invalid encryption"):
+        if message.startswith("Found invalid encryption"):
             return True
             break
     else:
