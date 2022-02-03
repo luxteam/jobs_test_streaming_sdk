@@ -394,7 +394,7 @@ class Encryption(Action):
     def execute(self):
         self.sock.send("start".encode("utf-8"))
 
-        compressing_thread = Thread(target=analyze_encryption, args=("server", self.params["args"].transport_protocol, 
+        compressing_thread = Thread(target=analyze_encryption, args=("server", self.params["args"].transport_protocol, \
             self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], self.params["client_address"]))
         compressing_thread.start()
 

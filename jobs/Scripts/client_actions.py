@@ -284,9 +284,9 @@ class SleepAndScreen(Action):
                 response = self.sock.recv(1024).decode("utf-8")
                 self.logger.info("Server response for 'encryption' action: {}".format(response))
 
-                compressing_thread = Thread(target=analyze_encryption, args=("client", self.params["args"].transport_protocol, 
+                compressing_thread = Thread(target=analyze_encryption, args=("client", self.params["args"].transport_protocol, \
                     self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], self.params["args"].server_address))
-                    compressing_thread.start()
+                compressing_thread.start()
             except Exception as e:
                 self.logger.warning("Failed to validate encryption: {}".format(str(e)))
                 self.logger.warning("Traceback: {}".format(traceback.format_exc()))
