@@ -444,7 +444,8 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
     for line in tshark_interfaces_process.stdout:
         line = line.decode("utf8")
         if "Ethernet" in line:
-            device_name = line.split(".")[1].strip()
+            interface_name = line.split(".")[1].strip()
+            main_logger.info("Interface name: {}".format(interface_name))
             break
     else:
         raise Exception("Interface wasn't found")
@@ -463,6 +464,8 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
     # capture necessary packets
     tshark_capture_command = "tshark -i \"{interface}\" -f \"{capture_filter}\" -a duration:5 -w {file_path}".format(
         interface=interface_name, capture_filter=capture_filter, file_path=pcap_file_path)
+
+    main_logger.info("tshark capture command: {}".format(tshark_capture_command))
 
     tshark_capture_proc = psutil.Popen(tshark_capture_command, stdout=PIPE, stderr=PIPE, shell=True)
 
