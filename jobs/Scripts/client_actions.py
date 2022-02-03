@@ -271,13 +271,6 @@ class SleepAndScreen(Action):
         self.client_type = self.params["client_type"]
 
     def execute(self):
-        if "Multiconnection" in self.test_group:
-            self.sock.send(self.action.encode("utf-8"))
-
-        sleep(float(self.initial_delay))
-
-        screen_number = 1
-
         if "Encryption" in self.test_group:
             try:
                 self.sock.send("encryption".encode("utf-8"))
@@ -290,6 +283,13 @@ class SleepAndScreen(Action):
             except Exception as e:
                 self.logger.warning("Failed to validate encryption: {}".format(str(e)))
                 self.logger.warning("Traceback: {}".format(traceback.format_exc()))
+
+        if "Multiconnection" in self.test_group:
+            self.sock.send(self.action.encode("utf-8"))
+
+        sleep(float(self.initial_delay))
+
+        screen_number = 1
 
         while True:
             make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
