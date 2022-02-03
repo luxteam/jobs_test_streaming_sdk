@@ -278,7 +278,7 @@ class SleepAndScreen(Action):
                 self.logger.info("Server response for 'encryption' action: {}".format(response))
 
                 compressing_thread = Thread(target=analyze_encryption, args=("client", self.params["transport_protocol"], \
-                    self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], self.params["args"].server_address))
+                    "-encrypt" in self.params["case"]["server_keys"].lower(), self.params["messages"], self.params["args"].server_address))
                 compressing_thread.start()
             except Exception as e:
                 self.logger.warning("Failed to validate encryption: {}".format(str(e)))
