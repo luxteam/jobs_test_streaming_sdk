@@ -202,6 +202,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             params["client_type"] = "android"
             params["messages"] = error_messages
             params["client_address"] = address[0]
+            params["transport_protocol"] = case["transport_protocol"]
 
             test_action_command = DoTestActions(connection, params, instance_state, main_logger)
             test_action_command.parse()
