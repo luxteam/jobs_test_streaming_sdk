@@ -305,7 +305,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     main_logger.info("Waiting iperf command...")
                     sleep(1)
 
-            main_logger.error("Received command: {}".format(iperf_command))
+            main_logger.info("Received command: {}".format(iperf_command))
 
             # execute iperf if it's necessary
             params["json_content"] = json_content

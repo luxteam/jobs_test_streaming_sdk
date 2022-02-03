@@ -443,8 +443,9 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
 
     for line in tshark_interfaces_process.stdout:
         line = line.decode("utf8")
-        if "Ethernet" in line:
-            interface_name = line.split(".")[1].strip()
+        if "(Ethernet)" in line:
+            # Example line: 3. \Device\NPF_{C964BDAE-0BCE-4EBD-9AAC-0E5461F4B1CB} (Ethernet)
+            interface_name = line.split(".")[1].strip().split()[0]
             main_logger.info("Interface name: {}".format(interface_name))
             break
     else:
