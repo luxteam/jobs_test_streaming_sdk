@@ -278,6 +278,19 @@ class SleepAndScreen(Action):
 
         screen_number = 1
 
+        if "Encryption" in self.test_group:
+            try:
+                self.sock.send("encryption".encode("utf-8"))
+                response = self.sock.recv(1024).decode("utf-8")
+                self.logger.info("Server response for 'encryption' action: {}".format(response))
+
+                compressing_thread = Thread(target=analyze_encryption, args=("client", self.params["args"].transport_protocol, 
+                    self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], self.params["args"].server_address))
+                    compressing_thread.start()
+            except Exception as e:
+                self.logger.warning("Failed to validate encryption: {}".format(str(e)))
+                self.logger.warning("Traceback: {}".format(traceback.format_exc()))
+
         while True:
             make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
@@ -291,19 +304,6 @@ class SleepAndScreen(Action):
 
         if "Multiconnection" in self.test_group:
             self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
-
-        if "Encryption" in self.test_group:
-            try:
-                self.sock.send("encryption".encode("utf-8"))
-                response = self.sock.recv(1024).decode("utf-8")
-                self.logger.info("Server response for 'encryption' action: {}".format(response))
-
-                compressing_thread = Thread(target=analyze_encryption, args=("client", self.params["args"].transport_protocol, 
-                    self.params["case"]["server_keys"].lower().contains("-encrypt"), self.params["messages"], self.params["args"].server_address))
-                    compressing_thread.start()
-            except Exception as e:
-                self.logger.warning("Failed to validate encryption: {}".format(str(e)))
-                self.logger.warning("Traceback: {}".format(traceback.format_exc()))
 
         try:
             self.sock.send("gpuview".encode("utf-8"))

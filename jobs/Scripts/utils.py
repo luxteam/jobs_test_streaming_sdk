@@ -421,20 +421,18 @@ def multiconnection_start_android(test_group):
 def analyze_encryption(execution_type, transport_protocol, is_encrypted, messages, address=None):
     encryption_is_valid = validate_encryption(execution_type, transport_protocol, "src", is_encrypted, address)
 
-    if execution_type == "client":
-        if not encryption_is_valid:
+    if not encryption_is_valid:
+        if execution_type == "client":
             messages.add("Found invalid encryption. Packet: server -> client (found on client side)")
-    else:
-        if not encryption_is_valid:
+        else:
             messages.add("Found invalid encryption. Packet: server -> client (found on server side)")
 
     encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, address)
 
-    if execution_type == "client":
-        if not encryption_is_valid:
+    if not encryption_is_valid:
+        if execution_type == "client":
             messages.add("Found invalid encryption. Packet: client -> server (found on client side)")
-    else:
-        if not encryption_is_valid:
+        else:
             messages.add("Found invalid encryption. Packet: client -> server (found on server side)")
 
 
