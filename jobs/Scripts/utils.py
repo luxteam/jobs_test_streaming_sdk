@@ -454,8 +454,12 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
         else:
             capture_filter = "dst host {address} and {transport_protocol} src port 1235".format(address=address, transport_protocol=transport_protocol)
 
+    main_logger.info("Capture filter: {}".format(capture_filter))
+
     packets = pyshark.LiveCapture("eth", bpf_filter=capture_filter)
     packets.sniff(timeout=5)
+
+    main_logger.info(packets)
 
     non_encrypted_packet_found = False
 
