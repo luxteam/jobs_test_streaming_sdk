@@ -115,6 +115,22 @@ class RecordVideo(Action):
         self.sock.send("done".encode("utf-8"))
 
 
+class Encryption(Action):
+    def parse(self):
+        pass
+
+    def execute(self):
+        try:
+            self.sock.send("start".encode("utf-8"))
+
+            compressing_thread = Thread(target=analyze_encryption, args=("client", self.params["transport_protocol"], \
+                "-encrypt" in self.params["case"]["server_keys"].lower(), self.params["messages"], self.params["args"].ip_address))
+            compressing_thread.start()
+        except Exception as e:
+            self.logger.warning("Failed to validate encryption: {}".format(str(e)))
+            self.logger.warning("Traceback: {}".format(traceback.format_exc())) 
+
+
 class Finish(Action):
     def parse(self):
         pass

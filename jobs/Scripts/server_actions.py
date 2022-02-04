@@ -391,12 +391,16 @@ class DoTestActions(Action):
         self.state.executing_test_actions = True
 
 
-# collect gpuview traces on server side
+# check encryption traces on server side
 class Encryption(Action):
     def parse(self):
         self.test_group = self.params["args"].test_group
 
     def execute(self):
+        self.second_sock.send("encryption".encode("utf-8"))
+        response = self.second_sock.recv(1024).decode("utf-8")
+        self.logger.info("Second client response for 'encryption' action: {}".format(response))
+
         self.sock.send("start".encode("utf-8"))
 
         compressing_thread = Thread(target=analyze_encryption, args=("server", self.params["transport_protocol"], \

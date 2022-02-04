@@ -23,7 +23,6 @@ ROOT_PATH = os.path.abspath(os.path.join(
 sys.path.append(ROOT_PATH)
 from jobs_launcher.core.config import *
 from jobs_launcher.core.system_info import get_gpu
-from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
 
 pyautogui.FAILSAFE = False
 
@@ -34,6 +33,7 @@ ACTIONS_MAPPING = {
     "sleep_and_screen": SleepAndScreen,
     "record_metrcis": RecordMetrics,
     "record_video": RecordVideo,
+    "encryption": Encryption,
     "finish": Finish
 }
 
@@ -291,6 +291,8 @@ def execute_tests(args, current_conf):
             params["case"] = case
             params["client_type"] = "second_client"
             params["audio_device_name"] = audio_device_name
+            params["transport_protocol"] = transport_protocol
+            params["messages"] = error_messages
 
             case_start_time = time()
 
@@ -349,10 +351,10 @@ def execute_tests(args, current_conf):
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                     json_content = json.load(file)[0]
 
-                json_content["test_status"] = "passed"
+                # check that encryption is valid
+                json_content["test_status"] = "error" if contains_encryption_errors(error_messages) else "passed"
 
-                if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"] or args.test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
-                    analyze_logs(args.output, json_content, case, execution_type="second_windows_client")
+                analyze_logs(args.output, json_content, case, execution_type="second_windows_client")
 
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                     json.dump([json_content], file, indent=4)
