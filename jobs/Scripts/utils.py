@@ -434,7 +434,7 @@ def analyze_encryption(case, execution_type, transport_protocol, is_encrypted, m
 
     if not encryption_is_valid:
         if execution_type == "client" or execution_type == "second_client":
-            messages.add("Found invalid encryption. Packet: server -> client (found on client side)")
+            messages.add("Found invalid encryption. Packet: server -> client (found on {} side)".format(second_client))
         else:
             messages.add("Found invalid encryption. Packet: server -> client (found on server side)")
 
@@ -442,7 +442,7 @@ def analyze_encryption(case, execution_type, transport_protocol, is_encrypted, m
 
     if not encryption_is_valid:
         if execution_type == "client" or execution_type == "second_client":
-            messages.add("Found invalid encryption. Packet: client -> server (found on client side)")
+            messages.add("Found invalid encryption. Packet: client -> server (found on {} side)".format(second_client))
         else:
             messages.add("Found invalid encryption. Packet: client -> server (found on server side)")
 
@@ -456,8 +456,6 @@ def decode_payload(payload):
 
 # address is address of the opposite side
 def validate_encryption(execution_type, transport_protocol, direction, is_encrypted, address):
-    # analyze ony first N packets, because there are too much packets (~1sec = 100 packets)
-    packets_to_analyze = 20
     main_logger.info("Check first {} packets".format(packets_to_analyze))
 
     if execution_type == "client":
@@ -471,7 +469,7 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
     main_logger.info("Capture filter: {}".format(capture_filter))
 
     packets = pyshark.LiveCapture("eth", bpf_filter=capture_filter)
-    packets.sniff(timeout=1)
+    packets.sniff(timeout=2)
 
     main_logger.info(packets)
 
@@ -483,6 +481,10 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
 
     if packets_to_analyze > len(packets):
         packets_to_analyze = len(packets)
+
+    # number of packets which should be analyzed (some packets doesn't contain payload, they'll be skipped)
+    packets_to_analyze = 5
+    analyzed_packets = 0
 
     for packet in packets[:packets_to_analyze]:
         try:
@@ -500,9 +502,13 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
 
         decoded_payload = decode_payload(payload)
         main_logger.info("Decoded payload: {}".format(decoded_payload))
+        analyzed_packets += 1
 
         if "\"id\":" in decoded_payload or "\"DeviceID\":" in decoded_payload:
             non_encrypted_packet_found = True
+            break
+
+        if analyzed_packets >= packets_to_analyze:
             break
 
     packets.close()
