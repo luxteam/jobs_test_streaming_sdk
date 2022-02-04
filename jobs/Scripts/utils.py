@@ -19,7 +19,11 @@ ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
 sys.path.append(ROOT_PATH)
 from jobs_launcher.core.config import main_logger
-from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
+
+
+def get_mc_config():
+    with open(os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)), "multiconnection.json"), "r") as config:
+        return config.read()
 
 
 def is_case_skipped(case, render_platform):
@@ -414,7 +418,7 @@ def track_used_memory(case, execution_type):
 
 def multiconnection_start_android(test_group):
     # start Android client for multiconnection group
-    if test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
+    if test_group in get_mc_config()["android_client"]:
         execute_adb_command("adb logcat -c")
         execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
 

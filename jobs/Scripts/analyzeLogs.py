@@ -7,11 +7,9 @@ import re
 import traceback
 import datetime
 from typing import Protocol
+from utils import get_mc_config
 
-sys.path.append(os.path.abspath(os.path.join(
-    os.path.dirname(__file__), os.path.pardir, os.path.pardir)))
-from jobs_launcher.core.config import *
-from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
+MC_CONFIG = get_mc_config()
 
 
 def get_framerate(keys):
@@ -242,7 +240,7 @@ def parse_error(line, saved_errors):
 def update_status(json_content, case, saved_values, saved_errors, framerate, execution_type):
     should_analyze_metrics = True
 
-    if not (json_content["test_group"] in MULTICONNECTION_CONFIGURATION["second_win_client"] or json_content["test_group"] in MULTICONNECTION_CONFIGURATION["android_client"]):
+    if not (json_content["test_group"] in MC_CONFIG["second_win_client"] or json_content["test_group"] in MC_CONFIG["android_client"]):
         if "client_latencies" not in saved_values or "server_latencies" not in saved_values:
             if "expected_connection_problems" not in case or "client" not in case["expected_connection_problems"]:
                 json_content["test_status"] = "error"

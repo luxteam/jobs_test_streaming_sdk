@@ -22,9 +22,9 @@ ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
 sys.path.append(ROOT_PATH)
 from jobs_launcher.core.config import *
-from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
 
 pyautogui.FAILSAFE = False
+MC_CONFIG = get_mc_config()
 
 GAMES_WITH_TIMEOUTS = ['apexlegends']
 
@@ -112,7 +112,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
     sock = socket.socket()
     sock.bind(("", int(args.communication_port)))
     # max one connection
-    if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+    if args.test_group in MC_CONFIG["second_win_client"]:
         sock.listen(2)
     else:
         sock.listen(1)
@@ -122,7 +122,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
     connection, address = sock.accept()
     request = connection.recv(1024).decode("utf-8")
 
-    if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+    if args.test_group in MC_CONFIG["second_win_client"]:
         # check which client is main client, which client is second multiconnection client
         main_logger.info("Start trying to receive second connection: {}".format(case["case"]))
 
@@ -165,7 +165,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     should_collect_traces = (args.collect_traces == "BeforeTests")
                     process = start_streaming(args.execution_type, script_path, not should_collect_traces)
 
-                    if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+                    if args.test_group in MC_CONFIG["second_win_client"]:
                         sleep(10)
 
                     if should_collect_traces:
@@ -180,7 +180,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     sleep(10)
 
             # start second client after server
-            if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+            if args.test_group in MC_CONFIG["second_win_client"]:
                 connection_sc.send(case["case"].encode("utf-8"))
                 # small delay to give client time to connect
                 sleep(5)
@@ -251,12 +251,12 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     command_object.do_action()
                 elif command in MULTIONNECTION_ACTIONS:
                     # multiconnection tests can require to execute different commands for android client / second windows client
-                    if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+                    if args.test_group in MC_CONFIG["second_win_client"]:
                         command_object = MULTICONNECTION_ACTIONS_MAPPING["windows"][command](connection, params, instance_state, main_logger, second_sock=connection_sc)
                         command_object.do_action()
 
-                    if args.test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
-                        if args.test_group not in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+                    if args.test_group in MC_CONFIG["android_client"]:
+                        if args.test_group not in MC_CONFIG["second_win_client"]:
                             connection_sc = None
                         command_object = MULTICONNECTION_ACTIONS_MAPPING["android"][command](connection, params, instance_state, main_logger, second_sock=connection_sc)
                         command_object.do_action()
@@ -269,10 +269,10 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
             process = close_streaming_process(args.execution_type, case, process)
 
-            if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+            if args.test_group in MC_CONFIG["second_win_client"]:
                 connection_sc.send("finish passed".encode("utf-8"))
 
-            if args.test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
+            if args.test_group in MC_CONFIG["android_client"]:
                 # close Streaming SDK android app
                 android_client_closed = close_android_app(case, True)
                 save_android_log(args, case, current_try, log_name_postfix="_android")
@@ -289,7 +289,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
             analyze_logs(args.output, json_content, case)
 
-            if args.test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
+            if args.test_group in MC_CONFIG["android_client"]:
                 analyze_logs(args.output, json_content, case, execution_type="android_client")
 
             wait_iperf_command = True
@@ -326,13 +326,13 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
         if not instance_state.is_aborted:
             connection.send("abort".encode("utf-8"))
 
-        if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+        if args.test_group in MC_CONFIG["second_win_client"]:
             connection_sc.send("finish error".encode("utf-8"))
 
         raise e
     finally:
         connection.close()
-        if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+        if args.test_group in MC_CONFIG["second_win_client"]:
             connection_sc.close()
 
         # restart game if it's required

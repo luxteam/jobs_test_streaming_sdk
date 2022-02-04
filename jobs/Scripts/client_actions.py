@@ -7,16 +7,12 @@ import json
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory, analyze_encryption
+from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory, analyze_encryption, get_mc_config
 import win32api
 from actions import *
 
-ROOT_PATH = os.path.abspath(os.path.join(
-    os.path.dirname(__file__), os.path.pardir, os.path.pardir))
-sys.path.append(ROOT_PATH)
-from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
-
 pyautogui.FAILSAFE = False
+MC_CONFIG = get_mc_config()
 
 
 # [Server action] send request to execute some cmd command on server
@@ -145,7 +141,7 @@ class MakeScreen(Action):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
-        self.is_multiconnection = self.test_group in MULTICONNECTION_CONFIGURATION["android_client"] or self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]
+        self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
 
     def execute(self):
         if not self.screen_name:
@@ -181,7 +177,7 @@ class RecordVideo(Action):
         self.video_name = self.params["case"]["case"] + self.params["client_type"]
         self.resolution = self.params["args"].screen_resolution
         self.duration = int(self.params["arguments_line"])
-        self.is_multiconnection = self.test_group in MULTICONNECTION_CONFIGURATION["android_client"] or self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]
+        self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
 
     def execute(self):
         if self.is_multiconnection:
@@ -276,7 +272,7 @@ class SleepAndScreen(Action):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
-        self.is_multiconnection = self.test_group in MULTICONNECTION_CONFIGURATION["android_client"] or self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]
+        self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
 
     def execute(self):
         if "Encryption" in self.test_group:

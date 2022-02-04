@@ -14,13 +14,10 @@ from threading import Thread
 from utils import *
 from actions import *
 
-ROOT_PATH = os.path.abspath(os.path.join(
-    os.path.dirname(__file__), os.path.pardir, os.path.pardir))
-sys.path.append(ROOT_PATH)
-from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
-
 csgoFirstExec = True
 pyautogui.FAILSAFE = False
+MC_CONFIG = get_mc_config()
+
 
 # execute some cmd command on server (e.g. open game/benchmark)
 class ExecuteCMD(Action):
@@ -436,7 +433,7 @@ class RecordMetrics(Action):
     @Action.server_action_decorator
     def execute(self):
         try:
-            if self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
+            if self.test_group in MC_CONFIG["second_win_client"]:
                 self.sock.send("record_metrics".encode("utf-8"))
         except Exception as e:
             self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
@@ -460,7 +457,7 @@ class MakeScreen(MulticonnectionAction):
         try:
             self.second_sock.send(self.action.encode("utf-8"))
 
-            if self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"] and if self.test_group not in MULTICONNECTION_CONFIGURATION["android_client"]::
+            if self.test_group in MC_CONFIG["second_win_client"] and if self.test_group not in MC_CONFIG["android_client"]::
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
@@ -479,7 +476,7 @@ class SleepAndScreen(MulticonnectionAction):
         try:
             self.second_sock.send(self.action.encode("utf-8"))
 
-            if self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"] and if self.test_group not in MULTICONNECTION_CONFIGURATION["android_client"]::
+            if self.test_group in MC_CONFIG["second_win_client"] and if self.test_group not in MC_CONFIG["android_client"]::
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
@@ -498,7 +495,7 @@ class RecordVideo(MulticonnectionAction):
         try:
             self.second_sock.send(self.action.encode("utf-8"))
 
-            if self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"] and if self.test_group not in MULTICONNECTION_CONFIGURATION["android_client"]::
+            if self.test_group in MC_CONFIG["second_win_client"] and if self.test_group not in MC_CONFIG["android_client"]::
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
