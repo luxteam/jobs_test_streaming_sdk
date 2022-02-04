@@ -467,7 +467,7 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
     main_logger.info("Capture filter: {}".format(capture_filter))
 
     packets = pyshark.LiveCapture("eth", bpf_filter=capture_filter)
-    packets.sniff(timeout=2)
+    packets.sniff(timeout=1)
 
     main_logger.info(packets)
 

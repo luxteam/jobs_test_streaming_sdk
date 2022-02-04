@@ -298,7 +298,7 @@ def execute_tests(args, current_conf):
             case_start_time = time()
 
             # TODO: extend max_clients param (consider all existing clients)
-            if "-MAXUSERS 1" not in case["server_keys"] or ("max_clients" in case and case["max_clients"] == 1):
+            if "-MAXUSERS 1" not in case["server_keys"] and not ("max_clients" in case and case["max_clients"] == 1):
                 if process is None:
                     process = start_streaming("second_client", script_path, False)
 
@@ -324,7 +324,7 @@ def execute_tests(args, current_conf):
                 else:
                     arguments_line = None
 
-                if "-MAXUSERS 1" in case["server_keys"] and command != "finish":
+                if ("-MAXUSERS 1" in case["server_keys"] or ("max_clients" in case and case["max_clients"] == 1)) and command != "finish":
                     main_logger.info("Ignore action")
                     sock.send("done".encode("utf-8"))
                     continue
@@ -346,7 +346,7 @@ def execute_tests(args, current_conf):
 
             status = "passed"
 
-            if "-MAXUSERS 1" not in case["server_keys"]:
+            if "-MAXUSERS 1" not in case["server_keys"] and not ("max_clients" in case and case["max_clients"] == 1):
                 process = close_streaming_process("second_client", case, process)
                 last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
 
