@@ -10,10 +10,12 @@ from client_actions import *
 import psutil
 from utils import *
 from subprocess import PIPE, STDOUT
+from analyzeLogs import analyze_logs
+
 sys.path.append(os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir)))
 from jobs_launcher.core.config import *
-from analyzeLogs import analyze_logs
+from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
 
 
 # mapping of commands and their implementations
@@ -194,7 +196,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
 
             json_content["message"] = json_content["message"] + list(error_messages)
 
-            if "Multiconnection" in args.test_group:
+            if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"] or args.test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
                 analyze_logs(args.output, json_content, case, execution_type="windows_client")
 
             # execute iperf if it's necessary

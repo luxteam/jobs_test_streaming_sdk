@@ -16,6 +16,11 @@ import base64
 import keyboard
 from pyffmpeg import FFmpeg
 
+ROOT_PATH = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+sys.path.append(ROOT_PATH)
+from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
+
 pyautogui.FAILSAFE = False
 
 
@@ -348,8 +353,8 @@ class MakeScreen(MulticonnectionAction):
             make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
-            if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
-                if self.test_group == "MulticonnectionWWA":
+            if self.test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
+                if self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
                     self.logger.info("Wait second client answer")
                     response = self.second_sock.recv(1024).decode("utf-8")
                     self.logger.info("Second client answer: {}".format(response))
@@ -402,8 +407,8 @@ class SleepAndScreen(MulticonnectionAction):
             else:
                 sleep(float(self.delay))
 
-        if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
-            if self.test_group == "MulticonnectionWWA":
+        if self.test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
+            if self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
@@ -450,8 +455,8 @@ class RecordVideo(MulticonnectionAction):
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
 
-        if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
-            if self.test_group == "MulticonnectionWWA":
+        if self.test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
+            if self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]:
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))

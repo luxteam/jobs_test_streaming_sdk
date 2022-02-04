@@ -11,6 +11,11 @@ from utils import collect_traces, parse_arguments, collect_iperf_info, track_use
 import win32api
 from actions import *
 
+ROOT_PATH = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+sys.path.append(ROOT_PATH)
+from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
+
 pyautogui.FAILSAFE = False
 
 
@@ -140,19 +145,20 @@ class MakeScreen(Action):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
+        self.is_multiconnection = self.test_group in MULTICONNECTION_CONFIGURATION["android_client"] or self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]
 
     def execute(self):
         if not self.screen_name:
             make_screen(self.screen_path, self.current_try)
         else:
-            if "Multiconnection" in self.test_group:
+            if self.is_multiconnection:
                 self.sock.send(self.action.encode("utf-8"))
 
             make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
     def analyze_result(self):
-        if self.screen_name and "Multiconnection" in self.test_group:
+        if self.screen_name and self.is_multiconnection:
             self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
@@ -175,9 +181,10 @@ class RecordVideo(Action):
         self.video_name = self.params["case"]["case"] + self.params["client_type"]
         self.resolution = self.params["args"].screen_resolution
         self.duration = int(self.params["arguments_line"])
+        self.is_multiconnection = self.test_group in MULTICONNECTION_CONFIGURATION["android_client"] or self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]
 
     def execute(self):
-        if "Multiconnection" in self.test_group:
+        if self.is_multiconnection:
             self.sock.send(self.action.encode("utf-8"))
 
         video_full_path = os.path.join(self.video_path, self.video_name + ".mp4")
@@ -192,7 +199,7 @@ class RecordVideo(Action):
         self.logger.info("Finish to record video")
 
     def analyze_result(self):
-        if "Multiconnection" in self.test_group:
+        if self.is_multiconnection:
             self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
@@ -269,6 +276,7 @@ class SleepAndScreen(Action):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
+        self.is_multiconnection = self.test_group in MULTICONNECTION_CONFIGURATION["android_client"] or self.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"]
 
     def execute(self):
         if "Encryption" in self.test_group:
@@ -284,7 +292,7 @@ class SleepAndScreen(Action):
                 self.logger.warning("Failed to validate encryption: {}".format(str(e)))
                 self.logger.warning("Traceback: {}".format(traceback.format_exc()))
 
-        if "Multiconnection" in self.test_group:
+        if self.is_multiconnection:
             self.sock.send(self.action.encode("utf-8"))
 
         sleep(float(self.initial_delay))
@@ -302,7 +310,7 @@ class SleepAndScreen(Action):
             else:
                 sleep(float(self.delay))
 
-        if "Multiconnection" in self.test_group:
+        if self.is_multiconnection:
             self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
         try:

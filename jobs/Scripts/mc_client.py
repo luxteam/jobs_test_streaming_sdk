@@ -23,6 +23,7 @@ ROOT_PATH = os.path.abspath(os.path.join(
 sys.path.append(ROOT_PATH)
 from jobs_launcher.core.config import *
 from jobs_launcher.core.system_info import get_gpu
+from jobs.multiconnection import MULTICONNECTION_CONFIGURATION
 
 pyautogui.FAILSAFE = False
 
@@ -350,7 +351,7 @@ def execute_tests(args, current_conf):
 
                 json_content["test_status"] = "passed"
 
-                if "Multiconnection" in args.test_group:
+                if args.test_group in MULTICONNECTION_CONFIGURATION["second_win_client"] or args.test_group in MULTICONNECTION_CONFIGURATION["android_client"]:
                     analyze_logs(args.output, json_content, case, execution_type="second_windows_client")
 
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
