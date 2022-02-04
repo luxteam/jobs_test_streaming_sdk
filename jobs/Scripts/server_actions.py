@@ -400,7 +400,7 @@ class Encryption(MulticonnectionAction):
 
         self.sock.send("start".encode("utf-8"))
 
-        compressing_thread = Thread(target=analyze_encryption, args=("server", self.params["transport_protocol"], \
+        compressing_thread = Thread(target=analyze_encryption, args=(self.params["case"], "server", self.params["transport_protocol"], \
             "-encrypt" in self.params["case"]["server_keys"].lower(), self.params["messages"], self.params["client_address"]))
         compressing_thread.start()
 

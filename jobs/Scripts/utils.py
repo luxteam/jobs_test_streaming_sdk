@@ -425,11 +425,15 @@ def multiconnection_start_android(test_group):
 
 
 # address is address of the opposite side
-def analyze_encryption(execution_type, transport_protocol, is_encrypted, messages, address=None):
+def analyze_encryption(case, execution_type, transport_protocol, is_encrypted, messages, address=None):
+    if "expected_connection_problems" in case and execution_type in case["expected_connection_problems"]:
+        main_logger.info("Ignore encryption analyzing due to expected problems")
+        return
+
     encryption_is_valid = validate_encryption(execution_type, transport_protocol, "src", is_encrypted, address)
 
     if not encryption_is_valid:
-        if execution_type == "client":
+        if execution_type == "client" or execution_type == "second_client":
             messages.add("Found invalid encryption. Packet: server -> client (found on client side)")
         else:
             messages.add("Found invalid encryption. Packet: server -> client (found on server side)")
@@ -437,7 +441,7 @@ def analyze_encryption(execution_type, transport_protocol, is_encrypted, message
     encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, address)
 
     if not encryption_is_valid:
-        if execution_type == "client":
+        if execution_type == "client" or execution_type == "second_client":
             messages.add("Found invalid encryption. Packet: client -> server (found on client side)")
         else:
             messages.add("Found invalid encryption. Packet: client -> server (found on server side)")
@@ -472,6 +476,10 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
     main_logger.info(packets)
 
     non_encrypted_packet_found = False
+
+    if packets_to_analyze <= 10:
+        main_logger.warning("Not enough packets for analyze")
+        return False
 
     if packets_to_analyze > len(packets):
         packets_to_analyze = len(packets)
