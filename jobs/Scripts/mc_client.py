@@ -297,7 +297,8 @@ def execute_tests(args, current_conf):
 
             case_start_time = time()
 
-            if "-MAXUSERS 1" not in case["server_keys"]:
+            # TODO: extend max_clients param (consider all existing clients)
+            if "-MAXUSERS 1" not in case["server_keys"] or ("max_clients" in case and case["max_clients"] == 1):
                 if process is None:
                     process = start_streaming("second_client", script_path, False)
 

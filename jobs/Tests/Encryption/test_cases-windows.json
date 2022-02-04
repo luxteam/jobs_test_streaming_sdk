@@ -7,6 +7,7 @@
         "second_client_keys": "",
         "transport_protocol": "udp",
         "start_first": "server",
+        "max_clients": 1,
         "script_info": [
             "Launch server and client using Simple Encryption",
             "Expected result: Client side will be receiving image from Server in real time"
@@ -20,6 +21,7 @@
         "second_client_keys": "",
         "transport_protocol": "udp",
         "start_first": "server",
+        "max_clients": 1,
         "script_info": [
             "Launch server and client using AES Encryption Passphrase",
             "Expected result: Client side will be receiving image from Server in real time"
@@ -33,6 +35,7 @@
         "second_client_keys": "",
         "transport_protocol": "udp",
         "start_first": "server",
+        "max_clients": 1,
         "expected_connection_problems": ["client"],
         "script_info": [
             "Launch server and client using AES Encryption Wrong Passphrase",
@@ -144,6 +147,7 @@
         "second_client_keys": "",
         "transport_protocol": "tcp",
         "start_first": "server",
+        "max_clients": 1,
         "script_info": [
             "Launch server and client using Simple Encryption",
             "Expected result: Client side will be receiving image from Server in real time"
@@ -157,6 +161,7 @@
         "second_client_keys": "",
         "transport_protocol": "tcp",
         "start_first": "server",
+        "max_clients": 1,
         "script_info": [
             "Launch server and client using AES Encryption Passphrase",
             "Expected result: Client side will be receiving image from Server in real time"
@@ -170,6 +175,7 @@
         "second_client_keys": "",
         "transport_protocol": "tcp",
         "start_first": "server",
+        "max_clients": 1,
         "expected_connection_problems": ["client"],
         "script_info": [
             "Launch server and client using AES Encryption Wrong Passphrase",

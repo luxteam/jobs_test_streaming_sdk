@@ -467,7 +467,7 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
     main_logger.info("Capture filter: {}".format(capture_filter))
 
     packets = pyshark.LiveCapture("eth", bpf_filter=capture_filter)
-    packets.sniff(timeout=1)
+    packets.sniff(timeout=2)
 
     main_logger.info(packets)
 
@@ -490,11 +490,10 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
             main_logger.error("Traceback: {}".format(traceback.format_exc()))
             continue
 
-        # find "id" key
         decoded_payload = decode_payload(payload)
         main_logger.info("Decoded payload: {}".format(decoded_payload))
 
-        if "\"id\":" in decoded_payload:
+        if "\"id\":" in decoded_payload or "\"DeviceID\":" in decoded_payload:
             non_encrypted_packet_found = True
             break
 
