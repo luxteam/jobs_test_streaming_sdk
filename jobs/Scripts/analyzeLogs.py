@@ -9,6 +9,10 @@ import datetime
 from typing import Protocol
 from utils import get_mc_config
 
+sys.path.append(os.path.abspath(os.path.join(
+    os.path.dirname(__file__), os.path.pardir, os.path.pardir)))
+from jobs_launcher.core.config import *
+
 MC_CONFIG = get_mc_config()
 
 

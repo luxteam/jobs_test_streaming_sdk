@@ -7,7 +7,7 @@ import json
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory
+from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory, analyze_encryption
 import win32api
 from actions import *
 

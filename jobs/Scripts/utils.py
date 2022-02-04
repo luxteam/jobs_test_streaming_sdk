@@ -14,6 +14,7 @@ from datetime import datetime
 import pydirectinput, pyautogui
 import win32gui
 import pyshark
+import json
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
@@ -23,7 +24,7 @@ from jobs_launcher.core.config import main_logger
 
 def get_mc_config():
     with open(os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)), "multiconnection.json"), "r") as config:
-        return config.read()
+        return json.load(config)
 
 
 def is_case_skipped(case, render_platform):

@@ -258,6 +258,7 @@ def execute_tests(args, current_conf):
             else:
                 previous_test_case = case
                 current_try = 0
+                error_messages = []
 
             prepared_keys = prepare_keys(args, case)
             execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
@@ -291,7 +292,7 @@ def execute_tests(args, current_conf):
             params["case"] = case
             params["client_type"] = "second_client"
             params["audio_device_name"] = audio_device_name
-            params["transport_protocol"] = transport_protocol
+            params["transport_protocol"] = case["transport_protocol"]
             params["messages"] = error_messages
 
             case_start_time = time()
@@ -362,7 +363,7 @@ def execute_tests(args, current_conf):
                 status = json_content["test_status"]
 
             execution_time = time() - case_start_time
-            save_results(args, case, cases, execution_time = execution_time, test_case_status = status, error_messages = [])
+            save_results(args, case, cases, execution_time = execution_time, test_case_status = status, error_messages = error_messages)
 
         except Exception as e:
             main_logger.error("Fatal error: {}".format(str(e)))

@@ -389,7 +389,7 @@ class DoTestActions(Action):
 
 
 # check encryption traces on server side
-class Encryption(Action):
+class Encryption(MulticonnectionAction):
     def parse(self):
         self.test_group = self.params["args"].test_group
 
@@ -457,7 +457,7 @@ class MakeScreen(MulticonnectionAction):
         try:
             self.second_sock.send(self.action.encode("utf-8"))
 
-            if self.test_group in MC_CONFIG["second_win_client"] and if self.test_group not in MC_CONFIG["android_client"]::
+            if self.test_group in MC_CONFIG["second_win_client"] and self.test_group not in MC_CONFIG["android_client"]:
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
@@ -476,7 +476,7 @@ class SleepAndScreen(MulticonnectionAction):
         try:
             self.second_sock.send(self.action.encode("utf-8"))
 
-            if self.test_group in MC_CONFIG["second_win_client"] and if self.test_group not in MC_CONFIG["android_client"]::
+            if self.test_group in MC_CONFIG["second_win_client"] and self.test_group not in MC_CONFIG["android_client"]:
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
@@ -495,7 +495,7 @@ class RecordVideo(MulticonnectionAction):
         try:
             self.second_sock.send(self.action.encode("utf-8"))
 
-            if self.test_group in MC_CONFIG["second_win_client"] and if self.test_group not in MC_CONFIG["android_client"]::
+            if self.test_group in MC_CONFIG["second_win_client"] and self.test_group not in MC_CONFIG["android_client"]:
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))

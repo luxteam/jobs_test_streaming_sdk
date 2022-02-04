@@ -44,19 +44,19 @@ ACTIONS_MAPPING = {
     "click_server": ClickServer,
     "start_test_actions_server": DoTestActions,
     "gpuview": GPUView,
-    "record_metrics": RecordMetrics,
-    "encryption": Encryption
+    "record_metrics": RecordMetrics
 }
 
 
-MULTIONNECTION_ACTIONS = ["make_screen", "sleep_and_screen", "record_video"]
+MULTIONNECTION_ACTIONS = ["make_screen", "sleep_and_screen", "record_video", "encryption"]
 
 
 MULTICONNECTION_ACTIONS_MAPPING = {
     "windows": {
         "make_screen": MakeScreen,
         "sleep_and_screen": SleepAndScreen,
-        "record_video": RecordVideo
+        "record_video": RecordVideo,
+        "encryption": Encryption
     },
 
     "android": {
