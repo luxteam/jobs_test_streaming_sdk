@@ -145,7 +145,8 @@
     "lol_actions": [
         "check_window \"League of Legends\" \"LeagueClient.exe\"",
         "check_game \"League of Legends (TM) Client\" \"League of Legends.exe\"",
-        "skip_if_done 20",
+        "skip_if_done 21",
+        "sleep 240",
         "execute_cmd \"C:\\JN\\League of Legends.lnk\"",
         "sleep 90",
         "click_server center_-520 center_-340",

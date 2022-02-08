@@ -26,7 +26,7 @@ from jobs_launcher.core.system_info import get_gpu
 
 
 # some games should be rebooted sometimes
-REBOOTING_GAMES = {"valorant": {"time_to_reboot": 3000, "delay": 120}, "lol": {"time_to_reboot": 2400}}
+REBOOTING_GAMES = {"valorant": {"time_to_reboot": 3000, "delay": 120}, "lol": {"time_to_reboot": 3000}}
 
 
 # mapping of commands and their implementations
