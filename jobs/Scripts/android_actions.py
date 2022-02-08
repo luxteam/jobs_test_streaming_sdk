@@ -80,6 +80,9 @@ class OpenGame(Action):
             game_launched = False
 
         if not game_launched:
+            if self.game_name == "lol":
+                sleep(240)
+
             psutil.Popen(self.game_launcher, stdout=PIPE, stderr=PIPE, shell=True)
             self.logger.info("Executed: {}".format(self.game_launcher))
 
