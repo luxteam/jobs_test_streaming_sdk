@@ -33,6 +33,7 @@ ACTIONS_MAPPING = {
     "sleep_and_screen": SleepAndScreen,
     "record_metrcis": RecordMetrics,
     "record_video": RecordVideo,
+    "encryption": Encryption,
     "finish": Finish
 }
 
@@ -257,6 +258,7 @@ def execute_tests(args, current_conf):
             else:
                 previous_test_case = case
                 current_try = 0
+                error_messages = []
 
             prepared_keys = prepare_keys(args, case)
             execution_script = "{tool} {keys}".format(tool=tool_path, keys=prepared_keys)
@@ -290,10 +292,13 @@ def execute_tests(args, current_conf):
             params["case"] = case
             params["client_type"] = "second_client"
             params["audio_device_name"] = audio_device_name
+            params["transport_protocol"] = case["transport_protocol"]
+            params["messages"] = error_messages
 
             case_start_time = time()
 
-            if "-MAXUSERS 1" not in case["server_keys"]:
+            # TODO: extend max_clients param (consider all existing clients)
+            if "-MAXUSERS 1" not in case["server_keys"] and not ("max_clients" in case and case["max_clients"] == 1):
                 if process is None:
                     process = start_streaming("second_client", script_path, False)
 
@@ -319,7 +324,7 @@ def execute_tests(args, current_conf):
                 else:
                     arguments_line = None
 
-                if "-MAXUSERS 1" in case["server_keys"] and command != "finish":
+                if ("-MAXUSERS 1" in case["server_keys"] or ("max_clients" in case and case["max_clients"] == 1)) and command != "finish":
                     main_logger.info("Ignore action")
                     sock.send("done".encode("utf-8"))
                     continue
@@ -341,17 +346,17 @@ def execute_tests(args, current_conf):
 
             status = "passed"
 
-            if "-MAXUSERS 1" not in case["server_keys"]:
+            if "-MAXUSERS 1" not in case["server_keys"] and not ("max_clients" in case and case["max_clients"] == 1):
                 process = close_streaming_process("second_client", case, process)
                 last_log_line = save_logs(args, case, last_log_line, current_try, is_multiconnection=True)
 
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                     json_content = json.load(file)[0]
 
-                json_content["test_status"] = "passed"
+                # check that encryption is valid
+                json_content["test_status"] = "error" if contains_encryption_errors(error_messages) else "passed"
 
-                if "Multiconnection" in args.test_group:
-                    analyze_logs(args.output, json_content, case, execution_type="second_windows_client")
+                analyze_logs(args.output, json_content, case, execution_type="second_windows_client")
 
                 with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                     json.dump([json_content], file, indent=4)
@@ -359,7 +364,7 @@ def execute_tests(args, current_conf):
                 status = json_content["test_status"]
 
             execution_time = time() - case_start_time
-            save_results(args, case, cases, execution_time = execution_time, test_case_status = status, error_messages = [])
+            save_results(args, case, cases, execution_time = execution_time, test_case_status = status, error_messages = error_messages)
 
         except Exception as e:
             main_logger.error("Fatal error: {}".format(str(e)))

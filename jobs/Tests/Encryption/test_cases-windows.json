@@ -1,0 +1,282 @@
+[
+    {
+        "case": "STR_ECR_001",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Encrypt SIMPLE",
+        "client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "second_client_keys": "",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "max_clients": 1,
+        "script_info": [
+            "Launch server and client using Simple Encryption",
+            "Expected result: Client side will be receiving image from Server in real time"
+        ]
+    },
+    {
+        "case": "STR_ECR_002",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Encrypt AES -Pass \"Test\"",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"Test\"",
+        "second_client_keys": "",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "max_clients": 1,
+        "script_info": [
+            "Launch server and client using AES Encryption Passphrase",
+            "Expected result: Client side will be receiving image from Server in real time"
+        ]
+    },
+    {
+        "case": "STR_ECR_003",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Encrypt AES -Pass \"Test\"",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"NotTest\"",
+        "second_client_keys": "",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "max_clients": 1,
+        "expected_connection_problems": ["client"],
+        "script_info": [
+            "Launch server and client using AES Encryption Wrong Passphrase",
+            "Expected result: Client side will not connect to Server"
+        ]
+    },
+    {
+        "case": "STR_ECR_004",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt SIMPLE",
+        "client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "second_client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "script_info": [
+            "Launch server with encryption and 2 clients both with encryption",
+            "Expected result: All Clients will be receiving image from Server in real time"
+        ]
+    },
+    {
+        "case": "STR_ECR_005",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt SIMPLE",
+        "client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "second_client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "expected_connection_problems": ["second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients (one with encryption and one without)",
+            "Expected result: Only the first Client will connect to server"
+        ]
+    },
+    {
+        "case": "STR_ECR_006",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt SIMPLE",
+        "client_keys": "-Fullscreen true",
+        "second_client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "expected_connection_problems": ["server", "client", "second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients both without encryption",
+            "Expected result: All Clients will not connect to Server"
+        ]
+    },
+    {
+        "case": "STR_ECR_007",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2",
+        "client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "second_client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "expected_connection_problems": ["client"],
+        "script_info": [
+            "Launch server without encryption and 2 clients (one with encryption and one without)",
+            "Expected result: Only the second Client will connect to server"
+        ]
+    },
+    {
+        "case": "STR_ECR_008",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt AES -Pass \"test\"",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"test\"",
+        "second_client_keys": "-Fullscreen true -Encrypt AES -Pass \"fail\"",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "expected_connection_problems": ["second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients both with encryption (one with correct passphrase and one with wrong)",
+            "Expected result: Only the first Client will connect to server"
+        ]
+    },
+    {
+        "case": "STR_ECR_009",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt AES -Pass \"test\"",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"test\"",
+        "second_client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "expected_connection_problems": ["second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients both with encryption (one with correct passphrase and one with Simple encryption)",
+            "Expected result: Only the first Client will connect to server"
+        ]
+    },
+    {
+        "case": "STR_ECR_010",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"test\"",
+        "second_client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "transport_protocol": "udp",
+        "start_first": "server",
+        "expected_connection_problems": ["server", "client", "second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients both with encryption (one with correct passphrase and one with Simple encryption)",
+            "Expected result: All Clients will not connect to Server"
+        ]
+    },
+    {
+        "case": "STR_ECR_011",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Encrypt SIMPLE",
+        "client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "second_client_keys": "",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "max_clients": 1,
+        "script_info": [
+            "Launch server and client using Simple Encryption",
+            "Expected result: Client side will be receiving image from Server in real time"
+        ]
+    },
+    {
+        "case": "STR_ECR_012",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Encrypt AES -Pass \"Test\"",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"Test\"",
+        "second_client_keys": "",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "max_clients": 1,
+        "script_info": [
+            "Launch server and client using AES Encryption Passphrase",
+            "Expected result: Client side will be receiving image from Server in real time"
+        ]
+    },
+    {
+        "case": "STR_ECR_013",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Encrypt AES -Pass \"Test\"",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"NotTest\"",
+        "second_client_keys": "",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "max_clients": 1,
+        "expected_connection_problems": ["client"],
+        "script_info": [
+            "Launch server and client using AES Encryption Wrong Passphrase",
+            "Expected result: Client side will not connect to Server"
+        ]
+    },
+    {
+        "case": "STR_ECR_014",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt SIMPLE",
+        "client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "second_client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "script_info": [
+            "Launch server with encryption and 2 clients both with encryption",
+            "Expected result: All Clients will be receiving image from Server in real time"
+        ]
+    },
+    {
+        "case": "STR_ECR_015",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt SIMPLE",
+        "client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "second_client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "expected_connection_problems": ["second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients (one with encryption and one without)",
+            "Expected result: Only the first Client will connect to server"
+        ]
+    },
+    {
+        "case": "STR_ECR_016",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt SIMPLE",
+        "client_keys": "-Fullscreen true",
+        "second_client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "expected_connection_problems": ["server", "client", "second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients both without encryption",
+            "Expected result: All Clients will not connect to Server"
+        ]
+    },
+    {
+        "case": "STR_ECR_017",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2",
+        "client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "second_client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "expected_connection_problems": ["client"],
+        "script_info": [
+            "Launch server without encryption and 2 clients (one with encryption and one without)",
+            "Expected result: Only the second Client will connect to server"
+        ]
+    },
+    {
+        "case": "STR_ECR_018",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt AES -Pass \"test\"",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"test\"",
+        "second_client_keys": "-Fullscreen true -Encrypt AES -Pass \"fail\"",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "expected_connection_problems": ["second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients both with encryption (one with correct passphrase and one with wrong)",
+            "Expected result: Only the first Client will connect to server"
+        ]
+    },
+    {
+        "case": "STR_ECR_019",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2 -Encrypt AES -Pass \"test\"",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"test\"",
+        "second_client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "expected_connection_problems": ["second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients both with encryption (one with correct passphrase and one with Simple encryption)",
+            "Expected result: Only the first Client will connect to server"
+        ]
+    },
+    {
+        "case": "STR_ECR_020",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -MAXUSERS 2",
+        "client_keys": "-Fullscreen true -Encrypt AES -Pass \"test\"",
+        "second_client_keys": "-Fullscreen true -Encrypt SIMPLE",
+        "transport_protocol": "tcp",
+        "start_first": "server",
+        "expected_connection_problems": ["server", "client", "second_client"],
+        "script_info": [
+            "Launch server with encryption and 2 clients both with encryption (one with correct passphrase and one with Simple encryption)",
+            "Expected result: All Clients will not connect to Server"
+        ]
+    }
+]

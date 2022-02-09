@@ -4,7 +4,7 @@ import os
 from glob import glob
 import zipfile
 import subprocess
-from subprocess import PIPE
+from subprocess import PIPE, STDOUT
 import shlex
 import win32api
 import sys
@@ -13,11 +13,18 @@ from shutil import copyfile
 from datetime import datetime
 import pydirectinput, pyautogui
 import win32gui
+import pyshark
+import json
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
 sys.path.append(ROOT_PATH)
 from jobs_launcher.core.config import main_logger
+
+
+def get_mc_config():
+    with open(os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)), "multiconnection.json"), "r") as config:
+        return json.load(config)
 
 
 def is_case_skipped(case, render_platform):
@@ -412,6 +419,112 @@ def track_used_memory(case, execution_type):
 
 def multiconnection_start_android(test_group):
     # start Android client for multiconnection group
-    if test_group == "MulticonnectionWA" or test_group == "MulticonnectionWWA":
+    if test_group in get_mc_config()["android_client"]:
         execute_adb_command("adb logcat -c")
         execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
+
+
+# address is address of the opposite side
+def analyze_encryption(case, execution_type, transport_protocol, is_encrypted, messages, address=None):
+    if "expected_connection_problems" in case and execution_type in case["expected_connection_problems"]:
+        main_logger.info("Ignore encryption analyzing due to expected problems")
+        return
+
+    encryption_is_valid = validate_encryption(execution_type, transport_protocol, "src", is_encrypted, address)
+
+    if not encryption_is_valid:
+        if execution_type == "client" or execution_type == "second_client":
+            messages.add("Found invalid encryption. Packet: server -> client (found on {} side)".format(second_client))
+        else:
+            messages.add("Found invalid encryption. Packet: server -> client (found on server side)")
+
+    encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, address)
+
+    if not encryption_is_valid:
+        if execution_type == "client" or execution_type == "second_client":
+            messages.add("Found invalid encryption. Packet: client -> server (found on {} side)".format(second_client))
+        else:
+            messages.add("Found invalid encryption. Packet: client -> server (found on server side)")
+
+
+def decode_payload(payload):
+    result = ""
+    for byte in payload.split(":"):
+        result += chr(int(byte, 16))
+    return result.encode("cp1251", "ignore").decode("utf8", "ignore")
+
+
+# address is address of the opposite side
+def validate_encryption(execution_type, transport_protocol, direction, is_encrypted, address):
+    main_logger.info("Check first {} packets".format(packets_to_analyze))
+
+    if execution_type == "client":
+        capture_filter = "{direction} host {address} and {transport_protocol} {direction} port 1235".format(direction=direction, address=address, transport_protocol=transport_protocol)
+    else:
+        if direction == "src":
+            capture_filter = "src host {address} and {transport_protocol} dst port 1235".format(address=address, transport_protocol=transport_protocol)
+        else:
+            capture_filter = "dst host {address} and {transport_protocol} src port 1235".format(address=address, transport_protocol=transport_protocol)
+
+    main_logger.info("Capture filter: {}".format(capture_filter))
+
+    packets = pyshark.LiveCapture("eth", bpf_filter=capture_filter)
+    packets.sniff(timeout=2)
+
+    main_logger.info(packets)
+
+    non_encrypted_packet_found = False
+
+    if packets_to_analyze <= 10:
+        main_logger.warning("Not enough packets for analyze")
+        return False
+
+    if packets_to_analyze > len(packets):
+        packets_to_analyze = len(packets)
+
+    # number of packets which should be analyzed (some packets doesn't contain payload, they'll be skipped)
+    packets_to_analyze = 5
+    analyzed_packets = 0
+
+    for packet in packets[:packets_to_analyze]:
+        try:
+            if transport_protocol == "udp":
+                payload = packet.udp.payload
+            else:
+                payload = packet.tcp.payload
+        except AttributeError:
+            main_logger.warning("Could not get payload")
+            continue
+        except Exception as e:
+            main_logger.error("Failed to get packet payload. Exception: {}".format(str(e)))
+            main_logger.error("Traceback: {}".format(traceback.format_exc()))
+            continue
+
+        decoded_payload = decode_payload(payload)
+        main_logger.info("Decoded payload: {}".format(decoded_payload))
+        analyzed_packets += 1
+
+        if "\"id\":" in decoded_payload or "\"DeviceID\":" in decoded_payload:
+            non_encrypted_packet_found = True
+            break
+
+        if analyzed_packets >= packets_to_analyze:
+            break
+
+    packets.close()
+
+    if is_encrypted == (not non_encrypted_packet_found):
+        main_logger.info("Encryption is valid")
+        return True
+    else:
+        main_logger.warning("Encryption isn't valid")
+        return False
+
+
+def contains_encryption_errors(error_messages):
+    for message in error_messages:
+        if message.startswith("Found invalid encryption"):
+            return True
+            break
+    else:
+        return False

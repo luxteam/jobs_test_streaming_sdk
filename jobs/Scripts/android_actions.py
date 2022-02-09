@@ -10,13 +10,14 @@ import win32api
 import pyautogui
 import pydirectinput
 from threading import Thread
-from utils import parse_arguments, execute_adb_command
+from utils import parse_arguments, execute_adb_command, get_mc_config
 from actions import *
 import base64
 import keyboard
 from pyffmpeg import FFmpeg
 
 pyautogui.FAILSAFE = False
+MC_CONFIG = get_mc_config()
 
 
 # open some game if it doesn't launched (e.g. open game/benchmark)
@@ -351,8 +352,8 @@ class MakeScreen(MulticonnectionAction):
             make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
-            if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
-                if self.test_group == "MulticonnectionWWA":
+            if self.test_group in MC_CONFIG["android_client"]:
+                if self.test_group in MC_CONFIG["second_win_client"]:
                     self.logger.info("Wait second client answer")
                     response = self.second_sock.recv(1024).decode("utf-8")
                     self.logger.info("Second client answer: {}".format(response))
@@ -405,8 +406,8 @@ class SleepAndScreen(MulticonnectionAction):
             else:
                 sleep(float(self.delay))
 
-        if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
-            if self.test_group == "MulticonnectionWWA":
+        if self.test_group in MC_CONFIG["android_client"]:
+            if self.test_group in MC_CONFIG["second_win_client"]:
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))
@@ -453,8 +454,8 @@ class RecordVideo(MulticonnectionAction):
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
 
-        if self.test_group == "MulticonnectionWA" or self.test_group == "MulticonnectionWWA":
-            if self.test_group == "MulticonnectionWWA":
+        if self.test_group in MC_CONFIG["android_client"]:
+            if self.test_group in MC_CONFIG["second_win_client"]:
                 self.logger.info("Wait second client answer")
                 response = self.second_sock.recv(1024).decode("utf-8")
                 self.logger.info("Second client answer: {}".format(response))

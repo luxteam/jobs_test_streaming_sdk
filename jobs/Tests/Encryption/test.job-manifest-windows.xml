@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<job-manifest enable="False">
+
+    <outpath value="{OutputDir}"/>
+
+    <execute command='python "{ResourcesDir}/simpleRender.py"' timeout="4800">
+        <argument>--client_tool "{clientTool}"</argument>
+        <argument>--server_tool "{serverTool}"</argument>
+        <argument>--output "{OutputDir}"</argument>
+        <argument>--test_group Encryption</argument>
+        <argument>--test_cases "{TestCases}"</argument>
+        <argument>--retries 1</argument>
+        <argument>--execution_type "{executionType}"</argument>
+        <argument>--ip_address "{ipAddress}"</argument>
+        <argument>--communication_port "{communicationPort}"</argument>
+        <argument>--server_gpu_name "{serverGPUName}"</argument>
+        <argument>--server_os_name "{serverOSName}"</argument>
+        <argument>--game_name "{gameName}"</argument>
+        <argument>--common_actions_path "{CommonActions}"</argument>
+        <argument>--collect_traces "{collectTraces}"</argument>
+        <argument>--screen_resolution "{screenResolution}"</argument>
+        <argument>--track_used_memory True</argument>
+    </execute>
+
+    <execute command='python "{ResourcesDir}/makeCompareReport.py"'>
+        <argument>--work_dir "{OutputDir}"</argument>
+        <argument>--execution_type "{executionType}"</argument>
+    </execute>
+
+</job-manifest>

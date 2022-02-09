@@ -7,11 +7,12 @@ import json
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory
+from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory, analyze_encryption, get_mc_config
 import win32api
 from actions import *
 
 pyautogui.FAILSAFE = False
+MC_CONFIG = get_mc_config()
 
 
 # [Server action] send request to execute some cmd command on server
@@ -140,19 +141,20 @@ class MakeScreen(Action):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
+        self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
 
     def execute(self):
         if not self.screen_name:
             make_screen(self.screen_path, self.current_try)
         else:
-            if "Multiconnection" in self.test_group:
+            if self.is_multiconnection:
                 self.sock.send(self.action.encode("utf-8"))
 
             make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
     def analyze_result(self):
-        if self.screen_name and "Multiconnection" in self.test_group:
+        if self.screen_name and self.is_multiconnection:
             self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
@@ -175,9 +177,10 @@ class RecordVideo(Action):
         self.video_name = self.params["case"]["case"] + self.params["client_type"]
         self.resolution = self.params["args"].screen_resolution
         self.duration = int(self.params["arguments_line"])
+        self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
 
     def execute(self):
-        if "Multiconnection" in self.test_group:
+        if self.is_multiconnection:
             self.sock.send(self.action.encode("utf-8"))
 
         video_full_path = os.path.join(self.video_path, self.video_name + ".mp4")
@@ -192,7 +195,7 @@ class RecordVideo(Action):
         self.logger.info("Finish to record video")
 
     def analyze_result(self):
-        if "Multiconnection" in self.test_group:
+        if self.is_multiconnection:
             self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
@@ -269,9 +272,23 @@ class SleepAndScreen(Action):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
+        self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
 
     def execute(self):
-        if "Multiconnection" in self.test_group:
+        if "Encryption" in self.test_group:
+            try:
+                self.sock.send("encryption".encode("utf-8"))
+                response = self.sock.recv(1024).decode("utf-8")
+                self.logger.info("Server response for 'encryption' action: {}".format(response))
+
+                compressing_thread = Thread(target=analyze_encryption, args=(self.params["case"], "client", self.params["transport_protocol"], \
+                    "-encrypt" in self.params["case"]["server_keys"].lower(), self.params["messages"], self.params["args"].ip_address))
+                compressing_thread.start()
+            except Exception as e:
+                self.logger.warning("Failed to validate encryption: {}".format(str(e)))
+                self.logger.warning("Traceback: {}".format(traceback.format_exc()))
+
+        if self.is_multiconnection:
             self.sock.send(self.action.encode("utf-8"))
 
         sleep(float(self.initial_delay))
@@ -289,7 +306,7 @@ class SleepAndScreen(Action):
             else:
                 sleep(float(self.delay))
 
-        if "Multiconnection" in self.test_group:
+        if self.is_multiconnection:
             self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
         try:

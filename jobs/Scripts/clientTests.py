@@ -10,10 +10,13 @@ from client_actions import *
 import psutil
 from utils import *
 from subprocess import PIPE, STDOUT
+import json
+from analyzeLogs import analyze_logs
+
 sys.path.append(os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir)))
 from jobs_launcher.core.config import *
-from analyzeLogs import analyze_logs
+MC_CONFIG = get_mc_config()
 
 
 # mapping of commands and their implementations
@@ -45,7 +48,7 @@ ACTIONS_MAPPING = {
 # Client reads list of actions and executes them one by one.
 # It sends actions which must be executed on server to it.
 # Also client does screenshots and records video.
-def start_client_side_tests(args, case, process, script_path, last_log_line, audio_device_name, current_try):
+def start_client_side_tests(args, case, process, script_path, last_log_line, audio_device_name, current_try, error_messages):
     output_path = os.path.join(args.output, "Color")
 
     screen_path = os.path.join(output_path, case["case"])
@@ -144,6 +147,8 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             params["case"] = case
             params["game_name"] = game_name
             params["client_type"] = "win_client"
+            params["messages"] = error_messages
+            params["transport_protocol"] = case["transport_protocol"]
 
             # execute actions one by one
             for action in actions:
@@ -187,9 +192,12 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                 json_content = json.load(file)[0]
 
-            json_content["test_status"] = "passed"
+            # check that encryption is valid
+            json_content["test_status"] = "error" if contains_encryption_errors(error_messages) else "passed"
 
-            if "Multiconnection" in args.test_group:
+            json_content["message"] = json_content["message"] + list(error_messages)
+
+            if args.test_group in MC_CONFIG["second_win_client"] or args.test_group in MC_CONFIG["android_client"]:
                 analyze_logs(args.output, json_content, case, execution_type="windows_client")
 
             # execute iperf if it's necessary

@@ -7,7 +7,7 @@ import json
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory
+from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory, analyze_encryption
 import win32api
 from actions import *
 
@@ -113,6 +113,22 @@ class RecordVideo(Action):
         self.logger.info("Finish to record video")
 
         self.sock.send("done".encode("utf-8"))
+
+
+class Encryption(Action):
+    def parse(self):
+        pass
+
+    def execute(self):
+        try:
+            self.sock.send("start".encode("utf-8"))
+
+            compressing_thread = Thread(target=analyze_encryption, args=(self.params["case"], "second_client", self.params["transport_protocol"], \
+                "-encrypt" in self.params["case"]["server_keys"].lower(), self.params["messages"], self.params["args"].ip_address))
+            compressing_thread.start()
+        except Exception as e:
+            self.logger.warning("Failed to validate encryption: {}".format(str(e)))
+            self.logger.warning("Traceback: {}".format(traceback.format_exc())) 
 
 
 class Finish(Action):
