@@ -13,6 +13,7 @@ from shutil import copyfile
 from datetime import datetime
 import pydirectinput, pyautogui
 import win32gui
+import win32con
 import pyshark
 import json
 
@@ -134,6 +135,15 @@ def close_streaming_process(execution_type, case, process):
             # additional try to kill Streaming SDK server/client (to be sure that all processes are closed)
             subprocess.call("taskkill /f /im RemoteGameClient.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
             subprocess.call("taskkill /f /im RemoteGameServer.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
+
+            if execution_type == "server":
+                crash_window = win32gui.FindWindow(None, "RemoteGameServer.exe")
+            else:
+                crash_window = win32gui.FindWindow(None, "RemoteGameClient.exe")
+
+            if crash_window:
+                main_logger.info("Crash window was found. Closing it...")
+                win32gui.PostMessage(crash_window, win32con.WM_CLOSE, 0, 0)
 
             process = None
 
