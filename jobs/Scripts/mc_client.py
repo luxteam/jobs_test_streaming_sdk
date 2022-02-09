@@ -206,7 +206,7 @@ def execute_tests(args, current_conf):
     with open(os.path.join(os.path.abspath(args.output), "test_cases.json"), "r") as json_file:
         cases = json.load(json_file)
 
-    tests_left = len(cases)
+    tests_left = len([case for case in cases if case["status"] != "skipped" ])
 
     tool_path = args.tool
 
