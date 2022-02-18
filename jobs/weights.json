@@ -1,10 +1,6 @@
 {
     "weights": [
         {
-            "suite_name": "General",
-            "value": 30
-        },
-        {
             "suite_name": "GeneralQoS",
             "value": 28
         },
