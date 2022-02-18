@@ -52,7 +52,7 @@ class OpenGame(Action):
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
             "lol": ["League of Legends (TM) Client", "League of Legends.exe"],
             "dota2dx11": ["Dota 2", "dota2.exe"],
-            "dota2opengl": ["Dota 2", "dota2.exe"],
+            "dota2vulkan": ["Dota 2", "dota2.exe"],
             "csgo": ["Counter-Strike: Global Offensive - Direct3D 9", "csgo.exe"],
             "nothing": [None, None]
         }
@@ -197,10 +197,10 @@ class OpenGame(Action):
                 sleep(60)
                 click("center_0", "center_0", self.logger)
                 press_keys("shift+x ctrl+shift+i shift+y:17 ctrl+e ctrl+r", self.logger)
-            elif self.game_name == "dota2dx11" or self.game_name == "dota2opengl":
-                sleep(30)
+            elif self.game_name == "dota2dx11" or self.game_name == "dota2vulkan":
+                sleep(25)
                 press_keys("esc", self.logger)
-                sleep(5)
+                sleep(15)
 
                 click("90", "30", self.logger)
                 sleep(1)

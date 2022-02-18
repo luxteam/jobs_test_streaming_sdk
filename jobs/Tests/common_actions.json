@@ -507,9 +507,9 @@
         "check_game \"Dota 2\" \"dota2.exe\"",
         "skip_if_done 30",
         "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
-        "sleep 30",
+        "sleep 25",
         "press_keys_server \"esc\"",
-        "sleep 5",
+        "sleep 15",
 
         "click_server 90 30",
         "sleep 1",
