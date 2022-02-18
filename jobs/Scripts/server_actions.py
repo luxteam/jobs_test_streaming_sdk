@@ -348,7 +348,7 @@ class DoTestActions(Action):
 
                 if self.stage > 3:
                     self.stage = 0
-            elif self.game_name == "dota2":
+            elif self.game_name == "dota2dx11" or self.game_name == "dota2opengl":
                 sleep(1)
                 pydirectinput.press("r")
                 sleep(1)

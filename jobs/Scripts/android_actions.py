@@ -34,7 +34,8 @@ class OpenGame(Action):
             "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url",
             "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
             "lol": "C:\\JN\\League of Legends.lnk",
-            "dota2": "C:\\JN\\dota2.exe.lnk",
+            "dota2dx11": "C:\\JN\\dota2.exe.lnk",
+            "dota2vulkan": "C:\\JN\\dota2.exe.lnk",
             "csgo": "C:\\JN\\csgo.exe.url",
             "nothing": None
         }
@@ -50,7 +51,8 @@ class OpenGame(Action):
             "apexlegends": ["Apex Legends", "r5apex.exe"],
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
             "lol": ["League of Legends (TM) Client", "League of Legends.exe"],
-            "dota2": ["Dota 2", "dota2.exe"],
+            "dota2dx11": ["Dota 2", "dota2.exe"],
+            "dota2opengl": ["Dota 2", "dota2.exe"],
             "csgo": ["Counter-Strike: Global Offensive - Direct3D 9", "csgo.exe"],
             "nothing": [None, None]
         }
@@ -195,10 +197,25 @@ class OpenGame(Action):
                 sleep(60)
                 click("center_0", "center_0", self.logger)
                 press_keys("shift+x ctrl+shift+i shift+y:17 ctrl+e ctrl+r", self.logger)
-            elif self.game_name == "dota2":
+            elif self.game_name == "dota2dx11" or self.game_name == "dota2opengl":
                 sleep(30)
                 press_keys("esc", self.logger)
                 sleep(5)
+
+                click("90", "30", self.logger)
+                sleep(1)
+                click("center_-270", "center_-485", self.logger)
+                sleep(1)
+                click("center_-725", "center_255", self.logger)
+                sleep(1)
+                if self.game_name == "dota2dx11":
+                    click("center_-725", "center_300", self.logger)
+                else:
+                    click("center_-725", "center_345", self.logger)
+                sleep(1)
+                press_keys("esc", self.logger)
+                sleep(1)
+
                 click("center_-510", "center_-570", self.logger)
                 sleep(1)
                 click("center_-407", "center_-230", self.logger)
@@ -530,7 +547,7 @@ def do_test_actions(game_name, logger):
                 sleep(1)
                 pyautogui.click()
                 sleep(3)
-        elif game_name == "dota2":
+        elif game_name == "dota2dx11" or game_name == "dota2vulkan":
             for i in range(6):
                 pydirectinput.press("r")
                 sleep(3)

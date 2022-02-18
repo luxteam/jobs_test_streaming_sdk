@@ -358,14 +358,17 @@ def close_game_process(game_name):
         games_processes = {
             "heavendx9": ["browser_x86.exe", "Heaven.exe"],
             "heavendx11": ["browser_x86.exe", "Heaven.exe"],
+            "heavenopengl": ["browser_x86.exe", "Heaven.exe"],
             "valleydx9": ["browser_x86.exe", "Valley.exe"],
             "valleydx11": ["browser_x86.exe", "Valley.exe"],
+            "valleyopengl": ["browser_x86.exe", "Valley.exe"],
             "borderlands3": ["Borderlands3.exe"],
             "apexlegends": ["r5apex.exe"],
             "valorant": ["VALORANT-Win64-Shipping.exe"],
             "lol": ["LeagueClient.exe", "League of Legends.exe"],
             "csgo": ["csgo.exe"],
-            "dota2": ["dota2.exe"]
+            "dota2dx11": ["dota2.exe"],
+            "dota2vulkan": ["dota2.exe"],
         }
 
         if game_name in games_processes:
