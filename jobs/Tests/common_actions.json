@@ -448,11 +448,11 @@
 
     "dota2dx11_actions": [
         "check_game \"Dota 2\" \"dota2.exe\"",
-        "skip_if_done 30",
+        "skip_if_done 39",
         "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
-        "sleep 30",
+        "sleep 25",
         "press_keys_server \"esc\"",
-        "sleep 5",
+        "sleep 15",
 
         "click_server 90 30",
         "sleep 1",
@@ -464,6 +464,15 @@
         "sleep 1",
         "press_keys_server \"esc\"",
         "sleep 1",
+        "click_server 35 edge_-35",
+        "sleep 1",
+        "click_server center_-115 center_45",
+        "sleep 1",
+        "check_game \"Dota 2\" \"dota2.exe\"",
+        "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
+        "sleep 25",
+        "press_keys_server \"esc\"",
+        "sleep 5",
 
         "click_server center_-510 center_-570",
         "sleep 1",
@@ -505,7 +514,7 @@
 
     "dota2vulkan_actions": [
         "check_game \"Dota 2\" \"dota2.exe\"",
-        "skip_if_done 30",
+        "skip_if_done 39",
         "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
         "sleep 25",
         "press_keys_server \"esc\"",
@@ -521,6 +530,15 @@
         "sleep 1",
         "press_keys_server \"esc\"",
         "sleep 1",
+        "click_server 35 edge_-35",
+        "sleep 1",
+        "click_server center_-115 center_45",
+        "sleep 1",
+        "check_game \"Dota 2\" \"dota2.exe\"",
+        "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
+        "sleep 25",
+        "press_keys_server \"esc\"",
+        "sleep 5",
 
         "click_server center_-510 center_-570",
         "sleep 1",

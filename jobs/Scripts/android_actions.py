@@ -215,6 +215,12 @@ class OpenGame(Action):
                 sleep(1)
                 press_keys("esc", self.logger)
                 sleep(1)
+                click("35", "edge_-35", self.logger)
+                sleep(1)
+                click("center_-115", "center_45", self.logger)
+                sleep(1)
+                psutil.Popen(self.game_launcher, stdout=PIPE, stderr=PIPE, shell=True)
+                self.logger.info("Executed: {}".format(self.game_launcher))
 
                 click("center_-510", "center_-570", self.logger)
                 sleep(1)
