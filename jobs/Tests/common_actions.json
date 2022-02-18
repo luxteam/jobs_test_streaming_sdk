@@ -261,9 +261,45 @@
         "press_keys \"esc\""
     ],
 
+    "heavenopengl_actions": [
+        "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
+        "check_game \"Unigine Heaven Benchmark 4.0 Basic (OpenGL)\" \"Heaven.exe\"",
+        "skip_if_done 8",
+        "execute_cmd \"C:\\JN\\Heaven Benchmark 4.0.lnk\"",
+        "sleep 6",
+        "click_server center_290 center_-85",
+        "click_server center_290 center_-40",
+        "click_server center_280 center_135",
+        "sleep 15",
+        "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
+        "check_game \"Unigine Heaven Benchmark 4.0 Basic (OpenGL)\" \"Heaven.exe\"",
+
+        "make_screen",
+        "move 1000 800",
+        "click",
+        "press_keys_server \"f9\"",
+        "sleep 1",
+        "make_screen heaven_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 heaven_benchmark",
+        "press_keys_server \"esc\""
+    ],
+
+    "heavenopengl_actions_android": [
+        "open_game",
+        "press_keys \"f9\"",
+        "sleep 5",
+        "make_screen heaven_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 heaven_benchmark",
+        "press_keys \"esc\""
+    ],
+
     "valleydx11_actions": [
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
-        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
         "skip_if_done 8",
         "execute_cmd \"C:\\JN\\Valley Benchmark 1.0.lnk\"",
         "sleep 5",
@@ -272,7 +308,7 @@
         "click_server center_280 center_135",
         "sleep 15",
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
-        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
 
         "make_screen",
         "move 1000 800",
@@ -333,6 +369,42 @@
         "press_keys \"esc\""
     ],
 
+    "valleyopengl_actions": [
+        "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
+        "skip_if_done 8",
+        "execute_cmd \"C:\\JN\\Valley Benchmark 1.0.lnk\"",
+        "sleep 5",
+        "click_server center_290 center_-70",
+        "click_server center_290 center_-25",
+        "click_server center_280 center_135",
+        "sleep 15",
+        "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
+
+        "make_screen",
+        "move 1000 800",
+        "click",
+        "press_keys_server \"f9\"",
+        "sleep 1",
+        "make_screen valley_benchmark",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 valley_benchmark",
+        "press_keys_server \"esc\""
+    ],
+
+    "valleyopengl_actions_android": [
+        "open_game",
+        "press_keys \"f9\"",
+        "sleep 5",
+        "make_screen valley_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 valley_benchmark",
+        "press_keys \"esc\""
+    ],
+
     "superposition_actions": [
         "check_window \"UNIGINE Superposition v1.1\" \"launcher.exe\"",
         "skip_if_done 3",
@@ -374,13 +446,35 @@
         "sleep_and_screen 5 4 4 nothing"
     ],
 
-    "dota2_actions": [
+    "dota2dx11_actions": [
         "check_game \"Dota 2\" \"dota2.exe\"",
-        "skip_if_done 20",
+        "skip_if_done 40",
+        "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
+        "sleep 30",
+        "click_server center_0 center_0",
+        "press_keys_server \"esc\"",
+        "sleep 10",
+
+        "click_server 90 30",
+        "sleep 1",
+        "click_server center_-270 center_-485",
+        "sleep 1",
+        "click_server center_-725 center_255",
+        "sleep 1",
+        "click_server center_-725 center_300",
+        "sleep 1",
+        "press_keys_server \"esc\"",
+        "sleep 3",
+        "click_server edge_-35 35",
+        "sleep 1",
+        "click_server center_-115 center_45",
+        "sleep 1",
+        "check_game \"Dota 2\" \"dota2.exe\"",
         "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
         "sleep 30",
         "press_keys_server \"esc\"",
         "sleep 5",
+
         "click_server center_-510 center_-570",
         "sleep 1",
         "click_server center_-407 center_-230",
@@ -409,7 +503,74 @@
         "sleep_and_screen 5 4 4 test_actions"
     ],
 
-    "dota2_actions_android": [
+    "dota2dx11_actions_android": [
+        "open_game",
+        "sleep 10",
+        "start_actions",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
+    "dota2vulkan_actions": [
+        "check_game \"Dota 2\" \"dota2.exe\"",
+        "skip_if_done 40",
+        "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
+        "sleep 30",
+        "click_server center_0 center_0",
+        "press_keys_server \"esc\"",
+        "sleep 10",
+
+        "click_server 90 30",
+        "sleep 1",
+        "click_server center_-270 center_-485",
+        "sleep 1",
+        "click_server center_-725 center_255",
+        "sleep 1",
+        "click_server center_-725 center_345",
+        "sleep 1",
+        "press_keys_server \"esc\"",
+        "sleep 3",
+        "click_server edge_-35 35",
+        "sleep 1",
+        "click_server center_-115 center_45",
+        "sleep 1",
+        "check_game \"Dota 2\" \"dota2.exe\"",
+        "execute_cmd \"C:\\JN\\dota2.exe.lnk\"",
+        "sleep 30",
+        "press_keys_server \"esc\"",
+        "sleep 5",
+
+        "click_server center_-510 center_-570",
+        "sleep 1",
+        "click_server center_-407 center_-230",
+        "sleep 1",
+        "click_server center_380 center_-292",
+        "sleep 15",
+        "click_server center_-335 center_427",
+        "click_server center_-335 center_427",
+        "sleep 1",
+        "click_server center_-923 center_-370",
+        "sleep 1",
+        "click_server center_-912 center_-328",
+        "sleep 1",
+        "click_server center_-797 center_-250",
+        "sleep 1",
+        "check_game \"dota2.exe\" \"dota2.exe\"",
+
+        "make_screen",
+        "move 1000 800",
+        "click",
+        "start_test_actions_server",
+        "start_test_actions_client",
+        "make_screen test_actions",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 test_actions"
+    ],
+
+    "dota2vulkan_actions_android": [
         "open_game",
         "sleep 10",
         "start_actions",

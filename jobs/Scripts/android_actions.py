@@ -26,13 +26,16 @@ class OpenGame(Action):
         games_launchers = {
             "heavendx9": "C:\\JN\\Heaven Benchmark 4.0.lnk",
             "heavendx11": "C:\\JN\\Heaven Benchmark 4.0.lnk",
+            "heavenopengl": "C:\\JN\\Heaven Benchmark 4.0.lnk",
             "valleydx9": "C:\\JN\\Valley Benchmark 1.0.lnk",
             "valleydx11": "C:\\JN\\Valley Benchmark 1.0.lnk",
+            "valleyopengl": "C:\\JN\\Valley Benchmark 1.0.lnk",
             "borderlands3": "C:\\JN\\Borderlands3.exe - Shortcut.lnk",
             "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url",
             "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
             "lol": "C:\\JN\\League of Legends.lnk",
-            "dota2": "C:\\JN\\dota2.exe.lnk",
+            "dota2dx11": "C:\\JN\\dota2.exe.lnk",
+            "dota2vulkan": "C:\\JN\\dota2.exe.lnk",
             "csgo": "C:\\JN\\csgo.exe.url",
             "nothing": None
         }
@@ -40,13 +43,16 @@ class OpenGame(Action):
         games_windows = {
             "heavendx9": ["Unigine Heaven Benchmark 4.0 Basic (Direct3D9)", "Heaven.exe"],
             "heavendx11": ["Unigine Heaven Benchmark 4.0 Basic (Direct3D11)", "Heaven.exe"],
+            "heavenopengl": ["Unigine Heaven Benchmark 4.0 Basic (OpenGL)", "Heaven.exe"],
             "valleydx9": ["Unigine Valley Benchmark 1.0 Basic (Direct3D9)", "Valley.exe"],
             "valleydx11": ["Unigine Valley Benchmark 1.0 Basic (Direct3D11)", "Valley.exe"],
+            "valleyopengl": ["Unigine Valley Benchmark 1.0 Basic (OpenGL)", "Valley.exe"],
             "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"],
             "apexlegends": ["Apex Legends", "r5apex.exe"],
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
             "lol": ["League of Legends (TM) Client", "League of Legends.exe"],
-            "dota2": ["Dota 2", "dota2.exe"],
+            "dota2dx11": ["Dota 2", "dota2.exe"],
+            "dota2vulkan": ["Dota 2", "dota2.exe"],
             "csgo": ["Counter-Strike: Global Offensive - Direct3D 9", "csgo.exe"],
             "nothing": [None, None]
         }
@@ -87,22 +93,26 @@ class OpenGame(Action):
             psutil.Popen(self.game_launcher, stdout=PIPE, stderr=PIPE, shell=True)
             self.logger.info("Executed: {}".format(self.game_launcher))
 
-            if self.game_name == "heavendx9" or self.game_name == "heavendx11":
+            if self.game_name == "heavendx9" or self.game_name == "heavendx11" or self.game_name == "heavenopengl":
                 sleep(6)
                 click("center_290", "center_-85", self.logger)
-                if self.game_name == "heavendx9":
+                if self.game_name == "heavendx11":
+                    click("center_290", "center_-70", self.logger)
+                elif self.game_name == "heavendx9":
                     click("center_290", "center_-55", self.logger)
                 else:
-                    click("center_290", "center_-70", self.logger)
+                    click("center_290", "center_-40", self.logger)
                 click("center_280", "center_135", self.logger)
                 sleep(30)
-            if self.game_name == "valleydx9" or self.game_name == "valleydx11":
+            if self.game_name == "valleydx9" or self.game_name == "valleydx11" or self.game_name == "valleyopengl":
                 sleep(6)
                 click("center_290", "center_-70", self.logger)
-                if self.game_name == "valleydx9":
+                if self.game_name == "valleydx11":
+                    click("center_290", "center_-55", self.logger)
+                elif self.game_name == "valleydx9":
                     click("center_290", "center_-40", self.logger)
                 else:
-                    click("center_290", "center_-55", self.logger)
+                    click("center_290", "center_-25", self.logger)
                 click("center_280", "center_135", self.logger)
                 sleep(30)
             elif self.game_name == "borderlands3":
@@ -187,10 +197,35 @@ class OpenGame(Action):
                 sleep(60)
                 click("center_0", "center_0", self.logger)
                 press_keys("shift+x ctrl+shift+i shift+y:17 ctrl+e ctrl+r", self.logger)
-            elif self.game_name == "dota2":
+            elif self.game_name == "dota2dx11" or self.game_name == "dota2vulkan":
+                sleep(30)
+                click("center_0", "center_0", self.logger)
+                press_keys("esc", self.logger)
+                sleep(10)
+
+                click("90", "30", self.logger)
+                sleep(1)
+                click("center_-270", "center_-485", self.logger)
+                sleep(1)
+                click("center_-725", "center_255", self.logger)
+                sleep(1)
+                if self.game_name == "dota2dx11":
+                    click("center_-725", "center_300", self.logger)
+                else:
+                    click("center_-725", "center_345", self.logger)
+                sleep(1)
+                press_keys("esc", self.logger)
+                sleep(3)
+                click("edge_-35", "35", self.logger)
+                sleep(1)
+                click("center_-115", "center_45", self.logger)
+                sleep(1)
+                psutil.Popen(self.game_launcher, stdout=PIPE, stderr=PIPE, shell=True)
+                self.logger.info("Executed: {}".format(self.game_launcher))
                 sleep(30)
                 press_keys("esc", self.logger)
-                sleep(5)
+                sleep(10)
+
                 click("center_-510", "center_-570", self.logger)
                 sleep(1)
                 click("center_-407", "center_-230", self.logger)
@@ -522,7 +557,7 @@ def do_test_actions(game_name, logger):
                 sleep(1)
                 pyautogui.click()
                 sleep(3)
-        elif game_name == "dota2":
+        elif game_name == "dota2dx11" or game_name == "dota2vulkan":
             for i in range(6):
                 pydirectinput.press("r")
                 sleep(3)
