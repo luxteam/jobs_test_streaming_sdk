@@ -261,9 +261,45 @@
         "press_keys \"esc\""
     ],
 
+    "heavenopengl_actions": [
+        "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
+        "check_game \"Unigine Heaven Benchmark 4.0 Basic (OpenGL)\" \"Heaven.exe\"",
+        "skip_if_done 8",
+        "execute_cmd \"C:\\JN\\Heaven Benchmark 4.0.lnk\"",
+        "sleep 6",
+        "click_server center_290 center_-85",
+        "click_server center_290 center_-40",
+        "click_server center_280 center_135",
+        "sleep 15",
+        "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
+        "check_game \"Unigine Heaven Benchmark 4.0 Basic (OpenGL)\" \"Heaven.exe\"",
+
+        "make_screen",
+        "move 1000 800",
+        "click",
+        "press_keys_server \"f9\"",
+        "sleep 1",
+        "make_screen heaven_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 heaven_benchmark",
+        "press_keys_server \"esc\""
+    ],
+
+    "heavenopengl_actions_android": [
+        "open_game",
+        "press_keys \"f9\"",
+        "sleep 5",
+        "make_screen heaven_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 heaven_benchmark",
+        "press_keys \"esc\""
+    ],
+
     "valleydx11_actions": [
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
-        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
         "skip_if_done 8",
         "execute_cmd \"C:\\JN\\Valley Benchmark 1.0.lnk\"",
         "sleep 5",
@@ -272,7 +308,7 @@
         "click_server center_280 center_135",
         "sleep 15",
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
-        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
 
         "make_screen",
         "move 1000 800",
@@ -323,6 +359,42 @@
     ],
 
     "valleydx9_actions_android": [
+        "open_game",
+        "press_keys \"f9\"",
+        "sleep 5",
+        "make_screen valley_benchmark",
+        "sleep 3",
+        "record_video 10",
+        "sleep_and_screen 6 4 4.7 valley_benchmark",
+        "press_keys \"esc\""
+    ],
+
+    "valleyopengl_actions": [
+        "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
+        "skip_if_done 8",
+        "execute_cmd \"C:\\JN\\Valley Benchmark 1.0.lnk\"",
+        "sleep 5",
+        "click_server center_290 center_-70",
+        "click_server center_290 center_-25",
+        "click_server center_280 center_135",
+        "sleep 15",
+        "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
+
+        "make_screen",
+        "move 1000 800",
+        "click",
+        "press_keys_server \"f9\"",
+        "sleep 1",
+        "make_screen valley_benchmark",
+        "sleep 4",
+        "record_video 10",
+        "sleep_and_screen 5 4 4 valley_benchmark",
+        "press_keys_server \"esc\""
+    ],
+
+    "valleyopengl_actions_android": [
         "open_game",
         "press_keys \"f9\"",
         "sleep 5",

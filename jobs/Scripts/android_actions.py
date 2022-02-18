@@ -26,8 +26,10 @@ class OpenGame(Action):
         games_launchers = {
             "heavendx9": "C:\\JN\\Heaven Benchmark 4.0.lnk",
             "heavendx11": "C:\\JN\\Heaven Benchmark 4.0.lnk",
+            "heavenopengl": "C:\\JN\\Heaven Benchmark 4.0.lnk",
             "valleydx9": "C:\\JN\\Valley Benchmark 1.0.lnk",
             "valleydx11": "C:\\JN\\Valley Benchmark 1.0.lnk",
+            "valleyopengl": "C:\\JN\\Valley Benchmark 1.0.lnk",
             "borderlands3": "C:\\JN\\Borderlands3.exe - Shortcut.lnk",
             "apexlegends": "C:\\JN\\ApexLegends.exe - Shortcut.url",
             "valorant": "C:\\JN\\VALORANT.exe - Shortcut.lnk",
@@ -40,8 +42,10 @@ class OpenGame(Action):
         games_windows = {
             "heavendx9": ["Unigine Heaven Benchmark 4.0 Basic (Direct3D9)", "Heaven.exe"],
             "heavendx11": ["Unigine Heaven Benchmark 4.0 Basic (Direct3D11)", "Heaven.exe"],
+            "heavenopengl": ["Unigine Heaven Benchmark 4.0 Basic (OpenGL)", "Heaven.exe"],
             "valleydx9": ["Unigine Valley Benchmark 1.0 Basic (Direct3D9)", "Valley.exe"],
             "valleydx11": ["Unigine Valley Benchmark 1.0 Basic (Direct3D11)", "Valley.exe"],
+            "valleyopengl": ["Unigine Valley Benchmark 1.0 Basic (OpenGL)", "Valley.exe"],
             "borderlands3": ["Borderlands® 3  ", "Borderlands3.exe"],
             "apexlegends": ["Apex Legends", "r5apex.exe"],
             "valorant": ["VALORANT  ", "VALORANT-Win64-Shipping.exe"],
@@ -87,22 +91,26 @@ class OpenGame(Action):
             psutil.Popen(self.game_launcher, stdout=PIPE, stderr=PIPE, shell=True)
             self.logger.info("Executed: {}".format(self.game_launcher))
 
-            if self.game_name == "heavendx9" or self.game_name == "heavendx11":
+            if self.game_name == "heavendx9" or self.game_name == "heavendx11" or self.game_name == "heavenopengl":
                 sleep(6)
                 click("center_290", "center_-85", self.logger)
-                if self.game_name == "heavendx9":
+                if self.game_name == "heavendx11":
+                    click("center_290", "center_-70", self.logger)
+                elif self.game_name == "heavendx9":
                     click("center_290", "center_-55", self.logger)
                 else:
-                    click("center_290", "center_-70", self.logger)
+                    click("center_290", "center_-40", self.logger)
                 click("center_280", "center_135", self.logger)
                 sleep(30)
-            if self.game_name == "valleydx9" or self.game_name == "valleydx11":
+            if self.game_name == "valleydx9" or self.game_name == "valleydx11" or self.game_name == "valleyopengl":
                 sleep(6)
                 click("center_290", "center_-70", self.logger)
-                if self.game_name == "valleydx9":
+                if self.game_name == "valleydx11":
+                    click("center_290", "center_-55", self.logger)
+                elif self.game_name == "valleydx9":
                     click("center_290", "center_-40", self.logger)
                 else:
-                    click("center_290", "center_-55", self.logger)
+                    click("center_290", "center_-25", self.logger)
                 click("center_280", "center_135", self.logger)
                 sleep(30)
             elif self.game_name == "borderlands3":
