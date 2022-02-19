@@ -541,7 +541,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     invalid_count = 0
 
                 if invalid_count >= 5:
-                    json_content["message"].append("Application problem: Input Queue Full detected")
+                    json_content["message"].append("Application problem: VIDEO_OP_CODE_FORCE_IDR detected")
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
                     break
