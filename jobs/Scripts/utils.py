@@ -277,7 +277,7 @@ def start_streaming(execution_type, script_path, do_delay=True):
     main_logger.info("Start StreamingSDK {}".format(execution_type))
 
     # start Streaming SDK process
-    process = psutil.Popen(script_path, stdout=PIPE, stderr=PIPE, shell=True)
+    process = None
 
     main_logger.info("Start Streaming SDK")
 
