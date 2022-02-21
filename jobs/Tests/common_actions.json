@@ -299,7 +299,7 @@
 
     "valleydx11_actions": [
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
-        "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
         "skip_if_done 8",
         "execute_cmd \"C:\\JN\\Valley Benchmark 1.0.lnk\"",
         "sleep 5",
@@ -308,7 +308,7 @@
         "click_server center_280 center_135",
         "sleep 15",
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
-        "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
 
         "make_screen",
         "move 1000 800",
@@ -371,7 +371,7 @@
 
     "valleyopengl_actions": [
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
-        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
         "skip_if_done 8",
         "execute_cmd \"C:\\JN\\Valley Benchmark 1.0.lnk\"",
         "sleep 5",
@@ -380,7 +380,7 @@
         "click_server center_280 center_135",
         "sleep 15",
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
-        "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
+        "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
 
         "make_screen",
         "move 1000 800",
