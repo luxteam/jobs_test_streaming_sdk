@@ -105,16 +105,7 @@ def parse_arguments(arguments):
 
 
 def is_workable_condition(process):
-    # is process with Streaming SDK alive
-    try:
-        process.wait(timeout=0)
-        main_logger.error("StreamingSDK was down")
-
-        return False
-    except psutil.TimeoutExpired as e:
-        main_logger.info("StreamingSDK is alive") 
-
-        return True
+    return True
 
 
 def should_case_be_closed(execution_type, case):
@@ -122,42 +113,7 @@ def should_case_be_closed(execution_type, case):
 
 
 def close_streaming_process(execution_type, case, process):
-    try:
-        if should_case_be_closed(execution_type, case):
-            # close the current Streaming SDK process
-            main_logger.info("Start closing")
-
-            if process is not None:
-                close_process(process)
-
-            main_logger.info("Finish closing")
-
-            # additional try to kill Streaming SDK server/client (to be sure that all processes are closed)
-            subprocess.call("taskkill /f /im RemoteGameClient.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
-            subprocess.call("taskkill /f /im RemoteGameServer.exe", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
-
-            if execution_type == "server":
-                crash_window = win32gui.FindWindow(None, "RemoteGameServer.exe")
-            else:
-                crash_window = win32gui.FindWindow(None, "RemoteGameClient.exe")
-
-            if crash_window:
-                main_logger.info("Crash window was found. Closing it...")
-                win32gui.PostMessage(crash_window, win32con.WM_CLOSE, 0, 0)
-
-            process = None
-
-        if process:
-            main_logger.info("StreamingSDK instance was killed")
-        else:
-            main_logger.info("Keep StreamingSDK instance")
-
-        return process
-    except Exception as e:
-        main_logger.error("Failed to close Streaming SDK process. Exception: {}".format(str(e)))
-        main_logger.error("Traceback: {}".format(traceback.format_exc()))
-
-        return None
+    return None
 
 
 def close_android_app(case=None, multiconnection=False):
@@ -179,62 +135,7 @@ def close_android_app(case=None, multiconnection=False):
 
 
 def save_logs(args, case, last_log_line, current_try, is_multiconnection=False):
-    try:
-        if not is_multiconnection:
-            if hasattr(args, "execution_type"):
-                execution_type = args.execution_type
-            else:
-                execution_type = "server"
-
-            tool_path = args.server_tool if execution_type == "server" else args.client_tool
-        else:
-            execution_type = "second_client"
-            tool_path = args.tool
-
-        tool_path = os.path.abspath(tool_path)
-
-        log_source_path = tool_path + ".log"
-        log_destination_path = os.path.join(args.output, "tool_logs", case["case"] + "_{}".format(execution_type) + ".log")
-
-        with open(log_source_path, "rb") as file:
-            logs = file.read()
-
-        # Firstly, convert utf-2 le bom to utf-8 with BOM. Secondly, remove BOM
-        logs = logs.decode("utf-16-le").encode("utf-8").decode("utf-8-sig").encode("utf-8")
-
-        lines = logs.split(b"\n")
-
-        # index of first line of the current log in whole log file
-        first_log_line_index = 0
-
-        for i in range(len(lines)):
-            if last_log_line is not None and last_log_line in lines[i]:
-                first_log_line_index = i + 1
-                break
-
-        # update last log line
-        for i in range(len(lines) - 1, -1, -1):
-            if lines[i] and lines[i] != b"\r":
-                last_log_line = lines[i]
-                break
-
-        if first_log_line_index != 0:
-            lines = lines[first_log_line_index:]
-
-        logs = b"\n".join(lines)
-
-        with open(log_destination_path, "ab") as file:
-            file.write("\n---------- Try #{} ----------\n\n".format(current_try).encode("utf-8"))
-            file.write(logs)
-
-        main_logger.info("Finish logs saving for {}".format(execution_type))
-
-        return last_log_line
-    except Exception as e:
-        main_logger.error("Failed during logs saving. Exception: {}".format(str(e)))
-        main_logger.error("Traceback: {}".format(traceback.format_exc()))
-
-        return None
+    return None
 
 
 def save_android_log(args, case, current_try, log_name_postfix="_client"):
