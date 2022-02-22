@@ -427,7 +427,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                         bad_decyns_value = abs(decyns_value)
 
             if bad_decyns_value:
-                json_content["message"].append("Application problem: Absolute value of A/V desync is more than 100 ms. A/V desync: {} ms".format(bad_decyns_value))
+                json_content["message"].append("Application problem: Absolute value of A/V desync is more than 50 ms. A/V desync: {} ms".format(bad_decyns_value))
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
