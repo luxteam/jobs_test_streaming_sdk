@@ -212,6 +212,11 @@ def parse_line(line, saved_values):
         codec_type = line.split('Info: Initialize(): Codec: ')[1]
         saved_values['codec'].append(codec_type)
 
+    elif 'AcquireSurface()' in line:
+        if 'acquire_surface' not in saved_values:
+            saved_values['acquire_surface'] = 0
+        saved_values['acquire_surface'] += 1
+
     elif '[WVRServerSession]' in line and 'size of Tx:' in line:
         if 'datagram_size' not in saved_values:
             saved_values['datagram_size'] = []
@@ -545,6 +550,10 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     if json_content["test_status"] != "error":
                         json_content["test_status"] = "failed"
                     break
+
+        # rule №9,3 AcquireSurface
+        if 'acquire_surface' in saved_values and saved_values['acquire_surface'] >= 5:
+            json_content["message"].append("Application problem: AcquireSurface detected")
 
         # rule №10: -resolution X,Y != Encode Resolution -> failed
         flag_resolution = get_resolution(case["prepared_keys"], execution_type)
