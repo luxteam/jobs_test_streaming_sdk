@@ -228,7 +228,7 @@ class OpenGame(Action):
 
                 click("center_-510", "center_-570", self.logger)
                 sleep(1)
-                click("center_-407", "center_-230", self.logger)
+                click("center_-342", "center_-230", self.logger)
                 sleep(1)
                 click("center_380", "center_-292", self.logger)
                 sleep(15)

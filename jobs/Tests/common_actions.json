@@ -477,7 +477,7 @@
 
         "click_server center_-510 center_-570",
         "sleep 1",
-        "click_server center_-407 center_-230",
+        "click_server center_-342 center_-230",
         "sleep 1",
         "click_server center_380 center_-292",
         "sleep 15",
@@ -544,7 +544,7 @@
 
         "click_server center_-510 center_-570",
         "sleep 1",
-        "click_server center_-407 center_-230",
+        "click_server center_-342 center_-230",
         "sleep 1",
         "click_server center_380 center_-292",
         "sleep 15",
