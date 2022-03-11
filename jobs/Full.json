@@ -23,6 +23,8 @@
         "Microphone":"",
         "Config":"",
         "ConfigOverwrite":"",
-        "CaptureMode": ""
+        "CaptureMode": "",
+        "Encryption":"",
+        "MulticonnectionWW":""
     }
 }
