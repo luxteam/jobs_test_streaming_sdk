@@ -440,7 +440,7 @@ def multiconnection_start_android(test_group):
     # start Android client for multiconnection group
     if test_group in get_mc_config()["android_client"]:
         execute_adb_command("adb logcat -c")
-        execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
+        execute_adb_command("adb shell am start -a com.amd.wirelessvr.CONNECT -n com.amd.remotegameclient/.MainActivity")
 
 
 # address is address of the opposite side
