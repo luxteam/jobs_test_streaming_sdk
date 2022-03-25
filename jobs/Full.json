@@ -25,6 +25,8 @@
         "ConfigOverwrite":"",
         "CaptureMode": "",
         "Encryption":"",
-        "MulticonnectionWW":""
+        "MulticonnectionWW":"",
+        "MulticonnectionWA":"",
+        "MulticonnectionWWA":""
     }
 }
