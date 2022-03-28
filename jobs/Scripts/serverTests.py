@@ -44,7 +44,8 @@ ACTIONS_MAPPING = {
     "click_server": ClickServer,
     "start_test_actions_server": DoTestActions,
     "gpuview": GPUView,
-    "record_metrics": RecordMetrics
+    "record_metrics": RecordMetrics,
+    "record_audio": RecordMicrophone
 }
 
 
@@ -238,6 +239,10 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 params["action_line"] = request
                 params["command"] = command
                 params["arguments_line"] = arguments_line
+
+                # Replacing record_video command to record_audio
+                if command == "record_video" and args.test_group == "Microphone":
+                    command = "record_audio"
 
                 # find necessary command and execute it
                 if command in ACTIONS_MAPPING:

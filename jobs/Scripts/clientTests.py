@@ -39,7 +39,8 @@ ACTIONS_MAPPING = {
     "parse_keys": PressKeys,
     "sleep_and_screen": SleepAndScreen,
     "skip_if_done": SkipIfDone,
-    "record_metrics": RecordMetrics
+    "record_metrics": RecordMetrics,
+    "record_audio": RecordMicrophone
 }
 
 

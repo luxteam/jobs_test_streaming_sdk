@@ -38,7 +38,8 @@ ACTIONS_MAPPING = {
     "make_screen": MakeScreen,
     "sleep_and_screen": SleepAndScreen,
     "record_video": RecordVideo,
-    "start_actions": StartActions
+    "start_actions": StartActions,
+    "record_audio": RecordMicrophone
 }
 
 
@@ -331,6 +332,9 @@ def execute_tests(args):
                     params["action_line"] = action
                     params["command"] = command
                     params["arguments_line"] = arguments_line
+
+                    if command == "record_video" and args.test_group == "Microphone":
+                        command = "record_audio"
 
                     # find necessary command and execute it
                     if command in ACTIONS_MAPPING:

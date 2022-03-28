@@ -9,11 +9,13 @@ import win32gui
 import win32api
 import pyautogui
 import pydirectinput
+import sounddevice
 from threading import Thread
 from utils import parse_arguments, execute_adb_command, get_mc_config
 from actions import *
 import base64
 import keyboard
+from scipy.io.wavfile import write
 from pyffmpeg import FFmpeg
 
 pyautogui.FAILSAFE = False
@@ -497,6 +499,25 @@ class RecordVideo(MulticonnectionAction):
                 self.sock.send(response.encode("utf-8"))
             else:
                 self.sock.send("done".encode("utf-8"))
+
+
+class RecordMicrophone(Action):
+    def parse(self):
+        self.duration = int(self.params["arguments_line"])
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
+        self.audio_path = self.params["output_path"]
+        self.audio_name = self.params["case"]["case"] + self.params["client_type"]
+
+    def execute(self):
+        audio_full_path = os.path.join(self.audio_path, self.audio_name + ".mp4")
+        try:
+            recording = sounddevice.rec(int(self.duration * 44100), samplerate=44100, channels=2)
+            sounddevice.wait()  # Wait until recording is finished
+            write(audio_full_path, 44100, recording)  # Save as MP4 file 
+            self.logger.info("The recording from the microphone is located: {}".format(audio_full_path))
+        except Exception as e:
+            self.logger.error("Error due microphone recording")
 
 
 def click(x_description, y_description, logger, delay = 0.2):

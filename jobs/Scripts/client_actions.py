@@ -129,6 +129,17 @@ class StartTestActionsServer(Action):
     def analyze_result(self):
         self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
+# [Server action] send request to start microphone
+# [Result] wait answer from server. Answer must be 'done'
+class RecordMicrophone(Action):
+    def parse(self):
+        self.action = self.params["action_line"]
+
+    def execute(self):
+        self.sock.send(self.action.encode("utf-8"))
+
+    def analyze_result(self):
+        self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 # [Client action] do screenshot
 # This action triggers actions on server side in Multiconnection group
