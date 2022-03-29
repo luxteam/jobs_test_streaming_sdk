@@ -304,6 +304,7 @@ class RecordMicrophone(Action):
             self.logger.info("The recording from the microphone is located: {}".format(audio_full_path))
         except Exception as e:
             self.logger.error("Error due microphone recording")
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
 
         return True
 
