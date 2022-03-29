@@ -223,9 +223,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
             test_case_report["group_timeout_exceeded"] = False
 
-        if args.test_group == "Microphone":
-            video_path = os.path.join("Color", case["case"] + "server.mp4")
-        elif args.execution_type == "server":
+        if args.execution_type == "server":
             video_path = os.path.join("Color", case["case"] + "android.mp4")
         else:
             video_path = os.path.join("Color", case["case"] + "win_client.mp4")
