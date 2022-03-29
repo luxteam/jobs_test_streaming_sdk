@@ -507,7 +507,7 @@ class RecordMicrophone(Action):
         self.action = self.params["action_line"]
         self.test_group = self.params["args"].test_group
         self.audio_path = self.params["output_path"]
-        self.audio_name = self.params["case"]["case"] + self.params["client_type"]
+        self.audio_name = self.params["case"]["case"] + "android"
 
     def execute(self):
         audio_full_path = os.path.join(self.audio_path, self.audio_name + ".mp4")
