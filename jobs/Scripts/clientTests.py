@@ -173,6 +173,10 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 params["command"] = command
                 params["arguments_line"] = arguments_line
 
+                # Replacing record_video command to record_audio
+                if "record_video" in command and args.test_group == "Microphone":
+                    command = command.replace("record_video", "record_audio")
+
                 # find necessary command and execute it
                 if command in ACTIONS_MAPPING:
                     command_object = ACTIONS_MAPPING[command](sock, params, instance_state, main_logger)

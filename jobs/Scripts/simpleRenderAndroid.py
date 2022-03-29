@@ -333,8 +333,9 @@ def execute_tests(args):
                     params["command"] = command
                     params["arguments_line"] = arguments_line
 
-                    if command == "record_video" and args.test_group == "Microphone":
-                        command = "record_audio"
+                    # Replacing record_video command to record_audio
+                    if "record_video" in command and args.test_group == "Microphone":
+                        command = command.replace("record_video", "record_audio")
 
                     # find necessary command and execute it
                     if command in ACTIONS_MAPPING:
