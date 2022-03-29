@@ -417,6 +417,12 @@ def track_used_memory(case, execution_type):
     #command = "powershell.exe (Get-Counter -Counter '\Process(remotegameserver)\Working Set - Private').CounterSamples[0].CookedValue"
     #result = subprocess.check_output(command, shell=True, text=True)
     #print(int(result) / 1024 ** 2)
+
+    # TODO: fix getting of memory information from second client
+    if execution_type == "second_client":
+        case["used_memory"] = 0
+        return
+
     process_name = "remotegameclient" if execution_type == "client" else "remotegameserver"
 
     if not(os.system("powershell.exe Get-Process -name " + process_name + " -ErrorAction SilentlyContinue > null")):
@@ -434,7 +440,7 @@ def multiconnection_start_android(test_group):
     # start Android client for multiconnection group
     if test_group in get_mc_config()["android_client"]:
         execute_adb_command("adb logcat -c")
-        execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
+        execute_adb_command("adb shell am start -a com.amd.wirelessvr.CONNECT -n com.amd.remotegameclient/.MainActivity")
 
 
 # address is address of the opposite side

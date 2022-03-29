@@ -355,7 +355,7 @@ def execute_tests(args):
 
                         if client_closed:
                             execute_adb_command("adb logcat -c")
-                            execute_adb_command("adb shell am start -n com.amd.remotegameclient/.MainActivity")
+                            execute_adb_command("adb shell am start -a com.amd.wirelessvr.CONNECT -n com.amd.remotegameclient/.MainActivity")
 
                         if "start_first" in case and case["start_first"] == "client":
                             sleep(10)
