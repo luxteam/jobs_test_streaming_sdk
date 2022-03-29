@@ -240,10 +240,6 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 params["command"] = command
                 params["arguments_line"] = arguments_line
 
-                # Replacing record_video command to record_audio
-                if "record_video" in command and args.test_group == "Microphone":
-                    command = command.replace("record_video", "record_audio")
-
                 # find necessary command and execute it
                 if command in ACTIONS_MAPPING:
                     # if client requests to start doing test actions server must answer immediately and starts to execute them

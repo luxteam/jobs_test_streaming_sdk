@@ -294,6 +294,7 @@ class RecordMicrophone(Action):
         self.audio_path = self.params["output_path"]
         self.audio_name = self.params["case"]["case"] + self.params["client_type"]
 
+    @Action.server_action_decorator
     def execute(self):
         audio_full_path = os.path.join(self.audio_path, self.audio_name + ".mp4")
         try:
@@ -303,7 +304,8 @@ class RecordMicrophone(Action):
             self.logger.info("The recording from the microphone is located: {}".format(audio_full_path))
         except Exception as e:
             self.logger.error("Error due microphone recording")
-        
+
+        return True
 
 
 # start doing test actions on server side
