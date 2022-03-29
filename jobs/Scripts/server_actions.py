@@ -1,7 +1,7 @@
 import socket
 import sys
 import os
-from time import sleep
+from time import sleep, strftime, gmtime
 import psutil
 from subprocess import PIPE
 import traceback
@@ -10,11 +10,10 @@ import win32api
 import pyautogui
 import pydirectinput
 import keyboard
-import sounddevice
+from pyffmpeg import FFmpeg
 from threading import Thread
 from utils import *
 from actions import *
-from scipy.io.wavfile import write
 
 csgoFirstExec = True
 pyautogui.FAILSAFE = False
@@ -296,12 +295,15 @@ class RecordMicrophone(Action):
 
     @Action.server_action_decorator
     def execute(self):
-        audio_full_path = os.path.join(self.audio_path, self.audio_name + ".mp4")
         try:
-            recording = sounddevice.rec(int(self.duration * 44100), samplerate=44100, channels=2)
-            sounddevice.wait()  # Wait until recording is finished
-            write(audio_full_path, 44100, recording)  # Save as MP4 file 
-            self.logger.info("The recording from the microphone is located: {}".format(audio_full_path))
+            audio_full_path = os.path.join(self.audio_path, self.audio_name + ".mp4")
+            time_flag_value = strftime("%H:%M:%S", gmtime(int(self.duration)))
+
+            recorder = FFmpeg()
+            self.logger.info("Start to record video")
+
+            recorder.options("-f dshow -i audio=\"Microphone (AMD Streaming Audio Device)\" -t {time} {audio}"
+                .format(time=time_flag_value, audio=audio_full_path))
         except Exception as e:
             self.logger.error("Error due microphone recording")
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
