@@ -38,7 +38,8 @@ ACTIONS_MAPPING = {
     "make_screen": MakeScreen,
     "sleep_and_screen": SleepAndScreen,
     "record_video": RecordVideo,
-    "start_actions": StartActions
+    "start_actions": StartActions,
+    "record_audio": RecordMicrophone
 }
 
 
@@ -317,6 +318,10 @@ def execute_tests(args):
 
                 # execute actions one by one
                 for action in actions:
+                    # Replacing record_video command to record_audio
+                    if "record_video" in action and args.test_group == "Microphone":
+                        action = action.replace("record_video", "record_audio")
+                    
                     main_logger.info("Current action: {}".format(action))
                     main_logger.info("Current state:\n{}".format(instance_state.format_current_state()))
 

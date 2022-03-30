@@ -44,7 +44,8 @@ ACTIONS_MAPPING = {
     "click_server": ClickServer,
     "start_test_actions_server": DoTestActions,
     "gpuview": GPUView,
-    "record_metrics": RecordMetrics
+    "record_metrics": RecordMetrics,
+    "record_audio": RecordMicrophone
 }
 
 

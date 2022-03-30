@@ -39,7 +39,8 @@ ACTIONS_MAPPING = {
     "parse_keys": PressKeys,
     "sleep_and_screen": SleepAndScreen,
     "skip_if_done": SkipIfDone,
-    "record_metrics": RecordMetrics
+    "record_metrics": RecordMetrics,
+    "record_audio": RecordMicrophone
 }
 
 
@@ -156,6 +157,10 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 if instance_state.commands_to_skip > 0:
                     instance_state.commands_to_skip -= 1
                     continue
+
+                # Replacing record_video command to record_audio
+                if "record_video" in action and args.test_group == "Microphone":
+                    action = action.replace("record_video", "record_audio")
 
                 main_logger.info("Current action: {}".format(action))
                 main_logger.info("Current state:\n{}".format(instance_state.format_current_state()))

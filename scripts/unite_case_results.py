@@ -105,8 +105,13 @@ if __name__ == '__main__':
 
                         target_file_content[i]["script_info"] = format_script_info(target_file_content[i]["script_info"])
 
-                        if VIDEO_KEY in source_file_content[i]:
-                            target_file_content[i]["android_" + VIDEO_KEY] = source_file_content[i][VIDEO_KEY]
+                        # Microphone test group: mp4 file is recording on server side
+                        if source_file_content[i]["test_group"] == "Microphone":
+                            if VIDEO_KEY in source_file_content[i]:
+                                target_file_content[i][VIDEO_KEY] = source_file_content[i][VIDEO_KEY]
+                        else:
+                            if VIDEO_KEY in source_file_content[i]:
+                                target_file_content[i]["android_" + VIDEO_KEY] = source_file_content[i][VIDEO_KEY]
 
                         if SCREENS_COLLECTION_KEY in source_file_content[i]:
                             target_file_content[i]["android_" + SCREENS_COLLECTION_KEY] = source_file_content[i][SCREENS_COLLECTION_KEY]

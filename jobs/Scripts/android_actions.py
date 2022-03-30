@@ -1,6 +1,6 @@
 import sys
 import os
-from time import sleep
+from time import sleep, strftime, gmtime
 import psutil
 import subprocess
 from subprocess import PIPE
@@ -9,6 +9,7 @@ import win32gui
 import win32api
 import pyautogui
 import pydirectinput
+from pyffmpeg import FFmpeg
 from threading import Thread
 from utils import parse_arguments, execute_adb_command, get_mc_config
 from actions import *
@@ -497,6 +498,29 @@ class RecordVideo(MulticonnectionAction):
                 self.sock.send(response.encode("utf-8"))
             else:
                 self.sock.send("done".encode("utf-8"))
+
+
+class RecordMicrophone(Action):
+    def parse(self):
+        self.duration = int(self.params["arguments_line"])
+        self.action = self.params["action_line"]
+        self.test_group = self.params["args"].test_group
+        self.audio_path = self.params["output_path"]
+        self.audio_name = self.params["case"]["case"] + "android"
+
+    def execute(self):
+        try:
+            audio_full_path = os.path.join(self.audio_path, self.audio_name + ".mp4")
+            time_flag_value = strftime("%H:%M:%S", gmtime(int(self.duration)))
+
+            recorder = FFmpeg()
+            self.logger.info("Start to record video")
+
+            recorder.options("-f dshow -i audio=\"Microphone (AMD Streaming Audio Device)\" -t {time} {audio}"
+                .format(time=time_flag_value, audio=audio_full_path))
+        except Exception as e:
+            self.logger.error("Error due microphone recording")
+            self.logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
 def click(x_description, y_description, logger, delay = 0.2):
