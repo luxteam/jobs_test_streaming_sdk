@@ -1,6 +1,6 @@
 [
     {
-        "case": "STR_DRT_001",
+        "case": "STR_ADR_001",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EnableDirtyRects true",
         "client_keys": "",
@@ -9,7 +9,7 @@
         ]
     },
     {
-        "case": "STR_DRT_002",
+        "case": "STR_ADR_002",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EnableDirtyRects true -DrawDirtyRects true",
         "client_keys": "",
@@ -18,7 +18,7 @@
         ]
     },
     {
-        "case": "STR_DRT_003",
+        "case": "STR_ADR_003",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EnableDirtyRects true",
         "client_keys": "",
@@ -27,7 +27,7 @@
         ]
     },
     {
-        "case": "STR_DRT_004",
+        "case": "STR_ADR_004",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EnableDirtyRects true -DrawDirtyRects true",
         "client_keys": "",

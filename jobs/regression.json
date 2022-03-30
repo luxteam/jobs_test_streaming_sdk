@@ -3,6 +3,7 @@
     "groups": [
         {
             "Audio":"STR_AUD_001,STR_AUD_004",
+            "CaptureMode":"STR_CPM_001,STR_CPM_002,STR_CPM_003,STR_CPM_004",
             "CaptureType":"STR_CPT_001,STR_CPT_002,STR_CPT_003,STR_CPT_004",
             "Codecs":"STR_COD_001,STR_COD_002,STR_COD_003,STR_COD_004",
             "Config":"STR_CFG_010,STR_CFG_032",
