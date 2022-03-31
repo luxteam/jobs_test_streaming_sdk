@@ -11,20 +11,20 @@
             "Connection":"STR_CON_001,STR_CON_002,STR_CON_005,STR_CON_009,STR_CON_010,STR_CON_014,STR_CON_015,STR_CON_016,STR_CON_019,STR_CON_023,STR_CON_024,STR_CON_028",
             "ConversionType":"STR_CT_002,STR_CT_005",
             "DirtyRectangles":"STR_DRT_002,STR_DRT_004",
-            "Encryption":"STR_ECR_005,STR_ECR_008,STR_ECR_015,STR_ECR_018",
-            "Flags":"STR_FLG_001,STR_FLG_002,STR_FLG_014,STR_FLG_015"  
-            },
-        {
+            "Flags":"STR_FLG_001,STR_FLG_002,STR_FLG_014,STR_FLG_015",
             "Microphone":"STR_MIC_001,STR_MIC_002",
             "MPO":"STR_MPO_001,STR_MPO_002",        
-            "MulticonnectionWA":"STR_MWA_001,STR_MWA_013,STR_MWA_014,STR_MWA_021,STR_MWA_033,STR_MWA_034",
-            "MulticonnectionWW":"STR_MWW_002,STR_MWW_003,STR_MWW_018,STR_MWW_026,STR_MWW_027,STR_MWW_042",
-            "MulticonnectionWWA":"STR_MWWA_001,STR_MWWA_014",
             "QoS":"STR_QOS_001,STR_QOS_008,STR_QOS_010,STR_QOS_017",
             "RateControl":"STR_RC_001,STR_RC_002,STR_RC_003,STR_RC_004,STR_RC_005,STR_RC_011,STR_RC_012,STR_RC_013,STR_RC_014,STR_RC_015,STR_RC_016,STR_RC_022",
             "Resolution":"STR_RN_002,STR_RN_003,STR_RN_005,STR_RN_006",
             "Slices":"STR_SL_002,STR_SL_004",
-            "VSync":"STR_VS_001,STR_VS_002" 
+            "VSync":"STR_VS_001,STR_VS_002" ,
+            "MulticonnectionWA":"STR_MWA_001,STR_MWA_013,STR_MWA_014,STR_MWA_021,STR_MWA_033,STR_MWA_034"
+        },
+        {
+            "Encryption":"STR_ECR_005,STR_ECR_008,STR_ECR_015,STR_ECR_018",
+            "MulticonnectionWW":"STR_MWW_002,STR_MWW_003,STR_MWW_018,STR_MWW_026,STR_MWW_027,STR_MWW_042",
+            "MulticonnectionWWA":"STR_MWWA_001,STR_MWWA_014"
         }
     ]
 }
