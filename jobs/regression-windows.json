@@ -19,12 +19,12 @@
             "Resolution":"STR_RN_002,STR_RN_003,STR_RN_005,STR_RN_006",
             "Slices":"STR_SL_002,STR_SL_004",
             "VSync":"STR_VS_001,STR_VS_002" ,
-            "MulticonnectionWA":"STR_MWA_001,STR_MWA_013,STR_MWA_014,STR_MWA_021,STR_MWA_033,STR_MWA_034"
+            "MulticonnectionWA":"STR_MCWA_001,STR_MCWA_013,STR_MCWA_014,STR_MCWA_021,STR_MCWA_033,STR_MCWA_034"
         },
         {
             "Encryption":"STR_ECR_005,STR_ECR_008,STR_ECR_015,STR_ECR_018",
-            "MulticonnectionWW":"STR_MWW_002,STR_MWW_003,STR_MWW_018,STR_MWW_026,STR_MWW_027,STR_MWW_042",
-            "MulticonnectionWWA":"STR_MWWA_001,STR_MWWA_014"
+            "MulticonnectionWW":"STR_MCWW_002,STR_MCWW_003,STR_MCWW_018,STR_MCWW_026,STR_MCWW_027,STR_MCWW_042",
+            "MulticonnectionWWA":"STR_MCWWA_001,STR_MCWWA_014"
         }
     ]
 }
