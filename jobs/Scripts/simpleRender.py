@@ -86,7 +86,7 @@ def copy_test_cases(args):
                     cases = necessary_cases
 
             with open(os.path.join(args.output, 'test_cases.json'), "w+") as file:
-                json.dump(duplicated_cases, file, indent=4)
+                json.dump(cases, file, indent=4)
     except Exception as e:
         main_logger.error('Can\'t load test_cases.json')
         main_logger.error(str(e))
