@@ -108,7 +108,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_014",
+        "case": "STR_MCWA_013",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -121,7 +121,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_015",
+        "case": "STR_MCWA_014",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -134,7 +134,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_016",
+        "case": "STR_MCWA_015",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -146,7 +146,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_017",
+        "case": "STR_MCWA_016",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -156,7 +156,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_018",
+        "case": "STR_MCWA_017",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -168,7 +168,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_019",
+        "case": "STR_MCWA_018",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -178,7 +178,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_020",
+        "case": "STR_MCWA_019",
         "status": "skipped",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -190,7 +190,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_021",
+        "case": "STR_MCWA_020",
         "status": "skipped",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -200,7 +200,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_022",
+        "case": "STR_MCWA_021",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -209,7 +209,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_023",
+        "case": "STR_MCWA_022",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -218,7 +218,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_024",
+        "case": "STR_MCWA_023",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -227,7 +227,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_025",
+        "case": "STR_MCWA_024",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -236,7 +236,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_026",
+        "case": "STR_MCWA_025",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -245,7 +245,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_027",
+        "case": "STR_MCWA_026",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -254,7 +254,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_028",
+        "case": "STR_MCWA_027",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -263,7 +263,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_029",
+        "case": "STR_MCWA_028",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -272,7 +272,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_030",
+        "case": "STR_MCWA_029",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -281,7 +281,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_031",
+        "case": "STR_MCWA_030",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Resolution <resolution> -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -290,7 +290,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_032",
+        "case": "STR_MCWA_031",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -299,7 +299,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_033",
+        "case": "STR_MCWA_032",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -capture amd -Framerate 60 -bitrate 50000000 -QoS true -Resolution <resolution> -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustFramerate true -adjustbitrate true -Framerateperiod 2 -bitrateperiod 2 -Frameratestep 5 -bitratestep 5000000 -minFramerate 30 -minbitrate 10000000",
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
@@ -308,7 +308,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_035",
+        "case": "STR_MCWA_033",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -321,7 +321,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_036",
+        "case": "STR_MCWA_034",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -334,7 +334,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_037",
+        "case": "STR_MCWA_035",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -346,7 +346,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_038",
+        "case": "STR_MCWA_036",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -356,7 +356,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_039",
+        "case": "STR_MCWA_037",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -368,7 +368,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_040",
+        "case": "STR_MCWA_038",
         "status": "active",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -378,7 +378,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_041",
+        "case": "STR_MCWA_039",
         "status": "skipped",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -390,7 +390,7 @@
         ]
     },
     {
-        "case": "STR_MCWA_042",
+        "case": "STR_MCWA_040",
         "status": "skipped",
         "server_keys": "-MAXUSERS 2 -Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
