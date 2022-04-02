@@ -66,6 +66,8 @@
 
         "check_game \"VALORANT  \" \"VALORANT-Win64-Shipping.exe\"",
 
+        "start_streaming",
+
         "make_screen",
         "move 1000 800",
         "click",
@@ -168,6 +170,8 @@
         "check_window \"League of Legends\" \"LeagueClient.exe\"",
         "check_game \"League of Legends (TM) Client\" \"League of Legends.exe\"",
 
+        "start_streaming",
+
         "make_screen",
         "move 1000 800",
         "click",
@@ -201,6 +205,8 @@
         "sleep 15",
         "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Heaven Benchmark 4.0 Basic (Direct3D11)\" \"Heaven.exe\"",
+
+        "start_streaming",
 
         "make_screen",
         "move 1000 800",
@@ -238,6 +244,8 @@
         "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Heaven Benchmark 4.0 Basic (Direct3D9)\" \"Heaven.exe\"",
 
+        "start_streaming",
+
         "make_screen",
         "move 1000 800",
         "click",
@@ -273,6 +281,8 @@
         "sleep 15",
         "check_window \"Unigine Heaven Benchmark 4.0 (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Heaven Benchmark 4.0 Basic (OpenGL)\" \"Heaven.exe\"",
+
+        "start_streaming",
 
         "make_screen",
         "move 1000 800",
@@ -310,6 +320,8 @@
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
 
+        "start_streaming",
+
         "make_screen",
         "move 1000 800",
         "click",
@@ -346,6 +358,8 @@
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
 
+        "start_streaming",
+
         "make_screen",
         "move 1000 800",
         "click",
@@ -381,6 +395,8 @@
         "sleep 15",
         "check_window \"Unigine Valley Benchmark (Basic Edition)\" \"browser_x86.exe\"",
         "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
+
+        "start_streaming",
 
         "make_screen",
         "move 1000 800",
@@ -428,6 +444,7 @@
     ],
 
     "nothing_actions": [
+        "start_streaming",
         "make_screen",
         "move 1000 800",
         "click",
@@ -491,6 +508,8 @@
         "click_server center_-797 center_-250",
         "sleep 1",
         "check_game \"dota2.exe\" \"dota2.exe\"",
+
+        "start_streaming",
 
         "make_screen",
         "move 1000 800",
@@ -559,6 +578,8 @@
         "sleep 1",
         "check_game \"dota2.exe\" \"dota2.exe\"",
 
+        "start_streaming",
+
         "make_screen",
         "move 1000 800",
         "click",
@@ -601,6 +622,8 @@
         "sleep 40",
         "press_keys_server \"w_3\"",
         "check_game \"Counter-Strike: Global Offensive - Direct3D 9\" \"csgo.exe\"",
+
+        "start_streaming",
 
         "make_screen",
         "move 1000 800",

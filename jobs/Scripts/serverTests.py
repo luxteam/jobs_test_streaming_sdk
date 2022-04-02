@@ -83,32 +83,6 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
     archive_name = case["case"]
 
-    # default launching of client and server (order doesn't matter). Exception: Multiconnection
-    if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
-        if start_streaming is not None and process is None:
-            should_collect_traces = (args.collect_traces == "BeforeTests")
-            process = start_streaming(args.execution_type, script_path, not should_collect_traces)
-
-            if should_collect_traces:
-                collect_traces(archive_path, archive_name + "_server.zip")
-
-    # TODO: make single parameter to configure launching order
-    # start android client before server or default behaviour
-    if "android_start" not in case or case["android_start"] == "before_server":
-        if android_client_closed:
-            multiconnection_start_android(args.test_group)
-
-    # start server before client
-    if "start_first" in case and case["start_first"] == "server":
-        if start_streaming is not None and process is None:
-            should_collect_traces = (args.collect_traces == "BeforeTests")
-            process = start_streaming(args.execution_type, script_path, not should_collect_traces)
-
-            if should_collect_traces:
-                collect_traces(archive_path, archive_name + "_server.zip")
-            else:
-                sleep(10)
-
     # configure socket
     sock = socket.socket()
     sock.bind(("", int(args.communication_port)))
@@ -160,36 +134,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             # non-blocking usage
             connection.setblocking(False)
 
-            # start client before server
-            if "start_first" in case and case["start_first"] == "client":
-                if start_streaming is not None and process is None:
-                    should_collect_traces = (args.collect_traces == "BeforeTests")
-                    process = start_streaming(args.execution_type, script_path, not should_collect_traces)
-
-                    if args.test_group in MC_CONFIG["second_win_client"]:
-                        sleep(10)
-
-                    if should_collect_traces:
-                        collect_traces(archive_path, archive_name + "_server.zip")
-
-            # TODO: make single parameter to configure launching order
-            # start android client after server
-            if "android_start" in case and case["android_start"] == "after_server":
-                if android_client_closed:
-                    multiconnection_start_android(args.test_group)
-                    # small delay to give client time to connect
-                    sleep(10)
-
-            # start second client after server
-            if args.test_group in MC_CONFIG["second_win_client"]:
-                connection_sc.send(case["case"].encode("utf-8"))
-                # small delay to give client time to connect
-                sleep(5)
-
-            if is_workable_condition(process):
-                connection.send("ready".encode("utf-8"))
-            else:
-                connection.send("fail".encode("utf-8"))
+            connection.send("ready".encode("utf-8"))
 
             # build params dict with all necessary variables for test actions
             params["output_path"] = output_path
@@ -205,6 +150,9 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             params["messages"] = error_messages
             params["client_address"] = address[0]
             params["transport_protocol"] = case["transport_protocol"]
+            params["script_path"] = script_path
+            params["process"] = process
+            params["android_client_closed"] = android_client_closed
 
             test_action_command = DoTestActions(connection, params, instance_state, main_logger)
             test_action_command.parse()
@@ -241,7 +189,18 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 params["arguments_line"] = arguments_line
 
                 # find necessary command and execute it
-                if command in ACTIONS_MAPPING:
+                if command == "start_streaming":
+                    if MC_CONFIG["second_win_client"]:
+                        command_object = StartStreaming(connection, params, instance_state, main_logger, second_sock=connection_sc)
+                    else:
+                        command_object = StartStreaming(connection, params, instance_state, main_logger, second_sock=None)
+
+                    command_object.do_action()
+
+                    # Save Streaming process for feature cases
+                    # e.g. it's necessary Connection test group where Streaming instance can be alive during few test cases
+                    process = command_object.process
+                elif command in ACTIONS_MAPPING:
                     # if client requests to start doing test actions server must answer immediately and starts to execute them
                     if command == "start_test_actions_server":
                         connection.send("done".encode("utf-8"))

@@ -7,7 +7,7 @@ import json
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory, analyze_encryption, get_mc_config
+from utils import *
 import win32api
 from actions import *
 
@@ -405,3 +405,40 @@ class SkipIfDone(Action):
     def execute(self):
         if self.state.prev_action_done:
             self.state.commands_to_skip += int(self.commands_to_skip)
+
+
+# [Client + Server action] start Streaming SDK clients and server
+# [Result] wait answer from server. Answer can be any
+class StartStreaming(Action):
+    def parse(self):
+        self.action = self.params["action_line"]
+        self.case = self.params["case"]
+        self.args = self.params["args"]
+        self.archive_path = self.params["archive_path"]
+        self.archive_name = self.params["case"]["case"]
+        self.script_path = self.params["script_path"]
+
+    def execute(self):
+        # start client before server (default case)
+        if "start_first" not in self.case or self.case["start_first"] != "server":
+            if self.process is None:
+                should_collect_traces = (self.args.collect_traces == "BeforeTests")
+                self.process = start_streaming(self.args.execution_type, self.script_path, not should_collect_traces)
+
+                if should_collect_traces:
+                    collect_traces(self.archive_path, self.archive_name + "_client.zip")
+                elif "start_first" in self.case and self.case["start_first"] == "client":
+                    sleep(10)
+
+        self.sock.send(self.action.encode("utf-8"))
+
+        self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
+
+        # start server before client
+        if "start_first" in self.case and self.case["start_first"] == "server":
+            if self.process is None:
+                should_collect_traces = (self.args.collect_traces == "BeforeTests")
+                self.process = start_streaming(self.args.execution_type, self.script_path, not should_collect_traces)
+
+                if should_collect_traces:
+                    collect_traces(self.archive_path, self.archive_name + "_client.zip")
