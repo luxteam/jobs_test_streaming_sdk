@@ -190,7 +190,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
                 # find necessary command and execute it
                 if command == "start_streaming":
-                    if MC_CONFIG["second_win_client"]:
+                    if args.test_group in MC_CONFIG["second_win_client"]:
                         command_object = StartStreaming(connection, params, instance_state, main_logger, second_sock=connection_sc)
                     else:
                         command_object = StartStreaming(connection, params, instance_state, main_logger, second_sock=None)
