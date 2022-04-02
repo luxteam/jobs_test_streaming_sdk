@@ -541,6 +541,7 @@ class StartStreaming(MulticonnectionAction):
         self.archive_name = self.params["case"]["case"]
         self.script_path = self.params["script_path"]
         self.android_client_closed = self.params["android_client_closed"]
+        self.process = self.params["process"]
 
     def execute(self):
         mc_config = get_mc_config()

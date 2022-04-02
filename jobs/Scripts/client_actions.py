@@ -417,6 +417,7 @@ class StartStreaming(Action):
         self.archive_path = self.params["archive_path"]
         self.archive_name = self.params["case"]["case"]
         self.script_path = self.params["script_path"]
+        self.process = self.params["process"]
 
     def execute(self):
         # start client before server (default case)
