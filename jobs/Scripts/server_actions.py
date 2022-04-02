@@ -529,3 +529,54 @@ class RecordVideo(MulticonnectionAction):
         except Exception as e:
             self.logger.error("Failed to send action to second windows client: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+# Start Streaming SDK clients and server
+class StartStreaming(MulticonnectionAction):
+    def parse(self):
+        self.action = self.params["action_line"]
+        self.case = self.params["case"]
+        self.args = self.params["args"]
+        self.archive_path = self.params["archive_path"]
+        self.archive_name = self.params["case"]["case"]
+        self.script_path = self.params["script_path"]
+        self.android_client_closed = self.params["android_client_closed"]
+        self.process = self.params["process"]
+
+    def execute(self):
+        mc_config = get_mc_config()
+
+        # TODO: make single parameter to configure launching order
+        # start android client before server or default behaviour
+        if "android_start" not in self.case or self.case["android_start"] == "before_server":
+            if self.android_client_closed:
+                multiconnection_start_android(self.args.test_group)
+
+        # start server
+        if self.process is None:
+            should_collect_traces = (self.args.collect_traces == "BeforeTests")
+            self.process = start_streaming(self.args.execution_type, self.script_path, not should_collect_traces)
+
+            if self.args.test_group in mc_config["second_win_client"]:
+                sleep(10)
+
+            if should_collect_traces:
+                collect_traces(self.archive_path, self.archive_name + "_server.zip")
+            elif "start_first" in self.case and self.case["start_first"] == "server":
+                sleep(10)
+
+        # TODO: make single parameter to configure launching order
+        # start android client after server
+        if "android_start" in self.case and self.case["android_start"] == "after_server":
+            if android_client_closed:
+                multiconnection_start_android(self.args.test_group)
+                # small delay to give client time to connect
+                sleep(10)
+
+        # start second client after server
+        if self.args.test_group in mc_config["second_win_client"]:
+            self.second_sock.send(self.case["case"].encode("utf-8"))
+            # small delay to give client time to connect
+            sleep(5)
+
+        self.sock.send("done".encode("utf-8"))

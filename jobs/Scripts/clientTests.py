@@ -40,7 +40,8 @@ ACTIONS_MAPPING = {
     "sleep_and_screen": SleepAndScreen,
     "skip_if_done": SkipIfDone,
     "record_metrics": RecordMetrics,
-    "record_audio": RecordMicrophone
+    "record_audio": RecordMicrophone,
+    "start_streaming": StartStreaming
 }
 
 
@@ -61,28 +62,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         os.makedirs(archive_path)
 
     archive_name = case["case"]
-
-    # default launching of client and server (order doesn't matter)
-    if "start_first" not in case or (case["start_first"] != "client" and case["start_first"] != "server"):
-        if start_streaming is not None and process is None:
-            should_collect_traces = (args.collect_traces == "BeforeTests")
-            process = start_streaming(args.execution_type, script_path, not should_collect_traces)
-
-            if should_collect_traces:
-                collect_traces(archive_path, archive_name + "_client.zip")
-
     game_name = args.game_name
-
-    # start client before server
-    if "start_first" in case and case["start_first"] == "client":
-        if start_streaming is not None and process is None:
-            should_collect_traces = (args.collect_traces == "BeforeTests")
-            process = start_streaming(args.execution_type, script_path, not should_collect_traces)
-
-            if should_collect_traces:
-                collect_traces(archive_path, archive_name + "_client.zip")
-            else:
-                sleep(10)
 
     response = None
 
@@ -106,28 +86,11 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
         instance_state = ClientInstanceState()
 
         # Client init communication:
-        # 1.  Client sent ready to server
-        # 2.  Server check that Streaming SDK process is alive and sent result (ready/fail)
-        #     3.1 Server sent ready: Client check that Streaming SDK process is alive.
-        #         3.1.1 Streaming SDK client is alive: start do actions
-        #         3.1.2 Streaming SDK client isn't alive: client sent retry to server to init retry of the current test case
-        #     3.2 Server sent fail: client sent retry to server to init retry of the current test case
+        # 1. Client sends 'ready' to server
+        # 2. Server sends 'ready' to client
+        # 3. Client starts doing actions
 
         if response == "ready":
-
-            # start server before client
-            if "start_first" in case and case["start_first"] == "server":
-                if start_streaming is not None and process is None:
-                    should_collect_traces = (args.collect_traces == "BeforeTests")
-                    process = start_streaming(args.execution_type, script_path, not should_collect_traces)
-
-                    if should_collect_traces:
-                        collect_traces(archive_path, archive_name + "_client.zip")
-
-            if not is_workable_condition(process):
-                instance_state.non_workable_client = True
-                raise Exception("Client has non-workable state")
-
             # get list of actions for the current game / benchmark
             actions_key = "{}_actions".format(game_name.lower())
             if actions_key in case:
@@ -150,6 +113,8 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             params["client_type"] = "win_client"
             params["messages"] = error_messages
             params["transport_protocol"] = case["transport_protocol"]
+            params["script_path"] = script_path
+            params["process"] = process
 
             # execute actions one by one
             for action in actions:
@@ -181,6 +146,11 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 if command in ACTIONS_MAPPING:
                     command_object = ACTIONS_MAPPING[command](sock, params, instance_state, main_logger)
                     command_object.do_action()
+
+                    # Save Streaming process for feature cases
+                    # e.g. it's necessary Connection test group where Streaming instance can be alive during few test cases
+                    if command == "start_streaming":
+                        process = command_object.process
                 else:
                     raise ClientActionException("Unknown client command: {}".format(command))
 
@@ -217,9 +187,6 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
             with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
                 json.dump([json_content], file, indent=4)
 
-        elif response == "fail":
-            instance_state.non_workable_server = True
-            raise Exception("Server has non-workable state")
         else:
             raise Exception("Unknown server answer: {}".format(response))
     except Exception as e:
