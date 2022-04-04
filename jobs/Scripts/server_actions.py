@@ -568,7 +568,7 @@ class StartStreaming(MulticonnectionAction):
         # TODO: make single parameter to configure launching order
         # start android client after server
         if "android_start" in self.case and self.case["android_start"] == "after_server":
-            if android_client_closed:
+            if self.android_client_closed:
                 multiconnection_start_android(self.args.test_group)
                 # small delay to give client time to connect
                 sleep(10)
