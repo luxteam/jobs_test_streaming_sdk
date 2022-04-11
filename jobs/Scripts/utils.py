@@ -418,15 +418,10 @@ def track_used_memory(case, execution_type):
     #result = subprocess.check_output(command, shell=True, text=True)
     #print(int(result) / 1024 ** 2)
 
-    # TODO: fix getting of memory information from second client
-    if execution_type == "second_client":
-        case["used_memory"] = 0
-        return
-
     process_name = "remotegameclient" if execution_type == "client" else "remotegameserver"
 
     if not(os.system("powershell.exe Get-Process -name " + process_name + " -ErrorAction SilentlyContinue > null")):
-        command = "powershell.exe (Get-Counter -Counter '\Process(" + process_name + ")\Working Set - Private').CounterSamples[0].CookedValue"
+        command = "powershell.exe \"get-process " + process_name + " | select-object PrivateMemorySize -ExpandProperty PrivateMemorySize\""
         value = int(subprocess.check_output(command, shell=True, text=True)) / 1024 ** 2
         if "used_memory" in case and isinstance(case["used_memory"], list):
             case["used_memory"].append(value)
