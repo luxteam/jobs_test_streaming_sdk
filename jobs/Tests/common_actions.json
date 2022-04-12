@@ -67,6 +67,7 @@
         "check_game \"VALORANT  \" \"VALORANT-Win64-Shipping.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -81,7 +82,7 @@
 
     "valorant_actions_android": [
         "open_game",
-        "sleep 10",
+        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",
@@ -171,6 +172,7 @@
         "check_game \"League of Legends (TM) Client\" \"League of Legends.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -185,7 +187,7 @@
 
     "lol_actions_android": [
         "open_game",
-        "sleep 10",
+        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",
@@ -207,6 +209,7 @@
         "check_game \"Unigine Heaven Benchmark 4.0 Basic (Direct3D11)\" \"Heaven.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -223,7 +226,7 @@
     "heavendx11_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 5",
+        "sleep 3",
         "make_screen heaven_benchmark",
         "sleep 3",
         "record_video 8",
@@ -245,6 +248,7 @@
         "check_game \"Unigine Heaven Benchmark 4.0 Basic (Direct3D9)\" \"Heaven.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -261,7 +265,7 @@
     "heavendx9_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 5",
+        "sleep 3",
         "make_screen heaven_benchmark",
         "sleep 3",
         "record_video 8",
@@ -283,6 +287,7 @@
         "check_game \"Unigine Heaven Benchmark 4.0 Basic (OpenGL)\" \"Heaven.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -299,7 +304,7 @@
     "heavenopengl_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 5",
+        "sleep 3",
         "make_screen heaven_benchmark",
         "sleep 3",
         "record_video 8",
@@ -321,6 +326,7 @@
         "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D11)\" \"Valley.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -337,7 +343,7 @@
     "valleydx11_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 5",
+        "sleep 3",
         "make_screen valley_benchmark",
         "sleep 3",
         "record_video 8",
@@ -359,6 +365,7 @@
         "check_game \"Unigine Valley Benchmark 1.0 Basic (Direct3D9)\" \"Valley.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -375,7 +382,7 @@
     "valleydx9_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 5",
+        "sleep 2",
         "make_screen valley_benchmark",
         "sleep 3",
         "record_video 8",
@@ -397,6 +404,7 @@
         "check_game \"Unigine Valley Benchmark 1.0 Basic (OpenGL)\" \"Valley.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -413,7 +421,7 @@
     "valleyopengl_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 5",
+        "sleep 3",
         "make_screen valley_benchmark",
         "sleep 3",
         "record_video 8",
@@ -445,6 +453,7 @@
 
     "nothing_actions": [
         "start_streaming",
+        "sleep 3",
         "make_screen",
         "move 1000 800",
         "click",
@@ -510,6 +519,7 @@
         "check_game \"dota2.exe\" \"dota2.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -524,7 +534,7 @@
 
     "dota2dx11_actions_android": [
         "open_game",
-        "sleep 10",
+        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",
@@ -579,6 +589,7 @@
         "check_game \"dota2.exe\" \"dota2.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -593,7 +604,7 @@
 
     "dota2vulkan_actions_android": [
         "open_game",
-        "sleep 10",
+        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",
@@ -624,6 +635,7 @@
         "check_game \"Counter-Strike: Global Offensive - Direct3D 9\" \"csgo.exe\"",
 
         "start_streaming",
+        "sleep 3",
 
         "make_screen",
         "move 1000 800",
@@ -638,7 +650,7 @@
 
     "csgo_actions_android": [
         "open_game",
-        "sleep 10",
+        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",

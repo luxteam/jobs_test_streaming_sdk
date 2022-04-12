@@ -351,14 +351,14 @@ def execute_tests(args):
                             if process is None:
                                 main_logger.info("Start Streaming SDK server instance")
                                 process = start_streaming("server", server_script_path)
-                                sleep(10)
+                                sleep(5)
 
                         if client_closed:
                             execute_adb_command("adb logcat -c")
                             execute_adb_command("adb shell am start -a com.amd.wirelessvr.CONNECT -n com.amd.remotegameclient/.MainActivity")
 
                         if "start_first" in case and case["start_first"] == "client":
-                            sleep(10)
+                            sleep(5)
 
                         # start server after client
                         if "start_first" not in case or case["start_first"] == "client":
