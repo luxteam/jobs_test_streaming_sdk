@@ -365,6 +365,9 @@ def execute_tests(args):
                             main_logger.info("Start Streaming SDK server instance")
                             process = start_streaming("server", server_script_path)
 
+                        # give Streaming a bit of time to connect
+                        sleep(3)
+
                     main_logger.info("Finish action execution\n\n\n")
 
                 execution_time = time.time() - case_start_time
