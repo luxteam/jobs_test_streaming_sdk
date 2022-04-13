@@ -345,7 +345,7 @@ class DoTestActions(Action):
                 center_x = edge_x / 2
                 center_y = edge_y / 2
 
-                # avoit to long cycle of test actions (split it to parts)
+                # avoid to long cycle of test actions (split it to parts)
 
                 if self.stage == 0:
                     sleep(2)
@@ -375,11 +375,22 @@ class DoTestActions(Action):
                 if self.stage > 3:
                     self.stage = 0
             elif self.game_name == "dota2dx11" or self.game_name == "dota2vulkan":
-                sleep(1)
-                pydirectinput.press("r")
-                sleep(1)
-                pydirectinput.press("w")
-                sleep(1)
+                # avoid to long cycle of test actions (split it to parts)
+
+                if self.stage == 0:
+                    sleep(1)
+                    pydirectinput.press("r")
+                elif self.stage == 1:
+                    sleep(1)
+                    pydirectinput.press("w")
+                elif self.stage == 2:
+                    sleep(1)
+
+                self.stage += 1
+
+                if self.stage > 2:
+                    self.stage = 0
+
             elif self.game_name == "csgo":
                 global csgoFirstExec
                 if csgoFirstExec:

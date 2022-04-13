@@ -156,6 +156,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
             test_action_command = DoTestActions(connection, params, instance_state, main_logger)
             test_action_command.parse()
+            test_action_start_time = time()
 
             # while client doesn't sent 'next_case' command server waits next command
             while instance_state.wait_next_command:
@@ -163,8 +164,13 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     request = connection.recv(1024).decode("utf-8")
                 except Exception as e:
                     # execute test actions if it's requested by client and new command doesn't received
-                    if instance_state.executing_test_actions:
+                    # wait at least 2 seconds between test actions
+                    if instance_state.executing_test_actions and (time() - test_action_start_time > 2):
                         test_action_command.execute()
+                        test_action_thread = Thread(target=test_action_command.execute)
+                        test_action_thread.daemon = True
+                        test_action_thread.start()
+                        test_action_start_time = time()
                     else:
                         sleep(0.1)
                     continue
