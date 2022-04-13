@@ -414,19 +414,17 @@ def execute_adb_command(command, return_output=False):
 
 
 def track_used_memory(case, execution_type):
-    #command = "powershell.exe (Get-Counter -Counter '\Process(remotegameserver)\Working Set - Private').CounterSamples[0].CookedValue"
-    #result = subprocess.check_output(command, shell=True, text=True)
-    #print(int(result) / 1024 ** 2)
+    process_name = "RemoteGameClient.exe" if execution_type == "client" else "RemoteGameServer.exe"
 
-    process_name = "remotegameclient" if execution_type == "client" else "remotegameserver"
+    for process in psutil.process_iter():
+        if process.name() == process_name:
+            value = psutil.Process(process.pid).memory_full_info().uss / 1024 ** 2
 
-    if not(os.system("powershell.exe Get-Process -name " + process_name + " -ErrorAction SilentlyContinue > null")):
-        command = "powershell.exe \"get-process " + process_name + " | select-object PrivateMemorySize -ExpandProperty PrivateMemorySize\""
-        value = int(subprocess.check_output(command, shell=True, text=True)) / 1024 ** 2
-        if "used_memory" in case and isinstance(case["used_memory"], list):
-            case["used_memory"].append(value)
-        else:
-            case["used_memory"] = value
+            if "used_memory" in case and isinstance(case["used_memory"], list):
+                case["used_memory"].append(value)
+            else:
+                case["used_memory"] = value
+            break
     else:
         main_logger.error("Target process not found")
 
