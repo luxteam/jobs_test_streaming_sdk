@@ -82,7 +82,6 @@
 
     "valorant_actions_android": [
         "open_game",
-        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",
@@ -187,7 +186,6 @@
 
     "lol_actions_android": [
         "open_game",
-        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",
@@ -226,7 +224,6 @@
     "heavendx11_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 3",
         "make_screen heaven_benchmark",
         "sleep 3",
         "record_video 8",
@@ -265,7 +262,7 @@
     "heavendx9_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 3",
+        "sleep 1",
         "make_screen heaven_benchmark",
         "sleep 3",
         "record_video 8",
@@ -304,7 +301,7 @@
     "heavenopengl_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 3",
+        "sleep 1",
         "make_screen heaven_benchmark",
         "sleep 3",
         "record_video 8",
@@ -343,7 +340,7 @@
     "valleydx11_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 3",
+        "sleep 1",
         "make_screen valley_benchmark",
         "sleep 3",
         "record_video 8",
@@ -382,7 +379,7 @@
     "valleydx9_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 2",
+        "sleep 1",
         "make_screen valley_benchmark",
         "sleep 3",
         "record_video 8",
@@ -421,7 +418,7 @@
     "valleyopengl_actions_android": [
         "open_game",
         "press_keys \"f9\"",
-        "sleep 3",
+        "sleep 1",
         "make_screen valley_benchmark",
         "sleep 3",
         "record_video 8",
@@ -534,7 +531,6 @@
 
     "dota2dx11_actions_android": [
         "open_game",
-        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",
@@ -604,7 +600,6 @@
 
     "dota2vulkan_actions_android": [
         "open_game",
-        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",
@@ -650,7 +645,6 @@
 
     "csgo_actions_android": [
         "open_game",
-        "sleep 3",
         "start_actions",
         "make_screen test_actions",
         "sleep 3",
