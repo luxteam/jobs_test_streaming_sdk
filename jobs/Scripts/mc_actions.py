@@ -114,6 +114,9 @@ class RecordVideo(Action):
 
         self.sock.send("done".encode("utf-8"))
 
+        if self.params["args"].track_used_memory:
+            track_used_memory(self.params["case"], "client") 
+
 
 class Encryption(Action):
     def parse(self):
@@ -136,8 +139,7 @@ class Finish(Action):
         pass
 
     def execute(self):
-        if self.params["args"].track_used_memory:
-            track_used_memory(self.params["case"], "client")
+        pass
 
     def analyze_result(self):
         self.state.finish_command_received = True
