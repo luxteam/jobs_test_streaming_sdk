@@ -166,7 +166,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     if instance_state.executing_test_actions:
                         test_action_command.execute()
                     else:
-                        sleep(1)
+                        sleep(0.1)
                     continue
 
                 main_logger.info("Received action: {}".format(request))
