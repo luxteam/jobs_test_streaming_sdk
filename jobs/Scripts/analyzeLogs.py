@@ -64,6 +64,9 @@ def get_min_framerate(keys):
     if '-MinFramerate ' in keys:
         return keys.split('-MinFramerate ')[1].split()[0]
 
+def get_microphone(keys):
+    return '-Microphone true ' in keys
+
 def parse_block_line(line, saved_values):
     # Line example:
     # 2021-05-31 09:01:55.469     3F90 [RemoteGamePipeline]    Info: Average latency: full 35.08, client  1.69, server 21.83, encoder  3.42, network 11.56, decoder  1.26, Rx rate: 122.67 fps, Tx rate: 62.33 fps
@@ -158,8 +161,14 @@ def parse_block_line(line, saved_values):
         if 'average_bandwidth_tx' not in saved_values:
             saved_values['average_bandwidth_tx'] = []
 
+        if 'audio_bandwidth_rx' not in saved_values:
+            saved_values['audio_bandwidth_rx'] = []
+
         average_bandwidth_tx = float(line.split('user:')[1].split('/')[0])
         saved_values['average_bandwidth_tx'].append(average_bandwidth_tx)
+
+        audio_bandwidth_rx = float(line.split('user:')[2].split('/')[1])
+        saved_values['audio_bandwidth_rx'].append(audio_bandwidth_rx)
 
     elif 'Send time (avg/worst)' in line:
         # Line example:
@@ -768,6 +777,18 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                     json_content["test_status"] = "failed"
 
         #rule CR11, CR22: can't be catched now
+
+        # -Microphone true -> Audio bandwidth must be non-zero
+        if get_microphone(case["prepared_keys"]):
+            if 'audio_bandwidth_rx' in saved_values:
+                for value in saved_values['audio_bandwidth_rx']:
+                    if value == 0:
+                        json_content["message"].append("Application problem: some audio bandwidth value is zero")
+
+                        if json_content["test_status"] != "error":
+                            json_content["test_status"] = "failed"
+
+                        break
 
 
     json_content["message"].extend(saved_errors)
