@@ -418,7 +418,7 @@ def track_used_memory(case, execution_type):
 
     for process in psutil.process_iter():
         if process.name() == process_name:
-            value = psutil.Process(process.pid).full_memory_info().uss / 1024 ** 2
+            value = psutil.Process(process.pid).memory_full_info().uss / 1024 ** 2
 
             if "used_memory" in case and isinstance(case["used_memory"], list):
                 case["used_memory"].append(value)
