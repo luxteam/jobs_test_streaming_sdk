@@ -360,7 +360,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                             if bad_value_first_time is None:
                                 bad_value_first_time = time
-                            elif (datetime.datetime.strptime(bad_value_first_time, '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')) > 10:
+                            elif (datetime.datetime.strptime(bad_value_first_time, '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')).total_seconds() > 10:
                                 json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
                                 if json_content["test_status"] != "error":
                                     json_content["test_status"] = "failed"
