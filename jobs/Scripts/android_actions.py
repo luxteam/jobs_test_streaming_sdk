@@ -452,7 +452,9 @@ class SleepAndScreen(MulticonnectionAction):
                 self.sock.send("done".encode("utf-8"))
 
 
-def compress_video(temp_video_path, target_video_path, logger):
+def download_and_compress_video(temp_video_path, target_video_path, logger):
+    execute_adb_command("adb pull /sdcard/video.mp4 {}".format(temp_video_path))
+
     recorder = FFmpeg()
     logger.info("Start video compressing")
 
@@ -479,12 +481,9 @@ class RecordVideo(MulticonnectionAction):
             self.logger.info("Finish to record video")
 
             temp_video_path = os.path.join(self.video_path, self.temp_video_name)
-
-            execute_adb_command("adb pull /sdcard/video.mp4 {}".format(temp_video_path))
-
             target_video_path = os.path.join(self.video_path, self.target_video_name)
 
-            compressing_thread = Thread(target=compress_video, args=(temp_video_path, target_video_path, self.logger))
+            compressing_thread = Thread(target=download_and_compress_video, args=(temp_video_path, target_video_path, self.logger))
             compressing_thread.start()
         except Exception as e:
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
@@ -608,7 +607,7 @@ def do_test_actions(game_name, logger):
                 pydirectinput.press("r")
                 sleep(0.1)
                 pydirectinput.press("r")
-                sleep(3)
+                sleep(1.5)
 
                 pyautogui.moveTo(center_x + 360, center_y - 360)
                 sleep(0.1)

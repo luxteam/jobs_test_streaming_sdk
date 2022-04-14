@@ -78,10 +78,10 @@ class Retry(Action):
 # [Result] wait answer from server. Answer can be any
 class NextCase(Action):
     def execute(self):
+        self.sock.send("next_case".encode("utf-8"))
+
         if self.params["args"].track_used_memory:
             track_used_memory(self.params["case"], "client")
-
-        self.sock.send("next_case".encode("utf-8"))
 
     def analyze_result(self):
         self.wait_server_answer(analyze_answer = False, abort_if_fail = False)
@@ -363,23 +363,6 @@ def do_test_actions(game_name, logger):
                 sleep(1)
                 pyautogui.click()
                 sleep(3)
-        elif game_name == "lol":
-            center_x = win32api.GetSystemMetrics(0) / 2
-            center_y = win32api.GetSystemMetrics(1) / 2
-
-            for i in range(5):
-                pydirectinput.press("e")
-                sleep(0.1)
-                pydirectinput.press("e")
-                sleep(0.1)
-
-                pydirectinput.press("r")
-                sleep(0.1)
-                pydirectinput.press("r")
-                sleep(3)
-
-                # get time to do server actions
-                sleep(4)
 
     except Exception as e:
         logger.error("Failed to do test actions: {}".format(str(e)))
@@ -424,12 +407,12 @@ class StartStreaming(Action):
         if "start_first" not in self.case or self.case["start_first"] != "server":
             if self.process is None:
                 should_collect_traces = (self.args.collect_traces == "BeforeTests")
-                self.process = start_streaming(self.args.execution_type, self.script_path, not should_collect_traces)
+                self.process = start_streaming(self.args.execution_type, self.script_path)
 
                 if should_collect_traces:
                     collect_traces(self.archive_path, self.archive_name + "_client.zip")
                 elif "start_first" in self.case and self.case["start_first"] == "client":
-                    sleep(10)
+                    sleep(5)
 
         self.sock.send(self.action.encode("utf-8"))
 
@@ -439,7 +422,7 @@ class StartStreaming(Action):
         if "start_first" in self.case and self.case["start_first"] == "server":
             if self.process is None:
                 should_collect_traces = (self.args.collect_traces == "BeforeTests")
-                self.process = start_streaming(self.args.execution_type, self.script_path, not should_collect_traces)
+                self.process = start_streaming(self.args.execution_type, self.script_path)
 
                 if should_collect_traces:
                     collect_traces(self.archive_path, self.archive_name + "_client.zip")

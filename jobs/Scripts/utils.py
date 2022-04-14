@@ -46,18 +46,18 @@ def close_process(process):
     for ch in child_processes:
         try:
             ch.terminate()
-            sleep(5)
+            sleep(0.5)
             ch.kill()
-            sleep(5)
+            sleep(0.5)
             status = ch.status()
         except psutil.NoSuchProcess:
             pass
 
     try:
         process.terminate()
-        sleep(5)
+        sleep(0.5)
         process.kill()
-        sleep(5)
+        sleep(0.5)
         status = process.status()
     except psutil.NoSuchProcess:
         pass
@@ -273,17 +273,13 @@ def save_android_log(args, case, current_try, log_name_postfix="_client"):
         return None
 
 
-def start_streaming(execution_type, script_path, do_delay=True):
+def start_streaming(execution_type, script_path):
     main_logger.info("Start StreamingSDK {}".format(execution_type))
 
     # start Streaming SDK process
     process = psutil.Popen(script_path, stdout=PIPE, stderr=PIPE, shell=True)
 
     main_logger.info("Start Streaming SDK")
-
-    if do_delay:
-        # Wait a bit to launch streaming SDK client/server
-        sleep(3)
 
     main_logger.info("Screen resolution: width = {}, height = {}".format(win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)))
 

@@ -345,13 +345,18 @@ class DoTestActions(Action):
                 center_x = edge_x / 2
                 center_y = edge_y / 2
 
-                # avoit to long cycle of test actions (split it to parts)
+                # avoid to long cycle of test actions (split it to parts)
 
                 if self.stage == 0:
-                    sleep(2)
+                    pydirectinput.press("e")
+                    sleep(0.1)
+                    pydirectinput.press("e")
+                    sleep(0.1)
+                    pydirectinput.press("r")
+                    sleep(0.1)
+                    pydirectinput.press("r")
+                    sleep(1.5)
                 elif self.stage == 1:
-                    sleep(2)
-                elif self.stage == 2:
                     pyautogui.moveTo(center_x + 360, center_y - 360)
                     sleep(0.1)
                     pyautogui.click()
@@ -360,7 +365,7 @@ class DoTestActions(Action):
                     sleep(0.1)
                     pyautogui.click(button="right")
                     sleep(1.5)
-                elif self.stage == 3:
+                elif self.stage == 2:
                     pyautogui.moveTo(edge_x - 290, edge_y - 20)
                     sleep(0.1)
                     pyautogui.click()
@@ -372,14 +377,12 @@ class DoTestActions(Action):
 
                 self.stage += 1
 
-                if self.stage > 3:
+                if self.stage > 2:
                     self.stage = 0
             elif self.game_name == "dota2dx11" or self.game_name == "dota2vulkan":
-                sleep(1)
                 pydirectinput.press("r")
                 sleep(1)
                 pydirectinput.press("w")
-                sleep(1)
             elif self.game_name == "csgo":
                 global csgoFirstExec
                 if csgoFirstExec:
@@ -397,11 +400,11 @@ class DoTestActions(Action):
                             keyboard.write(command)
                         else:
                             pydirectinput.press("`")
-                        sleep(0.25)
+                        sleep(0.15)
                         pydirectinput.press("enter")
 
                 pydirectinput.press("4")
-                sleep(1.5)
+                sleep(1)
                 pyautogui.click()
             else:
                 sleep(0.5)
@@ -555,15 +558,15 @@ class StartStreaming(MulticonnectionAction):
         # start server
         if self.process is None:
             should_collect_traces = (self.args.collect_traces == "BeforeTests")
-            self.process = start_streaming(self.args.execution_type, self.script_path, not should_collect_traces)
+            self.process = start_streaming(self.args.execution_type, self.script_path)
 
             if self.args.test_group in mc_config["second_win_client"]:
-                sleep(10)
+                sleep(5)
 
             if should_collect_traces:
                 collect_traces(self.archive_path, self.archive_name + "_server.zip")
             elif "start_first" in self.case and self.case["start_first"] == "server":
-                sleep(10)
+                sleep(5)
 
         # TODO: make single parameter to configure launching order
         # start android client after server
@@ -571,7 +574,7 @@ class StartStreaming(MulticonnectionAction):
             if self.android_client_closed:
                 multiconnection_start_android(self.args.test_group)
                 # small delay to give client time to connect
-                sleep(10)
+                sleep(5)
 
         # start second client after server
         if self.args.test_group in mc_config["second_win_client"]:
