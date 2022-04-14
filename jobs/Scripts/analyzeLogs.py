@@ -130,7 +130,7 @@ def parse_block_line(line, saved_values):
                 saved_values['tx_rates_by_time'] = []
 
             time = line.split('.')[0]
-            saved_values['tx_rates'].append((time, tx_rate))
+            saved_values['tx_rates_by_time'].append((time, tx_rate))
 
     elif 'Queue depth' in line:
         # Line example:
