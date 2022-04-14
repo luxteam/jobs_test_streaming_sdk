@@ -363,23 +363,6 @@ def do_test_actions(game_name, logger):
                 sleep(1)
                 pyautogui.click()
                 sleep(3)
-        elif game_name == "lol":
-            center_x = win32api.GetSystemMetrics(0) / 2
-            center_y = win32api.GetSystemMetrics(1) / 2
-
-            for i in range(5):
-                pydirectinput.press("e")
-                sleep(0.1)
-                pydirectinput.press("e")
-                sleep(0.1)
-
-                pydirectinput.press("r")
-                sleep(0.1)
-                pydirectinput.press("r")
-                sleep(3)
-
-                # get time to do server actions
-                sleep(4)
 
     except Exception as e:
         logger.error("Failed to do test actions: {}".format(str(e)))

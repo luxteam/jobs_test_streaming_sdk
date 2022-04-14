@@ -348,10 +348,15 @@ class DoTestActions(Action):
                 # avoid to long cycle of test actions (split it to parts)
 
                 if self.stage == 0:
-                    sleep(2)
+                    pydirectinput.press("e")
+                    sleep(0.1)
+                    pydirectinput.press("e")
+                    sleep(0.1)
+                    pydirectinput.press("r")
+                    sleep(0.1)
+                    pydirectinput.press("r")
+                    sleep(1.5)
                 elif self.stage == 1:
-                    sleep(2)
-                elif self.stage == 2:
                     pyautogui.moveTo(center_x + 360, center_y - 360)
                     sleep(0.1)
                     pyautogui.click()
@@ -360,7 +365,7 @@ class DoTestActions(Action):
                     sleep(0.1)
                     pyautogui.click(button="right")
                     sleep(1.5)
-                elif self.stage == 3:
+                elif self.stage == 2:
                     pyautogui.moveTo(edge_x - 290, edge_y - 20)
                     sleep(0.1)
                     pyautogui.click()
@@ -372,25 +377,12 @@ class DoTestActions(Action):
 
                 self.stage += 1
 
-                if self.stage > 3:
-                    self.stage = 0
-            elif self.game_name == "dota2dx11" or self.game_name == "dota2vulkan":
-                # avoid to long cycle of test actions (split it to parts)
-
-                if self.stage == 0:
-                    sleep(1)
-                    pydirectinput.press("r")
-                elif self.stage == 1:
-                    sleep(1)
-                    pydirectinput.press("w")
-                elif self.stage == 2:
-                    sleep(1)
-
-                self.stage += 1
-
                 if self.stage > 2:
                     self.stage = 0
-
+            elif self.game_name == "dota2dx11" or self.game_name == "dota2vulkan":
+                pydirectinput.press("r")
+                sleep(1)
+                pydirectinput.press("w")
             elif self.game_name == "csgo":
                 global csgoFirstExec
                 if csgoFirstExec:
@@ -408,11 +400,11 @@ class DoTestActions(Action):
                             keyboard.write(command)
                         else:
                             pydirectinput.press("`")
-                        sleep(0.25)
+                        sleep(0.15)
                         pydirectinput.press("enter")
 
                 pydirectinput.press("4")
-                sleep(1.5)
+                sleep(1)
                 pyautogui.click()
             else:
                 sleep(0.5)

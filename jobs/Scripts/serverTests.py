@@ -164,8 +164,8 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                     request = connection.recv(1024).decode("utf-8")
                 except Exception as e:
                     # execute test actions if it's requested by client and new command doesn't received
-                    # wait at least 2 seconds between test actions
-                    if instance_state.executing_test_actions and (time() - test_action_start_time > 2):
+                    # wait at least 3 seconds between test actions
+                    if instance_state.executing_test_actions and (time() - test_action_start_time > 3):
                         test_action_command.execute()
                         test_action_thread = Thread(target=test_action_command.execute)
                         test_action_thread.daemon = True
