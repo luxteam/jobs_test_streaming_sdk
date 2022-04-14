@@ -125,6 +125,13 @@ def parse_block_line(line, saved_values):
             tx_rate = float(line.split('Tx rate:')[1].split(',')[0].replace('fps', ''))
             saved_values['tx_rates'].append(tx_rate)
 
+            # save tx rate by time
+            if 'tx_rates_by_time' not in saved_values:
+                saved_values['tx_rates_by_time'] = []
+
+            time = line.split('.')[0]
+            saved_values['tx_rates_by_time'].append((time, tx_rate))
+
     elif 'Queue depth' in line:
         # Line example:
         # 2021-07-07 13:43:17.038      A60 [RemoteGamePipeline]    Info: Queue depth: Encoder: 0, Decoder: 0
@@ -336,24 +343,32 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             if bad_rx_rate and bad_tx_rate:
                 json_content["message"].append("Network problem: TX Rate is much bigger than RX Rate. TX rate: {}. RX rate: {}".format(bad_tx_rate, bad_rx_rate))
 
-        # rule №2.2: framerate - tx rate > 10 -> problem with app
+        # rule №2.2: framerate - tx rate > 10 during more than 10 seconds -> problem with app
         # ignore for Android
         if execution_type != "android":
             # Heaven can't show more than 120 fps
             if not (framerate >= 110 and (case["game_name"] == "HeavenDX9" or case["game_name"] == "HeavenDX11")):
                 if 'tx_rates' in saved_values:
                     bad_tx_rate = None
+                    bad_value_first_time = None
 
-                    for tx_rate in saved_values['tx_rates']:
+                    for time, tx_rate in saved_values['tx_rates_by_time']:
                         # find the worst value
                         if framerate - tx_rate > 10:
                             if bad_tx_rate is None or tx_rate < bad_tx_rate:
                                 bad_tx_rate = tx_rate
 
-                    if bad_tx_rate:
-                        json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
-                        if json_content["test_status"] != "error":
-                            json_content["test_status"] = "failed"
+                            if bad_value_first_time is None:
+                                bad_value_first_time = time
+                            elif (datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(bad_value_first_time, '%Y-%m-%d %H:%M:%S')).total_seconds() > 10:
+                                json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
+                                if json_content["test_status"] != "error":
+                                    json_content["test_status"] = "failed"
+
+                                break
+                        else:
+                            bad_tx_rate = None
+                            bad_value_first_time = None
 
 
         # rule №3: encoder and decoder check. Problems with encoder -> warning. Problems with decoder -> issue with app
