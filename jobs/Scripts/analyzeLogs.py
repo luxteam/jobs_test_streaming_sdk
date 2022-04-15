@@ -614,13 +614,13 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             if max_tx_rate > 150:
                 json_content["message"].append("Application problem: too high TX Rate {}".format(max_tx_rate))
 
-        # rule №12: average latency in Android > 70 -> failed
+        # rule №12: average latency in Android > 80 -> failed
         if execution_type == "android":
             if 'average_latencies' in saved_values:
                 max_avg_latency = 0
 
                 for i in range(len(saved_values['average_latencies'])):
-                    if saved_values['average_latencies'][i] > 70 and saved_values['average_latencies'][i] > max_avg_latency:
+                    if saved_values['average_latencies'][i] > 80 and saved_values['average_latencies'][i] > max_avg_latency:
                         max_avg_latency = saved_values['average_latencies'][i]
 
                 if max_avg_latency != 0:
