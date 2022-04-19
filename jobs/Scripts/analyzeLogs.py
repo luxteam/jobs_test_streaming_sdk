@@ -456,10 +456,10 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                         if bad_desync_value is None or bad_desync_value < abs(desync_value):
                             bad_desync_value = abs(desync_value)
 
-                if bad_desync_value:
-                    json_content["message"].append("Application problem: Absolute value of A/V desync is more than 50 ms. A/V desync: {} ms".format(bad_desync_value))
-                    if json_content["test_status"] != "error":
-                        json_content["test_status"] = "failed"
+            if bad_desync_value:
+                json_content["message"].append("Application problem: Absolute value of A/V desync is more than 50 ms. A/V desync: {} ms".format(bad_desync_value))
+                if json_content["test_status"] != "error":
+                    json_content["test_status"] = "failed"
 
         # rule №6.1: (sum of video bitrate - sum of average bandwidth tx) / video bitrate > 0.25 or 3.0 -> issue with app
         if 'average_bandwidth_tx' in saved_values and 'video_bitrate' in saved_values:
