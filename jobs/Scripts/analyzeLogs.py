@@ -449,16 +449,17 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
         if 'decyns_values' in saved_values:
             bad_decyns_value = None
 
-            for decyns_value in saved_values['decyns_values']:
-                # find the worst value
-                if abs(decyns_value) > 50:
-                    if bad_decyns_value is None or bad_decyns_value < abs(decyns_value):
-                        bad_decyns_value = abs(decyns_value)
+            if get_capture(case["prepared_keys"]) != "fake":
+                for decyns_value in saved_values['decyns_values']:
+                    # find the worst value
+                    if abs(decyns_value) > 50:
+                        if bad_decyns_value is None or bad_decyns_value < abs(decyns_value):
+                            bad_decyns_value = abs(decyns_value)
 
-            if bad_decyns_value:
-                json_content["message"].append("Application problem: Absolute value of A/V desync is more than 50 ms. A/V desync: {} ms".format(bad_decyns_value))
-                if json_content["test_status"] != "error":
-                    json_content["test_status"] = "failed"
+                if bad_decyns_value:
+                    json_content["message"].append("Application problem: Absolute value of A/V desync is more than 50 ms. A/V desync: {} ms".format(bad_decyns_value))
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
         # rule №6.1: (sum of video bitrate - sum of average bandwidth tx) / video bitrate > 0.25 or 3.0 -> issue with app
         if 'average_bandwidth_tx' in saved_values and 'video_bitrate' in saved_values:
