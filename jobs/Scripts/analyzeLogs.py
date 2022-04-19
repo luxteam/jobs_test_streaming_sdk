@@ -150,11 +150,11 @@ def parse_block_line(line, saved_values):
     elif 'A/V desync' in line:
         # Line example:
         # 2021-07-07 13:43:23.081      A60 [RemoteGamePipeline]    Info: A/V desync:  1.29 ms, video bitrate: 20.00 Mbps
-        if 'decyns_values' not in saved_values:
-            saved_values['decyns_values'] = []
+        if 'desync_values' not in saved_values:
+            saved_values['desync_values'] = []
 
-        decyns_values = float(line.split('desync:')[1].split(',')[0].replace('ms', ''))
-        saved_values['decyns_values'].append(decyns_values)
+        desync_values = float(line.split('desync:')[1].split(',')[0].replace('ms', ''))
+        saved_values['desync_values'].append(desync_values)
 
         if 'video_bitrate' not in saved_values:
             saved_values['video_bitrate'] = []
@@ -445,18 +445,19 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
-        # rule №5: |decyns value| > 50ms -> issue with app
-        if 'decyns_values' in saved_values:
-            bad_decyns_value = None
+        # rule №5: |desync value| > 50ms -> issue with app
+        if 'desync_values' in saved_values:
+            bad_desync_value = None
 
-            for decyns_value in saved_values['decyns_values']:
-                # find the worst value
-                if abs(decyns_value) > 50:
-                    if bad_decyns_value is None or bad_decyns_value < abs(decyns_value):
-                        bad_decyns_value = abs(decyns_value)
+            if get_capture(case["prepared_keys"]) != "fake":
+                for desync_value in saved_values['desync_values']:
+                    # find the worst value
+                    if abs(desync_value) > 50:
+                        if bad_desync_value is None or bad_desync_value < abs(desync_value):
+                            bad_desync_value = abs(desync_value)
 
-            if bad_decyns_value:
-                json_content["message"].append("Application problem: Absolute value of A/V desync is more than 50 ms. A/V desync: {} ms".format(bad_decyns_value))
+            if bad_desync_value:
+                json_content["message"].append("Application problem: Absolute value of A/V desync is more than 50 ms. A/V desync: {} ms".format(bad_desync_value))
                 if json_content["test_status"] != "error":
                     json_content["test_status"] = "failed"
 
