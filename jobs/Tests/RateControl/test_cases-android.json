@@ -2,7 +2,7 @@
     {
         "case": "STR_ARC_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Framerate 60 -QoS true -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 0 -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -11,7 +11,7 @@
     {
         "case": "STR_ARC_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Framerate 90 -QoS true -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 60 -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -20,7 +20,7 @@
     {
         "case": "STR_ARC_003",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Framerate 120 -QoS true -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 0 -RateControl cbr -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -29,7 +29,7 @@
     {
         "case": "STR_ARC_004",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Framerate 144 -QoS true -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 60 -RateControl cbr -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -38,7 +38,7 @@
     {
         "case": "STR_ARC_005",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -QoS true -extStats true -Framerate 60",
+        "server_keys": "-Resolution <resolution> -Framerate 0 -RateControl lvbr -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -47,7 +47,7 @@
     {
         "case": "STR_ARC_006",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -QoS true -Framerate 90 -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 60 -RateControl lvbr -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -56,7 +56,7 @@
     {
         "case": "STR_ARC_007",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -QoS true -Framerate 120 -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl cbr -Bitrate 10000000 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -65,7 +65,7 @@
     {
         "case": "STR_ARC_008",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -QoS true -Framerate 144 -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl cbr -Bitrate 1000000 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -74,7 +74,7 @@
     {
         "case": "STR_ARC_009",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl lvbr -QoS true -extStats true -Framerate 60",
+        "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl lvbr -Bitrate 10000000 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -83,7 +83,7 @@
     {
         "case": "STR_ARC_010",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl lvbr -QoS true -Framerate 90 -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl lvbr -Bitrate 1000000 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -92,23 +92,14 @@
     {
         "case": "STR_ARC_011",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl lvbr -QoS true -Framerate 120 -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 0 -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
-        "transport_protocol": "udp",
+        "transport_protocol": "tcp",
         "script_info": [
         ]
     },
     {
         "case": "STR_ARC_012",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl lvbr -QoS true -Framerate 144 -extStats true",
-        "client_keys": "-Fullscreen true",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_ARC_013",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 60 -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
@@ -117,9 +108,18 @@
         ]
     },
     {
+        "case": "STR_ARC_013",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -Framerate 0 -RateControl cbr -QoS true -extStats true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+        ]
+    },
+    {
         "case": "STR_ARC_014",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Framerate 90 -QoS true -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 60 -RateControl cbr -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -128,7 +128,7 @@
     {
         "case": "STR_ARC_015",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Framerate 120 -QoS true -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 0 -RateControl lvbr -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -137,7 +137,7 @@
     {
         "case": "STR_ARC_016",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Framerate 144 -QoS true -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 60 -RateControl lvbr -QoS true -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -146,7 +146,7 @@
     {
         "case": "STR_ARC_017",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -QoS true -extStats true -Framerate 60",
+        "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl cbr -Bitrate 10000000 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -155,7 +155,7 @@
     {
         "case": "STR_ARC_018",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -QoS true -Framerate 90 -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl cbr -Bitrate 1000000 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -164,7 +164,7 @@
     {
         "case": "STR_ARC_019",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -QoS true -Framerate 120 -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl lvbr -Bitrate 10000000 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
@@ -173,43 +173,7 @@
     {
         "case": "STR_ARC_020",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl cbr -QoS true -Framerate 144 -extStats true",
-        "client_keys": "-Fullscreen true",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_ARC_021",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl lvbr -QoS true -extStats true -Framerate 60",
-        "client_keys": "-Fullscreen true",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_ARC_022",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl lvbr -QoS true -Framerate 90 -extStats true",
-        "client_keys": "-Fullscreen true",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_ARC_023",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl lvbr -QoS true -Framerate 120 -extStats true",
-        "client_keys": "-Fullscreen true",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_ARC_024",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -RateControl lvbr -QoS true -Framerate 144 -extStats true",
+        "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl lvbr -Bitrate 1000000 -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
