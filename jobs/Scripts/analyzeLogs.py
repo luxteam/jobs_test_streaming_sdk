@@ -289,19 +289,20 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             # ignore for Android
             if get_capture(case["prepared_keys"]) != "dd" and get_capture(case["prepared_keys"]) != "false":
                 if execution_type != "android":
-                    bad_encoder_value = None
-
-                    for encoder_value in saved_values['encoder_values']:
-                        # find the worst value
-                        if encoder_value >= framerate:
-                            if bad_encoder_value is None or bad_encoder_value < encoder_value:
-                                bad_encoder_value = encoder_value
-
-                    if bad_encoder_value:
-                        json_content["message"].append("Application problem: Encoder is equal to or bigger than framerate. Encoder  {}. Framerate: {}".format(bad_encoder_value, framerate))
-                        if json_content["test_status"] != "error":
-                            json_content["test_status"] = "failed"
-
+                    if get_framerate(case["prepared_keys"]) != 0:
+                        bad_encoder_value = None
+    
+                        for encoder_value in saved_values['encoder_values']:
+                            # find the worst value
+                            if encoder_value >= framerate:
+                                if bad_encoder_value is None or bad_encoder_value < encoder_value:
+                                    bad_encoder_value = encoder_value
+    
+                        if bad_encoder_value:
+                            json_content["message"].append("Application problem: Encoder is equal to or bigger than framerate. Encoder  {}. Framerate: {}".format(bad_encoder_value, framerate))
+                            if json_content["test_status"] != "error":
+                                json_content["test_status"] = "failed"
+    
                 # rule №1.2: avrg encoder * 2 < encoder -> problem with app
                 avrg_encoder_value = mean(saved_values['encoder_values'])
 
