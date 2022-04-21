@@ -288,7 +288,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             # rule №1.1: encoder >= framerate -> problem with app
             # ignore for Android
             if get_capture(case["prepared_keys"]) != "dd" and get_capture(case["prepared_keys"]) != "false":
-                if execution_type != "android":
+                if execution_type != "android" or get_framerate(case["prepared_keys"]) != 0:
                     bad_encoder_value = None
 
                     for encoder_value in saved_values['encoder_values']:
