@@ -250,6 +250,9 @@ def execute_tests(args):
             error_messages = set()
 
             try:
+                if "android_clumsy_keys" in case:
+                    start_clumsy(case["android_clumsy_keys"])
+
                 instance_state = AndroidInstanceState()
 
                 # copy settings.json to update transport protocol using by server instance
@@ -424,6 +427,9 @@ def execute_tests(args):
                     json.dump(state, json_file, indent=4)
 
                 current_try += 1
+
+                if "android_clumsy_keys" in case:
+                    close_clumsy()
 
                 if ("keep_server" in case and case["keep_server"]) or ("keep_client" in case and case["keep_client"]):
                     sleep(30)

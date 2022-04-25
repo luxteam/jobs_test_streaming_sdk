@@ -224,6 +224,9 @@ def execute_tests(args, current_conf):
 
     while tests_left > 0:
         try:
+            if "second_client_clumsy_keys" in case:
+                start_clumsy(case["second_client_clumsy_keys"])
+
             # Connect to server to sync autotests
             main_logger.info("Start trying to connect to server")
 
@@ -376,6 +379,10 @@ def execute_tests(args, current_conf):
 
         finally:
             tests_left -= 1
+
+            if "second_client_clumsy_keys" in case:
+                close_clumsy()
+
             main_logger.info("End of test case")
 
     return 0
