@@ -14,6 +14,7 @@ import copy
 import traceback
 import time
 import win32api
+import re
 from instance_state import AndroidInstanceState
 from android_actions import *
 from analyzeLogs import analyze_logs
@@ -238,6 +239,9 @@ def execute_tests(args):
     # first time video recording can be unstable, do it before tests
     execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
 
+    # Make sure that clumsy is closed
+    close_clumsy()
+
     for case in [x for x in cases if not is_case_skipped(x, current_conf)]:
 
         case_start_time = time.time()
@@ -250,6 +254,16 @@ def execute_tests(args):
             error_messages = set()
 
             try:
+                if "android_clumsy_keys" in case:
+                    out, err = execute_adb_command("adb devices", return_output=True)
+
+                    android_ip = re.findall(
+                        '(\d*\.\d*\.\d*\.\d*)', out.decode('utf-8'))
+                    android_ip = next(iter(android_ip or None), 0)
+                    main_logger.info("Found android device ip {}".format(android_ip))
+
+                    start_clumsy(case["android_clumsy_keys"], android_ip=android_ip)
+
                 instance_state = AndroidInstanceState()
 
                 # copy settings.json to update transport protocol using by server instance
@@ -424,6 +438,9 @@ def execute_tests(args):
                     json.dump(state, json_file, indent=4)
 
                 current_try += 1
+
+                if "android_clumsy_keys" in case:
+                    close_clumsy()
 
                 if ("keep_server" in case and case["keep_server"]) or ("keep_client" in case and case["keep_client"]):
                     sleep(30)
