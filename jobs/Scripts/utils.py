@@ -541,7 +541,7 @@ def contains_encryption_errors(error_messages):
 def start_clumsy(keys, client_ip=None, server_ip=None, android_ip=None, second_client_ip=None):
     script = "powershell \"Start-Process cmd '/k clumsy.exe {} & exit 0' -Verb RunAs\"".format(keys.replace("\"", "\\\""))
 
-    ips = [client_ip, server_ip, android_ip, second_client_ip]
+    ips = {"client_ip": client_ip, "server_ip": server_ip, "android_ip": android_ip, "second_client_ip": second_client_ip}
 
     for ip_key, ip_value in ips.items():
         if ip_value is not None:

@@ -258,7 +258,7 @@ def execute_tests(args):
                     out, err = execute_adb_command("adb devices", return_output=True)
 
                     android_ip = re.findall(
-                        '(\d*\.\d*\.\d*\.\d*)', out)
+                        '(\d*\.\d*\.\d*\.\d*)', out.decode('utf-8'))
                     android_ip = next(iter(android_ip or None), 0)
                     main_logger.info("Found android device ip {}".format(android_ip))
 
