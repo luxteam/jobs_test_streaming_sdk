@@ -539,10 +539,10 @@ def contains_encryption_errors(error_messages):
 
 
 def start_clumsy(keys):
-    script = "powershell \"Start-Process cmd '/k clumsy.exe {} && exit 0' -Verb RunAs\"".format(keys.replace("\"", "\\\""))
-    psutil.Popen(keys, stdout=PIPE, stderr=PIPE, shell=True)
+    script = "powershell \"Start-Process cmd '/k clumsy.exe {} & exit 0' -Verb RunAs\"".format(keys.replace("\"", "\\\""))
+    psutil.Popen(script, stdout=PIPE, stderr=PIPE, shell=True)
 
 
 def close_clumsy():
-    script = "powershell \"Start-Process cmd '/k taskkill /im clumsy.exe && exit 0' -Verb RunAs\""
-    psutil.Popen(keys, stdout=PIPE, stderr=PIPE, shell=True)
+    script = "powershell \"Start-Process cmd '/k taskkill /im clumsy.exe & exit 0' -Verb RunAs\""
+    psutil.Popen(script, stdout=PIPE, stderr=PIPE, shell=True)

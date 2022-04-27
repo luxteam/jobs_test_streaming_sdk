@@ -222,11 +222,13 @@ def execute_tests(args, current_conf):
     previous_test_case = None
     current_try = 0
 
+    case = None
+
+    # Make sure that clumsy is closed
+    close_clumsy()
+
     while tests_left > 0:
         try:
-            if "second_client_clumsy_keys" in case:
-                start_clumsy(case["second_client_clumsy_keys"])
-
             # Connect to server to sync autotests
             main_logger.info("Start trying to connect to server")
 
@@ -245,8 +247,6 @@ def execute_tests(args, current_conf):
             with open(os.path.join(os.path.abspath(args.output), "test_cases.json"), "r") as json_file:
                 cases = json.load(json_file)
 
-            case = None
-
             for current_case in cases:
                 if current_case["case"] == response:
                     case = current_case
@@ -255,6 +255,9 @@ def execute_tests(args, current_conf):
                 raise Exception("Could not find test case with name '{}'".format(response))
 
             main_logger.info("Start test case: {}".format(response))
+
+            if "second_client_clumsy_keys" in case:
+                start_clumsy(case["second_client_clumsy_keys"])
 
             if case == previous_test_case:
                 current_try += 1
@@ -306,7 +309,7 @@ def execute_tests(args, current_conf):
                     process = start_streaming("second_client", script_path)
 
             pyscreenshot.grab()
-            pyautogui.click(x=1000, y=800)
+            pyautogui.click(x=400, y=800)
 
             # while client doesn't sent 'next_case' command server waits next command
             while not instance_state.finish_command_received:
@@ -380,7 +383,7 @@ def execute_tests(args, current_conf):
         finally:
             tests_left -= 1
 
-            if "second_client_clumsy_keys" in case:
+            if case is None or "second_client_clumsy_keys" in case:
                 close_clumsy()
 
             main_logger.info("End of test case")
