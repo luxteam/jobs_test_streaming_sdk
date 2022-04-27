@@ -14,6 +14,7 @@ import copy
 import traceback
 import time
 import win32api
+import re
 from instance_state import AndroidInstanceState
 from android_actions import *
 from analyzeLogs import analyze_logs
@@ -254,7 +255,14 @@ def execute_tests(args):
 
             try:
                 if "android_clumsy_keys" in case:
-                    start_clumsy(case["android_clumsy_keys"])
+                    out, err = execute_adb_command("adb devices", return_output=True)
+
+                    android_ip = re.findall(
+                        '(\d*\.\d*\.\d*\.\d*)', out)
+                    android_ip = next(iter(android_ip or None), 0)
+                    main_logger.info("Found android device ip {}".format(android_ip))
+
+                    start_clumsy(case["android_clumsy_keys"], android_ip=android_ip)
 
                 instance_state = AndroidInstanceState()
 

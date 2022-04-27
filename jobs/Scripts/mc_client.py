@@ -257,7 +257,7 @@ def execute_tests(args, current_conf):
             main_logger.info("Start test case: {}".format(response))
 
             if "second_client_clumsy_keys" in case:
-                start_clumsy(case["second_client_clumsy_keys"])
+                start_clumsy(case["second_client_clumsy_keys"], server_ip=args.ip_address)
 
             if case == previous_test_case:
                 current_try += 1

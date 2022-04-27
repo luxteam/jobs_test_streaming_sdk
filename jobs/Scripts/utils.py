@@ -538,8 +538,15 @@ def contains_encryption_errors(error_messages):
         return False
 
 
-def start_clumsy(keys):
+def start_clumsy(keys, client_ip=None, server_ip=None, android_ip=None, second_client_ip=None):
     script = "powershell \"Start-Process cmd '/k clumsy.exe {} & exit 0' -Verb RunAs\"".format(keys.replace("\"", "\\\""))
+
+    ips = [client_ip, server_ip, android_ip, second_client_ip]
+
+    for ip_key, ip_value in ips.items():
+        if ip_value is not None:
+            script = script.replace("<{}>".format(ip_key), ip_value)
+
     psutil.Popen(script, stdout=PIPE, stderr=PIPE, shell=True)
 
 

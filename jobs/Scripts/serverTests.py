@@ -13,6 +13,7 @@ import pyautogui
 import pydirectinput
 from utils import *
 from threading import Thread
+import re
 from instance_state import ServerInstanceState
 from server_actions import *
 import android_actions
@@ -126,7 +127,21 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
 
     try:
         if "server_clumsy_keys" in case:
-            start_clumsy(case["server_clumsy_keys"])
+            second_client_ip = None
+            android_ip = None
+
+            if args.test_group in MC_CONFIG["second_win_client"]:
+                second_client_ip=address_sc[0]
+
+            if args.test_group in MC_CONFIG["android_client"]:
+                out, err = execute_adb_command("adb devices", return_output=True)
+
+                android_ip = re.findall(
+                    '(\d*\.\d*\.\d*\.\d*)', out)
+                android_ip = next(iter(android_ip or None), 0)
+                main_logger.info("Found android device ip {}".format(android_ip))
+                
+            start_clumsy(case["server_clumsy_keys"], client_ip=address[0], second_client_ip=second_client_ip, android_ip=android_ip)
 
         # create state object
         instance_state = ServerInstanceState()

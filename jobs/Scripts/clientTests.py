@@ -83,7 +83,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
 
     try:
         if "client_clumsy_keys" in case:
-            start_clumsy(case["client_clumsy_keys"])
+            start_clumsy(case["client_clumsy_keys"], server_ip=args.ip_address)
 
         # create state object
         instance_state = ClientInstanceState()
