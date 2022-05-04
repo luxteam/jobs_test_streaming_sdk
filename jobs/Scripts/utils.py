@@ -74,7 +74,7 @@ def collect_traces(archive_path, archive_name):
     except Exception:
         pass
 
-    script = "powershell \"Start-Process cmd '/k clumsy.exe \"{}\" && .\\log_extended.cmd & exit 0' -Verb RunAs\"".format(gpuview_path)
+    script = "powershell \"Start-Process cmd '/k cd \"{}\" && .\\log_extended.cmd & exit 0' -Verb RunAs\"".format(gpuview_path)
 
     proc = psutil.Popen(script, stdout=PIPE, stderr=PIPE, shell=True)
 
