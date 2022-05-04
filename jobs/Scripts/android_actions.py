@@ -278,11 +278,27 @@ class OpenGame(Action):
 
 def make_window_foreground(window, logger):
     try:
-        win32gui.ShowWindow(window, 4)
+        win32gui.ShowWindow(window, 1)
         win32gui.SetForegroundWindow(window)
     except Exception as e:
-        logger.error("Failed to make window foreground: {}".format(str(e)))
+        logger.error("Failed to make window foreground (SW_SHOWNNORMAL): {}".format(str(e)))
         logger.error("Traceback: {}".format(traceback.format_exc()))
+        logger.info("Try to make window foreground with SW_SHOWNOACTIVATE value")
+
+        try:
+            win32gui.ShowWindow(window, 4)
+            win32gui.SetForegroundWindow(window)
+        except Exception as e1:
+            logger.error("Failed to make window foreground (SW_SHOWNOACTIVATE): {}".format(str(e1)))
+            logger.error("Traceback: {}".format(traceback.format_exc()))
+            logger.info("Try to make window foreground with SW_SHOW value")
+
+            try:
+                win32gui.ShowWindow(window, 5)
+                win32gui.SetForegroundWindow(window)
+            except Exception as e1:
+                logger.error("Failed to make window foreground (SW_SHOW): {}".format(str(e2)))
+                logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
 # Do click 
