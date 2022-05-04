@@ -64,17 +64,9 @@ def close_process(process):
 
 
 def collect_traces(archive_path, archive_name):
-    traces_base_path = "C:\\JN\\GPUViewTraces"
-    # traces can generate in gpuview dir
     gpuview_path = os.getenv("GPUVIEW_PATH")
-    executable_name = "log_extended.cmd - Shortcut.lnk"
+    executable_name = "log_extended.cmd"
     target_name = "Merged.etl"
-
-    try:
-        for filename in glob(os.path.join(traces_base_path, "*.etl")):
-            os.remove(filename)
-    except Exception:
-        pass
 
     try:
         for filename in glob(os.path.join(gpuview_path, "*.etl")):
@@ -82,19 +74,18 @@ def collect_traces(archive_path, archive_name):
     except Exception:
         pass
 
-    proc = psutil.Popen(os.path.join(traces_base_path, executable_name), stdout=PIPE, stderr=PIPE, shell=True)
+    script = "powershell \"Start-Process cmd '/k clumsy.exe \"{}\" && .\\log_extended.cmd & exit 0' -Verb RunAs\"".format(gpuview_path)
+
+    proc = psutil.Popen(script, stdout=PIPE, stderr=PIPE, shell=True)
 
     proc.communicate()
 
     sleep(2)
 
-    target_path = os.path.join(traces_base_path, target_name)
+    target_path = os.path.join(gpuview_path, target_name)
 
     if not os.path.exists(target_path):
-        target_path = os.path.join(gpuview_path, target_name)
-
-        if not os.path.exists(target_path):
-            raise Exception("Could not find etl file by path {}".format(target_path))
+        raise Exception("Could not find etl file by path {}".format(target_path))
 
     with zipfile.ZipFile(os.path.join(archive_path, archive_name), "w", zipfile.ZIP_DEFLATED) as archive:
         archive.write(target_path, arcname=target_name)
