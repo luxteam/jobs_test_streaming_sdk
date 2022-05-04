@@ -78,17 +78,16 @@ def collect_traces(archive_path, archive_name):
 
     proc = psutil.Popen(script, stdout=PIPE, stderr=PIPE, shell=True)
 
-    proc.communicate()
-
-    sleep(3)
-
     target_path = os.path.join(gpuview_path, target_name)
 
-    if not os.path.exists(target_path):
-        sleep(3)
+    start_time = datetime.now()
 
-        if not os.path.exists(target_path):
-            raise Exception("Could not find etl file by path {}".format(target_path))
+    while (datetime.now() - start_time).total_seconds() <= 30:
+        if os.path.exists(target_path):
+            sleep(5)
+            break
+    else:
+        raise Exception("Could not find etl file by path {}".format(target_path))
 
     with zipfile.ZipFile(os.path.join(archive_path, archive_name), "w", zipfile.ZIP_DEFLATED) as archive:
         archive.write(target_path, arcname=target_name)
