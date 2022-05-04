@@ -271,9 +271,6 @@ def execute_tests(args, current_conf):
         # first time video recording on Android device can be unstable, do it before tests
         execute_adb_command("adb shell screenrecord --time-limit=10 /sdcard/video.mp4")
 
-    # Make sure that clumsy is closed
-    close_clumsy()
-
     for case in [x for x in cases if not is_case_skipped(x, current_conf)]:
 
         case["game_name"] = args.game_name

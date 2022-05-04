@@ -224,9 +224,6 @@ def execute_tests(args, current_conf):
 
     case = None
 
-    # Make sure that clumsy is closed
-    close_clumsy()
-
     while tests_left > 0:
         try:
             # Connect to server to sync autotests
