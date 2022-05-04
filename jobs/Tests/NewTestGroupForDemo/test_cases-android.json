@@ -1,0 +1,11 @@
+[
+    {
+        "case": "STR_DEM_001",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -QoS false -extStats true -Framerate 30",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    }
+ ]

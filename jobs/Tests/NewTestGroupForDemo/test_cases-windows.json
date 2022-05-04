@@ -1,0 +1,11 @@
+[
+    {
+        "case": "STR_QOS_001",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -QoS false -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    }
+ ]
