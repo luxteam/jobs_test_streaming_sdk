@@ -80,12 +80,15 @@ def collect_traces(archive_path, archive_name):
 
     proc.communicate()
 
-    sleep(2)
+    sleep(3)
 
     target_path = os.path.join(gpuview_path, target_name)
 
     if not os.path.exists(target_path):
-        raise Exception("Could not find etl file by path {}".format(target_path))
+        sleep(3)
+
+        if not os.path.exists(target_path):
+            raise Exception("Could not find etl file by path {}".format(target_path))
 
     with zipfile.ZipFile(os.path.join(archive_path, archive_name), "w", zipfile.ZIP_DEFLATED) as archive:
         archive.write(target_path, arcname=target_name)
