@@ -1,0 +1,20 @@
+[
+    {
+        "case": "STR_ASM_001",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_ASM_002",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+        ]
+    }
+]
