@@ -6,9 +6,7 @@
         "Codecs":"",
         "ConversionType":"",
         "Duplicate":"",
-        "General":"",
         "MPO":"",
-        "Monitors":"",
         "QoS":"",
         "RateControl":"",
         "RenderType":"",
@@ -16,11 +14,9 @@
         "Slices":"",
         "Smoke":"",
         "VSync":"",
-        "GeneralQoS":"",
         "Connection":"",
         "DirtyRectangles":"",
         "Flags":"",
-        "Microphone":"",
         "CaptureMode": ""
     }
 }
