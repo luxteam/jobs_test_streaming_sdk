@@ -1,7 +1,7 @@
 [
     {
         "case": "STR_AUD_001",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -Stereo false",
         "transport_protocol": "udp",
@@ -10,7 +10,7 @@
     },
     {
         "case": "STR_AUD_002",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -Stereo true",
         "transport_protocol": "udp",
@@ -28,7 +28,7 @@
     },
     {
         "case": "STR_AUD_004",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -Stereo false",
         "transport_protocol": "tcp",
@@ -37,7 +37,7 @@
     },
     {
         "case": "STR_AUD_005",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true -Stereo true",
         "transport_protocol": "tcp",
