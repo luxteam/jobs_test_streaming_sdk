@@ -3,7 +3,7 @@
 
     <outpath value="{OutputDir}"/>
 
-    <execute command='python "{ResourcesDir}/simpleRender.py"' timeout="5400">
+    <execute command='python "{ResourcesDir}/simpleRender.py"' timeout="3600">
         <argument>--client_tool "{clientTool}"</argument>
         <argument>--server_tool "{serverTool}"</argument>
         <argument>--output "{OutputDir}"</argument>
