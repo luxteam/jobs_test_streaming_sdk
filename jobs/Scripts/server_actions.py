@@ -562,7 +562,7 @@ class StartStreaming(MulticonnectionAction):
             self.process = start_streaming(self.args.execution_type, self.script_path)
 
             if self.args.test_group in mc_config["second_win_client"] or self.args.test_group in mc_config["android_client"]:
-                sleep(5)
+                sleep(0.1)
 
             if should_collect_traces:
                 collect_traces(self.archive_path, self.archive_name + "_server.zip")
@@ -575,12 +575,12 @@ class StartStreaming(MulticonnectionAction):
             if self.android_client_closed:
                 multiconnection_start_android(self.args.test_group)
                 # small delay to give client time to connect
-                sleep(5)
+                sleep(0.1)
 
         # start second client after server
         if self.args.test_group in mc_config["second_win_client"]:
             self.second_sock.send(self.case["case"].encode("utf-8"))
             # small delay to give client time to connect
-            sleep(5)
+            sleep(0.1)
 
         self.sock.send("done".encode("utf-8"))
