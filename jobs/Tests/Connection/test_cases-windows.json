@@ -15,7 +15,7 @@
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
-        "transport_protocol": "tcp",
+        "transport_protocol": "udp",
         "start_first": "client",
         "script_info": [
             "Connect client before server"
@@ -134,10 +134,10 @@
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
-        "transport_protocol": "udp",
-        "start_first": "client",
+        "transport_protocol": "tcp",
+        "start_first": "server",
         "script_info": [
-            "Connect client before server"
+            "Connect server before client"
         ]
     },
     {
@@ -146,9 +146,9 @@
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
-        "start_first": "server",
+        "start_first": "client",
         "script_info": [
-            "Connect server before client"
+            "Connect client before server"
         ]
     },
     {
