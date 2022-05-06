@@ -1,16 +1,12 @@
 {
     "weights": [
         {
-            "suite_name": "GeneralQoS",
-            "value": 28
-        },
-        {
             "suite_name": "Audio",
-            "value": 2
+            "value": 6
         },
         {
             "suite_name": "Codecs",
-            "value": 4
+            "value": 2
         },
         {
             "suite_name": "CaptureType",
@@ -22,7 +18,7 @@
         },
         {
             "suite_name": "QoS",
-            "value": 18
+            "value": 66
         },
 
         {
@@ -31,11 +27,11 @@
         },
         {
             "suite_name": "RateControl",
-            "value": 22
+            "value": 62
         },
         {
             "suite_name": "Duplicate",
-            "value": 0
+            "value": 2
         },
         {
             "suite_name": "Monitors",
@@ -47,7 +43,7 @@
         },
         {
             "suite_name": "RenderType",
-            "value": 4
+            "value": 8
         },
         {
             "suite_name": "Resolution",
@@ -55,7 +51,7 @@
         },
         {
             "suite_name": "Slices",
-            "value": 4
+            "value": 8
         },
         {
             "suite_name": "Smoke",
@@ -74,10 +70,6 @@
             "value": 26
         },
         {
-            "suite_name": "Microphone",
-            "value": 2
-        },
-        {
             "suite_name": "Config",
             "value": 43
         },
@@ -88,6 +80,10 @@
         {
             "suite_name": "CaptureMode",
             "value": 4
-        }        
+        },
+        {
+            "suite_name": "HDR",
+            "value": 2
+        }       
     ]
 }

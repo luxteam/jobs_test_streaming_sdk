@@ -127,7 +127,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                     continue
 
                 # Replacing record_video command to record_audio
-                if "record_video" in action and args.test_group == "Microphone":
+                if "record_video" in action and "-microphone true" in case["server_keys"].lower():
                     action = action.replace("record_video", "record_audio")
 
                 main_logger.info("Current action: {}".format(action))

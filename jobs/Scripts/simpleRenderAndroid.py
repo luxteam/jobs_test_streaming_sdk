@@ -330,7 +330,7 @@ def execute_tests(args):
                 # execute actions one by one
                 for action in actions:
                     # Replacing record_video command to record_audio
-                    if "record_video" in action and args.test_group == "Microphone":
+                    if "record_video" in action and "-microphone true" in case["server_keys"].lower():
                         action = action.replace("record_video", "record_audio")
                     
                     main_logger.info("Current action: {}".format(action))

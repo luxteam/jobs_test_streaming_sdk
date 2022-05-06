@@ -6,7 +6,6 @@
         "Codecs":"",
         "ConversionType":"",
         "Duplicate":"",
-        "General":"",
         "MPO":"",
         "Monitors":"",
         "QoS":"",
@@ -16,17 +15,16 @@
         "Slices":"",
         "Smoke":"",
         "VSync":"",
-        "GeneralQoS":"",
         "Connection":"",
         "DirtyRectangles":"",
         "Flags":"",
-        "Microphone":"",
         "Config":"",
         "ConfigOverwrite":"",
         "CaptureMode": "",
         "Encryption":"",
         "MulticonnectionWW":"",
         "MulticonnectionWA":"",
-        "MulticonnectionWWA":""
+        "MulticonnectionWWA":"",
+        "HDR":""
     }
 }

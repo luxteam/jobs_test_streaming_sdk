@@ -106,7 +106,7 @@ if __name__ == '__main__':
                         target_file_content[i]["script_info"] = format_script_info(target_file_content[i]["script_info"])
 
                         # Microphone test group: mp4 file is recording on server side
-                        if source_file_content[i]["test_group"] == "Microphone":
+                        if "keys" in source_file_content[i] and "-microphone true" in source_file_content[i]["keys"].lower():
                             if VIDEO_KEY in source_file_content[i]:
                                 target_file_content[i][VIDEO_KEY] = source_file_content[i][VIDEO_KEY]
                         else:

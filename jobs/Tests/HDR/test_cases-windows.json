@@ -1,20 +1,20 @@
 [
     {
-        "case": "STR_COD_001",
+        "case": "STR_HDR_001",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Codec h.264 -extStats true -Framerate 60",
+        "server_keys": "-Resolution <resolution> -extStats true -EnableHDR true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
         ]
     },
     {
-        "case": "STR_COD_002",
+        "case": "STR_HDR_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -Codec h.264 -extStats true -Framerate 60",
+        "server_keys": "-Resolution <resolution> -extStats true -EnableHDR true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
         ]
     }
-]
+ ]

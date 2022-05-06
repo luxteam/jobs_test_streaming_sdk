@@ -1,6 +1,6 @@
 [
     {
-        "case": "STR_MIC_001",
+        "case": "STR_AAD_001",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Microphone true",
         "client_keys": "",
@@ -9,7 +9,7 @@
         ]
     },
     {
-        "case": "STR_MIC_002",
+        "case": "STR_AAD_002",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Microphone true",
         "client_keys": "",
