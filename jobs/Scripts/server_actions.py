@@ -550,17 +550,18 @@ class StartStreaming(MulticonnectionAction):
         mc_config = get_mc_config()
 
         # TODO: make single parameter to configure launching order
-        # start android client before server or default behaviour
-        if "android_start" not in self.case or self.case["android_start"] == "before_server":
+        # start android client before server
+        if "android_start" in self.case and self.case["android_start"] == "before_server":
             if self.android_client_closed:
                 multiconnection_start_android(self.args.test_group)
+                sleep(5)
 
         # start server
         if self.process is None:
             should_collect_traces = (self.args.collect_traces == "BeforeTests")
             self.process = start_streaming(self.args.execution_type, self.script_path)
 
-            if self.args.test_group in mc_config["second_win_client"]:
+            if self.args.test_group in mc_config["second_win_client"] or self.args.test_group in mc_config["android_client"]:
                 sleep(5)
 
             if should_collect_traces:
@@ -569,8 +570,8 @@ class StartStreaming(MulticonnectionAction):
                 sleep(5)
 
         # TODO: make single parameter to configure launching order
-        # start android client after server
-        if "android_start" in self.case and self.case["android_start"] == "after_server":
+        # start android client after server or default behaviour
+        if "android_start" not in self.case or self.case["android_start"] == "after_server":
             if self.android_client_closed:
                 multiconnection_start_android(self.args.test_group)
                 # small delay to give client time to connect
