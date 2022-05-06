@@ -1,6 +1,6 @@
 [
     {
-        "case": "STR_VS_001",
+        "case": "STR_HDR_001",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -EnableHDR true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -9,7 +9,7 @@
         ]
     },
     {
-        "case": "STR_VS_002",
+        "case": "STR_HDR_002",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -EnableHDR true -Framerate 60",
         "client_keys": "-Fullscreen true",
