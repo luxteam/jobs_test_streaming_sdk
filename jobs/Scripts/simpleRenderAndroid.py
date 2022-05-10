@@ -247,6 +247,9 @@ def execute_tests(args):
 
         main_logger.info("Start test case {}. Try: {}".format(case["case"], current_try))
 
+        execute_adb_command("adb kill-server")
+        execute_adb_command("adb connect 192.168.0.151:5555")
+
         while current_try < args.retries:
             error_messages = set()
 
