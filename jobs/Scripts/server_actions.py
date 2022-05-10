@@ -572,6 +572,9 @@ class StartStreaming(MulticonnectionAction):
         # TODO: make single parameter to configure launching order
         # start android client after server or default behaviour
         if "android_start" not in self.case or self.case["android_start"] == "after_server":
+            execute_adb_command("adb kill-server")
+            execute_adb_command("adb connect 192.168.0.151:5555")
+            
             if self.android_client_closed:
                 multiconnection_start_android(self.args.test_group)
                 # small delay to give client time to connect
