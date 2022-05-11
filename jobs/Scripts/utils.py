@@ -434,18 +434,12 @@ def analyze_encryption(case, execution_type, transport_protocol, is_encrypted, m
     encryption_is_valid = validate_encryption(execution_type, transport_protocol, "src", is_encrypted, address)
 
     if not encryption_is_valid:
-        if execution_type == "client" or execution_type == "second_client":
-            messages.add("Found invalid encryption. Packet: server -> client (found on {} side)".format(second_client))
-        else:
-            messages.add("Found invalid encryption. Packet: server -> client (found on server side)")
+        messages.add("Found invalid encryption. Packet: server -> client (found on {} side)".format(execution_type))
 
     encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, address)
 
     if not encryption_is_valid:
-        if execution_type == "client" or execution_type == "second_client":
-            messages.add("Found invalid encryption. Packet: client -> server (found on {} side)".format(second_client))
-        else:
-            messages.add("Found invalid encryption. Packet: client -> server (found on server side)")
+        messages.add("Found invalid encryption. Packet: client -> server (found on {} side)".format(execution_type))
 
 
 def decode_payload(payload):
