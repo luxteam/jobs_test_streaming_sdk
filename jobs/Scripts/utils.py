@@ -473,7 +473,7 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
 
     non_encrypted_packet_found = False
 
-    if packets_to_analyze <= 10:
+    if len(packets) <= 10:
         main_logger.warning("Not enough packets for analyze")
         return False
 
