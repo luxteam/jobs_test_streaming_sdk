@@ -436,7 +436,9 @@ def analyze_encryption(case, execution_type, transport_protocol, is_encrypted, m
     if not encryption_is_valid:
         messages.add("Found invalid encryption. Packet: server -> client (found on {} side)".format(execution_type))
 
-    encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, address)
+    # do not check inbound packets on server if problems with connection of clients are expected
+    if execution_type != "server" or "expected_connection_problems" not in case:
+        encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, address)
 
     if not encryption_is_valid:
         messages.add("Found invalid encryption. Packet: client -> server (found on {} side)".format(execution_type))
