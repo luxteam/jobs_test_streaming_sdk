@@ -352,8 +352,13 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 if 'tx_rates' in saved_values:
                     bad_tx_rate = None
                     bad_value_first_time = None
+                    not_null_tx_rate = False
 
                     for time, tx_rate in saved_values['tx_rates_by_time']:
+                        # check that all tx rate values aren't zero
+                        if tx_rate > 0.0:
+                            not_null_tx_rate = True
+
                         # find the worst value
                         if framerate - tx_rate > 10:
                             if bad_tx_rate is None or tx_rate < bad_tx_rate:
@@ -361,7 +366,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                             if bad_value_first_time is None:
                                 bad_value_first_time = time
-                            elif (datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(bad_value_first_time, '%Y-%m-%d %H:%M:%S')).total_seconds() > 10:
+                            elif (datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(bad_value_first_time, '%Y-%m-%d %H:%M:%S')).total_seconds() > 10 and not_null_tx_rate:
                                 json_content["message"].append("Application problem: TX Rate is much less than framerate. Framerate: {}. TX rate: {} fps".format(framerate, bad_tx_rate))
                                 if json_content["test_status"] != "error":
                                     json_content["test_status"] = "failed"
