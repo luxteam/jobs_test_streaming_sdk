@@ -457,6 +457,9 @@ def decode_payload(payload):
 
 # address is address of the opposite side
 def validate_encryption(execution_type, transport_protocol, direction, is_encrypted, address):
+    # number of packets which should be analyzed (some packets doesn't contain payload, they'll be skipped)
+    packets_to_analyze = 5
+
     main_logger.info("Check first {} packets".format(packets_to_analyze))
 
     if execution_type == "client":
@@ -483,8 +486,6 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
     if packets_to_analyze > len(packets):
         packets_to_analyze = len(packets)
 
-    # number of packets which should be analyzed (some packets doesn't contain payload, they'll be skipped)
-    packets_to_analyze = 5
     analyzed_packets = 0
 
     for packet in packets[:packets_to_analyze]:
