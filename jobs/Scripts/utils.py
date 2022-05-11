@@ -452,7 +452,7 @@ def decode_payload(payload):
 # address is address of the opposite side
 def validate_encryption(execution_type, transport_protocol, direction, is_encrypted, address):
     # number of packets which should be analyzed (some packets doesn't contain payload, they'll be skipped)
-    packets_to_analyze = 5
+    packets_to_analyze = 10
 
     main_logger.info("Check first {} packets".format(packets_to_analyze))
 
@@ -473,9 +473,9 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
 
     non_encrypted_packet_found = False
 
-    if len(packets) <= 10:
+    if len(packets) < packets_to_analyze:
         main_logger.warning("Not enough packets for analyze")
-        return False
+        return True
 
     if packets_to_analyze > len(packets):
         packets_to_analyze = len(packets)
