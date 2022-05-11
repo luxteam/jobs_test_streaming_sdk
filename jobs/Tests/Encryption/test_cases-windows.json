@@ -37,6 +37,7 @@
         "start_first": "server",
         "max_clients": 1,
         "expected_connection_problems": ["client"],
+        "has_wrong_passphrase": true,
         "script_info": [
             "Launch server and client using AES Encryption Wrong Passphrase",
             "Expected result: Client side will not connect to Server"
@@ -106,6 +107,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "expected_connection_problems": ["second_client"],
+        "has_wrong_passphrase": true,
         "script_info": [
             "Launch server with encryption and 2 clients both with encryption (one with correct passphrase and one with wrong)",
             "Expected result: Only the first Client will connect to server"
@@ -177,6 +179,7 @@
         "start_first": "server",
         "max_clients": 1,
         "expected_connection_problems": ["client"],
+        "has_wrong_passphrase": true,
         "script_info": [
             "Launch server and client using AES Encryption Wrong Passphrase",
             "Expected result: Client side will not connect to Server"
@@ -246,6 +249,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "expected_connection_problems": ["second_client"],
+        "has_wrong_passphrase": true,
         "script_info": [
             "Launch server with encryption and 2 clients both with encryption (one with correct passphrase and one with wrong)",
             "Expected result: Only the first Client will connect to server"

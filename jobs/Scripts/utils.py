@@ -431,14 +431,17 @@ def analyze_encryption(case, execution_type, transport_protocol, is_encrypted, m
         main_logger.info("Ignore encryption analyzing due to expected problems")
         return
 
+    # do not check encryption if problems case has wrong passphrase
+    if "has_wrong_passphrase" in case and case["has_wrong_passphrase"]:
+        main_logger.info("Ignore encryption analyzing due to wrong passphrase")
+        return
+
     encryption_is_valid = validate_encryption(execution_type, transport_protocol, "src", is_encrypted, address)
 
     if not encryption_is_valid:
         messages.add("Found invalid encryption. Packet: server -> client (found on {} side)".format(execution_type))
 
-    # do not check inbound packets on server if problems with connection of clients are expected
-    if execution_type != "server" or "expected_connection_problems" not in case:
-        encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, address)
+    encryption_is_valid = validate_encryption(execution_type, transport_protocol, "dst", is_encrypted, address)
 
     if not encryption_is_valid:
         messages.add("Found invalid encryption. Packet: client -> server (found on {} side)".format(execution_type))
