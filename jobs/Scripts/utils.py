@@ -452,9 +452,9 @@ def decode_payload(payload):
 # address is address of the opposite side
 def validate_encryption(execution_type, transport_protocol, direction, is_encrypted, address):
     # number of packets which should be analyzed (some packets doesn't contain payload, they'll be skipped)
-    packets_to_analyze = 10
+    packets_to_analyze = 5
 
-    main_logger.info("Check first {} packets".format(packets_to_analyze))
+    main_logger.info("Check {} packets".format(packets_to_analyze))
 
     if execution_type == "client":
         capture_filter = "{direction} host {address} and {transport_protocol} {direction} port 1235".format(direction=direction, address=address, transport_protocol=transport_protocol)
@@ -467,7 +467,7 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
     main_logger.info("Capture filter: {}".format(capture_filter))
 
     packets = pyshark.LiveCapture("eth", bpf_filter=capture_filter)
-    packets.sniff(timeout=2)
+    packets.sniff(timeout=3)
 
     main_logger.info(packets)
 
@@ -482,12 +482,14 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
 
     analyzed_packets = 0
 
-    for packet in packets[:packets_to_analyze]:
+    for packet in packets:
         try:
             if transport_protocol == "udp":
                 payload = packet.udp.payload
             else:
                 payload = packet.tcp.payload
+
+            analyzed_packets += 1
         except AttributeError:
             main_logger.warning("Could not get payload")
             continue
@@ -498,7 +500,6 @@ def validate_encryption(execution_type, transport_protocol, direction, is_encryp
 
         decoded_payload = decode_payload(payload)
         main_logger.info("Decoded payload: {}".format(decoded_payload))
-        analyzed_packets += 1
 
         if "\"id\":" in decoded_payload or "\"DeviceID\":" in decoded_payload:
             non_encrypted_packet_found = True
