@@ -9,7 +9,7 @@
             "Config":"STR_CFG_010,STR_CFG_032",
             "ConfigOverwrite":"STR_CFR_001,STR_CFR_004,STR_CFR_012,STR_CFR_015",
             "Connection":"STR_CON_001,STR_CON_002,STR_CON_003,STR_CON_004,STR_CON_005,STR_CON_009,STR_CON_010,STR_CON_014,STR_CON_015,STR_CON_019,STR_CON_020,STR_CON_024",
-            "ConversionType":"STR_CT_002,STR_CT_003",
+            "ConversionType":"STR_CT_001,STR_CT_003",
             "DirtyRectangles":"STR_DRT_002,STR_DRT_004",
             "Duplicate":"STR_DP_001,STR_DP_002",
             "Flags":"STR_FLG_001,STR_FLG_002,STR_FLG_014,STR_FLG_015",
