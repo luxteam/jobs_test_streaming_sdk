@@ -152,6 +152,8 @@
         "sleep 240",
         "execute_cmd \"C:\\JN\\League of Legends.lnk\"",
         "sleep 90",
+        "click_server center_-15 center_-160",
+        "sleep 1",
         "click_server center_-520 center_-340",
         "sleep 1",
         "click_server center_-390 center_-280",
