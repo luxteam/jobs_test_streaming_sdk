@@ -3,11 +3,11 @@
 
     <outpath value="{OutputDir}"/>
 
-    <execute command='python "{ResourcesDir}/simpleRenderAndroid.py"' timeout="10800">
+    <execute command='python "{ResourcesDir}/simpleRenderAndroid.py"' timeout="900">
         <argument>--client_tool "{clientTool}"</argument>
         <argument>--server_tool "{serverTool}"</argument>
         <argument>--output "{OutputDir}"</argument>
-        <argument>--test_group RateControl</argument>
+        <argument>--test_group HDR</argument>
         <argument>--test_cases "{TestCases}"</argument>
         <argument>--retries {retries}</argument>
         <argument>--game_name "{gameName}"</argument>

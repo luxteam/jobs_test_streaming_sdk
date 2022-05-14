@@ -6,17 +6,16 @@
         "Codecs":"",
         "ConversionType":"",
         "Duplicate":"",
-        "MPO":"",
         "QoS":"",
         "RateControl":"",
         "RenderType":"",
         "Resolution":"",
         "Slices":"",
         "Smoke":"",
-        "VSync":"",
         "Connection":"",
         "DirtyRectangles":"",
         "Flags":"",
-        "CaptureMode": ""
+        "CaptureMode":"",
+        "HDR":""
     }
 }
