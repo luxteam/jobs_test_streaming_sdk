@@ -11,18 +11,18 @@
     {
         "case": "STR_CPM_002",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -CaptureMode present -extStats true",
+        "server_keys": "-Resolution <resolution> -CaptureMode asap -extStats true",
         "client_keys": "-Fullscreen true",
-        "transport_protocol": "tcp",
+        "transport_protocol": "udp",
         "script_info": [
         ]
     },
     {
         "case": "STR_CPM_003",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -CaptureMode asap -extStats true",
+        "server_keys": "-Resolution <resolution> -CaptureMode present -extStats true",
         "client_keys": "-Fullscreen true",
-        "transport_protocol": "udp",
+        "transport_protocol": "tcp",
         "script_info": [
         ]
     },
