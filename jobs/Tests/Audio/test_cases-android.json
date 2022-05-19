@@ -10,8 +10,26 @@
     },
     {
         "case": "STR_AAD_002",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile <<FILE>>",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_AAD_003",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Microphone true",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+        ]
+    },
+    {
+        "case": "STR_AAD_004",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile <<FILE>>",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
