@@ -3,7 +3,7 @@
         "case": "STR_ARN_001",
         "status": "active",
         "server_keys": "-Resolution 1920,1200 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen false",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -12,7 +12,7 @@
         "case": "STR_ARN_002",
         "status": "active",
         "server_keys": "-Resolution 1280,720 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -21,7 +21,7 @@
         "case": "STR_ARN_003",
         "status": "active",
         "server_keys": "-Resolution 1920,1200 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen false",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -30,7 +30,7 @@
         "case": "STR_ARN_004",
         "status": "active",
         "server_keys": "-Resolution 1280,720 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]

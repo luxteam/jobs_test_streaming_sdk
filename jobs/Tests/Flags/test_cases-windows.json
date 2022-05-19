@@ -21,7 +21,7 @@
         "case": "STR_FLG_003",
         "status": "active",
         "server_keys": "-capture amd -Framerate 60 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
-        "client_keys": " -fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -138,7 +138,7 @@
         "case": "STR_FLG_016",
         "status": "active",
         "server_keys": "-capture amd -Framerate 60 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
-        "client_keys": " -fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
         ]
