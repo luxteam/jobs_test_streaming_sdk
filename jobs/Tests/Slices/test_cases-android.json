@@ -3,7 +3,7 @@
         "case": "STR_ASL_001",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Slices 5 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -12,7 +12,7 @@
         "case": "STR_ASL_002",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Slices 500 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -21,7 +21,7 @@
         "case": "STR_ASL_003",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Slices 1000 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -30,7 +30,7 @@
         "case": "STR_ASL_004",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Slices 1001 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -39,7 +39,7 @@
         "case": "STR_ASL_005",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Slices 5 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -48,7 +48,7 @@
         "case": "STR_ASL_006",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Slices 500 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -57,7 +57,7 @@
         "case": "STR_ASL_007",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Slices 1000 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -66,7 +66,7 @@
         "case": "STR_ASL_008",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Slices 1001 -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]

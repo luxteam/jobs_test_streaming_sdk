@@ -3,7 +3,7 @@
         "case": "STR_AFL_001",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -21,7 +21,7 @@
         "case": "STR_AFL_003",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -30,7 +30,7 @@
         "case": "STR_AFL_004",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -39,7 +39,7 @@
         "case": "STR_AFL_005",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -48,7 +48,7 @@
         "case": "STR_AFL_006",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -57,7 +57,7 @@
         "case": "STR_AFL_007",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -66,7 +66,7 @@
         "case": "STR_AFL_008",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -75,7 +75,7 @@
         "case": "STR_AFL_009",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -84,7 +84,7 @@
         "case": "STR_AFL_010",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -93,7 +93,7 @@
         "case": "STR_AFL_011",
         "status": "active",
         "server_keys": "-extStats -Framerate 30 -capture amd -resolution 2560,1440 -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -102,7 +102,7 @@
         "case": "STR_AFL_012",
         "status": "active",
         "server_keys": "-Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -120,7 +120,7 @@
         "case": "STR_AFL_014",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -138,7 +138,7 @@
         "case": "STR_AFL_016",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -147,7 +147,7 @@
         "case": "STR_AFL_017",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -156,7 +156,7 @@
         "case": "STR_AFL_018",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -165,7 +165,7 @@
         "case": "STR_AFL_019",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1  -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -174,7 +174,7 @@
         "case": "STR_AFL_020",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -183,7 +183,7 @@
         "case": "STR_AFL_021",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -192,7 +192,7 @@
         "case": "STR_AFL_022",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -201,7 +201,7 @@
         "case": "STR_AFL_023",
         "status": "active",
         "server_keys": "-capture amd -Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -210,7 +210,7 @@
         "case": "STR_AFL_024",
         "status": "active",
         "server_keys": "-extStats -Framerate 30 -capture amd -resolution 2560,1440 -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
@@ -219,7 +219,7 @@
         "case": "STR_AFL_025",
         "status": "active",
         "server_keys": "-Framerate 30 -bitrate 50000000 -QoS true -resolution 2560,1440 -extStats true -render DX11 -convert DX11 -duplicate false -codec h.265 -ratecontrol vbr -slices 1 -adjustframerate true -adjustbitrate true -framerateperiod 2 -bitrateperiod 2 -frameratestep 5 -bitratestep 5000000 -minframerate 30 -minbitrate 10000000",
-        "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]

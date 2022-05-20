@@ -3,7 +3,7 @@
         "case": "STR_ADP_001",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Duplicate true -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
         ]
@@ -12,7 +12,7 @@
         "case": "STR_ADP_002",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Duplicate true -extStats true -Framerate 30",
-        "client_keys": "-Fullscreen true",
+        "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
         ]
