@@ -9,90 +9,9 @@
         ]
     },
     {
-        "case": "STR_AQS_002",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -AdjustBitrate false -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_003",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -FrameratePeriod 2 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_004",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -BitratePeriod 5000000 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_005",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -FramerateStep 2 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_006",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -BitrateStep 5000000 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_007",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -MinFramerate 100 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
         "case": "STR_AQS_008",
         "status": "active",
         "server_keys": "-Resolution <resolution> -MinBitrate 70000000 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_009",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -Framerate 0",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_010",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Framerate 0",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_011",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Framerate 0",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
@@ -126,72 +45,9 @@
         ]
     },
     {
-        "case": "STR_AQS_015",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_016",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
         "case": "STR_AQS_017",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Bitrate 10000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_018",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Bitrate 10000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_019",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Bitrate 10000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_020",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Bitrate 10000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_021",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Bitrate 10000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_022",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Bitrate 10000000 -Framerate 60",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
@@ -207,72 +63,9 @@
         ]
     },
     {
-        "case": "STR_AQS_024",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Bitrate 100000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_025",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Bitrate 100000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_026",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Bitrate 100000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_027",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Bitrate 100000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_028",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Bitrate 100000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
         "case": "STR_AQS_029",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Framerate 28",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_030",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Framerate 28",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_031",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Framerate 28",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
@@ -288,24 +81,6 @@
         ]
     },
     {
-        "case": "STR_AQS_033",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Framerate 58",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_034",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Framerate 58",
-        "client_keys": "",
-        "transport_protocol": "udp",
-        "script_info": [
-        ]
-    },
-    {
         "case": "STR_AQS_035",
         "status": "active",
         "server_keys": "-Resolution <resolution> -AdjustFramerate false -extStats true -Framerate 30",
@@ -315,90 +90,9 @@
         ]
     },
     {
-        "case": "STR_AQS_036",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -AdjustBitrate false -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_037",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -FrameratePeriod 2 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_038",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -BitratePeriod 5000000 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_039",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -FramerateStep 2 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_040",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -BitrateStep 5000000 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_041",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -MinFramerate 100 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
         "case": "STR_AQS_042",
         "status": "active",
         "server_keys": "-Resolution <resolution> -MinBitrate 70000000 -extStats true -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_043",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -Framerate 0",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_044",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Framerate 0",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_045",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Framerate 0",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
@@ -432,72 +126,9 @@
         ]
     },
     {
-        "case": "STR_AQS_049",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_050",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
         "case": "STR_AQS_051",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Bitrate 10000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_052",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Bitrate 10000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_053",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Bitrate 10000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_054",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Bitrate 10000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_055",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Bitrate 10000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_056",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Bitrate 10000000 -Framerate 60",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
@@ -513,51 +144,6 @@
         ]
     },
     {
-        "case": "STR_AQS_058",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Bitrate 100000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_059",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Bitrate 100000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_060",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Bitrate 100000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_061",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Bitrate 100000000 -Framerate 30",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_062",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Bitrate 100000000 -Framerate 60",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
         "case": "STR_AQS_063",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Framerate 28",
@@ -567,45 +153,9 @@
         ]
     },
     {
-        "case": "STR_AQS_064",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Framerate 28",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_065",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Framerate 28",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
         "case": "STR_AQS_066",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -RateControl vbr -Framerate 58",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_067",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl cbr -Framerate 58",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-        ]
-    },
-    {
-        "case": "STR_AQS_068",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -RateControl lvbr -Framerate 58",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
