@@ -1,8 +1,8 @@
 {
     "second_win_client": [
-        "MulticonnectionWW", "MulticonnectionWWA", "Encryption"
+        "MulticonnectionWW", "MulticonnectionWWA", "Encryption", "SmokeMulticonnection"
     ],
     "android_client": [
-        "MulticonnectionWA", "MulticonnectionWWA"
+        "MulticonnectionWA", "MulticonnectionWWA", "SmokeMulticonnection"
     ]
 }
