@@ -16,6 +16,7 @@ from actions import *
 import base64
 import keyboard
 from pyffmpeg import FFmpeg
+from grayArtifacts import check_artifacts
 
 pyautogui.FAILSAFE = False
 MC_CONFIG = get_mc_config()
@@ -424,6 +425,10 @@ def make_screen(screen_path, current_try, logger, screen_name = "", current_imag
         with open(screen_path, "wb") as file:
             file.write(out)
 
+        # Check artifacts
+        status = check_artifacts(os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1)))
+        self.logger.info("{:03}_{}_try_{:02}.png is corrupted: {}".format(current_image_num, screen_name, current_try + 1, status))
+
         logger.error("Screencap command err: {}".format(err))
     except Exception as e:
         logger.error("Failed to make screenshot: {}".format(str(e)))
@@ -503,6 +508,11 @@ class RecordVideo(MulticonnectionAction):
 
             compressing_thread = Thread(target=download_and_compress_video, args=(temp_video_path, target_video_path, self.logger))
             compressing_thread.start()
+
+            # Check artifacts
+            status = check_artifacts(os.path.join(self.video_path, self.target_video_name), obj_type="video")
+            self.logger.info("{} is corrupted: {}".format(self.target_video_name + ".mp4", status))
+
         except Exception as e:
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))

@@ -10,6 +10,7 @@ from threading import Thread
 from utils import *
 import win32api
 from actions import *
+from grayArtifacts import check_artifacts
 
 pyautogui.FAILSAFE = False
 MC_CONFIG = get_mc_config()
@@ -176,6 +177,9 @@ def make_screen(screen_path, current_try, screen_name = "", current_image_num = 
         screen = screen.convert("RGB")
         screen.save(os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1)))
 
+        # Check artifacts
+        status = check_artifacts(os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1)))
+        self.logger.info("{:03}_{}_try_{:02}.jpg is corrupted: {}".format(current_image_num, screen_name, current_try + 1, status))
 
 # [Client action] record video
 # This action triggers actions on server side in Multiconnection group
@@ -204,6 +208,11 @@ class RecordVideo(Action):
             .format(resolution=self.resolution, audio_device_name=self.audio_device_name, time=time_flag_value, video=video_full_path))
 
         self.logger.info("Finish to record video")
+
+        # Check artifacts
+        status = check_artifacts(video_full_path, obj_type="video")
+        self.logger.info("{} is corrupted: {}".format(self.video_name + ".mp4", status))
+
 
     def analyze_result(self):
         if self.is_multiconnection:
