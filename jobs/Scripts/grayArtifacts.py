@@ -99,7 +99,7 @@ def find_contour(img, thresh, limit=100000):
 
 def check_artifacts(path, limit=100000, obj_type="image", step=5):
     suppress_qt_warnings()
-    if obj == "image":
+    if obj_type == "image":
         img = cv2.imread(path)
         thresh = create_thresh(img)
         status, contour = find_contour(img, thresh, limit)
