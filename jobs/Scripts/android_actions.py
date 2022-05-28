@@ -402,9 +402,9 @@ class MakeScreen(MulticonnectionAction):
 
     def execute(self):
         if not self.screen_name:
-            make_screen(self.screen_path, self.current_try, self.logger)
+            status = make_screen(self.screen_path, self.current_try, self.logger)
         else:
-            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
+            status = make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
             if self.test_group in MC_CONFIG["android_client"]:
@@ -415,6 +415,7 @@ class MakeScreen(MulticonnectionAction):
                     self.sock.send(response.encode("utf-8"))
                 else:
                     self.sock.send("done".encode("utf-8"))
+        self.logger.info("{:03}_{}_try_{:02}.png is corrupted: {}".format(self.current_image_num, self.screen_name, self.current_try + 1, status))
 
 
 def make_screen(screen_path, current_try, logger, screen_name = "", current_image_num = 0):
@@ -427,9 +428,9 @@ def make_screen(screen_path, current_try, logger, screen_name = "", current_imag
 
         # Check artifacts
         status = check_artifacts(os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1)))
-        self.logger.info("{:03}_{}_try_{:02}.png is corrupted: {}".format(current_image_num, screen_name, current_try + 1, status))
 
         logger.error("Screencap command err: {}".format(err))
+        return status
     except Exception as e:
         logger.error("Failed to make screenshot: {}".format(str(e)))
         logger.error("Traceback: {}".format(traceback.format_exc()))

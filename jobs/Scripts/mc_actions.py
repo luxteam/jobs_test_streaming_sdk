@@ -28,11 +28,12 @@ class MakeScreen(Action):
 
     def execute(self):
         if not self.screen_name:
-            make_screen(self.screen_path, self.current_try)
+            status = make_screen(self.screen_path, self.current_try)
         else:
-            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
+            status = make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
             self.sock.send("done".encode("utf-8"))
+        self.logger.info("{:03}_{}_try_{:02}.jpg is corrupted: {}".format(self.current_image_num, self.screen_name, self.current_try + 1, status))
 
 
 def make_screen(screen_path, current_try, screen_name = "", current_image_num = 0):
@@ -44,8 +45,7 @@ def make_screen(screen_path, current_try, screen_name = "", current_image_num = 
 
         # Check artifacts
         status = check_artifacts(os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1)))
-        self.logger.info("{:03}_{}_try_{:02}.jpg is corrupted: {}".format(current_image_num, screen_name, current_try + 1, status))
-
+        return status
 
 # [Client action] make sequence of screens with delay. It supports initial delay before the first test case
 class SleepAndScreen(Action):

@@ -157,13 +157,15 @@ class MakeScreen(Action):
 
     def execute(self):
         if not self.screen_name:
-            make_screen(self.screen_path, self.current_try)
+            status = make_screen(self.screen_path, self.current_try)
         else:
             if self.is_multiconnection:
                 self.sock.send(self.action.encode("utf-8"))
 
-            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
+            status = make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
+        self.logger.info("{:03}_{}_try_{:02}.jpg is corrupted: {}".format(self.current_image_num, self.screen_name, self.current_try + 1, status))
+
 
     def analyze_result(self):
         if self.screen_name and self.is_multiconnection:
@@ -179,7 +181,6 @@ def make_screen(screen_path, current_try, screen_name = "", current_image_num = 
 
         # Check artifacts
         status = check_artifacts(os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1)))
-        self.logger.info("{:03}_{}_try_{:02}.jpg is corrupted: {}".format(current_image_num, screen_name, current_try + 1, status))
 
 # [Client action] record video
 # This action triggers actions on server side in Multiconnection group
