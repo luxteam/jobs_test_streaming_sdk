@@ -57,19 +57,17 @@ def load_videos_from_folder(path):
 def extract_frames(capture, step):
     count = 0
     frames = []
-    name = capture[1]
-    vid = capture[0]
 
-    while vid.isOpened():
-        status, frame = vid.read()
+    while capture.isOpened():
+        status, frame = capture.read()
         if status:
             frames.append(frame)
             count += int(step)
-            vid.set(cv2.CAP_PROP_POS_FRAMES, count)
+            capture.set(cv2.CAP_PROP_POS_FRAMES, count)
         else:
-            vid.release()
+            capture.release()
             break
-    return frames, name
+    return frames
 
 
 def create_thresh(img):
@@ -107,7 +105,7 @@ def check_artifacts(path, limit=100000, obj_type="image", step=5):
     else:
         capture = cv2.VideoCapture(path)
         status = False
-        frames, name = extract_frames(capture, step)
+        frames = extract_frames(capture, step)
         for frame in frames:
             thresh = create_thresh(frame)
             status, contour = find_contour(frame, thresh, limit)
