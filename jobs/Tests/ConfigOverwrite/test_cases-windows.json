@@ -1,15 +1,5 @@
 [
     {
-        "case": "STR_CFR_016",
-        "status": "active",
-        "server_keys": "-extStats true -PROTOCOL tcp",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-            "Config values - Network: \"TCP\""
-        ]
-    },
-    {
         "case": "STR_CFR_022",
         "status": "active",
         "server_keys": "-extStats true -EnableHDR false",
