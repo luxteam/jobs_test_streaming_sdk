@@ -181,6 +181,7 @@ def make_screen(screen_path, current_try, screen_name = "", current_image_num = 
 
         # Check artifacts
         status = check_artifacts(os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1)))
+        return status
 
 # [Client action] record video
 # This action triggers actions on server side in Multiconnection group
