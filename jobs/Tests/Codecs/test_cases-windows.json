@@ -6,6 +6,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "h.264 codec"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "h.264 codec"
         ]
     }
 ]

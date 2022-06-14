@@ -7,6 +7,7 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Multiconnection default settings"
         ]
     },
     {
@@ -17,6 +18,7 @@
         "second_client_keys": "-fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Multiconnection default settings"
         ]
     }
 ]

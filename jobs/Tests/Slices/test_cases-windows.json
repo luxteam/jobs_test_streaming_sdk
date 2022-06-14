@@ -6,6 +6,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Slices 5"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Slices 500"
         ]
     },
     {
@@ -24,6 +26,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Slices 1000"
         ]
     },
     {
@@ -33,6 +36,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Slices 1001"
         ]
     },
     {
@@ -42,6 +46,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Slices 5"
         ]
     },
     {
@@ -51,6 +56,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Slices 500"
         ]
     },
     {
@@ -60,6 +66,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Slices 1000"
         ]
     },
     {
@@ -69,6 +76,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Slices 1001"
         ]
     }
  ]

@@ -6,6 +6,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Monitor ID"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "EDID"
         ]
     },
     {
@@ -24,6 +26,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Monitor ID"
         ]
     },
     {
@@ -33,6 +36,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "EDID"
         ]
     }
  ]

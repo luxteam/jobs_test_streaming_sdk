@@ -6,6 +6,8 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 0",
+            "QoS false"
         ]
     },
     {
@@ -15,6 +17,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 0",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -24,6 +29,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 0",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -33,6 +41,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 30",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -42,6 +53,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 30",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -51,6 +65,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 30",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -60,6 +77,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 45",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -69,6 +89,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 45",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -78,6 +101,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 45",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -87,6 +113,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 60",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -96,6 +125,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 60",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -105,6 +137,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 60",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -114,6 +149,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -123,6 +162,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 60",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -132,6 +175,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -141,6 +188,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 60",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -150,6 +201,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -159,6 +214,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 60",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -168,6 +227,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -177,6 +240,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 60",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -186,6 +253,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -195,6 +266,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 60",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -204,6 +279,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -213,6 +292,10 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 60",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -222,6 +305,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 28",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -231,6 +317,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 28",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -240,6 +329,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 28",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -249,6 +341,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 58",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -258,6 +353,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 58",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -267,6 +365,9 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 58",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -276,6 +377,8 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 0",
+            "QoS false"
         ]
     },
     {
@@ -285,6 +388,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 0",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -294,6 +400,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 0",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -303,6 +412,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 30",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -312,6 +424,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 30",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -321,6 +436,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 30",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -330,6 +448,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 45",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -339,6 +460,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 45",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -348,6 +472,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 45",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -357,6 +484,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 60",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -366,6 +496,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 60",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -375,6 +508,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 60",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -384,6 +520,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -393,6 +533,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 60",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -402,6 +546,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -411,6 +559,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 60",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -420,6 +572,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -429,6 +585,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 60",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -438,6 +598,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -447,6 +611,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 60",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -456,6 +624,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -465,6 +637,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 60",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -474,6 +650,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -483,6 +663,10 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 60",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -492,6 +676,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 28",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -501,6 +688,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 28",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -510,6 +700,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 28",
+            "LVBR",
+            "QoS false"
         ]
     },
     {
@@ -519,6 +712,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 58",
+            "VBR",
+            "QoS false"
         ]
     },
     {
@@ -528,6 +724,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 58",
+            "CBR",
+            "QoS false"
         ]
     },
     {
@@ -537,6 +736,9 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 58",
+            "LVBR",
+            "QoS false"
         ]
     }
  ]
