@@ -6,6 +6,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set explicitly"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: minbitrate, minframerate"
         ]
     },
     {
@@ -24,6 +26,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: bitratestep, frameratestep"
         ]
     },
     {
@@ -33,6 +36,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: bitrateperiod, framerateperiod"
         ]
     },
     {
@@ -42,6 +46,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: adjustbitrate, adjustframerate"
         ]
     },
     {
@@ -51,6 +56,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: slices, ratecontrol"
         ]
     },
     {
@@ -60,6 +66,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: codec, duplicate"
         ]
     },
     {
@@ -69,6 +76,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: convert"
         ]
     },
     {
@@ -78,6 +86,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: render"
         ]
     },
     {
@@ -87,6 +96,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: extStats, QoS, bitrate, framerate"
         ]
     },
     {
@@ -96,6 +106,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except: capture"
         ]
     },
     {
@@ -105,6 +116,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "udp",
         "script_info": [
+            "All parameters set, except (on Client): fullscreen, stereo, mpo"
         ]
     },
     {
@@ -206,6 +218,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set explicitly"
         ]
     },
     {
@@ -215,6 +228,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: minbitrate, minframerate"
         ]
     },
     {
@@ -224,6 +238,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: bitratestep, frameratestep"
         ]
     },
     {
@@ -233,6 +248,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: bitrateperiod, framerateperiod"
         ]
     },
     {
@@ -242,6 +258,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: adjustbitrate, adjustframerate"
         ]
     },
     {
@@ -251,6 +268,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: slices, ratecontrol"
         ]
     },
     {
@@ -260,6 +278,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: codec, duplicate"
         ]
     },
     {
@@ -269,6 +288,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: convert"
         ]
     },
     {
@@ -278,6 +298,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: render"
         ]
     },
     {
@@ -287,6 +308,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: extStats, QoS, bitrate, framerate"
         ]
     },
     {
@@ -296,6 +318,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except: capture"
         ]
     },
     {
@@ -305,6 +328,7 @@
         "client_keys": "-fullscreen true -stereo false -mpo false -vsync true",
         "transport_protocol": "tcp",
         "script_info": [
+            "All parameters set, except (on Client): fullscreen, stereo, mpo"
         ]
     },
     {

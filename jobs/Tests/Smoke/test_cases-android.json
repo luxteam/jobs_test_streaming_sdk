@@ -6,6 +6,7 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Default settings"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Default settings"
         ]
     }
 ]

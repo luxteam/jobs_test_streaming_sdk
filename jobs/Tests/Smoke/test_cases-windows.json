@@ -6,7 +6,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
-            "Smoke UDP"
+            "Default settings"
         ]
     },
     {
@@ -16,7 +16,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
-            "Smoke TCP"
+            "Default settings"
         ]
     }
 ]
