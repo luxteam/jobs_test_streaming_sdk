@@ -5,7 +5,7 @@ set IP_ADDRESS="%3"
 set COMMUNICATION_PORT="%4"
 set SERVER_GPU_NAME=%5
 set SERVER_OS_NAME=%6
-for /f %%i in ('C:\Python39\python.exe get_screen_resolution.py') do set SCREEN_RESOLUTION=%%i
+for /f %%i in ('python get_screen_resolution.py') do set SCREEN_RESOLUTION=%%i
 
 python prepare_xmls.py --os_name "MC"
 python prepare_test_cases.py --os_name "Windows"

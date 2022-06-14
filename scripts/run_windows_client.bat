@@ -9,7 +9,7 @@ set GAME_NAME=%7
 set COLLECT_TRACES=%8
 if not defined EXECUTION_TYPE set EXECUTION_TYPE="client"
 if not defined COLLECT_TRACES set COLLECT_TRACES="False"
-for /f %%i in ('C:\Python39\python.exe get_screen_resolution.py') do set SCREEN_RESOLUTION=%%i
+for /f %%i in ('python get_screen_resolution.py') do set SCREEN_RESOLUTION=%%i
 if not defined RETRIES set RETRIES=1
 if not defined EXECUTION_TYPE set EXECUTION_TYPE="client"
 

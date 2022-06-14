@@ -170,7 +170,10 @@ def prepare_empty_reports(args, current_conf):
             test_case_report[SCREENS_PATH_KEY] = os.path.join(args.output, "Color", case["case"])
             test_case_report["number_of_tries"] = 0
             test_case_report["client_configuration"] = get_gpu() + " " + platform.system()
-            test_case_report["server_configuration"] = args.server_gpu_name + " " + args.server_os_name
+            if args.server_gpu_name == "" and args.server_os_name == "":
+                test_case_report["server_configuration"] = get_gpu() + " " + platform.system()
+            else:
+                test_case_report["server_configuration"] = args.server_gpu_name + " " + args.server_os_name
             test_case_report["message"] = []
 
             if case['status'] == 'skipped':
@@ -411,8 +414,8 @@ if __name__ == '__main__':
             os.makedirs(os.path.join(args.output, "tool_logs"))
 
         # use OS name and GPU name from server (to skip and merge cases correctly)
-        render_device = args.server_gpu_name
-        system_pl = args.server_os_name
+        render_device = get_gpu() if args.server_gpu_name == "" else args.server_gpu_name
+        system_pl = platform.system() if args.server_os_name == "" else args.server_os_name
         current_conf = set(system_pl) if not render_device else {system_pl, render_device}
         main_logger.info("Detected GPUs: {}".format(render_device))
         main_logger.info("PC conf: {}".format(current_conf))
