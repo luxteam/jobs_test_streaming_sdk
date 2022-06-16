@@ -1,12 +1,12 @@
 [
     {
         "case": "STR_AUD_001",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
-        "client_keys": "-Fullscreen true -Stereo true",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Microphone true",
+        "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "Stereo audio"
+            "Microphone enabled"
         ]
     },
     {
@@ -24,7 +24,7 @@
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Microphone true",
         "client_keys": "",
-        "transport_protocol": "udp",
+        "transport_protocol": "tcp",
         "script_info": [
             "Microphone enabled"
         ]
@@ -32,31 +32,11 @@
     {
         "case": "STR_AUD_004",
         "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
-        "client_keys": "-Fullscreen true -Stereo true",
-        "transport_protocol": "tcp",
-        "script_info": [
-            "Stereo audio"
-        ]
-    },
-    {
-        "case": "STR_AUD_005",
-        "status": "skipped",
         "server_keys": "-Resolution <resolution> -AudioFile <<FILE>> -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
             "Audio File"
-        ]
-    },
-    {
-        "case": "STR_AUD_006",
-        "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Microphone true",
-        "client_keys": "",
-        "transport_protocol": "tcp",
-        "script_info": [
-            "Microphone enabled"
         ]
     }
 ]
