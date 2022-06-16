@@ -290,18 +290,22 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             if get_capture(case["prepared_keys"]) != "dd" and get_capture(case["prepared_keys"]) != "false":
                 if execution_type != "android":
                     if get_framerate(case["prepared_keys"]) != 0:
-                        bad_encoder_value = None
+                        # catch 3 value in succession
+                        bad_encoder_values = []
     
                         for encoder_value in saved_values['encoder_values']:
                             # find the worst value
                             if encoder_value >= framerate:
-                                if bad_encoder_value is None or bad_encoder_value < encoder_value:
-                                    bad_encoder_value = encoder_value
-    
-                        if bad_encoder_value:
-                            json_content["message"].append("Application problem: Encoder is equal to or bigger than framerate. Encoder  {}. Framerate: {}".format(bad_encoder_value, framerate))
+                                bad_encoder_values.append(encoder_value)
+
+                        if len(bad_encoder_values) >= 3:
+                            formatted_encoder_values = "[{}, {}, {}]".format(round(bad_encoder_values[0], 2), round(bad_encoder_values[1], 2), round(bad_encoder_values[2], 2))
+
+                            json_content["message"].append("Application problem: At least 3 encoder values in sucession are equal to or bigger than framerate. Encoder {}. Framerate: {}".format(formatted_encoder_values, framerate))
                             if json_content["test_status"] != "error":
                                 json_content["test_status"] = "failed"
+
+                            break
     
                 # rule №1.2: avrg encoder * 2 < encoder -> problem with app
                 avrg_encoder_value = mean(saved_values['encoder_values'])
