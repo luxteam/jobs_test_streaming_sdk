@@ -512,6 +512,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                     if block_number >= 5:
                         check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
+
+                    # clear saved values, because bitrate was changed
                     previous_video_bitrate = saved_values['video_bitrate'][i]
                     average_bandwidth_tx_sum = 0
                     block_number = 0
@@ -519,7 +521,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 average_bandwidth_tx_sum += saved_values['average_bandwidth_tx'][i]
                 block_number += 1
 
-            check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
+            if block_number >= 5:
+                check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
 
         # rule №6.2: if QoS false -> all bitrates must be same
         if not get_qos_status(case["prepared_keys"]) and 'video_bitrate' in saved_values:
