@@ -586,9 +586,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                         json_content["test_status"] = "failed"
                     break
 
-        # rule №9,3 AcquireSurface
+        # rule №9.3 AcquireSurface
         if 'acquire_surface' in saved_values and saved_values['acquire_surface'] >= 5:
             json_content["message"].append("Application problem: AcquireSurface detected")
+
+            if json_content["test_status"] != "error":
+                json_content["test_status"] = "failed"
 
         # rule №10: -resolution X,Y != Encode Resolution -> failed
         flag_resolution = get_resolution(case["prepared_keys"], execution_type)
