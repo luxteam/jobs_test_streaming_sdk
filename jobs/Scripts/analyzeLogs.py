@@ -604,7 +604,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                             json_content["test_status"] = "failed"
                     break
 
-        # rule №14: FPS > 150 -> warning
+        # rule №11: FPS > 150 -> warning
         if 'rx_rates' in saved_values:
             max_rx_rate = 0
 
