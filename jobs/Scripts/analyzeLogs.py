@@ -305,7 +305,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                             if json_content["test_status"] != "error":
                                 json_content["test_status"] = "failed"
 
-                            break
+                                break
     
                 # rule №1.2: avrg encoder * 2 < encoder -> problem with app
                 avrg_encoder_value = mean(saved_values['encoder_values'])
