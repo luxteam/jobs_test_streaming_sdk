@@ -297,6 +297,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                             # find the worst value
                             if encoder_value >= framerate:
                                 bad_encoder_values.append(encoder_value)
+                            else:
+                                bad_encoder_values = []
 
                             if len(bad_encoder_values) >= 3:
                                 formatted_encoder_values = "[{}, {}, {}]".format(round(bad_encoder_values[0], 2), round(bad_encoder_values[1], 2), round(bad_encoder_values[2], 2))
