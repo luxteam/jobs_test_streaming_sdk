@@ -133,7 +133,7 @@ def prepare_empty_reports(args, current_conf):
 
             test_case_report = {}
             test_case_report['test_case'] = case['case']
-            test_case_report['render_device'] = args.server_gpu_name
+            test_case_report['render_device'] = get_gpu() if args.server_gpu_name == "none" else args.server_gpu_name
 
             if case['status'] == 'skipped':
                 prepared_keys = prepare_keys(args, case)
