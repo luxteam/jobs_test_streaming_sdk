@@ -3,12 +3,12 @@ set FILE_FILTER=%1
 set TESTS_FILTER="%2"
 set IP_ADDRESS="%3"
 set COMMUNICATION_PORT="%4"
+set SCREEN_RESOLUTION="%5"
 set SERVER_GPU_NAME="none"
 set SERVER_OS_NAME="none"
-set GAME_NAME=%5
-set COLLECT_TRACES=%6
+set GAME_NAME=%6
+set COLLECT_TRACES=%7
 if not defined COLLECT_TRACES set COLLECT_TRACES="False"
-for /f %%i in ('C:\Python39\python.exe get_screen_resolution.py') do set SCREEN_RESOLUTION=%%i
 if not defined RETRIES set RETRIES=1
 if not defined EXECUTION_TYPE set EXECUTION_TYPE="server"
 
