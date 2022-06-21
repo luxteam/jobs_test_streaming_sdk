@@ -6,6 +6,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Framerate 0"
         ]
     },{
         "case": "STR_RC_002",
@@ -14,6 +16,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Framerate 30"
         ]
     },
     {
@@ -23,6 +27,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Framerate 90"
         ]
     },
     {
@@ -32,6 +38,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Framerate 120"
         ]
     },
     {
@@ -41,6 +49,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Framerate 144"
         ]
     },
     {
@@ -50,6 +60,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 0"
         ]
     },
     {
@@ -59,6 +72,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 30"
         ]
     },
     {
@@ -68,6 +84,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 60"
         ]
     },
     {
@@ -77,6 +96,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 90"
         ]
     },
     {
@@ -86,6 +108,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 120"
         ]
     },
     {
@@ -95,6 +120,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 144"
         ]
     },
     {
@@ -104,6 +132,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 0"
         ]
     },
     {
@@ -113,6 +144,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 30"
         ]
     },
     {
@@ -122,6 +156,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 60"
         ]
     },
     {
@@ -131,6 +168,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 90"
         ]
     },
     {
@@ -140,6 +180,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 120"
         ]
     },
     {
@@ -149,6 +192,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 144"
         ]
     },
     {
@@ -158,6 +204,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -167,6 +217,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -176,6 +230,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -185,6 +243,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -194,6 +256,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 30",
+            "VBR"
         ]
     },
     {
@@ -203,6 +269,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -212,6 +282,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -221,6 +295,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -230,6 +308,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -239,6 +321,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -248,6 +334,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 30",
+            "VBR"
         ]
     },
     {
@@ -257,6 +347,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 90",
+            "VBR"
         ]
     },
     {
@@ -266,6 +360,8 @@
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
         "transport_protocol": "udp",
         "script_info": [
+            "QoS false",
+            "Force Display Frame Rate"
         ]
     },
     {
@@ -275,6 +371,9 @@
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
         "transport_protocol": "udp",
         "script_info": [
+            "Server Framerate 90",
+            "QoS false",
+            "Force Display Frame Rate"
         ]
     },
     {
@@ -284,6 +383,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Framerate 0"
         ]
     },{
         "case": "STR_RC_033",
@@ -292,6 +393,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Framerate 30"
         ]
     },
     {
@@ -301,6 +404,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Framerate 90"
         ]
     },
     {
@@ -310,6 +415,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Framerate 120"
         ]
     },
     {
@@ -319,6 +426,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Framerate 144"
         ]
     },
     {
@@ -328,6 +437,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 0"
         ]
     },
     {
@@ -337,6 +449,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 30"
         ]
     },
     {
@@ -346,6 +461,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 60"
         ]
     },
     {
@@ -355,6 +473,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 90"
         ]
     },
     {
@@ -364,6 +485,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 120"
         ]
     },
     {
@@ -373,6 +497,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - CBR",
+            "Framerate 144"
         ]
     },
     {
@@ -382,6 +509,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 0"
         ]
     },
     {
@@ -391,6 +521,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 30"
         ]
     },
     {
@@ -400,6 +533,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 60"
         ]
     },
     {
@@ -409,6 +545,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 90"
         ]
     },
     {
@@ -418,6 +557,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 120"
         ]
     },
     {
@@ -427,6 +569,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Rate Control Mode - LVBR",
+            "Framerate 144"
         ]
     },
     {
@@ -436,6 +581,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -445,6 +594,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -454,6 +607,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -463,6 +620,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -472,6 +633,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 30",
+            "VBR"
         ]
     },
     {
@@ -481,6 +646,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 10000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -490,6 +659,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -499,6 +672,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -508,6 +685,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -517,6 +698,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -526,6 +711,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 30",
+            "VBR"
         ]
     },
     {
@@ -535,6 +724,10 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Bitrate 100000000",
+            "Framerate 90",
+            "VBR"
         ]
     },
     {
@@ -544,6 +737,8 @@
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
         "transport_protocol": "tcp",
         "script_info": [
+            "QoS false",
+            "Force Display Frame Rate"
         ]
     },
     {
@@ -553,6 +748,9 @@
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Server Framerate 90",
+            "QoS false",
+            "Force Display Frame Rate"
         ]
     }
 ]

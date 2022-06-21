@@ -1,8 +1,8 @@
 set PATH=c:\python39\;c:\python39\scripts\;%PATH%
 set FILE_FILTER=%1
 set TESTS_FILTER="%2"
-set RETRIES=%3
-set GAME_NAME=%4
+set GAME_NAME=%3
+set CIS_OS=Android
 if not defined RETRIES set RETRIES=1
 
 python prepare_xmls.py --os_name "Android"

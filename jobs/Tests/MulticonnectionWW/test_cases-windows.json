@@ -8,6 +8,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "Default settings, 1 client"
         ]
     },
     {
@@ -19,6 +20,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "Server and 2 Clients with default settings"
         ]
     },
     {
@@ -30,6 +32,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set explicitly"
         ]
     },
     {
@@ -41,6 +44,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: MinBitrate, MinFramerate"
         ]
     },
     {
@@ -52,6 +56,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: BitrateStep, FramerateStep"
         ]
     },
     {
@@ -63,6 +68,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: BitratePeriod, FrameratePeriod"
         ]
     },
     {
@@ -74,6 +80,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: AdjustBitrate, AdjustFramerate"
         ]
     },
     {
@@ -85,6 +92,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Slices, RateControl"
         ]
     },
     {
@@ -96,6 +104,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Codec, Duplicate"
         ]
     },
     {
@@ -107,6 +116,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Convert"
         ]
     },
     {
@@ -118,6 +128,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Render"
         ]
     },
     {
@@ -129,6 +140,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: extStats, QoS, Bitrate, Framerate"
         ]
     },
     {
@@ -140,6 +152,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Capture"
         ]
     },
     {
@@ -151,6 +164,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except (on Client): Fullscreen, Stereo, MPO"
         ]
     },
     {
@@ -162,6 +176,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set explicitly with Capture Mode present"
         ]
     },
     {
@@ -173,6 +188,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "All parameters set explicitly with Capture Mode asap"
         ]
     },
     {
@@ -184,6 +200,7 @@
         "transport_protocol": "udp",
         "start_first": "server",
         "script_info": [
+            "2 Clients with different parameters"
         ]
     },
     {
@@ -285,6 +302,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "Default settings, 1 client"
         ]
     },
     {
@@ -296,6 +314,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "Server and 2 Clients with default settings"
         ]
     },
     {
@@ -307,6 +326,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set explicitly"
         ]
     },
     {
@@ -318,6 +338,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: MinBitrate, MinFramerate"
         ]
     },
     {
@@ -329,6 +350,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: BitrateStep, FramerateStep"
         ]
     },
     {
@@ -340,6 +362,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: BitratePeriod, FrameratePeriod"
         ]
     },
     {
@@ -351,6 +374,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: AdjustBitrate, AdjustFramerate"
         ]
     },
     {
@@ -362,6 +386,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Slices, RateControl"
         ]
     },
     {
@@ -373,6 +398,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Codec, Duplicate"
         ]
     },
     {
@@ -384,6 +410,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Convert"
         ]
     },
     {
@@ -395,6 +422,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Render"
         ]
     },
     {
@@ -406,6 +434,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: extStats, QoS, Bitrate, Framerate"
         ]
     },
     {
@@ -417,6 +446,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except: Capture"
         ]
     },
     {
@@ -428,6 +458,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set, except (on Client): Fullscreen, Stereo, MPO"
         ]
     },
     {
@@ -439,6 +470,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set explicitly with Capture Mode present"
         ]
     },
     {
@@ -450,6 +482,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "All parameters set explicitly with Capture Mode asap"
         ]
     },
     {
@@ -461,6 +494,7 @@
         "transport_protocol": "tcp",
         "start_first": "server",
         "script_info": [
+            "2 Clients with different parameters"
         ]
     },
     {

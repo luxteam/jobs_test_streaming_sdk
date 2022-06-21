@@ -6,6 +6,7 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Default settings with dirty rects"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Drawing dirty dects"
         ]
     },
     {
@@ -24,6 +26,7 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Default settings with dirty rects"
         ]
     },
     {
@@ -33,6 +36,7 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Drawing dirty dects"
         ]
     }
 ]
