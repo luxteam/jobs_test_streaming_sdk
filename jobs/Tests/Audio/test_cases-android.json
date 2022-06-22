@@ -6,6 +6,7 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Microphone enabled"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Audio file on Server"
         ]
     },
     {
@@ -24,6 +26,7 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Microphone enabled"
         ]
     },
     {
@@ -33,6 +36,7 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Audio file on Server"
         ]
     }
 ]

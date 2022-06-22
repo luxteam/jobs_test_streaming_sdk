@@ -6,6 +6,7 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "DD Capture Type"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
+            "Fake Capture Type"
         ]
     },
     {
@@ -24,6 +26,7 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "DD Capture Type"
         ]
     },
     {
@@ -33,6 +36,7 @@
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
+            "Fake Capture Type"
         ]
     }
 ]

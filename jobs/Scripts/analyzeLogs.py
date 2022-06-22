@@ -290,19 +290,25 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
             if get_capture(case["prepared_keys"]) != "dd" and get_capture(case["prepared_keys"]) != "false":
                 if execution_type != "android":
                     if get_framerate(case["prepared_keys"]) != 0:
-                        bad_encoder_value = None
+                        # catch 3 value in succession
+                        bad_encoder_values = []
     
                         for encoder_value in saved_values['encoder_values']:
                             # find the worst value
                             if encoder_value >= framerate:
-                                if bad_encoder_value is None or bad_encoder_value < encoder_value:
-                                    bad_encoder_value = encoder_value
-    
-                        if bad_encoder_value:
-                            json_content["message"].append("Application problem: Encoder is equal to or bigger than framerate. Encoder  {}. Framerate: {}".format(bad_encoder_value, framerate))
-                            if json_content["test_status"] != "error":
-                                json_content["test_status"] = "failed"
-    
+                                bad_encoder_values.append(encoder_value)
+                            else:
+                                bad_encoder_values = []
+
+                            if len(bad_encoder_values) >= 3:
+                                formatted_encoder_values = "[{}, {}, {}]".format(round(bad_encoder_values[0], 2), round(bad_encoder_values[1], 2), round(bad_encoder_values[2], 2))
+
+                                json_content["message"].append("Application problem: At least 3 encoder values in sucession are equal to or bigger than framerate. Encoder {}. Framerate: {}".format(formatted_encoder_values, framerate))
+                                if json_content["test_status"] != "error":
+                                    json_content["test_status"] = "failed"
+
+                                    break
+
                 # rule №1.2: avrg encoder * 2 < encoder -> problem with app
                 avrg_encoder_value = mean(saved_values['encoder_values'])
 
@@ -395,9 +401,6 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                 if invalid_blocks_number >= 3:
                     json_content["message"].append("Application problem: high encoder value ({}-{}-{})".format(saved_values['queue_encoder_values'][i - 2], saved_values['queue_encoder_values'][i - 1], saved_values['queue_encoder_values'][i]))
-                    
-                    if json_content["test_status"] != "error":
-                        json_content["test_status"] = "failed"
 
                     break
 
@@ -414,6 +417,9 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                 if invalid_blocks_number >= 3:
                     json_content["message"].append("Application problem: high decoder value ({}-{}-{})".format(saved_values['queue_decoder_values'][i - 2], saved_values['queue_decoder_values'][i - 1], saved_values['queue_decoder_values'][i]))
+
+                    if json_content["test_status"] != "error":
+                        json_content["test_status"] = "failed"
 
                     break
 
@@ -508,6 +514,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
 
                     if block_number >= 5:
                         check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
+
+                    # clear saved values, because bitrate was changed
                     previous_video_bitrate = saved_values['video_bitrate'][i]
                     average_bandwidth_tx_sum = 0
                     block_number = 0
@@ -515,7 +523,8 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 average_bandwidth_tx_sum += saved_values['average_bandwidth_tx'][i]
                 block_number += 1
 
-            check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
+            if block_number >= 5:
+                check_rule_8(average_bandwidth_tx_sum, previous_video_bitrate, block_number)
 
         # rule №6.2: if QoS false -> all bitrates must be same
         if not get_qos_status(case["prepared_keys"]) and 'video_bitrate' in saved_values:
@@ -582,9 +591,12 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                         json_content["test_status"] = "failed"
                     break
 
-        # rule №9,3 AcquireSurface
+        # rule №9.3 AcquireSurface
         if 'acquire_surface' in saved_values and saved_values['acquire_surface'] >= 5:
             json_content["message"].append("Application problem: AcquireSurface detected")
+
+            if json_content["test_status"] != "error":
+                json_content["test_status"] = "failed"
 
         # rule №10: -resolution X,Y != Encode Resolution -> failed
         flag_resolution = get_resolution(case["prepared_keys"], execution_type)
@@ -597,7 +609,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                             json_content["test_status"] = "failed"
                     break
 
-        # rule №14: FPS > 150 -> warning
+        # rule №11: FPS > 150 -> warning
         if 'rx_rates' in saved_values:
             max_rx_rate = 0
 

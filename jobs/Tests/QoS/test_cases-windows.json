@@ -6,6 +6,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Adjust Framerate disabled"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Adjust Bitrate disabled"
         ]
     },
     {
@@ -24,6 +26,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate Period 2"
         ]
     },
     {
@@ -33,6 +36,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate Period 5000000"
         ]
     },
     {
@@ -42,6 +46,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate Step 2"
         ]
     },
     {
@@ -51,6 +56,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate Step 5000000"
         ]
     },
     {
@@ -60,6 +66,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Minimal Framerate 100"
         ]
     },
     {
@@ -69,6 +76,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Minimal Bitrate 10000000"
         ]
     },
     {
@@ -78,6 +86,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 0"
         ]
     },
     {
@@ -87,6 +96,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 0",
+            "CBR"
         ]
     },
     {
@@ -96,6 +107,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 0",
+            "LVBR"
         ]
     },
     {
@@ -105,6 +118,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 30"
         ]
     },
     {
@@ -114,6 +128,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -123,6 +139,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -132,6 +150,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 60",
+            "CBR"
         ]
     },
     {
@@ -141,6 +161,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 60",
+            "LVBR"
         ]
     },
     {
@@ -150,6 +172,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 90"
         ]
     },
     {
@@ -159,6 +182,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -168,6 +193,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Framerate 60",
+            "LVBR"
         ]
     },
     {
@@ -177,6 +204,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -186,6 +216,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -195,6 +228,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -204,6 +240,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -213,6 +252,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "VBR"
         ]
     },
     {
@@ -222,6 +264,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 90",
+            "VBR"
         ]
     },
     {
@@ -231,6 +276,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -240,6 +288,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -249,6 +300,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -258,6 +312,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -267,6 +324,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "VBR"
         ]
     },
     {
@@ -276,6 +336,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 90",
+            "VBR"
         ]
     },
     {
@@ -285,6 +348,7 @@
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
         "transport_protocol": "udp",
         "script_info": [
+            "Force Display Frame Rate"
         ]
     },
     {
@@ -294,6 +358,8 @@
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
         "transport_protocol": "udp",
         "script_info": [
+            "Server Framerate 90",
+            "Force Display Frame Rate"
         ]
     },
     {
@@ -303,6 +369,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Adjust Framerate disabled"
         ]
     },
     {
@@ -312,6 +379,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Adjust Bitrate disabled"
         ]
     },
     {
@@ -321,6 +389,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate Period 2"
         ]
     },
     {
@@ -330,6 +399,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate Period 5000000"
         ]
     },
     {
@@ -339,6 +409,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate Step 2"
         ]
     },
     {
@@ -348,6 +419,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate Step 5000000"
         ]
     },
     {
@@ -357,6 +429,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Minimal Framerate 100"
         ]
     },
     {
@@ -366,6 +439,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Minimal Bitrate 10000000"
         ]
     },
     {
@@ -375,6 +449,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 0"
         ]
     },
     {
@@ -384,6 +459,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 0",
+            "CBR"
         ]
     },
     {
@@ -393,6 +470,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 0",
+            "LVBR"
         ]
     },
     {
@@ -402,6 +481,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 30"
         ]
     },
     {
@@ -411,6 +491,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -420,6 +502,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -429,6 +513,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 60",
+            "CBR"
         ]
     },
     {
@@ -438,6 +524,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 60",
+            "CBR"
         ]
     },
     {
@@ -447,6 +535,7 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 90"
         ]
     },
     {
@@ -456,6 +545,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -465,6 +556,8 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Framerate 60",
+            "LVBR"
         ]
     },
     {
@@ -474,6 +567,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -483,6 +579,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -492,6 +591,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -501,6 +603,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -510,6 +615,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 30",
+            "VBR"
         ]
     },
     {
@@ -519,6 +627,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 10000000",
+            "Framerate 90",
+            "VBR"
         ]
     },
     {
@@ -528,6 +639,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "CBR"
         ]
     },
     {
@@ -537,6 +651,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 90",
+            "CBR"
         ]
     },
     {
@@ -546,6 +663,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "LVBR"
         ]
     },
     {
@@ -555,6 +675,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 90",
+            "LVBR"
         ]
     },
     {
@@ -564,6 +687,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 30",
+            "VBR"
         ]
     },
     {
@@ -573,6 +699,9 @@
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Bitrate 100000000",
+            "Framerate 90",
+            "VBR"
         ]
     },
     {
@@ -582,6 +711,7 @@
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Force Display Frame Rate"
         ]
     },
     {
@@ -591,6 +721,8 @@
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
         "transport_protocol": "tcp",
         "script_info": [
+            "Server Framerate 90",
+            "Force Display Frame Rate"
         ]
     }
  ]

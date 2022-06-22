@@ -6,6 +6,7 @@
         "client_keys": "-Fullscreen true -MPO true",
         "transport_protocol": "udp",
         "script_info": [
+            "MPO true"
         ]
     },
     {
@@ -15,6 +16,7 @@
         "client_keys": "-Fullscreen true -MPO true",
         "transport_protocol": "tcp",
         "script_info": [
+            "MPO true"
         ]
     }
  ]
