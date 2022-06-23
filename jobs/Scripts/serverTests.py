@@ -171,6 +171,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
             params["script_path"] = script_path
             params["process"] = process
             params["android_client_closed"] = android_client_closed
+            params["case_json_path"] = os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX)
 
             test_action_command = DoTestActions(connection, params, instance_state, main_logger)
             test_action_command.parse()

@@ -11,12 +11,11 @@ import pyautogui
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import parse_arguments, execute_adb_command, get_mc_config
+from utils import parse_arguments, execute_adb_command, get_mc_config, check_artifacts_and_save_status
 from actions import *
 import base64
 import keyboard
 from pyffmpeg import FFmpeg
-from grayArtifacts import check_artifacts
 
 pyautogui.FAILSAFE = False
 MC_CONFIG = get_mc_config()
@@ -399,12 +398,13 @@ class MakeScreen(MulticonnectionAction):
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
         self.test_group = self.params["args"].test_group
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         if not self.screen_name:
-            status = make_screen(self.screen_path, self.current_try, self.logger)
+            make_screen(self.screen_path, None, self.current_try, self.logger)
         else:
-            status = make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
+            make_screen(self.screen_path, self.case_json_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
             if self.test_group in MC_CONFIG["android_client"]:
@@ -415,10 +415,9 @@ class MakeScreen(MulticonnectionAction):
                     self.sock.send(response.encode("utf-8"))
                 else:
                     self.sock.send("done".encode("utf-8"))
-        self.logger.info("{:03}_{}_try_{:02}.png is corrupted: {}".format(self.current_image_num, self.screen_name, self.current_try + 1, status))
 
 
-def make_screen(screen_path, current_try, logger, screen_name = "", current_image_num = 0):
+def make_screen(screen_path, case_json_path, current_try, logger, screen_name = "", current_image_num = 0):
     try:
         screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1))
         out, err = execute_adb_command("adb exec-out screencap -p", return_output=True)
@@ -427,10 +426,10 @@ def make_screen(screen_path, current_try, logger, screen_name = "", current_imag
             file.write(out)
 
         # Check artifacts
-        status = check_artifacts(os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1)))
+        if case_json_path is not None:
+            check_artifacts_and_save_status(os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1)), case_json_path, logger)
 
         logger.error("Screencap command err: {}".format(err))
-        return status
     except Exception as e:
         logger.error("Failed to make screenshot: {}".format(str(e)))
         logger.error("Traceback: {}".format(traceback.format_exc()))
@@ -449,6 +448,7 @@ class SleepAndScreen(MulticonnectionAction):
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
         self.test_group = self.params["args"].test_group
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         sleep(float(self.initial_delay))
@@ -456,7 +456,7 @@ class SleepAndScreen(MulticonnectionAction):
         screen_number = 1
 
         while True:
-            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
+            make_screen(self.screen_path, self.case_json_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1
@@ -497,6 +497,7 @@ class RecordVideo(MulticonnectionAction):
         self.temp_video_name = self.params["case"]["case"] + self.params["client_type"] + "_temp.mp4"
         self.duration = int(self.params["arguments_line"])
         self.test_group = self.params["args"].test_group
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         try:
@@ -511,8 +512,7 @@ class RecordVideo(MulticonnectionAction):
             compressing_thread.start()
 
             # Check artifacts
-            status = check_artifacts(os.path.join(self.video_path, self.target_video_name), obj_type="video")
-            self.logger.info("{} is corrupted: {}".format(self.target_video_name + ".mp4", status))
+            check_artifacts_and_save_status(os.path.join(self.video_path, self.target_video_name), self.case_json_path, self.logger, obj_type="video")
 
         except Exception as e:
             self.logger.error("Failed to make screenshot: {}".format(str(e)))

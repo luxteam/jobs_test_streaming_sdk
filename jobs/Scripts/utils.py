@@ -16,11 +16,17 @@ import win32gui
 import win32con
 import pyshark
 import json
+import multiprocessing
+from threading import Thread
+from grayArtifacts import check_artifacts
 
 ROOT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir, os.path.pardir))
 sys.path.append(ROOT_PATH)
 from jobs_launcher.core.config import main_logger
+
+
+GRAY_ARTIFACTS_LOCK = multiprocessing.Lock()
 
 
 def get_mc_config():
@@ -546,3 +552,21 @@ def start_clumsy(keys, client_ip=None, server_ip=None, android_ip=None, second_c
 def close_clumsy():
     script = "powershell \"Start-Process cmd '/k taskkill /im clumsy.exe & exit 0' -Verb RunAs\""
     psutil.Popen(script, stdout=PIPE, stderr=PIPE, shell=True)
+
+
+def check_artifacts_and_save_status(artifact_path, json_path, logger, limit=100000, obj_type="image", step=5):
+    def do_check():
+        status = check_artifacts(artifact_path, limit, obj_type, step)
+        logger.info("{} gray artifact check status: {}".format(artifact_path, status))
+
+        if status:
+            with GRAY_ARTIFACTS_LOCK:
+                with open(json_path, "r") as file:
+                    test_case_report = json.loads(file.read())[0]
+                    test_case_report["gray_artifacts_detected"] = True
+
+                with open(json_path, "w") as file:
+                    json.dump([test_case_report], file, indent=4)
+
+    checking_thread = Thread(target=do_check, args=())
+    checking_thread.start()
