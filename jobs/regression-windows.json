@@ -19,12 +19,14 @@
             "RateControl":"STR_RC_001,STR_RC_002,STR_RC_003,STR_RC_004,STR_RC_005,STR_RC_032,STR_RC_033,STR_RC_034,STR_RC_035,STR_RC_036",
             "Resolution":"STR_RN_002,STR_RN_003,STR_RN_005,STR_RN_006",
             "Slices":"STR_SL_002,STR_SL_006",
-            "VSync":"STR_VS_001,STR_VS_002" ,
-            "MulticonnectionWA":"STR_MCWA_001,STR_MCWA_013,STR_MCWA_014,STR_MCWA_021,STR_MCWA_033,STR_MCWA_034"
+            "VSync":"STR_VS_001,STR_VS_002"
         },
         {
             "Encryption":"STR_ECR_005,STR_ECR_008,STR_ECR_015,STR_ECR_018",
-            "MulticonnectionWW":"STR_MCWW_002,STR_MCWW_003,STR_MCWW_018,STR_MCWW_026,STR_MCWW_027,STR_MCWW_042",
+            "MulticonnectionWW":"STR_MCWW_002,STR_MCWW_003,STR_MCWW_018,STR_MCWW_026,STR_MCWW_027,STR_MCWW_042"
+        },
+        {
+            "MulticonnectionWA":"STR_MCWA_001,STR_MCWA_013,STR_MCWA_014,STR_MCWA_021,STR_MCWA_033,STR_MCWA_034",
             "MulticonnectionWWA":"STR_MCWWA_001,STR_MCWWA_014"
         }
     ]
