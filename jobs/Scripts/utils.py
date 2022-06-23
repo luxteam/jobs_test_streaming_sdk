@@ -568,5 +568,7 @@ def check_artifacts_and_save_status(artifact_path, json_path, logger, limit=1000
                 with open(json_path, "w") as file:
                     json.dump([test_case_report], file, indent=4)
 
+    # wait a bit artifact saving
+    sleep(3)
     checking_thread = Thread(target=do_check, args=())
     checking_thread.start()
