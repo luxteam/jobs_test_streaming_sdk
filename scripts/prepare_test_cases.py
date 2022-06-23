@@ -18,6 +18,12 @@ if __name__ == '__main__':
     for path, dirs, files in os.walk(os.path.join("..", "jobs")):
         for json_file in files:
             if json_file == target_json_name:
+                if os.path.exists(os.path.join(path, renamed_json_name)):
+                    os.remove(os.path.join(path, renamed_json_name))
+
                 copyfile(os.path.join(path, json_file), os.path.join(path, renamed_json_name))
             elif json_file == target_package_name:
+                if os.path.exists(os.path.join(path, renamed_json_name)):
+                    os.remove(os.path.join(path, renamed_json_name))
+
                 copyfile(os.path.join(path, json_file), os.path.join(path, renamed_package_name))
