@@ -203,7 +203,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         # gray artifacts were datected
         if test_case_report["gray_artifacts_detected"] and test_case_report["test_status"] != "error":
             test_case_report["test_status"] = "failed"
-            test_case_report["message"] += ["Gray artifacts detected"]
+            test_case_report["message"] += ["Gray artifacts detected on Android client"]
 
     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
         json.dump([test_case_report], file, indent=4)

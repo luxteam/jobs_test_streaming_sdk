@@ -241,7 +241,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         # gray artifacts were datected
         if test_case_report["gray_artifacts_detected"] and test_case_report["test_status"] != "error":
             test_case_report["test_status"] = "failed"
-            test_case_report["message"] += ["Gray artifacts detected"]
+            test_case_report["message"] += ["Gray artifacts detected on Second Windows client"]
 
         if "used_memory" in case:
             used_memory_key = 'used_memory_{}'.format(args.execution_type)
