@@ -7,7 +7,7 @@ import json
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory, analyze_encryption
+from utils import collect_traces, parse_arguments, collect_iperf_info, track_used_memory, analyze_encryption, check_artifacts_and_save_status
 import win32api
 from actions import *
 
@@ -24,22 +24,27 @@ class MakeScreen(Action):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         if not self.screen_name:
-            make_screen(self.screen_path, self.current_try)
+            make_screen(self.screen_path, None, self.current_try, self.logger)
         else:
-            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
+            make_screen(self.screen_path, self.case_json_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
             self.sock.send("done".encode("utf-8"))
 
 
-def make_screen(screen_path, current_try, screen_name = "", current_image_num = 0):
+def make_screen(screen_path, case_json_path, current_try, logger, screen_name = "", current_image_num = 0):
     screen = pyscreenshot.grab()
 
     if screen_name:
         screen = screen.convert("RGB")
         screen.save(os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1)))
+
+        # Check artifacts
+        if case_json_path is not None:
+            check_artifacts_and_save_status(os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1)), case_json_path, logger)
 
 
 # [Client action] make sequence of screens with delay. It supports initial delay before the first test case
@@ -54,6 +59,7 @@ class SleepAndScreen(Action):
         self.current_image_num = self.params["current_image_num"]
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         sleep(float(self.initial_delay))
@@ -61,7 +67,7 @@ class SleepAndScreen(Action):
         screen_number = 1
 
         while True:
-            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
+            make_screen(self.screen_path, self.case_json_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1
@@ -96,6 +102,7 @@ class RecordVideo(Action):
         self.video_name = self.params["case"]["case"] + self.params["client_type"]
         self.resolution = self.params["args"].screen_resolution
         self.duration = int(self.params["arguments_line"])
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         video_full_path = os.path.join(self.video_path, self.video_name + ".mp4")
@@ -111,6 +118,9 @@ class RecordVideo(Action):
             .format(resolution=self.resolution, audio_device_name=self.audio_device_name, time=time_flag_value, video=video_full_path))
 
         self.logger.info("Finish to record video")
+
+        # Check artifacts
+        check_artifacts_and_save_status(video_full_path, self.case_json_path, self.logger, obj_type="video")
 
         self.sock.send("done".encode("utf-8"))
 
