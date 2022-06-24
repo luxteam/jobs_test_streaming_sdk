@@ -3,8 +3,8 @@ import os
 import argparse
 import numpy as np
 
-hsv_min = np.array((0, 0, 127), np.uint8)
-hsv_max = np.array((179, 13, 153), np.uint8)
+hsv_min = np.array((0, 0, 100), np.uint8)
+hsv_max = np.array((0, 0, 140), np.uint8)
 
 
 def suppress_qt_warnings():
@@ -16,7 +16,7 @@ def suppress_qt_warnings():
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--limit", default=150000)
+    parser.add_argument("--limit", default=100000)
     parser.add_argument("--object", default="image")
     parser.add_argument("--img_path", default=os.path.abspath(os.path.join(".", "screens")))
     parser.add_argument("--vid_path", default=os.path.abspath(os.path.join(".", "videos")))
@@ -77,7 +77,7 @@ def create_thresh(img):
     return median
 
 
-def find_contour(img, thresh, limit=150000):
+def find_contour(img, thresh, limit=100000):
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     max_cont = [0, 0]
     draw_contours = None
@@ -95,7 +95,7 @@ def find_contour(img, thresh, limit=150000):
     return corrupted, draw_contours
 
 
-def check_artifacts(path, limit=150000, obj_type="image", step=5):
+def check_artifacts(path, limit=100000, obj_type="image", step=5):
     suppress_qt_warnings()
     if obj_type == "image":
         img = cv2.imread(path)
