@@ -2,7 +2,7 @@ import sys
 import json
 import os
 import argparse
-from statistics import stdev, mean
+from statistics import stdev, mean, median
 import re
 import traceback
 import datetime
@@ -271,7 +271,7 @@ def update_status(json_content, case, saved_values, saved_errors, framerate, exe
                 json_content["test_status"] = "error"
                 json_content["message"].append("Application problem: Client could not connect")
                 should_analyze_metrics = False
-        elif max(saved_values["client_latencies"]) == 0 or max(saved_values["server_latencies"]) == 0:
+        elif median(saved_values["client_latencies"]) == 0 or median(saved_values["server_latencies"]) == 0:
             if "expected_connection_problems" not in case or "client" not in case["expected_connection_problems"]:
                 json_content["test_status"] = "error"
                 json_content["message"].append("Application problem: Client could not connect")
