@@ -374,6 +374,10 @@ def execute_tests(args, current_conf):
             execution_time = time.time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "error", error_messages = error_messages)
 
+        # make a delay if it's specified for the current test case
+        if "case_delay" in case:
+            time.sleep(case["case_delay"])
+
     return rc
 
 
