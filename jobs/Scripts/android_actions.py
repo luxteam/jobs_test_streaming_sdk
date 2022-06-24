@@ -11,7 +11,7 @@ import pyautogui
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import parse_arguments, execute_adb_command, get_mc_config, check_artifacts_and_save_status
+from utils import parse_arguments, execute_adb_command, get_mc_config
 from actions import *
 import base64
 import keyboard
@@ -425,10 +425,6 @@ def make_screen(screen_path, case_json_path, current_try, logger, screen_name = 
         with open(screen_path, "wb") as file:
             file.write(out)
 
-        # Check artifacts
-        if case_json_path is not None:
-            check_artifacts_and_save_status(os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1)), case_json_path, logger)
-
         logger.error("Screencap command err: {}".format(err))
     except Exception as e:
         logger.error("Failed to make screenshot: {}".format(str(e)))
@@ -510,9 +506,6 @@ class RecordVideo(MulticonnectionAction):
 
             compressing_thread = Thread(target=download_and_compress_video, args=(temp_video_path, target_video_path, self.logger))
             compressing_thread.start()
-
-            # Check artifacts
-            check_artifacts_and_save_status(os.path.join(self.video_path, self.target_video_name), self.case_json_path, self.logger, obj_type="video")
 
         except Exception as e:
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
