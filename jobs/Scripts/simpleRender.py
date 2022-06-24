@@ -192,6 +192,10 @@ def prepare_empty_reports(args, current_conf):
             with open(case_path, "w") as f:
                 f.write(json.dumps([test_case_report], indent=4))
 
+        # make a delay if it's specified for the current test case
+        if "case_delay" in case:
+            time.sleep(case["case_delay"])
+
     with open(os.path.join(args.output, "test_cases.json"), "w+") as f:
         json.dump(cases, f, indent=4)
 
