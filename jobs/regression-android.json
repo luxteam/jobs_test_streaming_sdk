@@ -5,12 +5,14 @@
             "Audio":"STR_AAD_001,STR_AAD_002",
             "CaptureMode":"STR_ACM_001,STR_ACM_002,STR_ACM_003,STR_ACM_004",        
             "CaptureType":"STR_ACP_001,STR_ACP_002,STR_ACP_003,STR_ACP_004",
-            "Codecs":"STR_ACD_001,STR_ACD_002",
+            "Codecs":"STR_ACD_001,STR_ACD_002"
+        },
+        {
             "Connection":"STR_ACN_001,STR_ACN_002,STR_ACN_003,STR_ACN_004,STR_ACN_005,STR_ACN_009,STR_ACN_010,STR_ACN_014,STR_ACN_015,STR_ACN_019,STR_ACN_020,STR_ACN_024",
             "ConversionType":"STR_ACT_001,STR_ACT_003",
             "DirtyRectangles":"STR_ADR_002,STR_ADR_004",
             "Duplicate":"STR_ADP_001,STR_ADP_002"
-            },
+        },
         {
             "Flags":"STR_AFL_001,STR_AFL_002,STR_AFL_014,STR_AFL_015",
             "HDR":"STR_AHD_001,STR_AHD_002",
