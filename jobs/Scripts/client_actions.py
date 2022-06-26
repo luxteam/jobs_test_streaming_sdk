@@ -153,28 +153,34 @@ class MakeScreen(Action):
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
         self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         if not self.screen_name:
-            make_screen(self.screen_path, self.current_try)
+            make_screen(self.screen_path, None, self.current_try, self.logger)
         else:
             if self.is_multiconnection:
                 self.sock.send(self.action.encode("utf-8"))
 
-            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
+            make_screen(self.screen_path, self.case_json_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
+
 
     def analyze_result(self):
         if self.screen_name and self.is_multiconnection:
             self.wait_server_answer(analyze_answer = True, abort_if_fail = True)
 
 
-def make_screen(screen_path, current_try, screen_name = "", current_image_num = 0):
+def make_screen(screen_path, case_json_path, current_try, logger, screen_name = "", current_image_num = 0):
     screen = pyscreenshot.grab()
 
     if screen_name:
         screen = screen.convert("RGB")
         screen.save(os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1)))
+
+        # Check artifacts
+        if case_json_path is not None:
+            check_artifacts_and_save_status(os.path.join(screen_path, "{:03}_{}_try_{:02}.jpg".format(current_image_num, screen_name, current_try + 1)), case_json_path, logger)
 
 
 # [Client action] record video
@@ -189,6 +195,7 @@ class RecordVideo(Action):
         self.resolution = self.params["args"].screen_resolution
         self.duration = int(self.params["arguments_line"])
         self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         if self.is_multiconnection:
@@ -204,6 +211,8 @@ class RecordVideo(Action):
             .format(resolution=self.resolution, audio_device_name=self.audio_device_name, time=time_flag_value, video=video_full_path))
 
         self.logger.info("Finish to record video")
+
+        check_artifacts_and_save_status(video_full_path, self.case_json_path, self.logger, obj_type="video")
 
     def analyze_result(self):
         if self.is_multiconnection:
@@ -284,6 +293,7 @@ class SleepAndScreen(Action):
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
         self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         if "Encryption" in self.test_group:
@@ -307,7 +317,7 @@ class SleepAndScreen(Action):
         screen_number = 1
 
         while True:
-            make_screen(self.screen_path, self.current_try, self.screen_name + self.client_type, self.current_image_num)
+            make_screen(self.screen_path, self.case_json_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1

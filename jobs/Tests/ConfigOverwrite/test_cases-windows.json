@@ -7,7 +7,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - height: 2160, width: 3840 in EncoderResolution part"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_013",
@@ -17,7 +18,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - MaxUserCount: 1"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_014",
@@ -27,7 +29,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - VideoSliceOutput: true, VideoSliceCount: 3"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_015",
@@ -37,7 +40,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - VideoBitrate: 40000000"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_016",
@@ -47,7 +51,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - Network: \"TCP\""
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_017",
@@ -57,7 +62,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - Microphone: true"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_018",
@@ -67,7 +73,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - VerifyFirewall: true"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_019",
@@ -77,7 +84,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - MinFrameRate: 20"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_020",
@@ -87,7 +95,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - EnableNetwork: false"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_021",
@@ -97,7 +106,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - VideoCodec: \"avc\""
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_022",
@@ -107,7 +117,8 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Config values - VideoEnableHDR: true"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_001",
@@ -117,7 +128,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - height: 2160, width: 3840 in EncoderResolution part"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_002",
@@ -127,7 +139,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - MaxUserCount: 1"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_003",
@@ -137,7 +150,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - VideoSliceOutput: true, VideoSliceCount: 3"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_004",
@@ -147,7 +161,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - VideoBitrate: 40000000"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_005",
@@ -157,7 +172,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - Network: \"TCP\""
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_006",
@@ -167,7 +183,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - Microphone: true"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_007",
@@ -177,7 +194,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - VerifyFirewall: true"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_008",
@@ -187,7 +205,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - MinFrameRate: 20"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_009",
@@ -197,7 +216,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - EnableNetwork: false"
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_010",
@@ -207,7 +227,8 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - VideoCodec: \"avc\""
-        ]
+        ],
+        "case_delay": 15
     },
     {
         "case": "STR_CFR_011",
@@ -217,6 +238,7 @@
         "transport_protocol": "udp",
         "script_info": [
             "Config values - VideoEnableHDR: true"
-        ]
+        ],
+        "case_delay": 15
     }
 ]

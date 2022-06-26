@@ -175,6 +175,7 @@ def prepare_empty_reports(args, current_conf):
             else:
                 test_case_report["server_configuration"] = args.server_gpu_name + " " + args.server_os_name
             test_case_report["message"] = []
+            test_case_report["gray_artifacts_detected"] = False
 
             if case['status'] == 'skipped':
                 test_case_report['test_status'] = 'skipped'
@@ -236,6 +237,14 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
         # save keys from scripts in script_info
         test_case_report["script_info"] = case["script_info"]
+
+        # gray artifacts were datected
+        if test_case_report["gray_artifacts_detected"] and test_case_report["test_status"] != "error":
+            test_case_report["test_status"] = "failed"
+            if args.test_group in MC_CONFIG["second_win_client"]:
+                test_case_report["message"] += ["Gray artifacts detected on First Windows client"]
+            else:
+                test_case_report["message"] += ["Gray artifacts detected on Windows client"]
 
         if "used_memory" in case:
             used_memory_key = 'used_memory_{}'.format(args.execution_type)
@@ -373,6 +382,10 @@ def execute_tests(args, current_conf):
             rc = -1
             execution_time = time.time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "error", error_messages = error_messages)
+
+        # make a delay if it's specified for the current test case
+        if "case_delay" in case:
+            time.sleep(case["case_delay"])
 
     return rc
 

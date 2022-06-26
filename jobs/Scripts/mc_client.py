@@ -146,6 +146,7 @@ def prepare_empty_reports(args, current_conf):
             test_case_report[SCREENS_PATH_KEY] = os.path.join(args.output, "Color", case["case"])
             test_case_report["second_client_configuration"] = get_gpu() + " " + platform.system()
             test_case_report["message"] = []
+            test_case_report["gray_artifacts_detected"] = False
 
             if case['status'] == 'skipped':
                 test_case_report['test_status'] = 'skipped'
@@ -186,6 +187,11 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
         # save keys from scripts in script_info
         test_case_report["script_info"] = case["script_info"]
+
+        # gray artifacts were datected
+        if test_case_report["gray_artifacts_detected"] and test_case_report["test_status"] != "error":
+            test_case_report["test_status"] = "failed"
+            test_case_report["message"] += ["Gray artifacts detected on Second Windows client"]
 
         if "used_memory" in case:
             test_case_report["used_memory_second_client"] = case["used_memory"]
@@ -297,6 +303,7 @@ def execute_tests(args, current_conf):
             params["audio_device_name"] = audio_device_name
             params["transport_protocol"] = case["transport_protocol"]
             params["messages"] = error_messages
+            params["case_json_path"] = os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX)
 
             case_start_time = time()
 

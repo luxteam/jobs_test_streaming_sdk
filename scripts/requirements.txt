@@ -5,3 +5,5 @@ keyboard
 pydirectinput
 Appium-Python-Client
 pyshark
+opencv-python==4.5.5.62
+numpy==1.22.2

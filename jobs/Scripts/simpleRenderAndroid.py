@@ -151,6 +151,7 @@ def prepare_empty_reports(args):
             test_case_report["number_of_tries"] = 0
             test_case_report["server_configuration"] = render_device + " " + platform_name
             test_case_report["message"] = []
+            test_case_report["gray_artifacts_detected"] = False
 
             if case['status'] == 'skipped':
                 test_case_report['test_status'] = 'skipped'
@@ -198,6 +199,11 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
         # save keys from scripts in script_info
         test_case_report["script_info"] = case["script_info"]
+
+        # gray artifacts were datected
+        if test_case_report["gray_artifacts_detected"] and test_case_report["test_status"] != "error":
+            test_case_report["test_status"] = "failed"
+            test_case_report["message"] += ["Gray artifacts detected on Android client"]
 
     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "w") as file:
         json.dump([test_case_report], file, indent=4)
@@ -317,6 +323,7 @@ def execute_tests(args):
                 params["case"] = case
                 params["game_name"] = args.game_name.lower()
                 params["client_type"] = "android"
+                params["case_json_path"] = os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX)
 
                 # get list of actions for the current game / benchmark
                 actions_key = "{}_actions_android".format(args.game_name.lower())
@@ -446,6 +453,10 @@ def execute_tests(args):
             rc = -1
             execution_time = time.time() - case_start_time
             save_results(args, case, cases, execution_time = execution_time, test_case_status = "error", error_messages = error_messages)
+
+        # make a delay if it's specified for the current test case
+        if "case_delay" in case:
+            time.sleep(case["case_delay"])
 
     return rc
 

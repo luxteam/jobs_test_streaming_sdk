@@ -26,7 +26,9 @@
             "MulticonnectionWW":"STR_MCWW_002,STR_MCWW_003,STR_MCWW_018,STR_MCWW_026,STR_MCWW_027,STR_MCWW_042"
         },
         {
-            "MulticonnectionWA":"STR_MCWA_001,STR_MCWA_013,STR_MCWA_014,STR_MCWA_021,STR_MCWA_033,STR_MCWA_034",
+            "MulticonnectionWA":"STR_MCWA_001,STR_MCWA_013,STR_MCWA_014,STR_MCWA_021,STR_MCWA_033,STR_MCWA_034"
+        },
+        {
             "MulticonnectionWWA":"STR_MCWWA_001,STR_MCWWA_014"
         }
     ]

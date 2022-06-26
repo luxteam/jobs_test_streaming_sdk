@@ -398,12 +398,13 @@ class MakeScreen(MulticonnectionAction):
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
         self.test_group = self.params["args"].test_group
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         if not self.screen_name:
-            make_screen(self.screen_path, self.current_try, self.logger)
+            make_screen(self.screen_path, None, self.current_try, self.logger)
         else:
-            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
+            make_screen(self.screen_path, self.case_json_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
 
             if self.test_group in MC_CONFIG["android_client"]:
@@ -416,7 +417,7 @@ class MakeScreen(MulticonnectionAction):
                     self.sock.send("done".encode("utf-8"))
 
 
-def make_screen(screen_path, current_try, logger, screen_name = "", current_image_num = 0):
+def make_screen(screen_path, case_json_path, current_try, logger, screen_name = "", current_image_num = 0):
     try:
         screen_path = os.path.join(screen_path, "{:03}_{}_try_{:02}.png".format(current_image_num, screen_name, current_try + 1))
         out, err = execute_adb_command("adb exec-out screencap -p", return_output=True)
@@ -443,6 +444,7 @@ class SleepAndScreen(MulticonnectionAction):
         self.current_try = self.params["current_try"]
         self.client_type = self.params["client_type"]
         self.test_group = self.params["args"].test_group
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         sleep(float(self.initial_delay))
@@ -450,7 +452,7 @@ class SleepAndScreen(MulticonnectionAction):
         screen_number = 1
 
         while True:
-            make_screen(self.screen_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
+            make_screen(self.screen_path, self.case_json_path, self.current_try, self.logger, self.screen_name + self.client_type, self.current_image_num)
             self.params["current_image_num"] += 1
             self.current_image_num = self.params["current_image_num"]
             screen_number += 1
@@ -491,6 +493,7 @@ class RecordVideo(MulticonnectionAction):
         self.temp_video_name = self.params["case"]["case"] + self.params["client_type"] + "_temp.mp4"
         self.duration = int(self.params["arguments_line"])
         self.test_group = self.params["args"].test_group
+        self.case_json_path = self.params["case_json_path"]
 
     def execute(self):
         try:
@@ -503,6 +506,7 @@ class RecordVideo(MulticonnectionAction):
 
             compressing_thread = Thread(target=download_and_compress_video, args=(temp_video_path, target_video_path, self.logger))
             compressing_thread.start()
+
         except Exception as e:
             self.logger.error("Failed to make screenshot: {}".format(str(e)))
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
