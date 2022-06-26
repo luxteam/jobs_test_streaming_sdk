@@ -17,21 +17,21 @@ MC_CONFIG = get_mc_config()
 
 
 def get_framerate(keys):
-    if '-Framerate ' in keys:
-        return int(keys.split('-Framerate ')[1].split()[0])
+    if '-framerate ' in keys.lower():
+        return int(keys.lower().split('-framerate ')[1].split()[0])
     else:
         return 30
 
 def get_qos_status(keys):
-    if '-QoS ' in keys:
-        value = keys.split('-QoS ')[1].split()[0]
+    if '-qos ' in keys.lower():
+        value = keys.lower().split('-qos ')[1].split()[0]
         return value != "False" and value != "false"
     else:
         return True
 
 def get_resolution(keys, execution_type):
-    if '-Resolution ' in keys:
-        return keys.split('-Resolution ')[1].split()[0]
+    if '-resolution ' in keys.lower():
+        return keys.lower().split('-resolution ')[1].split()[0]
     else:
         if execution_type == "android":
             return '2248,1080'
@@ -39,33 +39,33 @@ def get_resolution(keys, execution_type):
             return '2560,1440'
 
 def get_codec(keys):
-    if '-Codec ' in keys:
-        return keys.split('-Codec ')[1].split()[0]
+    if '-codec ' in keys.lower():
+        return keys.lower().split('-codec ')[1].split()[0]
     else:
         return 'h.265'
 
 def get_capture(keys):
-    if '-Capture ' in keys:
-        return keys.split('-Capture ')[1].split()[0]
+    if '-capture ' in keys.lower():
+        return keys.lower().split('-capture ')[1].split()[0]
     else:
         return 'amd'
 
 def get_bitrate(keys):
-    if '-Bitrate ' in keys:
-        return keys.split('-Bitrate ')[1].split()[0]
+    if '-bitrate ' in keys.lower():
+        return keys.lower().split('-bitrate ')[1].split()[0]
     else:
         return 50000000
 
 def get_server_protocol(keys):
-    if '-PROTOCOL ' in keys:
-        return keys.split('-PROTOCOL ')[1].split()[0]
+    if '-protocol ' in keys.lower():
+        return keys.lower().split('-protocol ')[1].split()[0]
 
 def get_min_framerate(keys):
-    if '-MinFramerate ' in keys:
-        return keys.split('-MinFramerate ')[1].split()[0]
+    if '-minframerate ' in keys.lower():
+        return keys.lower().split('-minframerate ')[1].split()[0]
 
 def get_microphone(keys):
-    return '-Microphone true ' in keys
+    return '-microphone true ' in keys.lower()
 
 def parse_block_line(line, saved_values):
     # Line example:
