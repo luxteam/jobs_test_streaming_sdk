@@ -2,26 +2,9 @@
     "split":false,
     "groups": [
         {
-            "Audio":"STR_AAD_001,STR_AAD_002",
-            "CaptureMode":"STR_ACM_001,STR_ACM_002,STR_ACM_003,STR_ACM_004",        
-            "CaptureType":"STR_ACP_001,STR_ACP_002,STR_ACP_003,STR_ACP_004",
-            "Codecs":"STR_ACD_001,STR_ACD_002"
-        },
-        {
-            "Connection":"STR_ACN_001,STR_ACN_002,STR_ACN_003,STR_ACN_004,STR_ACN_005,STR_ACN_009,STR_ACN_010,STR_ACN_014,STR_ACN_015,STR_ACN_019,STR_ACN_020,STR_ACN_024",
-            "ConversionType":"STR_ACT_001,STR_ACT_003",
-            "DirtyRectangles":"STR_ADR_002,STR_ADR_004",
-            "Duplicate":"STR_ADP_001,STR_ADP_002"
-        },
-        {
             "Flags":"STR_AFL_001,STR_AFL_002,STR_AFL_014,STR_AFL_015",
             "HDR":"STR_AHD_001,STR_AHD_002",
             "QoS":"STR_AQS_001,STR_AQS_008,STR_AQS_012,STR_AQS_013,STR_AQS_014,STR_AQS_017,STR_AQS_023,STR_AQS_029,STR_AQS_032,STR_AQS_035,STR_AQS_042,STR_AQS_046,STR_AQS_047,STR_AQS_048,STR_AQS_051,STR_AQS_057,STR_AQS_063,STR_AQS_066"
-        },
-        {
-            "RateControl":"STR_ARC_001,STR_ARC_004,STR_ARC_005,STR_ARC_006,STR_ARC_010,STR_ARC_013,STR_ARC_019,STR_ARC_025,STR_ARC_028,STR_ARC_031,STR_ARC_034,STR_ARC_035,STR_ARC_036,STR_ARC_040,STR_ARC_043,STR_ARC_049,STR_ARC_055,STR_ARC_058",
-            "Resolution":"STR_ARN_002,STR_ARN_004",
-            "Slices":"STR_ASL_002,STR_ASL_006"
         }
     ]
 }
