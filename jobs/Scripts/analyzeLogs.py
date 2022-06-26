@@ -941,13 +941,16 @@ def analyze_logs(work_dir, json_content, case, execution_type="server"):
                     number_of_metrics_lines = 0
                     log = log_file.readlines()
 
+                    client_latencies_sum = 0
+
                     for line in log:
                         if "Info: Average latency:" in line:
                             number_of_metrics_lines += 1
+                            client_latencies_sum += float(line.split('client')[1].split(',')[0])
 
                     main_logger.warning("Found {} metrics lines".format(number_of_metrics_lines))
 
-                    if number_of_metrics_lines < 5:
+                    if number_of_metrics_lines < 5 or client_latencies_sum == 0:
                         if execution_type == "windows_client":
                             if "expected_connection_problems" not in case or "client" not in case["expected_connection_problems"]:
                                 main_logger.warning("First windows client client could not connect")
