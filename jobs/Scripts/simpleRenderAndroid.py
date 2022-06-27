@@ -443,7 +443,7 @@ def execute_tests(args):
 
                 current_try += 1
 
-                if "android_clumsy_keys" in case and ("keep_server_clumsy" not in case or not case["keep_android_clumsy"]):
+                if "android_clumsy_keys" in case and ("keep_android_clumsy" not in case or not case["keep_android_clumsy"]):
                     close_clumsy()
 
                 if ("keep_server" in case and case["keep_server"]) or ("keep_client" in case and case["keep_client"]):

@@ -216,7 +216,7 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
 
         sock.close()
 
-        if "client_clumsy_keys" in case and ("keep_server_clumsy" not in case or not case["keep_client_clumsy"]):
+        if "client_clumsy_keys" in case and ("keep_client_clumsy" not in case or not case["keep_client_clumsy"]):
             close_clumsy()
 
     return process, last_log_line
