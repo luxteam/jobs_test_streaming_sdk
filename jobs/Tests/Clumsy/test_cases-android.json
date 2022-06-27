@@ -282,7 +282,31 @@
         ]
     },
     {
-        "case": "STR_ACL_024",
+        "case": "STR_CLM_024",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 6 --drop on --drop-inbound on --drop-outbound on --drop-chance 2 --throttle on --throttle-inbound on --throttle-outbound on --throttle-chance 2 --duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 2 --ood on --ood-inbound on --ood-outbound on --ood-chance 2 --tamper on --tamper-inbound on --tamper-outbound on --tamper-chance 2",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Stress testing Clumsy #1"
+        ]
+    },
+    {
+        "case": "STR_CLM_025",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "android_clumsy_keys": "off",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Stress testing Clumsy #2"
+        ]
+    },
+    {
+        "case": "STR_ACL_026",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -293,7 +317,7 @@
         ]
     },
     {
-        "case": "STR_ACL_025",
+        "case": "STR_ACL_027",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 3",
@@ -304,7 +328,7 @@
         ]
     },
     {
-        "case": "STR_ACL_026",
+        "case": "STR_ACL_028",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--throttle on --throttle-inbound on --throttle-outbound on --throttle-chance 3",
@@ -315,7 +339,7 @@
         ]
     },
     {
-        "case": "STR_ACL_027",
+        "case": "STR_ACL_029",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 3",
@@ -326,7 +350,7 @@
         ]
     },
     {
-        "case": "STR_ACL_028",
+        "case": "STR_ACL_030",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--ood on --ood-inbound on --ood-outbound on --ood-chance 3",
@@ -337,7 +361,7 @@
         ]
     },
     {
-        "case": "STR_ACL_029",
+        "case": "STR_ACL_031",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--tamper on --tamper-inbound on --tamper-outbound on --tamper-chance 3",
@@ -348,7 +372,7 @@
         ]
     },
     {
-        "case": "STR_ACL_030",
+        "case": "STR_ACL_032",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --drop on --drop-inbound on --drop-outbound on --drop-chance 2",
@@ -359,7 +383,7 @@
         ]
     },
     {
-        "case": "STR_ACL_031",
+        "case": "STR_ACL_033",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --ood on --ood-inbound on --ood-outbound on --ood-chance 2",
@@ -370,7 +394,7 @@
         ]
     },
     {
-        "case": "STR_ACL_032",
+        "case": "STR_ACL_034",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 2",
@@ -381,7 +405,7 @@
         ]
     },
     {
-        "case": "STR_ACL_033",
+        "case": "STR_ACL_035",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 2 --ood on --ood-inbound on --ood-outbound on --ood-chance 2",
@@ -392,7 +416,7 @@
         ]
     },
     {
-        "case": "STR_ACL_034",
+        "case": "STR_ACL_036",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -404,7 +428,7 @@
         ]
     },
     {
-        "case": "STR_ACL_035",
+        "case": "STR_ACL_037",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Bitrate 10000000",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -417,7 +441,7 @@
         ]
     },
     {
-        "case": "STR_ACL_036",
+        "case": "STR_ACL_038",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Bitrate 10000000",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -430,7 +454,7 @@
         ]
     },
     {
-        "case": "STR_ACL_037",
+        "case": "STR_ACL_039",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Bitrate 100000000",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -443,7 +467,7 @@
         ]
     },
     {
-        "case": "STR_ACL_038",
+        "case": "STR_ACL_040",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Bitrate 100000000",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -456,7 +480,7 @@
         ]
     },
     {
-        "case": "STR_ACL_039",
+        "case": "STR_ACL_041",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 7",
@@ -470,7 +494,7 @@
         ]
     },
     {
-        "case": "STR_ACL_040",
+        "case": "STR_ACL_042",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--lag off",
@@ -484,7 +508,7 @@
         ]
     },
     {
-        "case": "STR_ACL_041",
+        "case": "STR_ACL_043",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 20",
@@ -498,7 +522,7 @@
         ]
     },
     {
-        "case": "STR_ACL_042",
+        "case": "STR_ACL_044",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--lag off",
@@ -510,7 +534,7 @@
         ]
     },
     {
-        "case": "STR_ACL_043",
+        "case": "STR_ACL_045",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 4",
@@ -524,7 +548,7 @@
         ]
     },
     {
-        "case": "STR_ACL_044",
+        "case": "STR_ACL_046",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--drop off",
@@ -538,7 +562,7 @@
         ]
     },
     {
-        "case": "STR_ACL_045",
+        "case": "STR_ACL_047",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 10",
@@ -552,7 +576,7 @@
         ]
     },
     {
-        "case": "STR_ACL_046",
+        "case": "STR_ACL_048",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "android_clumsy_keys": "--lag off",
@@ -561,6 +585,30 @@
         "script_info": [
             "Recovery test #4",
             "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_CLM_049",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "android_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 6 --drop on --drop-inbound on --drop-outbound on --drop-chance 2 --throttle on --throttle-inbound on --throttle-outbound on --throttle-chance 2 --duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 2 --ood on --ood-inbound on --ood-outbound on --ood-chance 2 --tamper on --tamper-inbound on --tamper-outbound on --tamper-chance 2",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Stress testing Clumsy #1"
+        ]
+    },
+    {
+        "case": "STR_CLM_050",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "android_clumsy_keys": "off",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Stress testing Clumsy #2"
         ]
     }
 ]
