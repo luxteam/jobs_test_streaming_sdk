@@ -196,8 +196,16 @@ class RecordVideo(Action):
         self.duration = int(self.params["arguments_line"])
         self.is_multiconnection = self.test_group in MC_CONFIG["android_client"] or self.test_group in MC_CONFIG["second_win_client"]
         self.case_json_path = self.params["case_json_path"]
+        self.recovery_clumsy = "recovery_client_clumsy" in self.params["case"] and self.params["case"]["recovery_client_clumsy"]
 
     def execute(self):
+        if self.recovery_clumsy:
+            self.logger.info("Recovery Streaming SDK work - close clumsy")
+            close_clumsy()
+
+        if "recovery_server_clumsy" in self.params["case"] and self.params["case"]["recovery_server_clumsy"]:
+            self.sock.send("recovery_clumsy".encode("utf-8"))
+
         if self.is_multiconnection:
             self.sock.send(self.action.encode("utf-8"))
 

@@ -11,7 +11,7 @@ import pyautogui
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import parse_arguments, execute_adb_command, get_mc_config
+from utils import parse_arguments, execute_adb_command, get_mc_config, close_clumsy
 from actions import *
 import base64
 import keyboard
@@ -494,12 +494,17 @@ class RecordVideo(MulticonnectionAction):
         self.duration = int(self.params["arguments_line"])
         self.test_group = self.params["args"].test_group
         self.case_json_path = self.params["case_json_path"]
+        self.recovery_clumsy = "recovery_android_clumsy" in self.params["case"] and self.params["case"]["recovery_android_clumsy"]
 
     def execute(self):
         try:
             self.logger.info("Start to record video")
             execute_adb_command("adb shell screenrecord --time-limit={} /sdcard/video.mp4".format(self.duration))
             self.logger.info("Finish to record video")
+
+            if self.recovery_clumsy:
+                self.logger.info("Recovery Streaming SDK work - close clumsy")
+                close_clumsy()
 
             temp_video_path = os.path.join(self.video_path, self.temp_video_name)
             target_video_path = os.path.join(self.video_path, self.target_video_name)

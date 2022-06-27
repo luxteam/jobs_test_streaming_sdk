@@ -46,7 +46,8 @@ ACTIONS_MAPPING = {
     "start_test_actions_server": DoTestActions,
     "gpuview": GPUView,
     "record_metrics": RecordMetrics,
-    "record_audio": RecordMicrophone
+    "record_audio": RecordMicrophone,
+    "recovery_clumsy": RecoveryClumsy
 }
 
 

@@ -584,3 +584,14 @@ class StartStreaming(MulticonnectionAction):
             sleep(5)
 
         self.sock.send("done".encode("utf-8"))
+
+
+# Close clumsy
+class RecoveryClumsy(Action):
+    def parse(self):
+        self.recovery_clumsy = "recovery_server_clumsy" in self.params["case"] and self.params["case"]["recovery_server_clumsy"]
+
+    def execute(self):
+        if self.recovery_clumsy:
+            self.logger.info("Recovery Streaming SDK work - close clumsy")
+            close_clumsy()
