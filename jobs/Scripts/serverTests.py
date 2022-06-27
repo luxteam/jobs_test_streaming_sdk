@@ -345,7 +345,7 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
         with open(os.path.join(ROOT_PATH, "state.py"), "w+") as json_file:
             json.dump(state, json_file, indent=4)
 
-        if "server_clumsy_keys" in case:
+        if "server_clumsy_keys" in case and ("keep_server_clumsy" not in case or not case["keep_server_clumsy"]):
             close_clumsy()
 
     return process, last_log_line, android_client_closed
