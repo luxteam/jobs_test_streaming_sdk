@@ -1,4 +1,4 @@
-# Autotests for Radeon ProRender plugin for Autodesk Maya
+# Autotests for Streaming SDK
 
 ## Parameters
  1. Parameters of `run_windows.bat` script below:
