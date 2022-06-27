@@ -373,6 +373,30 @@
     },
     {
         "case": "STR_CLM_032",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 6 --drop on --drop-inbound on --drop-outbound on --drop-chance 2 --throttle on --throttle-inbound on --throttle-outbound on --throttle-chance 2 --duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 2 --ood on --ood-inbound on --ood-outbound on --ood-chance 2 --tamper on --tamper-inbound on --tamper-outbound on --tamper-chance 2",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "keep_client": true,
+        "keep_server": true,
+        "script_info": [
+            "Stress testing Clumsy #1"
+        ]
+    },
+    {
+        "case": "STR_CLM_033",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
+        "server_clumsy_keys": "off",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Stress testing Clumsy #2"
+        ]
+    },
+    {
+        "case": "STR_CLM_034",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -383,7 +407,7 @@
         ]
     },
     {
-        "case": "STR_CLM_033",
+        "case": "STR_CLM_035",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 3",
@@ -394,7 +418,7 @@
         ]
     },
     {
-        "case": "STR_CLM_034",
+        "case": "STR_CLM_036",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--throttle on --throttle-inbound on --throttle-outbound on --throttle-chance 3",
@@ -405,7 +429,7 @@
         ]
     },
     {
-        "case": "STR_CLM_035",
+        "case": "STR_CLM_037",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 3",
@@ -416,7 +440,7 @@
         ]
     },
     {
-        "case": "STR_CLM_036",
+        "case": "STR_CLM_038",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--ood on --ood-inbound on --ood-outbound on --ood-chance 3",
@@ -427,7 +451,7 @@
         ]
     },
     {
-        "case": "STR_CLM_037",
+        "case": "STR_CLM_039",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--tamper on --tamper-inbound on --tamper-outbound on --tamper-chance 3",
@@ -438,7 +462,7 @@
         ]
     },
     {
-        "case": "STR_CLM_038",
+        "case": "STR_CLM_040",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --drop on --drop-inbound on --drop-outbound on --drop-chance 2",
@@ -449,7 +473,7 @@
         ]
     },
     {
-        "case": "STR_CLM_039",
+        "case": "STR_CLM_041",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --ood on --ood-inbound on --ood-outbound on --ood-chance 2",
@@ -460,7 +484,7 @@
         ]
     },
     {
-        "case": "STR_CLM_040",
+        "case": "STR_CLM_042",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 2",
@@ -471,7 +495,7 @@
         ]
     },
     {
-        "case": "STR_CLM_041",
+        "case": "STR_CLM_043",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 2 --ood on --ood-inbound on --ood-outbound on --ood-chance 2",
@@ -482,7 +506,7 @@
         ]
     },
     {
-        "case": "STR_CLM_042",
+        "case": "STR_CLM_044",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -494,7 +518,7 @@
         ]
     },
     {
-        "case": "STR_CLM_043",
+        "case": "STR_CLM_045",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 90",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -506,7 +530,7 @@
         ]
     },
     {
-        "case": "STR_CLM_044",
+        "case": "STR_CLM_046",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Bitrate 10000000",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -519,7 +543,7 @@
         ]
     },
     {
-        "case": "STR_CLM_045",
+        "case": "STR_CLM_047",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 90 -Bitrate 10000000",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -532,7 +556,7 @@
         ]
     },
     {
-        "case": "STR_CLM_046",
+        "case": "STR_CLM_048",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Bitrate 100000000",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -545,7 +569,7 @@
         ]
     },
     {
-        "case": "STR_CLM_047",
+        "case": "STR_CLM_049",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 90 -Bitrate 100000000",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -558,7 +582,7 @@
         ]
     },
     {
-        "case": "STR_CLM_048",
+        "case": "STR_CLM_050",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -570,7 +594,7 @@
         ]
     },
     {
-        "case": "STR_CLM_049",
+        "case": "STR_CLM_051",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 7",
@@ -584,7 +608,7 @@
         ]
     },
     {
-        "case": "STR_CLM_050",
+        "case": "STR_CLM_052",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag off",
@@ -598,7 +622,7 @@
         ]
     },
     {
-        "case": "STR_CLM_051",
+        "case": "STR_CLM_053",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 20",
@@ -612,7 +636,7 @@
         ]
     },
     {
-        "case": "STR_CLM_052",
+        "case": "STR_CLM_054",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag off",
@@ -624,7 +648,7 @@
         ]
     },
     {
-        "case": "STR_CLM_053",
+        "case": "STR_CLM_055",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 4",
@@ -638,7 +662,7 @@
         ]
     },
     {
-        "case": "STR_CLM_054",
+        "case": "STR_CLM_056",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--drop off",
@@ -652,7 +676,7 @@
         ]
     },
     {
-        "case": "STR_CLM_055",
+        "case": "STR_CLM_057",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 10",
@@ -666,7 +690,7 @@
         ]
     },
     {
-        "case": "STR_CLM_056",
+        "case": "STR_CLM_058",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "server_clumsy_keys": "--lag off",
@@ -678,7 +702,7 @@
         ]
     },
     {
-        "case": "STR_CLM_057",
+        "case": "STR_CLM_059",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
@@ -689,7 +713,7 @@
         ]
     },
     {
-        "case": "STR_CLM_058",
+        "case": "STR_CLM_060",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 3",
@@ -700,7 +724,7 @@
         ]
     },
     {
-        "case": "STR_CLM_059",
+        "case": "STR_CLM_061",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_clumsy_keys": "--throttle on --throttle-inbound on --throttle-outbound on --throttle-chance 3",
@@ -711,7 +735,7 @@
         ]
     },
     {
-        "case": "STR_CLM_060",
+        "case": "STR_CLM_062",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_clumsy_keys": "--duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 3",
@@ -722,7 +746,7 @@
         ]
     },
     {
-        "case": "STR_CLM_061",
+        "case": "STR_CLM_063",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_clumsy_keys": "--ood on --ood-inbound on --ood-outbound on --ood-chance 3",
@@ -733,7 +757,7 @@
         ]
     },
     {
-        "case": "STR_CLM_062",
+        "case": "STR_CLM_064",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
         "client_clumsy_keys": "--tamper on --tamper-inbound on --tamper-outbound on --tamper-chance 3",
@@ -741,6 +765,30 @@
         "transport_protocol": "tcp",
         "script_info": [
             "Clumsy Tamper Client"
+        ]
+    },
+    {
+        "case": "STR_CLM_065",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 6 --drop on --drop-inbound on --drop-outbound on --drop-chance 2 --throttle on --throttle-inbound on --throttle-outbound on --throttle-chance 2 --duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 2 --ood on --ood-inbound on --ood-outbound on --ood-chance 2 --tamper on --tamper-inbound on --tamper-outbound on --tamper-chance 2",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "keep_client": true,
+        "keep_server": true,
+        "script_info": [
+            "Stress testing Clumsy #1"
+        ]
+    },
+    {
+        "case": "STR_CLM_066",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
+        "server_clumsy_keys": "off",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Stress testing Clumsy #2"
         ]
     }
 ]
