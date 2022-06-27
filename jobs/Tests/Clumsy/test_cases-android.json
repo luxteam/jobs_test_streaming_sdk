@@ -1,0 +1,566 @@
+[
+    {
+        "case": "STR_ACL_001",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_002",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 3",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_003",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--throttle on --throttle-inbound on --throttle-outbound on --throttle-chance 3",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Throttle"
+        ]
+    },
+    {
+        "case": "STR_ACL_004",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 3",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Duplicate"
+        ]
+    },
+    {
+        "case": "STR_ACL_005",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--ood on --ood-inbound on --ood-outbound on --ood-chance 3",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Out of order"
+        ]
+    },
+    {
+        "case": "STR_ACL_006",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--tamper on --tamper-inbound on --tamper-outbound on --tamper-chance 3",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Tamper"
+        ]
+    },
+    {
+        "case": "STR_ACL_007",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --drop on --drop-inbound on --drop-outbound on --drop-chance 2",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Lag + Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_008",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --ood on --ood-inbound on --ood-outbound on --ood-chance 2",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Lag + Out of order"
+        ]
+    },
+    {
+        "case": "STR_ACL_009",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 2",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Lag + Duplicate"
+        ]
+    },
+    {
+        "case": "STR_ACL_010",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 2 --ood on --ood-inbound on --ood-outbound on --ood-chance 2",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Drop + Out of order"
+        ]
+    },
+    {
+        "case": "STR_ACL_011",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Lag",
+            "Framerate 60"
+        ]
+    },
+    {
+        "case": "STR_ACL_012",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Bitrate 10000000",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Lag",
+            "Bitrate 10000000",
+            "Framerate 30"
+        ]
+    },
+    {
+        "case": "STR_ACL_013",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Bitrate 10000000",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Lag",
+            "Bitrate 10000000",
+            "Framerate 60"
+        ]
+    },
+    {
+        "case": "STR_ACL_014",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Bitrate 100000000",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Lag",
+            "Bitrate 100000000",
+            "Framerate 30"
+        ]
+    },
+    {
+        "case": "STR_ACL_015",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Bitrate 100000000",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Clumsy Lag",
+            "Bitrate 100000000",
+            "Framerate 60"
+        ]
+    },
+    {
+        "case": "STR_ACL_016",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 7",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #1",
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_017",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag off",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #2",
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_018",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 20",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #3",
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_019",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag off",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Recovery test #4",
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_020",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 4",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #1",
+            "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_021",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop off",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #2",
+            "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_022",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 10",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #3",
+            "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_023",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag off",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Recovery test #4",
+            "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_024",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_025",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 3",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_026",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--throttle on --throttle-inbound on --throttle-outbound on --throttle-chance 3",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Throttle"
+        ]
+    },
+    {
+        "case": "STR_ACL_027",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 3",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Duplicate"
+        ]
+    },
+    {
+        "case": "STR_ACL_028",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--ood on --ood-inbound on --ood-outbound on --ood-chance 3",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Out of order"
+        ]
+    },
+    {
+        "case": "STR_ACL_029",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--tamper on --tamper-inbound on --tamper-outbound on --tamper-chance 3",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Tamper"
+        ]
+    },
+    {
+        "case": "STR_ACL_030",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --drop on --drop-inbound on --drop-outbound on --drop-chance 2",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Lag + Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_031",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --ood on --ood-inbound on --ood-outbound on --ood-chance 2",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Lag + Out of order"
+        ]
+    },
+    {
+        "case": "STR_ACL_032",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 8 --duplicate on --duplicate-inbound on --duplicate-outbound on --duplicate-chance 2",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Lag + Duplicate"
+        ]
+    },
+    {
+        "case": "STR_ACL_033",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 2 --ood on --ood-inbound on --ood-outbound on --ood-chance 2",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Drop + Out of order"
+        ]
+    },
+    {
+        "case": "STR_ACL_034",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Lag",
+            "Framerate 60"
+        ]
+    },
+    {
+        "case": "STR_ACL_035",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Bitrate 10000000",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Lag",
+            "Bitrate 10000000",
+            "Framerate 30"
+        ]
+    },
+    {
+        "case": "STR_ACL_036",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Bitrate 10000000",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Lag",
+            "Bitrate 10000000",
+            "Framerate 60"
+        ]
+    },
+    {
+        "case": "STR_ACL_037",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Bitrate 100000000",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Lag",
+            "Bitrate 100000000",
+            "Framerate 30"
+        ]
+    },
+    {
+        "case": "STR_ACL_038",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Bitrate 100000000",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 10",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Clumsy Lag",
+            "Bitrate 100000000",
+            "Framerate 60"
+        ]
+    },
+    {
+        "case": "STR_ACL_039",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 7",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #1",
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_040",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag off",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #2",
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_041",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag on --lag-inbound on --lag-outbound on --lag-time 20",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #3",
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_042",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag off",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Recovery test #4",
+            "Clumsy Lag"
+        ]
+    },
+    {
+        "case": "STR_ACL_043",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 4",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #1",
+            "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_044",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop off",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #2",
+            "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_045",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--drop on --drop-inbound on --drop-outbound on --drop-chance 10",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "keep_android": true,
+        "keep_server": true,
+        "script_info": [
+            "Recovery test #3",
+            "Clumsy Drop"
+        ]
+    },
+    {
+        "case": "STR_ACL_046",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30",
+        "server_clumsy_keys": "--lag off",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Recovery test #4",
+            "Clumsy Drop"
+        ]
+    }
+]
