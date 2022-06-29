@@ -3,7 +3,7 @@
         "case": "STR_AUD_001",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Microphone true",
-        "client_keys": "",
+        "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
             "Microphone enabled"
@@ -11,8 +11,8 @@
     },
     {
         "case": "STR_AUD_002",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -AudioFile <<FILE>> -extStats true -Framerate 60",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -AudioFile \"C:\\JN\\All stars.mp3\" -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
@@ -21,22 +21,42 @@
     },
     {
         "case": "STR_AUD_003",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -AudioFile \"C:\\JN\\All stars.mp3\" -Microphone true -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Audio File + Microphone"
+        ]
+    },
+    {
+        "case": "STR_AUD_004",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Microphone true",
-        "client_keys": "",
+        "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
             "Microphone enabled"
         ]
     },
     {
-        "case": "STR_AUD_004",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -AudioFile <<FILE>> -extStats true -Framerate 60",
+        "case": "STR_AUD_005",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -AudioFile \"C:\\JN\\All stars.mp3\" -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
             "Audio File"
+        ]
+    },
+    {
+        "case": "STR_AUD_006",
+        "status": "skipped",
+        "server_keys": "-Resolution <resolution> -AudioFile \"C:\\JN\\All stars.mp3\" -Microphone true -extStats true -Framerate 60",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Audio File + Microphone"
         ]
     }
 ]
