@@ -77,6 +77,10 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    server_driver_version = None
+    first_client_driver_version = None
+    second_client_driver_version = None
+
     for path, dirs, files in os.walk(os.path.abspath(args.target_dir)):
         for file in files:
             if file.endswith(TEST_REPORT_NAME_COMPARED):
@@ -157,15 +161,22 @@ if __name__ == '__main__':
 
                 source_file_path = os.path.join(args.source_dir, os.path.relpath(target_file_path, args.target_dir))
 
-                if os.path.exists(source_file_path):
-                    with open(target_file_path, "r") as f:
-                        target_file_content = json.load(f)
+                with open(target_file_path, "r") as f:
+                    target_file_content = json.load(f)
 
+                if os.path.exists(source_file_path):
                     with open(source_file_path, "r") as f:
                         source_file_content = json.load(f)
 
+                    if "machine_info" in target_file_content:
+                        if "driver_version" in target_file_content["machine_info"]:
+                            first_client_driver_version = target_file_content["machine_info"]["driver_version"]
+
                     if "machine_info" in source_file_content:
-                    	target_file_content["machine_info"] = source_file_content["machine_info"]
+                        target_file_content["machine_info"] = source_file_content["machine_info"]
+
+                        if "driver_version" in source_file_content["machine_info"]:
+                            server_driver_version = source_file_content["machine_info"]["driver_version"]
 
                     for test_group in target_file_content["results"]:
                         target_group_data = target_file_content["results"][test_group][""]
@@ -200,22 +211,20 @@ if __name__ == '__main__':
                             if SCREENS_COLLECTION_KEY in source_group_data["render_results"][i]:
                                 target_group_data["render_results"][i]["android_" + SCREENS_COLLECTION_KEY] = source_group_data["render_results"][i][SCREENS_COLLECTION_KEY] 
 
-                    with open(target_file_path, "w", encoding="utf8") as f:
-                        json.dump(target_file_content, f, indent=4, sort_keys=True)
-
                 # get data from second client
                 second_client_file_path = os.path.join(args.second_client_dir, os.path.relpath(target_file_path, args.target_dir))
 
                 if os.path.exists(second_client_file_path):
-                    with open(target_file_path, "r") as f:
-                        target_file_content = json.load(f)
-
                     with open(second_client_file_path, "r") as f:
                         second_client_file_content = json.load(f)
 
                     for test_group in target_file_content["results"]:
                         target_group_data = target_file_content["results"][test_group][""]
                         second_client_group_data = second_client_file_content["results"][test_group][""]
+
+                        if "machine_info" in second_client_file_content:
+                            if "driver_version" in second_client_file_content["machine_info"]:
+                                second_client_driver_version = second_client_file_content["machine_info"]["driver_version"]
 
                         for i in range(len(target_group_data["render_results"])):
                             for key in KEYS_TO_COPY:
@@ -246,5 +255,18 @@ if __name__ == '__main__':
                             if SCREENS_COLLECTION_KEY in second_client_group_data["render_results"][i]:
                                 target_group_data["render_results"][i]["second_client_" + SCREENS_COLLECTION_KEY] = second_client_group_data["render_results"][i][SCREENS_COLLECTION_KEY] 
 
-                    with open(target_file_path, "w", encoding="utf8") as f:
-                        json.dump(target_file_content, f, indent=4, sort_keys=True)
+                if server_driver_version:
+                    target_file_content["machine_info"]["server_driver_version"] = server_driver_version
+                else:
+                    target_file_content["machine_info"]["server_driver_version"] = None
+                if first_client_driver_version:
+                    target_file_content["machine_info"]["first_client_driver_version"] = first_client_driver_version
+                else:
+                    target_file_content["machine_info"]["first_client_driver_version"] = None
+                if second_client_driver_version:
+                    target_file_content["machine_info"]["second_client_driver_version"] = second_client_driver_version
+                else:
+                    target_file_content["machine_info"]["second_client_driver_version"] = None
+
+                with open(target_file_path, "w", encoding="utf8") as f:
+                    json.dump(target_file_content, f, indent=4, sort_keys=True)
