@@ -3,7 +3,7 @@
         "case": "STR_AUD_001",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Microphone true",
-        "client_keys": "",
+        "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
         "script_info": [
             "Microphone enabled"
@@ -33,7 +33,7 @@
         "case": "STR_AUD_004",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 60 -Microphone true",
-        "client_keys": "",
+        "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
             "Microphone enabled"

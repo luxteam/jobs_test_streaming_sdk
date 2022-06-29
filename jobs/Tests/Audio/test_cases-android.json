@@ -11,16 +11,26 @@
     },
     {
         "case": "STR_AAD_002",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile <<FILE>>",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile \"C:\\JN\\All stars.mp3\"",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "Audio file on Server"
+            "Audio File"
         ]
     },
     {
         "case": "STR_AAD_003",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile \"C:\\JN\\All stars.mp3\" -Microphone true",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Audio File + Microphone"
+        ]
+    },
+    {
+        "case": "STR_AAD_004",
         "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -Microphone true",
         "client_keys": "",
@@ -30,13 +40,23 @@
         ]
     },
     {
-        "case": "STR_AAD_004",
-        "status": "skipped",
-        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile <<FILE>>",
+        "case": "STR_AAD_005",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 \"C:\\JN\\All stars.mp3\"",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "Audio file on Server"
+            "Audio File"
+        ]
+    },
+    {
+        "case": "STR_AAD_006",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile \"C:\\JN\\All stars.mp3\" -Microphone true",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Audio File + Microphone"
         ]
     }
 ]
