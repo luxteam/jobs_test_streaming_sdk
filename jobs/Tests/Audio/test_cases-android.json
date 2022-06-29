@@ -42,7 +42,7 @@
     {
         "case": "STR_AAD_005",
         "status": "active",
-        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 \"C:\\JN\\All stars.mp3\"",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile \"C:\\JN\\All stars.mp3\"",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
