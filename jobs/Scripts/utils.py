@@ -18,6 +18,7 @@ import pyshark
 import json
 import multiprocessing
 from threading import Thread
+from PIL import Image
 from grayArtifacts import check_artifacts
 
 ROOT_PATH = os.path.abspath(os.path.join(
@@ -570,3 +571,17 @@ def check_artifacts_and_save_status(artifact_path, json_path, logger, limit=1000
 
     checking_thread = Thread(target=do_check, args=())
     checking_thread.start()
+
+
+def locateOnScreen(template, tries=3, **kwargs):
+    coords = None
+    if not "confidence" in kwargs:
+        kwargs["confidence"] = 0.95
+    while not coords and tries > 0 and kwargs["confidence"] > 0:
+        with Image.open(os.path.abspath(os.path.join(os.path.dirname(__file__), "templates", template))) as img:
+            coords = pyautogui.locateOnScreen(img, **kwargs)
+        tries -= 1
+        kwargs["confidence"] -= 0.07
+    if not coords:
+        raise Exception("No such element on screen")
+    return (coords[0], coords[1], coords[2], coords[3])

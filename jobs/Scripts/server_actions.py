@@ -44,6 +44,7 @@ class CheckWindow(Action):
         self.process_name = parsed_arguments[1]
         self.is_game = (self.params["command"] == "check_game")
         self.test_group = self.params["args"].test_group
+        self.game_name = self.params["args"].game_name
 
     @Action.server_action_decorator
     def execute(self):
@@ -55,7 +56,7 @@ class CheckWindow(Action):
             self.logger.info("Window {} was succesfully found".format(self.window_name))
 
             if self.is_game:
-                make_window_foreground(window, self.logger)
+                make_game_foreground(self.game_name, self.logger)
         else:
             self.logger.error("Window {} wasn't found at all".format(self.window_name))
             return False
@@ -110,6 +111,33 @@ def make_window_foreground(window, logger):
             except Exception as e1:
                 logger.error("Failed to make window foreground (SW_SHOW): {}".format(str(e2)))
                 logger.error("Traceback: {}".format(traceback.format_exc()))
+
+
+def make_game_foreground(game_name, logger):
+    base_path = os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "Icons"))
+
+    if "Heaven" in game_name:
+        icon_path = os.path.join(base_path, "Heaven.png")
+    elif "Valley" in game_name:
+        icon_path = os.path.join(base_path, "Valley.png")
+    elif "Valorant" in game_name:
+        icon_path = os.path.join(base_path, "Valorant.png")
+    elif "LoL" in game_name:
+        icon_path = os.path.join(base_path, "LoL.png")
+    else:
+        logger.error(f"Unknown game: {game_name}")
+        return
+
+    # sometimes first click on app can be ignored
+    for i in range(2):
+        try:
+            game_icon_coords = locateOnScreen(icon_path)
+            game_icon_center = pyautogui.center(game_icon_coords)
+            pyautogui.click(game_icon_center[0], game_icon_center[1])
+            sleep(4)
+        except:
+            logger.info(f"Icon wasn't detected. Skip making game foreground (try #{i})")
+            break
 
 
 # press some sequence of keys on server
@@ -590,8 +618,11 @@ class StartStreaming(MulticonnectionAction):
 class RecoveryClumsy(Action):
     def parse(self):
         self.recovery_clumsy = "recovery_server_clumsy" in self.params["case"] and self.params["case"]["recovery_server_clumsy"]
+        self.game_name = self.params["args"].game_name
 
     def execute(self):
         if self.recovery_clumsy:
             self.logger.info("Recovery Streaming SDK work - close clumsy")
             close_clumsy()
+            sleep(2)
+            make_game_foreground(self.game_name, self.logger)
