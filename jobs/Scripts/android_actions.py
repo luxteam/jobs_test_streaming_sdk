@@ -74,7 +74,7 @@ class OpenGame(Action):
         if window is not None and window != 0:
             self.logger.info("Window {} was succesfully found".format(self.game_window))
 
-            make_game_foreground(window, self.logger)
+            make_game_foreground(self.game_name, self.logger)
         else:
             self.logger.error("Window {} wasn't found at all".format(self.game_window))
             game_launched = False
@@ -522,6 +522,7 @@ class RecordVideo(MulticonnectionAction):
         self.test_group = self.params["args"].test_group
         self.case_json_path = self.params["case_json_path"]
         self.recovery_clumsy = "recovery_android_clumsy" in self.params["case"] and self.params["case"]["recovery_android_clumsy"]
+        self.game_name = self.params["args"].game_name
 
     def execute(self):
         try:
