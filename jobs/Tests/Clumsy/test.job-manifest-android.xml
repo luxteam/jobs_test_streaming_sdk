@@ -3,7 +3,7 @@
 
     <outpath value="{OutputDir}"/>
 
-    <execute command='python "{ResourcesDir}/simpleRenderAndroid.py"' timeout="10800">
+    <execute command='python "{ResourcesDir}/simpleRenderAndroid.py"' timeout="5400">
         <argument>--client_tool "{clientTool}"</argument>
         <argument>--server_tool "{serverTool}"</argument>
         <argument>--output "{OutputDir}"</argument>
