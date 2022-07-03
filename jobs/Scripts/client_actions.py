@@ -421,8 +421,6 @@ class StartStreaming(Action):
 
                 if should_collect_traces:
                     collect_traces(self.archive_path, self.archive_name + "_client.zip")
-                elif "start_first" in self.case and self.case["start_first"] == "client":
-                    sleep(5)
 
         self.sock.send(self.action.encode("utf-8"))
 
