@@ -549,6 +549,8 @@ def start_clumsy(keys, client_ip=None, server_ip=None, android_ip=None, second_c
 
     psutil.Popen(script, stdout=PIPE, stderr=PIPE, shell=True)
 
+    sleep(1.5)
+
 
 def close_clumsy():
     script = "powershell \"Start-Process cmd '/k taskkill /im clumsy.exe & exit 0' -Verb RunAs\""
