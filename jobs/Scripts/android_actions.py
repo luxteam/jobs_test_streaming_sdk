@@ -306,13 +306,13 @@ def make_window_foreground(window, logger):
 def make_game_foreground(game_name, logger):
     base_path = os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "Icons"))
 
-    if "Heaven" in game_name:
+    if "heaven" in game_name.lower():
         icon_path = os.path.join(base_path, "Heaven.png")
-    elif "Valley" in game_name:
+    elif "valley" in game_name.lower():
         icon_path = os.path.join(base_path, "Valley.png")
-    elif "Valorant" in game_name:
+    elif "valorant" in game_name.lower():
         icon_path = os.path.join(base_path, "Valorant.png")
-    elif "LoL" in game_name:
+    elif "lol" in game_name.lower():
         icon_path = os.path.join(base_path, "LoL.png")
     else:
         logger.error(f"Unknown game: {game_name}")
