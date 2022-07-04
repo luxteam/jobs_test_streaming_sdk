@@ -535,7 +535,8 @@ class RecordMicrophone(Action):
             time_flag_value = strftime("%H:%M:%S", gmtime(int(self.duration)))
 
             recorder = FFmpeg()
-            self.logger.info("Start to record video")
+            sleep(30)
+            self.logger.info("Start to record audio")
 
             recorder.options("-f dshow -i audio=\"Microphone (AMD Streaming Audio Device)\" -t {time} {audio}"
                 .format(time=time_flag_value, audio=audio_full_path))
