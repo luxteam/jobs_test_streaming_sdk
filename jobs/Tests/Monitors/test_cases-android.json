@@ -1,0 +1,22 @@
+[
+    {
+        "case": "STR_ASM_001",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EDID true",
+        "client_keys": "",
+        "transport_protocol": "udp",
+        "script_info": [
+            "EDID"
+        ]
+    },
+    {
+        "case": "STR_ASM_002",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -EDID true",
+        "client_keys": "",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "EDID"
+        ]
+    }
+]
