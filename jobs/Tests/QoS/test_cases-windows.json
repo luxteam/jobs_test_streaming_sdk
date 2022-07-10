@@ -365,6 +365,38 @@
     {
         "case": "STR_QOS_034",
         "status": "active",
+        "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true -AdjustResolution true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Adjust Resolution true"
+        ]
+    },
+    {
+        "case": "STR_QOS_035",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true -AdjustResolution true -AdjustFramerate true -AdjustBitrate true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Adjust Resolution true",
+            "Adjust Framerate, Bitrate false"
+        ]
+    },
+    {
+        "case": "STR_QOS_036",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -Framerate 100 -extStats true -CapFPS true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Server Framerate 100",
+            "CapFPS true"
+        ]
+    },
+    {
+        "case": "STR_QOS_037",
+        "status": "active",
         "server_keys": "-Resolution <resolution> -AdjustFramerate false -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -373,7 +405,7 @@
         ]
     },
     {
-        "case": "STR_QOS_035",
+        "case": "STR_QOS_038",
         "status": "active",
         "server_keys": "-Resolution <resolution> -AdjustBitrate false -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -383,7 +415,7 @@
         ]
     },
     {
-        "case": "STR_QOS_036",
+        "case": "STR_QOS_039",
         "status": "active",
         "server_keys": "-Resolution <resolution> -FrameratePeriod 2 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -393,7 +425,7 @@
         ]
     },
     {
-        "case": "STR_QOS_037",
+        "case": "STR_QOS_040",
         "status": "active",
         "server_keys": "-Resolution <resolution> -BitratePeriod 5000000 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -403,7 +435,7 @@
         ]
     },
     {
-        "case": "STR_QOS_038",
+        "case": "STR_QOS_041",
         "status": "active",
         "server_keys": "-Resolution <resolution> -FramerateStep 2 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -413,7 +445,7 @@
         ]
     },
     {
-        "case": "STR_QOS_039",
+        "case": "STR_QOS_042",
         "status": "active",
         "server_keys": "-Resolution <resolution> -BitrateStep 5000000 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -423,7 +455,7 @@
         ]
     },
     {
-        "case": "STR_QOS_040",
+        "case": "STR_QOS_043",
         "status": "active",
         "server_keys": "-Resolution <resolution> -MinFramerate 100 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -433,7 +465,7 @@
         ]
     },
     {
-        "case": "STR_QOS_041",
+        "case": "STR_QOS_044",
         "status": "active",
         "server_keys": "-Resolution <resolution> -MinBitrate 10000000 -extStats true -Framerate 60",
         "client_keys": "-Fullscreen true",
@@ -443,7 +475,7 @@
         ]
     },
     {
-        "case": "STR_QOS_042",
+        "case": "STR_QOS_045",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 0 -extStats true",
         "client_keys": "-Fullscreen true",
@@ -453,7 +485,7 @@
         ]
     },
     {
-        "case": "STR_QOS_043",
+        "case": "STR_QOS_046",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 0 -RateControl cbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -464,7 +496,7 @@
         ]
     },
     {
-        "case": "STR_QOS_044",
+        "case": "STR_QOS_047",
         "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 0 -RateControl lvbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -475,7 +507,7 @@
         ]
     },
     {
-        "case": "STR_QOS_045",
+        "case": "STR_QOS_048",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 30 -extStats true",
         "client_keys": "-Fullscreen true",
@@ -485,7 +517,7 @@
         ]
     },
     {
-        "case": "STR_QOS_046",
+        "case": "STR_QOS_049",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl cbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -496,7 +528,7 @@
         ]
     },
     {
-        "case": "STR_QOS_047",
+        "case": "STR_QOS_050",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 30 -RateControl lvbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -507,7 +539,7 @@
         ]
     },
     {
-        "case": "STR_QOS_048",
+        "case": "STR_QOS_051",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 60 -RateControl cbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -518,7 +550,7 @@
         ]
     },
     {
-        "case": "STR_QOS_049",
+        "case": "STR_QOS_052",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 60 -RateControl lvbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -529,7 +561,7 @@
         ]
     },
     {
-        "case": "STR_QOS_050",
+        "case": "STR_QOS_053",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -extStats true",
         "client_keys": "-Fullscreen true",
@@ -539,7 +571,7 @@
         ]
     },
     {
-        "case": "STR_QOS_051",
+        "case": "STR_QOS_054",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -RateControl cbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -550,7 +582,7 @@
         ]
     },
     {
-        "case": "STR_QOS_052",
+        "case": "STR_QOS_055",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -RateControl lvbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -561,7 +593,7 @@
         ]
     },
     {
-        "case": "STR_QOS_053",
+        "case": "STR_QOS_056",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 30 -Bitrate 10000000 -RateControl cbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -573,7 +605,7 @@
         ]
     },
     {
-        "case": "STR_QOS_054",
+        "case": "STR_QOS_057",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -Bitrate 10000000 -RateControl cbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -585,7 +617,7 @@
         ]
     },
     {
-        "case": "STR_QOS_055",
+        "case": "STR_QOS_058",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 30 -Bitrate 10000000 -RateControl lvbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -597,7 +629,7 @@
         ]
     },
     {
-        "case": "STR_QOS_056",
+        "case": "STR_QOS_059",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -Bitrate 10000000 -RateControl lvbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -609,7 +641,7 @@
         ]
     },
     {
-        "case": "STR_QOS_057",
+        "case": "STR_QOS_060",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 30 -Bitrate 10000000 -RateControl vbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -621,7 +653,7 @@
         ]
     },
     {
-        "case": "STR_QOS_058",
+        "case": "STR_QOS_061",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -Bitrate 10000000 -RateControl vbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -633,7 +665,7 @@
         ]
     },
     {
-        "case": "STR_QOS_059",
+        "case": "STR_QOS_062",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 30 -Bitrate 100000000 -RateControl cbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -645,7 +677,7 @@
         ]
     },
     {
-        "case": "STR_QOS_060",
+        "case": "STR_QOS_063",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -Bitrate 100000000 -RateControl cbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -657,7 +689,7 @@
         ]
     },
     {
-        "case": "STR_QOS_061",
+        "case": "STR_QOS_064",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 30 -Bitrate 100000000 -RateControl lvbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -669,7 +701,7 @@
         ]
     },
     {
-        "case": "STR_QOS_062",
+        "case": "STR_QOS_065",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -Bitrate 100000000 -RateControl lvbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -681,7 +713,7 @@
         ]
     },
     {
-        "case": "STR_QOS_063",
+        "case": "STR_QOS_066",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 30 -Bitrate 100000000 -RateControl vbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -693,7 +725,7 @@
         ]
     },
     {
-        "case": "STR_QOS_064",
+        "case": "STR_QOS_067",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -Bitrate 100000000 -RateControl vbr -extStats true",
         "client_keys": "-Fullscreen true",
@@ -705,7 +737,7 @@
         ]
     },
     {
-        "case": "STR_QOS_065",
+        "case": "STR_QOS_068",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true",
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
@@ -715,7 +747,7 @@
         ]
     },
     {
-        "case": "STR_QOS_066",
+        "case": "STR_QOS_069",
         "status": "active",
         "server_keys": "-Resolution <resolution> -Framerate 90 -extStats true",
         "client_keys": "-Fullscreen true -ForceDisplayFrameRate true",
@@ -723,6 +755,38 @@
         "script_info": [
             "Server Framerate 90",
             "Force Display Frame Rate"
+        ]
+    },
+    {
+        "case": "STR_QOS_070",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true -AdjustResolution true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Adjust Resolution true"
+        ]
+    },
+    {
+        "case": "STR_QOS_071",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true -AdjustResolution true -AdjustFramerate true -AdjustBitrate true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Adjust Resolution true",
+            "Adjust Framerate, Bitrate false"
+        ]
+    },
+    {
+        "case": "STR_QOS_072",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -Framerate 100 -extStats true -CapFPS true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Server Framerate 100",
+            "CapFPS true"
         ]
     }
  ]
