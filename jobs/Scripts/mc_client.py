@@ -387,7 +387,7 @@ def execute_tests(args, current_conf):
         finally:
             tests_left -= 1
 
-            if case is None or "second_client_clumsy_keys" in case:
+            if case is None or ("second_client_clumsy_keys" in case and ("keep_second_client_clumsy" not in case or not case["keep_second_client_clumsy"])):
                 close_clumsy()
 
             main_logger.info("End of test case")

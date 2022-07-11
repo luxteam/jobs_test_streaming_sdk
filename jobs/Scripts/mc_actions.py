@@ -103,8 +103,13 @@ class RecordVideo(Action):
         self.resolution = self.params["args"].screen_resolution
         self.duration = int(self.params["arguments_line"])
         self.case_json_path = self.params["case_json_path"]
+        self.recovery_clumsy = "recovery_second_client_clumsy" in self.params["case"] and self.params["case"]["recovery_second_client_clumsy"]
 
     def execute(self):
+        if self.recovery_clumsy:
+            self.logger.info("Recovery Streaming SDK work - close clumsy")
+            close_clumsy()
+
         video_full_path = os.path.join(self.video_path, self.video_name + ".mp4")
         time_flag_value = strftime("%H:%M:%S", gmtime(int(self.duration)))
 

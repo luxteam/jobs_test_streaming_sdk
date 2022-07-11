@@ -11,7 +11,7 @@ import pyautogui
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import parse_arguments, execute_adb_command, get_mc_config
+from utils import parse_arguments, execute_adb_command, get_mc_config, close_clumsy, locateOnScreen
 from actions import *
 import base64
 import keyboard
@@ -74,7 +74,7 @@ class OpenGame(Action):
         if window is not None and window != 0:
             self.logger.info("Window {} was succesfully found".format(self.game_window))
 
-            make_window_foreground(window, self.logger)
+            make_game_foreground(self.game_name, self.logger)
         else:
             self.logger.error("Window {} wasn't found at all".format(self.game_window))
             game_launched = False
@@ -303,6 +303,33 @@ def make_window_foreground(window, logger):
                 logger.error("Traceback: {}".format(traceback.format_exc()))
 
 
+def make_game_foreground(game_name, logger):
+    base_path = os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "Icons"))
+
+    if "heaven" in game_name.lower():
+        icon_path = os.path.join(base_path, "Heaven.png")
+    elif "valley" in game_name.lower():
+        icon_path = os.path.join(base_path, "Valley.png")
+    elif "valorant" in game_name.lower():
+        icon_path = os.path.join(base_path, "Valorant.png")
+    elif "lol" in game_name.lower():
+        icon_path = os.path.join(base_path, "LoL.png")
+    else:
+        logger.error(f"Unknown game: {game_name}")
+        return
+
+    # sometimes first click on app can be ignored
+    for i in range(2):
+        try:
+            game_icon_coords = locateOnScreen(icon_path)
+            game_icon_center = pyautogui.center(game_icon_coords)
+            pyautogui.click(game_icon_center[0], game_icon_center[1])
+            sleep(4)
+        except:
+            logger.info(f"Icon wasn't detected. Skip making game foreground (try #{i})")
+            break
+
+
 # Do click 
 class Click(Action):
     def execute(self):
@@ -494,9 +521,17 @@ class RecordVideo(MulticonnectionAction):
         self.duration = int(self.params["arguments_line"])
         self.test_group = self.params["args"].test_group
         self.case_json_path = self.params["case_json_path"]
+        self.recovery_clumsy = "recovery_android_clumsy" in self.params["case"] and self.params["case"]["recovery_android_clumsy"]
+        self.game_name = self.params["args"].game_name
 
     def execute(self):
         try:
+            if self.recovery_clumsy:
+                self.logger.info("Recovery Streaming SDK work - close clumsy")
+                close_clumsy()
+                sleep(2)
+                make_game_foreground(self.game_name, self.logger)
+
             self.logger.info("Start to record video")
             execute_adb_command("adb shell screenrecord --time-limit={} /sdcard/video.mp4".format(self.duration))
             self.logger.info("Finish to record video")
