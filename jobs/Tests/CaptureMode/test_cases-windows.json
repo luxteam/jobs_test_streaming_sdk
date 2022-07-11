@@ -22,6 +22,28 @@
     {
         "case": "STR_CPM_003",
         "status": "active",
+        "server_keys": "-Resolution <resolution> -CaptureMode present -extStats true -CapFPS true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Capture Mode present",
+            "CapFPS true"
+        ]
+    },
+    {
+        "case": "STR_CPM_004",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -CaptureMode asap -extStats true -CapFPS true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "udp",
+        "script_info": [
+            "Capture Mode asap",
+            "CapFPS true"
+        ]
+    },
+    {
+        "case": "STR_CPM_005",
+        "status": "active",
         "server_keys": "-Resolution <resolution> -CaptureMode present -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -30,13 +52,35 @@
         ]
     },
     {
-        "case": "STR_CPM_004",
+        "case": "STR_CPM_006",
         "status": "active",
         "server_keys": "-Resolution <resolution> -CaptureMode asap -extStats true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
         "script_info": [
             "Capture Mode asap"
+        ]
+    },
+    {
+        "case": "STR_CPM_007",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -CaptureMode present -extStats true -CapFPS true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Capture Mode present",
+            "CapFPS true"
+        ]
+    },
+    {
+        "case": "STR_CPM_008",
+        "status": "active",
+        "server_keys": "-Resolution <resolution> -CaptureMode asap -extStats true -CapFPS true",
+        "client_keys": "-Fullscreen true",
+        "transport_protocol": "tcp",
+        "script_info": [
+            "Capture Mode asap",
+            "CapFPS true"
         ]
     }
 ]
