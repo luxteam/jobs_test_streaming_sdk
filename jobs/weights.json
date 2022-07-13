@@ -26,10 +26,6 @@
             "value": 24
         },
         {
-            "suite_name": "RateControl",
-            "value": 62
-        },
-        {
             "suite_name": "Duplicate",
             "value": 2
         },
