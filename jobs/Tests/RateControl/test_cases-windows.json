@@ -8,7 +8,8 @@
         "script_info": [
             "QoS false",
             "Framerate 0"
-        ]
+        ],
+        "case_delay": 10
     },{
         "case": "STR_RC_002",
         "status": "active",
@@ -18,7 +19,8 @@
         "script_info": [
             "QoS false",
             "Framerate 30"
-        ]
+        ],
+        "case_delay": 10
     },
     {
         "case": "STR_RC_003",
