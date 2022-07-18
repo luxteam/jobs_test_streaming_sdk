@@ -364,7 +364,7 @@
     },
     {
         "case": "STR_QOS_034",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true -AdjustResolution true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -374,7 +374,7 @@
     },
     {
         "case": "STR_QOS_035",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true -AdjustResolution true -AdjustFramerate true -AdjustBitrate true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "udp",
@@ -759,7 +759,7 @@
     },
     {
         "case": "STR_QOS_070",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true -AdjustResolution true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
@@ -769,7 +769,7 @@
     },
     {
         "case": "STR_QOS_071",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -Framerate 60 -extStats true -AdjustResolution true -AdjustFramerate true -AdjustBitrate true",
         "client_keys": "-Fullscreen true",
         "transport_protocol": "tcp",
