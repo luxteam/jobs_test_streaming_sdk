@@ -378,22 +378,22 @@
     },
     {
         "case": "STR_AQS_035",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AdjustResolution true",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "AdjustResolution true"
+            "Adjust Resolution true"
         ]
     },
     {
         "case": "STR_AQS_036",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AdjustResolution true -AdjustFramerate false -AdjustBitrate false",
         "client_keys": "",
         "transport_protocol": "udp",
         "script_info": [
-            "AdjustResolution true",
+            "Adjust Resolution true",
             "Adjust Framerate, Bitrate false"
         ]
     },
@@ -787,22 +787,22 @@
     },
     {
         "case": "STR_AQS_072",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AdjustResolution true",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "AdjustResolution true"
+            "Adjust Resolution true"
         ]
     },
     {
         "case": "STR_AQS_073",
-        "status": "active",
+        "status": "skipped",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AdjustResolution true -AdjustFramerate false -AdjustBitrate false",
         "client_keys": "",
         "transport_protocol": "tcp",
         "script_info": [
-            "AdjustResolution true",
+            "Adjust Resolution true",
             "Adjust Framerate, Bitrate false"
         ]
     },
