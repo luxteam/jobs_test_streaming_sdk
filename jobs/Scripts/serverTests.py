@@ -269,7 +269,12 @@ def start_server_side_tests(args, case, process, android_client_closed, script_p
                 json_content = json.load(file)[0]
 
             # check that encryption is valid
-            json_content["test_status"] = "error" if contains_encryption_errors(error_messages) else "passed"
+            if contains_encryption_errors(error_messages):
+                json_content["test_status"] = "error"
+            elif json_content["test_status"] == "observed":
+                json_content["test_status"] = "observed"
+            else:
+                json_content["test_status"] = "passed"
 
             json_content["message"] = json_content["message"] + list(error_messages)
 

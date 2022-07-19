@@ -107,6 +107,8 @@ def prepare_empty_reports(args):
         if case['status'] != 'done' and case['status'] != 'error':
             if case["status"] == 'inprogress':
                 case['status'] = 'active'
+            elif case["status"] == 'inprogress_observed':
+                case['status'] = 'observed'
 
             test_case_report = {}
             test_case_report['test_case'] = case['case']
@@ -189,7 +191,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
         test_case_report["message"] = test_case_report["message"] + list(error_messages)
 
-        if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
+        if test_case_report["test_status"] in ["passed", "error", "observed"]:
             test_case_report["group_timeout_exceeded"] = False
 
         video_path = os.path.join("Color", case["case"] + "android.mp4")
@@ -386,7 +388,11 @@ def execute_tests(args):
                     main_logger.info("Finish action execution\n\n\n")
 
                 execution_time = time.time() - case_start_time
-                save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = error_messages)
+
+                if case["status"] == "observed":
+                    save_results(args, case, cases, execution_time = execution_time, test_case_status = "observed", error_messages = error_messages)
+                else:
+                    save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = error_messages)
 
                 break
             except Exception as e:
@@ -406,8 +412,6 @@ def execute_tests(args):
                 try:
                     with open(os.path.join(args.output, case["case"] + CASE_REPORT_SUFFIX), "r") as file:
                         json_content = json.load(file)[0]
-
-                    json_content["test_status"] = "passed"
 
                     analyze_logs(args.output, json_content, case, execution_type = "android")
 

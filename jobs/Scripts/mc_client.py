@@ -121,6 +121,8 @@ def prepare_empty_reports(args, current_conf):
         if case['status'] != 'done' and case['status'] != 'error':
             if case["status"] == 'inprogress':
                 case['status'] = 'active'
+            elif case["status"] == 'inprogress_observed':
+                case['status'] = 'observed'
 
             test_case_report = {}
             test_case_report['test_case'] = case['case']
@@ -177,7 +179,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         test_case_report["message"] = test_case_report["message"] + list(error_messages)
         test_case_report["keys"] = case["prepared_keys"]
 
-        if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
+        if test_case_report["test_status"] in ["passed", "error", "observed"]:
             test_case_report["group_timeout_exceeded"] = False
 
         video_path = os.path.join("Color", case["case"] + "second_client.mp4")
@@ -354,7 +356,10 @@ def execute_tests(args, current_conf):
 
             main_logger.info("Finish to wait new actions")
 
-            status = "passed"
+            if case["status"] == "active":
+                status = "passed"
+            else:
+                status = "observed"
 
             if "-MAXUSERS 1" not in case["server_keys"] and not ("max_clients" in case and case["max_clients"] == 1):
                 process = close_streaming_process("second_client", case, process)
@@ -364,7 +369,12 @@ def execute_tests(args, current_conf):
                     json_content = json.load(file)[0]
 
                 # check that encryption is valid
-                json_content["test_status"] = "error" if contains_encryption_errors(error_messages) else "passed"
+                if contains_encryption_errors(error_messages):
+                    json_content["test_status"] = "error"
+                elif json_content["test_status"] == "observed":
+                    json_content["test_status"] = "observed"
+                else:
+                    json_content["test_status"] = "passed"
 
                 analyze_logs(args.output, json_content, case, execution_type="second_windows_client")
 

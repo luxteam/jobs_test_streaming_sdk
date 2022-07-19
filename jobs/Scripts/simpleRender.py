@@ -95,7 +95,7 @@ def copy_test_cases(args):
 
 def calculate_status(status_in_json, execution_status):
     test_statuses = (status_in_json, execution_status)
-    statuses = ("skipped", "error", "failed", "passed")
+    statuses = ("skipped", "error", "failed", "observed", "passed")
 
     for status in statuses:
         if status in test_statuses:
@@ -130,6 +130,8 @@ def prepare_empty_reports(args, current_conf):
         if case['status'] != 'done' and case['status'] != 'error':
             if case["status"] == 'inprogress':
                 case['status'] = 'active'
+            elif case["status"] == 'inprogress_observed':
+                case['status'] = 'observed'
 
             test_case_report = {}
             test_case_report['test_case'] = case['case']
@@ -224,7 +226,7 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
 
         test_case_report["keys"] = case["prepared_keys"]
 
-        if test_case_report["test_status"] == "passed" or test_case_report["test_status"] == "error":
+        if test_case_report["test_status"] in ["passed", "observed", "error"]:
             test_case_report["group_timeout_exceeded"] = False
 
         if args.execution_type == "server":
@@ -358,7 +360,11 @@ def execute_tests(args, current_conf):
                     PROCESS, last_log_line = start_client_side_tests(args, case, PROCESS, script_path, last_log_line, audio_device_name, current_try, error_messages)
 
                 execution_time = time.time() - case_start_time
-                save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = error_messages)
+
+                if case["status"] == "observed":
+                    save_results(args, case, cases, execution_time = execution_time, test_case_status = "observed", error_messages = error_messages)
+                else:
+                    save_results(args, case, cases, execution_time = execution_time, test_case_status = "passed", error_messages = error_messages)
 
                 break
             except Exception as e:
