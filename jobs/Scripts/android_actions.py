@@ -11,7 +11,7 @@ import pyautogui
 import pydirectinput
 from pyffmpeg import FFmpeg
 from threading import Thread
-from utils import parse_arguments, execute_adb_command, get_mc_config, close_clumsy, locateOnScreen
+from utils import parse_arguments, execute_adb_command, get_mc_config, close_clumsy, locateOnScreen, close_process
 from actions import *
 import base64
 import keyboard
@@ -516,7 +516,8 @@ def download_and_compress_video(temp_video_path, target_video_path, logger):
 class RecordVideo(MulticonnectionAction):
     def parse(self):
         self.video_path = self.params["output_path"]
-        self.target_video_name = self.params["case"]["case"] + self.params["client_type"] + ".mp4"
+        self.target_video_name = self.params["case"]["case"] + audio + ".mp4"
+        self.audio_name = self.params["case"]["case"] + self.params["client_type"] + ".mp4"
         self.temp_video_name = self.params["case"]["case"] + self.params["client_type"] + "_temp.mp4"
         self.duration = int(self.params["arguments_line"])
         self.test_group = self.params["args"].test_group
@@ -532,9 +533,44 @@ class RecordVideo(MulticonnectionAction):
                 sleep(2)
                 make_game_foreground(self.game_name, self.logger)
 
-            self.logger.info("Start to record video")
-            execute_adb_command("adb shell screenrecord --time-limit={} /sdcard/video.mp4".format(self.duration))
-            self.logger.info("Finish to record video")
+            def record_video():
+                try:
+                    execute_adb_command("adb shell screenrecord --time-limit={} /sdcard/video.mp4".format(self.duration))
+                    self.logger.info("Finish to record video")
+                except Exception as e:
+                    self.logger.info("Failed to record video: {}".format(e))
+                    self.logger.error("Traceback: {}".format(traceback.format_exc()))
+
+            def record_audio():
+                sndcpy_process = None
+
+                try:
+                    sndcpy_path = os.getenv("SNDCPY_PATH")
+                    os.chdir(sndcpy_path)
+                    sndcpy_process = psutil.Popen("sndcpy", stdout=PIPE, stderr=PIPE, shell=True)
+
+                    target_audio_path = os.path.join(self.video_path, self.audio_name)
+                    recorder = FFmpeg()
+                    recorder.options("-f dshow -i audio=\"Line 1 (Virtual Audio Cable)\" -t {time} {video}".format(time=time_flag_value, video=target_audio_path))
+
+                    self.logger.info("Finish to record audio")
+                except Exception as e:
+                    self.logger.info("Failed to record audio: {}".format(e))
+                    self.logger.error("Traceback: {}".format(traceback.format_exc()))
+                finally:
+                    if sndcpy_process:
+                        close_process(sndcpy_process)
+
+            self.logger.info("Start to record video and audio")
+
+            video_thread = Thread(target=record_video, args=())
+            video_thread.start()
+
+            audio_thread = Thread(target=record_audio, args=())
+            audio_thread.start()
+
+            video_thread.join()
+            audio_thread.join()
 
             temp_video_path = os.path.join(self.video_path, self.temp_video_name)
             target_video_path = os.path.join(self.video_path, self.target_video_name)
