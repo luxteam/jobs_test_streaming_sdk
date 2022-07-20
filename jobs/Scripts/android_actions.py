@@ -516,7 +516,7 @@ def download_and_compress_video(temp_video_path, target_video_path, logger):
 class RecordVideo(MulticonnectionAction):
     def parse(self):
         self.video_path = self.params["output_path"]
-        self.target_video_name = self.params["case"]["case"] + audio + ".mp4"
+        self.target_video_name = self.params["case"]["case"] + "audio" + ".mp4"
         self.audio_name = self.params["case"]["case"] + self.params["client_type"] + ".mp4"
         self.temp_video_name = self.params["case"]["case"] + self.params["client_type"] + "_temp.mp4"
         self.duration = int(self.params["arguments_line"])
