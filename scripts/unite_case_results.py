@@ -6,7 +6,7 @@ from glob import glob
 
 sys.path.append(os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir)))
-from jobs_launcher.core.config import SESSION_REPORT, TEST_REPORT_NAME_COMPARED, SCREENS_COLLECTION_KEY, VIDEO_KEY
+from jobs_launcher.core.config import SESSION_REPORT, TEST_REPORT_NAME_COMPARED, SCREENS_COLLECTION_KEY, VIDEO_KEY, AUDIO_KEY
 
 
 KEYS_TO_COPY = [
@@ -117,6 +117,9 @@ if __name__ == '__main__':
                             if VIDEO_KEY in source_file_content[i]:
                                 target_file_content[i]["android_" + VIDEO_KEY] = source_file_content[i][VIDEO_KEY]
 
+                        if AUDIO_KEY in source_file_content[i]:
+                            target_file_content[i][AUDIO_KEY] = source_file_content[i][AUDIO_KEY]
+
                         if SCREENS_COLLECTION_KEY in source_file_content[i]:
                             target_file_content[i]["android_" + SCREENS_COLLECTION_KEY] = source_file_content[i][SCREENS_COLLECTION_KEY]
 
@@ -207,6 +210,9 @@ if __name__ == '__main__':
 
                             if VIDEO_KEY in source_group_data["render_results"][i]:
                                 target_group_data["render_results"][i]["android_" + VIDEO_KEY] = source_group_data["render_results"][i][VIDEO_KEY]
+
+                            if AUDIO_KEY in source_group_data["render_results"][i]:
+                                target_group_data["render_results"][i][AUDIO_KEY] = source_group_data["render_results"][i][AUDIO_KEY]
 
                             if SCREENS_COLLECTION_KEY in source_group_data["render_results"][i]:
                                 target_group_data["render_results"][i]["android_" + SCREENS_COLLECTION_KEY] = source_group_data["render_results"][i][SCREENS_COLLECTION_KEY] 
