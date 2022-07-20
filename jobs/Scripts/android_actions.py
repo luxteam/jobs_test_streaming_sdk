@@ -516,8 +516,8 @@ def download_and_compress_video(temp_video_path, target_video_path, logger):
 class RecordVideo(MulticonnectionAction):
     def parse(self):
         self.video_path = self.params["output_path"]
-        self.target_video_name = self.params["case"]["case"] + self.params["client_type"] + ".mp4"
-        self.audio_name = self.params["case"]["case"] + "audio" + ".mp4"
+        self.target_video_name = self.params["case"]["case"] + "audio" + ".mp4"
+        self.audio_name = self.params["case"]["case"] + self.params["client_type"] + ".mp4"
         self.temp_video_name = self.params["case"]["case"] + self.params["client_type"] + "_temp.mp4"
         self.duration = int(self.params["arguments_line"])
         self.test_group = self.params["args"].test_group
@@ -545,8 +545,10 @@ class RecordVideo(MulticonnectionAction):
                 sndcpy_process = None
 
                 try:
-                    execute_adb_command("adb forward tcp:28200 localabstract:sndcpy")
-                    execute_adb_command("adb shell am start com.rom1v.sndcpy/.MainActivity")
+                    sndcpy_path = os.getenv("SNDCPY_PATH")
+                    os.chdir(sndcpy_path)
+                    sndcpy_process = psutil.Popen("sndcpy", stdout=PIPE, stderr=PIPE, shell=True)
+
                     target_audio_path = os.path.join(self.video_path, self.audio_name)
                     time_flag_value = strftime("%H:%M:%S", gmtime(int(self.duration)))
                     recorder = FFmpeg()
@@ -557,7 +559,9 @@ class RecordVideo(MulticonnectionAction):
                     self.logger.info("Failed to record audio: {}".format(e))
                     self.logger.error("Traceback: {}".format(traceback.format_exc()))
                 finally:
-                    execute_adb_command("adb shell am force-stop com.rom1v.sndcpy")
+                    if sndcpy_process:
+                        close_process(sndcpy_process)
+                        execute_adb_command("adb shell am force-stop com.rom1v.sndcpy")
 
             self.logger.info("Start to record video and audio")
 
