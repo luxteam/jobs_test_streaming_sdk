@@ -65,7 +65,7 @@ def get_min_framerate(keys):
         return keys.lower().split('-minframerate ')[1].split()[0]
 
 def get_microphone(keys):
-    return '-microphone true ' in keys.lower()
+    return '-microphone true' in keys.lower()
 
 def parse_block_line(line, saved_values):
     # Line example:
