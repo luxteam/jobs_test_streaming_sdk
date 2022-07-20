@@ -550,6 +550,7 @@ class RecordVideo(MulticonnectionAction):
                     sndcpy_process = psutil.Popen("sndcpy", stdout=PIPE, stderr=PIPE, shell=True)
 
                     target_audio_path = os.path.join(self.video_path, self.audio_name)
+                    time_flag_value = strftime("%H:%M:%S", gmtime(int(self.duration)))
                     recorder = FFmpeg()
                     recorder.options("-f dshow -i audio=\"Line 1 (Virtual Audio Cable)\" -t {time} {video}".format(time=time_flag_value, video=target_audio_path))
 
