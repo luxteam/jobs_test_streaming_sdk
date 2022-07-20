@@ -199,6 +199,11 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         if os.path.exists(os.path.join(args.output, video_path)):
             test_case_report[VIDEO_KEY] = video_path
 
+        audio_path = os.path.join("Color", case["case"] + "audio.mp4")
+
+        if os.path.exists(os.path.join(args.output, audio_path)):
+            test_case_report[AUDIO_KEY] = audio_path
+
         # save keys from scripts in script_info
         test_case_report["script_info"] = case["script_info"]
 
@@ -336,12 +341,17 @@ def execute_tests(args):
                     with open(os.path.abspath(args.common_actions_path), "r", encoding="utf-8") as common_actions_file:
                         actions = json.load(common_actions_file)[actions_key]
 
+                # Replacing record_video command to record_audio
+                if "-microphone true" in case["server_keys"].lower():
+                    for i in range(len(actions)):
+                        if "record_video" in actions[i]:
+                            if "-audiofile" in case["server_keys"].lower():
+                                actions.insert(i+1, actions[i].replace("record_video", "record_audio"))
+                            else:
+                                actions[i] = actions[i].replace("record_video", "record_audio")
+
                 # execute actions one by one
                 for action in actions:
-                    # Replacing record_video command to record_audio
-                    if "record_video" in action and "-microphone true" in case["server_keys"].lower():
-                        action = action.replace("record_video", "record_audio")
-                    
                     main_logger.info("Current action: {}".format(action))
                     main_logger.info("Current state:\n{}".format(instance_state.format_current_state()))
 

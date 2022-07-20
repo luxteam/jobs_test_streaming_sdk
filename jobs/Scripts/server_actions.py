@@ -319,7 +319,7 @@ class RecordMicrophone(Action):
         self.action = self.params["action_line"]
         self.test_group = self.params["args"].test_group
         self.audio_path = self.params["output_path"]
-        self.audio_name = self.params["case"]["case"] + self.params["client_type"]
+        self.audio_name = self.params["case"]["case"] + "audio"
 
     @Action.server_action_decorator
     def execute(self):
@@ -328,12 +328,12 @@ class RecordMicrophone(Action):
             time_flag_value = strftime("%H:%M:%S", gmtime(int(self.duration)))
 
             recorder = FFmpeg()
-            self.logger.info("Start to record video")
+            self.logger.info("Start to record audio")
 
             recorder.options("-f dshow -i audio=\"Microphone (AMD Streaming Audio Device)\" -t {time} {audio}"
                 .format(time=time_flag_value, audio=audio_full_path))
         except Exception as e:
-            self.logger.error("Error due microphone recording")
+            self.logger.error("Error during microphone recording")
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
 
         return True

@@ -103,6 +103,15 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 with open(os.path.abspath(args.common_actions_path), "r", encoding="utf-8") as common_actions_file:
                     actions = json.load(common_actions_file)[actions_key]
 
+            # Replacing record_video command to record_audio
+            if "-microphone true" in case["server_keys"].lower():
+                for i in range(len(actions)):
+                    if "record_video" in actions[i]:
+                        if "-audiofile" in case["server_keys"].lower():
+                            actions.insert(i+1, actions[i].replace("record_video", "record_audio"))
+                        else:
+                            actions[i] = actions[i].replace("record_video", "record_audio")
+
             # build params dict with all necessary variables for test actions
             params["output_path"] = output_path
             params["screen_path"] = screen_path
@@ -126,10 +135,6 @@ def start_client_side_tests(args, case, process, script_path, last_log_line, aud
                 if instance_state.commands_to_skip > 0:
                     instance_state.commands_to_skip -= 1
                     continue
-
-                # Replacing record_video command to record_audio
-                if "record_video" in action and "-microphone true" in case["server_keys"].lower():
-                    action = action.replace("record_video", "record_audio")
 
                 main_logger.info("Current action: {}".format(action))
                 main_logger.info("Current state:\n{}".format(instance_state.format_current_state()))

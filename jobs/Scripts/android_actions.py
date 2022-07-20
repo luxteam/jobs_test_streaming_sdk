@@ -562,7 +562,7 @@ class RecordMicrophone(Action):
         self.action = self.params["action_line"]
         self.test_group = self.params["args"].test_group
         self.audio_path = self.params["output_path"]
-        self.audio_name = self.params["case"]["case"] + "android"
+        self.audio_name = self.params["case"]["case"] + "audio"
 
     def execute(self):
         try:
@@ -576,7 +576,7 @@ class RecordMicrophone(Action):
             recorder.options("-f dshow -i audio=\"Microphone (AMD Streaming Audio Device)\" -t {time} {audio}"
                 .format(time=time_flag_value, audio=audio_full_path))
         except Exception as e:
-            self.logger.error("Error due microphone recording")
+            self.logger.error("Error during microphone recording")
             self.logger.error("Traceback: {}".format(traceback.format_exc()))
 
 

@@ -237,6 +237,11 @@ def save_results(args, case, cases, execution_time = 0.0, test_case_status = "",
         if os.path.exists(os.path.join(args.output, video_path)):
             test_case_report[VIDEO_KEY] = video_path
 
+        audio_path = os.path.join("Color", case["case"] + "audio.mp4")
+
+        if os.path.exists(os.path.join(args.output, audio_path)):
+            test_case_report[AUDIO_KEY] = audio_path
+
         # save keys from scripts in script_info
         test_case_report["script_info"] = case["script_info"]
 
