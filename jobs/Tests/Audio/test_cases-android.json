@@ -11,7 +11,7 @@
     },
     {
         "case": "STR_AAD_002",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile \"C:\\JN\\All stars.mp3\"",
         "client_keys": "",
         "transport_protocol": "udp",
@@ -21,7 +21,7 @@
     },
     {
         "case": "STR_AAD_003",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile \"C:\\JN\\All stars.mp3\" -Microphone true",
         "client_keys": "",
         "transport_protocol": "udp",
@@ -41,7 +41,7 @@
     },
     {
         "case": "STR_AAD_005",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile \"C:\\JN\\All stars.mp3\"",
         "client_keys": "",
         "transport_protocol": "tcp",
@@ -51,7 +51,7 @@
     },
     {
         "case": "STR_AAD_006",
-        "status": "skipped",
+        "status": "active",
         "server_keys": "-Resolution <resolution> -extStats true -Framerate 30 -AudioFile \"C:\\JN\\All stars.mp3\" -Microphone true",
         "client_keys": "",
         "transport_protocol": "udp",
